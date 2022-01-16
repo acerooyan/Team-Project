@@ -1,20 +1,22 @@
 package com.example.auth.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 @Data
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDomain {
-    private Integer id;
-    private String username;
+
+
+    @NotNull
+    private String userName;
+    @NotNull
     private String password;
-    private Integer admin;
-    private String firstName;
-    private String lastName;
+    @NotNull
+    private String email;
+
 
 }
