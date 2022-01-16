@@ -2,7 +2,6 @@ package com.example.auth.service.impl;
 
 import com.example.auth.dao.IUserDao;
 import com.example.auth.domain.UserDomain;
-import com.example.auth.entity.User;
 import com.example.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

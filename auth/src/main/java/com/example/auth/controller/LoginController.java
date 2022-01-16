@@ -2,7 +2,6 @@ package com.example.auth.controller;
 
 import com.example.auth.constant.JwtConstant;
 import com.example.auth.domain.UserDomain;
-import com.example.auth.entity.User;
 import com.example.auth.security.CookieUtil;
 import com.example.auth.security.JwtUtil;
 import com.example.auth.service.UserService;

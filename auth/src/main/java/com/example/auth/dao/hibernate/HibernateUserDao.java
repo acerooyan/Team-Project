@@ -2,7 +2,6 @@ package com.example.auth.dao.hibernate;
 
 import com.example.auth.dao.AbstractHbDao;
 import com.example.auth.dao.IUserDao;
-import com.example.auth.entity.User;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;

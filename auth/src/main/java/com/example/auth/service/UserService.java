@@ -1,7 +1,6 @@
 package com.example.auth.service;
 
 import com.example.auth.domain.UserDomain;
-import com.example.auth.entity.User;
 
 import java.util.List;
 

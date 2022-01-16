@@ -3,35 +3,38 @@ package com.example.auth.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "userrole")
 @Data
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements Serializable {
+public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Integer ID;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.MERGE)
-    private List<UserRole> userRole;
 
-    @Column(name = "username")
-    private String userName;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "password")
-    private String password;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+    @Column(name = "activeflag")
+    private int activeFlag;
     @Column(name = "createdate")
     private Date createDate;
     @Column(name = "modificationdate")
     private Date modificationDate;
+    @Column(name = "lastmodificationuser")
+    private int lastModificationUser;
+
+
+
 
 }
