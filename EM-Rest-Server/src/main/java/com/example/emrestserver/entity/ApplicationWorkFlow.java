@@ -21,14 +21,19 @@ public class ApplicationWorkFlow {
 
     @Column(name = "EmloyeeID")
     private Integer employeeID;
+
     @Column(name ="CreatedDate")
     private Date createdDate;
+
     @Column(name = "ModificationDate")
     private Date modificationDate;
+
     @Column(name = "Status")
     private String status;
+
     @Column(name = "Comments")
     private String comments;
+
     @Column(name = "Type")
     private String type;
 }

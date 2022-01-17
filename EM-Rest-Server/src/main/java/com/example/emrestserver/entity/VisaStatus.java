@@ -28,6 +28,6 @@ public class VisaStatus {
     private Date modificationDate;
 
     @Column(name = "CreateUser")
-    private Integer createUser;
+    private String createUser;
 
 }

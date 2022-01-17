@@ -34,7 +34,7 @@ public class PersonalDocument {
     private Date createDate;
 
     @Column(name = "CreateBy")
-    private Integer createBy;
+    private String createBy;
 
 
 }

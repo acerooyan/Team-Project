@@ -26,7 +26,9 @@ public class Employee {
     private Person personId;
      */
 
-    //either one above or
+    //either one above or below
+    @Column(name = "PersonID")
+    private Integer personId;
 
     @Column(name = "Title")
     private String title;
