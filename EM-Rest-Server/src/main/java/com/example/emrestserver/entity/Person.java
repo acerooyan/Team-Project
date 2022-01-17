@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -22,9 +24,6 @@ public class Person implements Serializable{
     //@OneToMany(mappedBy="person")
     //private Set<Contact> contactSet;
 
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "ID", referencedColumnName = "PersonID")
-    //private Employee employee;
 
     //@OneToMany(mappedBy = "person")
     //private Set<Address> addressSet;
@@ -58,4 +57,10 @@ public class Person implements Serializable{
 
     @Column(name = "UserId")
     private String userId;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.MERGE)
+    private List<Employee> employeeList = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.MERGE)
+    private List<Contact> contactList = new ArrayList<>();
 }

@@ -3,7 +3,9 @@ package com.example.emrestserver.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "visastatus")
@@ -30,4 +32,6 @@ public class VisaStatus {
     @Column(name = "CreateUser")
     private String createUser;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "visaStatus", cascade = CascadeType.MERGE)
+    private List<Employee> employeeList = new ArrayList<>();
 }

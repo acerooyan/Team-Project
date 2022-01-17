@@ -17,8 +17,9 @@ public class Contact {
     @Column(name ="ID")
     private Integer id;
 
-    @Column(name = "PersonID")
-    private Integer personId;
+    @ManyToOne
+    @JoinColumn(name = "PersonID")
+    private Person person;
 
     @Column(name = "Relationship")
     private String relationShip;
@@ -34,5 +35,8 @@ public class Contact {
 
     @Column(name = "isLandlord")
     private Byte isLandlord;
+
+
+
 
 }

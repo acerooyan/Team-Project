@@ -27,8 +27,9 @@ public class Employee {
      */
 
     //either one above or below
-    @Column(name = "PersonID")
-    private Integer personId;
+    @ManyToOne
+    @JoinColumn(name = "PersonID")
+    private Person person;
 
     @Column(name = "Title")
     private String title;
@@ -49,8 +50,9 @@ public class Employee {
     @Column(name = "Car")
     private String car;
 
-    @Column(name = "VisaStatusID")
-    private Integer visaStatusId;
+    @ManyToOne
+    @JoinColumn(name = "VisaStatusID")
+    private VisaStatus visaStatus;
 
     @Column(name = "VisaStartDate")
     private Date visaStartDate;
@@ -64,8 +66,11 @@ public class Employee {
     @Column(name="DriverLicence_ExpirationDate")
     private Date driverLicence_ExpirationDate;
 
-    @Column(name="HouseID")
-    private Integer houseId;
+    @ManyToOne
+    @JoinColumn(name="HouseID")
+    private House house;
+
+
 
 }
 

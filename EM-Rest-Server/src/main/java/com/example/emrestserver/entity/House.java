@@ -3,6 +3,8 @@ package com.example.emrestserver.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "house")
@@ -26,5 +28,8 @@ public class House {
 
     @Column(name = "NumberOfPerson")
     private Integer numberOfPerson;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "house", cascade = CascadeType.MERGE)
+    private List<Employee> employeeList = new ArrayList<>();
 
 }
