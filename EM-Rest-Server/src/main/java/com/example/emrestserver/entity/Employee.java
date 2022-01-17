@@ -20,8 +20,13 @@ public class Employee {
     @Column(name = "ID")
     private Integer id;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "empolyee")
+    /*
+    @ManyToOne
+    @JoinColumn(name="PersonID")
     private Person personId;
+     */
+
+    //either one above or
 
     @Column(name = "Title")
     private String title;
@@ -57,10 +62,8 @@ public class Employee {
     @Column(name="DriverLicence_ExpirationDate")
     private Date driverLicence_ExpirationDate;
 
-
+    @Column(name="HouseID")
     private Integer houseId;
-
-
 
 }
 
