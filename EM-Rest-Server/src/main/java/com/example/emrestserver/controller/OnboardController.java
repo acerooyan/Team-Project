@@ -2,12 +2,11 @@ package com.example.emrestserver.controller;
 
 import com.example.emrestserver.entity.Person;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@RequestMapping("/em")
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
+@RequestMapping("/em")
 public class OnboardController {
 
     /*
