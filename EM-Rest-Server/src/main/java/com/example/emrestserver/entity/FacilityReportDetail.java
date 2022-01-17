@@ -17,14 +17,19 @@ public class FacilityReportDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Integer id;
+
     @Column(name = "ReportID")
-    private Integer reportID;
+    private Integer reportId;
+
     @Column(name = "EmployeeID")
-    private Integer emplyeeID;
+    private Integer emplyeeId;
+
     @Column(name = "Comments")
     private String comments;
+
     @Column(name = "CreatedDate")
     private Date createdDate;
+
     @Column(name = "LastModificationDate")
     private Date lastModificationDate;
 

@@ -19,11 +19,14 @@ public class Facility {
 
     @Column(name = "Type")
     private String type;
+
     @Column(name = "Description")
     private String description;
+
     @Column(name = "Quantity")
     private Integer quantity;
+
     @Column(name = "HouseID")
-    private Integer houseID;
+    private Integer houseId;
 
 }
