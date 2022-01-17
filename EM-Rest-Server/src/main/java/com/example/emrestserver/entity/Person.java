@@ -17,7 +17,7 @@ public class Person implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Integer ID;
+    private Integer id;
 
     //@OneToMany(mappedBy="person")
     //private Set<Contact> contactSet;
