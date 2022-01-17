@@ -36,4 +36,5 @@ public class PersonalDocument {
     @Column(name = "CreateBy")
     private Integer createBy;
 
+
 }
