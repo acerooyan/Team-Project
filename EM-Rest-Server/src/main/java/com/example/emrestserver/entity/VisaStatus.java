@@ -34,4 +34,8 @@ public class VisaStatus {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "visaStatus", cascade = CascadeType.MERGE)
     private List<Employee> employeeList = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "visaStatus", cascade = CascadeType.MERGE)
+    private List<ApplicationWorkFlow> applicationWorkFlowList;
+
 }

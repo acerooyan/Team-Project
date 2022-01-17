@@ -19,8 +19,9 @@ public class ApplicationWorkFlow {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "EmloyeeID")
-    private Integer employeeID;
+    @OneToOne
+    @JoinColumn(name = "EmployeeID")
+    private Employee employee;
 
     @Column(name ="CreatedDate")
     private Date createdDate;
@@ -28,8 +29,9 @@ public class ApplicationWorkFlow {
     @Column(name = "ModificationDate")
     private Date modificationDate;
 
-    @Column(name = "Status")
-    private String status;
+    @ManyToOne
+    @JoinColumn(name = "VisaStatusID")
+    private VisaStatus visaStatus;
 
     @Column(name = "Comments")
     private String comments;

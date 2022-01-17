@@ -37,6 +37,8 @@ public class Contact {
     private Byte isLandlord;
 
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "contact")
+    private House house;
 
 
 }

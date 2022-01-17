@@ -20,8 +20,9 @@ public class House {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "ContactID")
-    private Integer contactId;
+    @OneToOne
+    @JoinColumn(name = "ContactID")
+    private Contact contactId;
 
     @Column(name = "Address")
     private String address;
@@ -31,5 +32,7 @@ public class House {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "house", cascade = CascadeType.MERGE)
     private List<Employee> employeeList = new ArrayList<>();
+
+
 
 }

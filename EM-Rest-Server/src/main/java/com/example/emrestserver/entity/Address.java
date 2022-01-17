@@ -35,6 +35,7 @@ public class Address {
     @Column(name = "StateAbbr")
     private String stateAbbr;
 
-    @Column(name = "PersonID")
-    private Integer personId;
+    @ManyToOne
+    @JoinColumn(name = "PersonID")
+    private Person person;
 }

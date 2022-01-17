@@ -63,4 +63,10 @@ public class Person implements Serializable{
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.MERGE)
     private List<Contact> contactList = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.MERGE)
+    private List<Address> addressList = new ArrayList<>();
+
+
+
 }

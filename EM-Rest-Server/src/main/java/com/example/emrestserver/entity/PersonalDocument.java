@@ -18,8 +18,9 @@ public class PersonalDocument {
     @Column(name ="ID")
     private Integer id;
 
-    @Column(name = "EmployeeID")
-    private Integer employeeId;
+    @ManyToOne
+    @JoinColumn(name = "EmployeeID")
+    private Employee employee;
 
     @Column(name = "Path")
     private String path;
