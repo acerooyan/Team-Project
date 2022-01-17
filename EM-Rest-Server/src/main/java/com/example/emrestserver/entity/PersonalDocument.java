@@ -33,8 +33,8 @@ public class PersonalDocument {
     @Column(name = "CreateDate")
     private Date createDate;
 
-    @Column(name = "CreateBy")
-    private String createBy;
+    @Column(name = "CreatedBy")
+    private String createdBy;
 
 
 }
