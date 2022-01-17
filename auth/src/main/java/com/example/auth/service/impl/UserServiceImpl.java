@@ -2,6 +2,7 @@ package com.example.auth.service.impl;
 
 import com.example.auth.dao.IUserDao;
 import com.example.auth.domain.UserDomain;
+import com.example.auth.entity.User;
 import com.example.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+
 @Transactional
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,18 +20,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDomain addUser(UserDomain userDomain) {
-        User user = User.builder().username(userDomain.getUsername()).password(userDomain.getPassword()).firstname(userDomain.getFirstName()).lastname(userDomain.getLastName()).build();
+        User user = User.builder().userName(userDomain.getUserName()).password(userDomain.getPassword()).build();
         User newUser = userDao.merge(user);
-        if(newUser == null)
+        if (newUser == null)
             return null;
-        return UserDomain.builder().username(newUser.getUsername()).password(newUser.getPassword()).firstName(newUser.getFirstname()).lastName(newUser.getLastname()).build();
+        return UserDomain.builder().userName(newUser.getUserName()).password(newUser.getPassword()).build();
     }
 
     public List<UserDomain> checkLogin(String username, String password) {
         List<UserDomain> res = new ArrayList<>();
         try {
             User user = userDao.getUser(username, password);
-            UserDomain userDomain = UserDomain.builder().username(user.getUsername()).id(user.getID()).admin(user.getAdmin()).firstName(user.getFirstname()).lastName(user.getLastname()).build();
+            UserDomain userDomain = UserDomain.builder().userName(user.getUserName()).id(user.getID()).build();
             res.add(userDomain);
         } catch (NullPointerException e) {
             e.printStackTrace();

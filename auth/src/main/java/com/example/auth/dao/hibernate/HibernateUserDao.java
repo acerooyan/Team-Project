@@ -2,6 +2,7 @@ package com.example.auth.dao.hibernate;
 
 import com.example.auth.dao.AbstractHbDao;
 import com.example.auth.dao.IUserDao;
+import com.example.auth.entity.User;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -19,19 +20,19 @@ public class HibernateUserDao extends AbstractHbDao<User> implements IUserDao {
     public User getUser(String username, String password) {
         Session session = super.getCurrentSession();
         DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
-        criteria.add(Restrictions.eq("username",username));
-        criteria.add(Restrictions.eq("password",password));
+        criteria.add(Restrictions.eq("userName", username));
+        criteria.add(Restrictions.eq("password", password));
         return (User) criteria.getExecutableCriteria(session).uniqueResult();
     }
 
 
     @Override
-    public User merge(User user){
+    public User merge(User user) {
         Session session = super.getCurrentSession();
         DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
-        criteria.add(Restrictions.eq("username",user.getUsername()));
+        criteria.add(Restrictions.eq("user", user.getUserName()));
         List<User> existedUser = criteria.getExecutableCriteria(session).list();
-        if(existedUser != null && existedUser.size()>0){
+        if (existedUser != null && existedUser.size() > 0) {
             return null;
         }
         return super.merge(user);

@@ -11,7 +11,7 @@ import java.util.Date;
 public class JwtUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtil.class);
 
-    public static String generateToken(String subject, int validDuration, String role, int id, String firstName, String lastName) {
+    public static String generateToken(String subject, int validDuration, String role, int id) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
 
@@ -19,8 +19,8 @@ public class JwtUtil {
                 .setSubject(subject)
                 .claim("id", id)
                 .claim("role", role)
-                .claim("firstName", firstName)
-                .claim("lastName", lastName)
+//                .claim("firstName", firstName)
+//                .claim("lastName", lastName)
                 .setIssuedAt(now)
                 .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(validDuration).toInstant()))
                 .signWith(SignatureAlgorithm.HS256, JwtConstant.JWT_SIGNING_KEY);

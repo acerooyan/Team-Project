@@ -23,7 +23,7 @@ public class User implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.MERGE)
     private List<UserRole> userRole;
 
-    @Column(name = "username")
+    @Column(name = "User")
     private String userName;
     @Column(name = "email")
     private String email;

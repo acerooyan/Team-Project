@@ -26,14 +26,9 @@
             <form:errors path="password" style="color:red;"/>
         </div>
         <div class="form-group">
-            <form:label path="firstName" for="firstNameInput">FirstName</form:label>
-            <form:input type="text" path="firstName" class="form-control" id="firstNameInput"/>
-            <form:errors path="firstName" style="color:red;"/>
-        </div>
-        <div class="form-group">
-            <form:label path="lastName" for="LastNameInput">LastName</form:label>
-            <form:input type="text" path="lastName" class="form-control" id="lastNameInput"/>
-            <form:errors path="lastName" style="color:red;"/>
+            <form:label path="email" for="emailInput">FirstName</form:label>
+            <form:input type="text" path="email" class="form-control" id="emailInput"/>
+            <form:errors path="email" style="color:red;"/>
         </div>
         <button type="submit" class="btn btn-primary">Add</button>
     </form:form>
