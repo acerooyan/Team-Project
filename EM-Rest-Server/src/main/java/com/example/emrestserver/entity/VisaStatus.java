@@ -29,5 +29,5 @@ public class VisaStatus {
 
     @Column(name = "CreateUser")
     private Integer createUser;
-    
+
 }
