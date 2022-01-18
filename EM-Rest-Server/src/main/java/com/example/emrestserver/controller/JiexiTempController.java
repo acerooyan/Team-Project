@@ -2,17 +2,11 @@ package com.example.emrestserver.controller;
 
 import com.example.emrestserver.entity.Person;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@RestController
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
-@RequestMapping("/em")
-public class OnboardController {
-
-    /*
-
-     */
-    @PostMapping("/jiexitest")
+public class JiexiTempController {
+    @PostMapping("/test")
     public ResponseEntity<Object> person(@RequestBody Person person) {
         if (person == null
                 || person.getFirstname() == null
@@ -21,6 +15,8 @@ public class OnboardController {
         } else {
             try{
                 //add new person in database
+                // person -> basic & contactinfo
+                //
             }catch (Exception e){
                 return ResponseEntity.internalServerError().build();
             }
