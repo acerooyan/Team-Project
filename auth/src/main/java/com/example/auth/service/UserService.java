@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserService {
     UserDomain addUser(UserDomain userDomain);
 
-    List<UserDomain> checkLogin(String username, String password);
+    List<UserDomain> checkLogin(UserDomain userDomain);
 
     User getUserById(int id);
 }

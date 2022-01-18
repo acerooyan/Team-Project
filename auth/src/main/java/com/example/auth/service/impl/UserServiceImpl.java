@@ -3,6 +3,7 @@ package com.example.auth.service.impl;
 import com.example.auth.dao.IUserDao;
 import com.example.auth.domain.UserDomain;
 import com.example.auth.entity.User;
+import com.example.auth.entity.UserRole;
 import com.example.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,19 @@ public class UserServiceImpl implements UserService {
         return UserDomain.builder().userName(newUser.getUserName()).password(newUser.getPassword()).build();
     }
 
-    public List<UserDomain> checkLogin(String username, String password) {
+    public List<UserDomain> checkLogin(UserDomain userDomain) {
+        if(userDomain.getUserName().indexOf("@")>=0){
+            userDomain.setEmail(userDomain.getUserName());
+            userDomain.setUserName(null);
+        }
         List<UserDomain> res = new ArrayList<>();
         try {
-            User user = userDao.getUser(username, password);
-            UserDomain userDomain = UserDomain.builder().userName(user.getUserName()).id(user.getID()).build();
+            User user = userDao.getUser(userDomain);
+            List<String> roleNames = new ArrayList<>();
+            for(UserRole userRole : user.getUserRole()){
+                roleNames.add(userRole.getRole().getRoleName());
+            }
+            userDomain = UserDomain.builder().userName(user.getUserName()).role(roleNames).id(user.getID()).email(user.getEmail()).build();
             res.add(userDomain);
         } catch (NullPointerException e) {
             e.printStackTrace();

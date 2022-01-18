@@ -3,6 +3,7 @@ package com.example.auth.domain;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @ToString
@@ -19,5 +20,5 @@ public class UserDomain {
     @NotNull
     private String email;
     @NotNull
-    private String role;
+    private List<String> role;
 }

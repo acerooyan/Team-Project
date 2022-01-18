@@ -20,10 +20,10 @@ public class UserRole {
 
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "UserID")
     private User user;
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "RoleID")
     private Role role;
     @Column(name = "activeflag")
     private int activeFlag;

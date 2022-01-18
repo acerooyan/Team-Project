@@ -23,15 +23,15 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<String> login(HttpServletResponse res, @RequestBody UserDomain userDomain) {
         if (userDomain != null && userDomain.getUserName() != null && userDomain.getPassword() != null) {
-            List<UserDomain> userDomainList = userService.checkLogin(userDomain.getUserName(), userDomain.getPassword());
+            List<UserDomain> userDomainList = userService.checkLogin(userDomain);
             if (userDomainList != null && userDomainList.size() > 0) {
-                String jwt = JwtUtil.generateToken(userDomain.getUserName(), JwtConstant.JWT_VALID_DURATION, userDomainList.get(0).getRole(), userDomainList.get(0).getId());
+                String jwt = JwtUtil.generateToken(userDomain.getEmail(), JwtConstant.JWT_VALID_DURATION, userDomainList.get(0).getRole(), userDomainList.get(0).getId());
                 CookieUtil.create(res, JwtConstant.JWT_COOKIE_NAME, jwt, false, -1, "localhost");
                 return ResponseEntity.ok().build();
             }
         }
         return ResponseEntity
-                .status(HttpStatus.CREATED)
+                .status(HttpStatus.FORBIDDEN)
                 .body("Invalid username or password");
     }
 

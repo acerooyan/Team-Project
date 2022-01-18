@@ -2,6 +2,7 @@ package com.example.auth.dao.hibernate;
 
 import com.example.auth.dao.AbstractHbDao;
 import com.example.auth.dao.IUserDao;
+import com.example.auth.domain.UserDomain;
 import com.example.auth.entity.User;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
@@ -17,12 +18,22 @@ public class HibernateUserDao extends AbstractHbDao<User> implements IUserDao {
     }
 
     @Override
-    public User getUser(String username, String password) {
+    public User getUser(UserDomain userDomain) {
         Session session = super.getCurrentSession();
         DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
-        criteria.add(Restrictions.eq("userName", username));
-        criteria.add(Restrictions.eq("password", password));
-        return (User) criteria.getExecutableCriteria(session).uniqueResult();
+        if (userDomain != null) {
+            if (userDomain.getUserName() != null && !userDomain.getUserName().isEmpty()) {
+                criteria.add(Restrictions.eq("userName", userDomain.getUserName()));
+            }
+            if (userDomain.getEmail() != null && !userDomain.getEmail().isEmpty()) {
+                criteria.add(Restrictions.eq("email", userDomain.getEmail()));
+            }
+            if (userDomain.getPassword() != null && !userDomain.getPassword().isEmpty()) {
+                criteria.add(Restrictions.eq("password", userDomain.getPassword()));
+            }
+            return (User) criteria.getExecutableCriteria(session).uniqueResult();
+        }
+        return null;
     }
 
 
@@ -30,7 +41,7 @@ public class HibernateUserDao extends AbstractHbDao<User> implements IUserDao {
     public User merge(User user) {
         Session session = super.getCurrentSession();
         DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
-        criteria.add(Restrictions.eq("user", user.getUserName()));
+        criteria.add(Restrictions.eq("userName", user.getUserName()));
         List<User> existedUser = criteria.getExecutableCriteria(session).list();
         if (existedUser != null && existedUser.size() > 0) {
             return null;

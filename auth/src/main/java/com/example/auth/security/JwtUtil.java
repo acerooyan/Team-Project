@@ -7,11 +7,12 @@ import org.slf4j.LoggerFactory;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 
 public class JwtUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtil.class);
 
-    public static String generateToken(String subject, int validDuration, String role, int id) {
+    public static String generateToken(String subject, int validDuration, List<String> role, int id) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
 
