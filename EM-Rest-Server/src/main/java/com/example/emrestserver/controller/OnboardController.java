@@ -21,6 +21,8 @@ public class OnboardController {
         } else {
             try{
                 //add new person in database
+                //person +
+                //
             }catch (Exception e){
                 return ResponseEntity.internalServerError().build();
             }
