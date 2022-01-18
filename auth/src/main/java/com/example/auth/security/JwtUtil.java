@@ -19,7 +19,7 @@ public class JwtUtil {
         JwtBuilder builder = Jwts.builder()
                 .setSubject(subject)
                 .claim("id", id)
-                .claim("role", role)
+                .claim("role", role != null && role.size() > 0 ? role.get(0) : "")
 //                .claim("firstName", firstName)
 //                .claim("lastName", lastName)
                 .setIssuedAt(now)
