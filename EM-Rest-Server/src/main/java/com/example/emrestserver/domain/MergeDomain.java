@@ -10,6 +10,7 @@ import lombok.*;
 public class MergeDomain {
 
     BasicInfoDomain basicInfoDomain;
+    ContactInfoDomain contactInfoDomain;
     CarInfoDomain carInfoDomain;
     ContactEmergencyDomain contactEmergencyDomain;
     ContactReferenceDomain contactReferenceDomain;
