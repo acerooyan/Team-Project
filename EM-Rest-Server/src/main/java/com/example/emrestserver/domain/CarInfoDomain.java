@@ -14,7 +14,7 @@ public class CarInfoDomain {
 
     private String driverLicence;
 
-    private Date driverLicence_expirationDate;
+    private String driverLicence_expirationDate;
 
     private MultipartFile driverLicenceFile;
 

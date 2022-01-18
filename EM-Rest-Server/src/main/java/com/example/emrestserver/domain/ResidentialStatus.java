@@ -13,6 +13,6 @@ import java.sql.Date;
 public class ResidentialStatus {
     private String citizenOrResident;
     private String workAuthorization; // visa status
-    private Date startDate;
+    private String startDate;
     private MultipartFile workAuthorizationFile;
 }

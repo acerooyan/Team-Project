@@ -21,7 +21,7 @@ public class BasicInfoDomain {
 
     private String SSN;
 
-    private Date DOB;
+    private String DOB;
 
     private String gender;
 
