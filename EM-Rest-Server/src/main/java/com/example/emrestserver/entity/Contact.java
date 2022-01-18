@@ -37,8 +37,13 @@ public class Contact {
     private Byte isLandlord;
 
 
+    @ManyToOne
+    @JoinColumn(name = "WitEmployee")
+    private Employee employee;
+
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "contact")
     private House house;
+
 
 
 }

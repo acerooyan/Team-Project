@@ -21,12 +21,6 @@ public class Person implements Serializable{
     @Column(name = "ID")
     private Integer id;
 
-    //@OneToMany(mappedBy="person")
-    //private Set<Contact> contactSet;
-
-
-    //@OneToMany(mappedBy = "person")
-    //private Set<Address> addressSet;
 
     @Column(name = "FirstName")
     private String firstname;

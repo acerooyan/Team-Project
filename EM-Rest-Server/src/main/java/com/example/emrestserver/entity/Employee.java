@@ -75,8 +75,11 @@ public class Employee {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.MERGE)
     private List<PersonalDocument> personalDocumentList = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "empolyee")
-    private ApplicationWorkFlow applicationWorkFlow;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<ApplicationWorkFlow> applicationWorkFlowList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.MERGE)
+    private List<Contact> contactList;
 
 }
 
