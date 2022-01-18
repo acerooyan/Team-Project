@@ -1,5 +1,6 @@
 package com.example.emrestserver.controller;
 
+import com.example.emrestserver.domain.TestDomain;
 import com.example.emrestserver.entity.Person;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,5 +25,17 @@ public class TestController {
             return ResponseEntity.ok().body(person);
         }
     }
+
+    @PostMapping("/test3")
+    public ResponseEntity<TestDomain> test2(@RequestBody TestDomain testDomain){
+        if(testDomain == null ){
+            return ResponseEntity.notFound().build();
+        } else {
+            System.out.println(testDomain.getPerson());
+            return ResponseEntity.ok().body(testDomain);
+        }
+    }
+
+
 
 }
