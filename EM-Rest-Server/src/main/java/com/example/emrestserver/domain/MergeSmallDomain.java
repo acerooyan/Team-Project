@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegistrationDomain {
-    private String username;
-    private String password;
+public class MergeSmallDomain {
+    RegistrationDomain registrationDomain;
+
 }

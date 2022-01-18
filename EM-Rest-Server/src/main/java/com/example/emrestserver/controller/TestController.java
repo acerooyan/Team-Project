@@ -1,5 +1,6 @@
 package com.example.emrestserver.controller;
 
+import com.example.emrestserver.domain.MergeSmallDomain;
 import com.example.emrestserver.entity.Person;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
