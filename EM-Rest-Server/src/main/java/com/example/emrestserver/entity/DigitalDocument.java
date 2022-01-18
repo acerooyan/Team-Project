@@ -3,6 +3,7 @@ package com.example.emrestserver.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "digitaldocument")
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DigitalDocument {
+public class DigitalDocument implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="ID")

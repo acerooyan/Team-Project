@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.Query;
 import java.util.List;
 
-@Repository
+@Repository("hrHomeDao")
 public class HrHomeDao {
     @Autowired
     protected SessionFactory sessionFactory;
@@ -32,8 +32,9 @@ public class HrHomeDao {
     @Transactional
     public List<Employee> getEmployeeListWithVisaStatusActive(){
         Session session = getCurrentSession();
-        Query getAllEmployees = session.createQuery("FROM Employee JOIN FETCH ALL PROPERTIES");
+        Query getAllEmployees = session.createQuery("FROM Employee");
         List<Employee> employeeList = (List<Employee>) getAllEmployees.getResultList();
+        System.out.println(employeeList.size());
         return employeeList;
 
     }

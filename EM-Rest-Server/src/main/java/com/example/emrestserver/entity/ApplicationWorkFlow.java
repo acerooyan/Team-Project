@@ -3,6 +3,7 @@ package com.example.emrestserver.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApplicationWorkFlow {
+public class ApplicationWorkFlow implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

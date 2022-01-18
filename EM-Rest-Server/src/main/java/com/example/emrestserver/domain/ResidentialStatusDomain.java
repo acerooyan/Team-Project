@@ -9,8 +9,11 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResidentialStatusDomain {
-    private String citizenOrResident;
+    private String isCitizenOrResident; //yes or no
+    private String citizenOrGreenCard; //citizen    resident   ""
+
     private String workAuthorization; // visa status
     private String startDate;
+    private String expirationDate;
     private MultipartFile workAuthorizationFile;
 }
