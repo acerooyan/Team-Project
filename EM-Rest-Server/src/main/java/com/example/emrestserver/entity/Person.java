@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,10 +48,10 @@ public class Person implements Serializable{
     private String ssn;
 
     @Column(name = "DOB")
-    private String dob;
+    private Date dob;
 
     @Column(name = "UserId")
-    private String userId;
+    private Integer userId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.MERGE)
     private List<Employee> employeeList = new ArrayList<>();
