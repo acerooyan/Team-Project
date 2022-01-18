@@ -66,6 +66,13 @@ public class JwtFilter implements Filter {
 
         System.out.println("+++++++++JwtFilter++++++++");
         System.out.println(token);
+        String role = null;
+        Claims claims = JwtUtil.getClaimsFromJwt(token);
+
+        if(claims!=null){
+            role = claims.get("role").toString();
+            System.out.println(role);
+        }
     }
 
     @Override
