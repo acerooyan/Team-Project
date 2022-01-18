@@ -1,5 +1,8 @@
 package com.example.auth.service;
 
+import com.example.auth.entity.RegistrationToken;
+
 public interface RegistrationTokenService {
-    String getTokenByToken(String token);
+    RegistrationToken getTokenByTokenAndEmail (String email, String token);
+
 }

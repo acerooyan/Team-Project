@@ -42,7 +42,7 @@ public class JwtUtil {
             return null;
         } catch (ExpiredJwtException e) {
             LOGGER.warn("Expired Jwt");
-            return null;
+            return "expired";
         } catch (Exception e) {
             LOGGER.warn("Exception Parsing Jwt");
             return null;

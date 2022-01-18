@@ -2,8 +2,10 @@ package com.example.auth.controller;
 
 import com.example.auth.constant.JwtConstant;
 import com.example.auth.domain.UserDomain;
+import com.example.auth.entity.RegistrationToken;
 import com.example.auth.security.CookieUtil;
 import com.example.auth.security.JwtUtil;
+import com.example.auth.service.RegistrationTokenService;
 import com.example.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +20,12 @@ import java.util.List;
 public class LoginController {
     @Autowired
     private UserService userService;
+    private RegistrationTokenService registrationTokenService;
 
+    @Autowired
+    public LoginController(RegistrationTokenService registrationTokenService) {
+        this.registrationTokenService = registrationTokenService;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(HttpServletResponse res, @RequestBody UserDomain userDomain) {
@@ -36,22 +43,25 @@ public class LoginController {
     }
 
     @GetMapping("/new")
-    public String savePerson(Model model, @RequestParam("registrationToken") String registrationToken) {
-        model.addAttribute("user", new UserDomain());
-        return "registerForm";
+    public ResponseEntity<String> savePerson(@RequestParam("registrationToken") String registrationToken) {
+        String email = JwtUtil.getSubjectFromJwt(registrationToken);
+        if(email!=null&&email.equals("expired")){
+            return ResponseEntity.ok("Expired Token");
+        }
+        RegistrationToken registrationToken1 = registrationTokenService.getTokenByTokenAndEmail(email, registrationToken);
+        if(registrationToken1!=null){
+            return ResponseEntity.ok("Success");
+        }
+        return ResponseEntity.ok("Invalid Token");
     }
 
-//    @PostMapping("/registration")
-//    public String addUser(HttpServletRequest req, Model model, @ModelAttribute("user") @Valid UserDomain userDomain,
-//                          BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "registerForm";
-//        }
-//        UserDomain newUserDomain = userService.addUser(userDomain);
-//        if (newUserDomain == null)
-//            return "registerForm";
-//        return "redirect:" + "/auth/login";
-//    }
+    @PostMapping("/registration")
+    public ResponseEntity<String> addUser(@RequestBody UserDomain userDomain) {
+        UserDomain newUserDomain = userService.addUser(userDomain);
+        if (newUserDomain == null)
+            return ResponseEntity.ok("Failed");
+        return ResponseEntity.ok("Success");
+    }
 
     @GetMapping("/logout")
     public String logout(HttpServletResponse res, @RequestParam("redirect") String redirect) {

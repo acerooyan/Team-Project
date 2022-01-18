@@ -2,14 +2,18 @@ package com.example.auth.service.impl;
 
 import com.example.auth.dao.IUserDao;
 import com.example.auth.domain.UserDomain;
+import com.example.auth.entity.Role;
 import com.example.auth.entity.User;
 import com.example.auth.entity.UserRole;
+import com.example.auth.service.RoleService;
+import com.example.auth.service.UserRoleService;
 import com.example.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -17,19 +21,32 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private IUserDao userDao;
+    private RoleService roleService;
+    private UserRoleService userRoleService;
 
+    @Autowired
+    public UserServiceImpl(RoleService roleService, UserRoleService userRoleService) {
+        this.roleService = roleService;
+        this.userRoleService = userRoleService;
+    }
 
     @Override
     public UserDomain addUser(UserDomain userDomain) {
-        User user = User.builder().userName(userDomain.getUserName()).password(userDomain.getPassword()).build();
-        User newUser = userDao.merge(user);
-        if (newUser == null)
-            return null;
-        return UserDomain.builder().userName(newUser.getUserName()).password(newUser.getPassword()).build();
+        User user = User.builder().userName(userDomain.getUserName()).password(userDomain.getPassword()).email(userDomain.getEmail()).createDate(new Date()).modificationDate(new Date()).build();
+        user = userDao.merge(user);
+        Role role = roleService.getRoleByName("employee");
+        if (role != null) {
+            UserRole userRole = UserRole.builder().role(role).user(user).createDate(new Date()).modificationDate(new Date()).activeFlag(1).lastModificationUser(user.getID()).build();
+            userRole = userRoleService.addUserRole(userRole);
+            List<UserRole> userRoles = new ArrayList<>();
+            userRoles.add(userRole);
+            return UserDomain.builder().userName(user.getUserName()).email(user.getEmail()).build();
+        }
+        return null;
     }
 
     public List<UserDomain> checkLogin(UserDomain userDomain) {
-        if(userDomain.getUserName().indexOf("@")>=0){
+        if (userDomain.getUserName().indexOf("@") >= 0) {
             userDomain.setEmail(userDomain.getUserName());
             userDomain.setUserName(null);
         }
@@ -37,7 +54,7 @@ public class UserServiceImpl implements UserService {
         try {
             User user = userDao.getUser(userDomain);
             List<String> roleNames = new ArrayList<>();
-            for(UserRole userRole : user.getUserRole()){
+            for (UserRole userRole : user.getUserRole()) {
                 roleNames.add(userRole.getRole().getRoleName());
             }
             userDomain = UserDomain.builder().userName(user.getUserName()).role(roleNames).id(user.getID()).email(user.getEmail()).build();

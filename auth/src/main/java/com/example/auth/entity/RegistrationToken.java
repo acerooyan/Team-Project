@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "registration_token")
@@ -27,7 +28,7 @@ public class RegistrationToken implements Serializable {
     private String token;
 
     @Column(name = "valid_duration")
-    private int validDuration;
+    private Integer validDuration;
 
     @Column(name = "email")
     private String email;

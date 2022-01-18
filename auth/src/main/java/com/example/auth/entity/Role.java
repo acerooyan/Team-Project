@@ -20,10 +20,7 @@ public class Role implements Serializable {
     @Column(name = "ID")
     private Integer ID;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "role", cascade = CascadeType.MERGE)
-    private List<UserRole> userRole;
-
-    @Column(name = "rolename")
+    @Column(name = "RoleName")
     private String roleName;
     @Column(name = "description")
     private String description;
