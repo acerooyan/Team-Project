@@ -10,13 +10,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { NavbarComponent } from './home/navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { HrpageComponent } from './home/hrpage/hrpage.component';
+import { EmployeeProfileComponent } from './home/employee-profile/employee-profile.component';
+import { EmpVisaStatusManagementComponent } from './home/emp-visa-status-management/emp-visa-status-management.component';
+import { HireComponent } from './home/hire/hire.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    HomeComponent,
+    HrpageComponent,
+    EmployeeProfileComponent,
+    EmpVisaStatusManagementComponent,
+    HireComponent
   ],
   imports: [
     BrowserModule,
