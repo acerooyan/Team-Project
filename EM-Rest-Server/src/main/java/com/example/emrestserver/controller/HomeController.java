@@ -25,20 +25,14 @@ public class HomeController {
         return ResponseEntity.ok().body(applicationWorkFlow);
     }
 
-    @PostMapping("/employee/home")
-    public ResponseEntity<Object> person(@RequestBody Person person) {
-        if (person == null
-                || person.getFirstname() == null
-                || person.getLastname()== null) {
-            return ResponseEntity.unprocessableEntity().build();
-        } else {
-            try{
-                //add new person in database
-            }catch (Exception e){
-                return ResponseEntity.internalServerError().build();
-            }
-            System.out.println(person);
-            return ResponseEntity.ok().build();
+    @GetMapping("/employee/home")
+    public String  employeeHome() {
+        try{
+            //add new person in database
+            return "success";
+        }catch (Exception e){
+            return "error";
         }
+
     }
 }
