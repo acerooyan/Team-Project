@@ -36,6 +36,9 @@ public class Contact {
     @Column(name = "isLandlord")
     private Byte isLandlord;
 
+    @Column(name = "WithEmployee")
+    private Integer withEmployee;
+
 
     @ManyToOne
     @JoinColumn(name = "WitEmployee")
