@@ -19,6 +19,7 @@ public class HomeController {
 
         try{
             //get application list from database
+            
         }catch (Exception e){
             return ResponseEntity.internalServerError().build();
         }
