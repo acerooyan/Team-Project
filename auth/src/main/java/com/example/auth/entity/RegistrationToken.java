@@ -4,10 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
-@Table(name = "registration_token")
+@Table(name = "registrationtoken")
 @Data
 @ToString
 @Builder
@@ -27,13 +26,13 @@ public class RegistrationToken implements Serializable {
     @Column(name = "token")
     private String token;
 
-    @Column(name = "valid_duration")
+    @Column(name = "validDuration")
     private Integer validDuration;
 
-    @Column(name = "email")
+    @Column(name = "Email")
     private String email;
 
-    @Column(name = "created_by")
+    @Column(name = "CreatedBy")
     private String createdBy;
 
 }

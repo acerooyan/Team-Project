@@ -18,9 +18,14 @@ public class HibernateRegistrationTokenDao extends AbstractHbDao<RegistrationTok
     @Override
     public RegistrationToken getTokenByTokenAndEmail(String email, String token) {
         Session session = super.getCurrentSession();
-        DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
+        DetachedCriteria criteria = DetachedCriteria.forClass(RegistrationToken.class);
         criteria.add(Restrictions.eq("token", token));
         criteria.add(Restrictions.eq("email", email));
         return (RegistrationToken) criteria.getExecutableCriteria(session).uniqueResult();
+    }
+
+    @Override
+    public RegistrationToken addRegistrationToken(RegistrationToken registrationToken) {
+        return super.merge(registrationToken);
     }
 }

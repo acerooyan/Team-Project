@@ -22,4 +22,9 @@ public class RegistrationTokenServiceImpl implements RegistrationTokenService {
     public RegistrationToken getTokenByTokenAndEmail(String email, String token) {
         return iRegistrationTokenDao.getTokenByTokenAndEmail(email, token);
     }
+
+    @Override
+    public RegistrationToken addRegistrationToken(RegistrationToken registrationToken) {
+        return iRegistrationTokenDao.addRegistrationToken(registrationToken);
+    }
 }

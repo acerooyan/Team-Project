@@ -48,4 +48,21 @@ public class JwtUtil {
             return null;
         }
     }
+    public static Claims getClaimsFromJwt(String token){
+        try {
+            Claims claims = Jwts.parser().setSigningKey(JwtConstant.JWT_SIGNING_KEY)
+                    .parseClaimsJws(token)
+                    .getBody();
+            return claims;
+        } catch (SignatureException e){
+            LOGGER.warn("Invalid Jwt Signature");
+            return null;
+        } catch (ExpiredJwtException e){
+            LOGGER.warn("Expired Jwt");
+            return null;
+        } catch (Exception e){
+            LOGGER.warn("Exception Parsing Jwt");
+            return null;
+        }
+    }
 }
