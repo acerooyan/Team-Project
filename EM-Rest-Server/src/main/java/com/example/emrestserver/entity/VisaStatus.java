@@ -26,7 +26,7 @@ public class VisaStatus implements Serializable {
     private String visaType;
 
     @Column(name = "Active")
-    private Integer active;
+    private String active;
 
     @Column(name = "ModificationDate")
     private Date modificationDate;

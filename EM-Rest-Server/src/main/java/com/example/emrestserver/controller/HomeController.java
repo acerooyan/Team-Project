@@ -19,15 +19,15 @@ public class HomeController {
     @GetMapping("/hr/home")
     public ResponseEntity<List<HrHomeDomain>> hrHome() {
 
-        try{
+//        try{
 //            get application list from database
          List<HrHomeDomain> hrHomeDomainList = hrHomeService.mapDocumentWithEmployee();
         return ResponseEntity.ok().body(hrHomeDomainList);
-        }catch (Exception e){
-            System.out.println("error catch");
-            return ResponseEntity.internalServerError().build();
-        }
-       
+//        }catch (Exception e){
+//            System.out.println("error catch");
+//            return ResponseEntity.internalServerError().build();
+//        }
+
     }
 
     @GetMapping("/employee/home")
