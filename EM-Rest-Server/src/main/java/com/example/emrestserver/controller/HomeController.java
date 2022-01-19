@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
+@RequestMapping("/api")
 public class HomeController {
 
     @Autowired

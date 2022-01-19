@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
-//@ServletComponentScan("com.example.emrestserver.security.filter")
+@ServletComponentScan("com.example.emrestserver.security.filter")
 
 public class EmRestServerApplication {
 

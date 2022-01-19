@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
-@RequestMapping("/em")
+@RequestMapping("/api/em")
 public class OnboardController {
 
     /*

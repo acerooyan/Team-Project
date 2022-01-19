@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = "/employee/*")
+@WebFilter(urlPatterns = "/api/employee/*")
 public class EmployeeFilter implements Filter {
 
 
@@ -59,8 +59,4 @@ public class EmployeeFilter implements Filter {
     public void destroy() {
 
     }
-
-
-
-
 }
