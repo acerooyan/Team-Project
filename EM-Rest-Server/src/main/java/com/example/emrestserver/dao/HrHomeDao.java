@@ -30,7 +30,7 @@ public class HrHomeDao {
     public List<Employee> getAllEmployees(){
         Session session = getCurrentSession();
 //        Query getAllEmployees = session.createQuery("FROM Employee e JOIN FETCH e.person");
-        Query getAllEmployees = session.createQuery("FROM Employee e WHERE e.visaStatus.active=1");
+        Query getAllEmployees = session.createQuery("FROM Employee e WHERE e.visaStatus.active='1'");
         List<Employee> employeeList = (List<Employee>) getAllEmployees.getResultList();
         return employeeList;
     }
