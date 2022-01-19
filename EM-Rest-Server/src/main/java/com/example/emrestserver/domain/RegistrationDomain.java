@@ -8,6 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegistrationDomain {
-    private String Username;
-    private String Password;
+    private String username;
+    private String password;
 }

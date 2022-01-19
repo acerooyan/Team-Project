@@ -9,8 +9,10 @@ import { Observable } from 'rxjs';
 export class VerifyUserService {
 
 
+
   // private sso = "auth/login";
    private sso = "api/hr/home";
+
   
   constructor(private http: HttpClient) { }
 

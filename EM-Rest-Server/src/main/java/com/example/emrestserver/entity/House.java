@@ -1,8 +1,10 @@
 package com.example.emrestserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class House {
+public class House implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +24,7 @@ public class House {
 
     @OneToOne
     @JoinColumn(name = "ContactID")
-    private Contact contactId;
+    private Contact contact;
 
     @Column(name = "Address")
     private String address;
@@ -30,6 +32,7 @@ public class House {
     @Column(name = "NumberOfPerson")
     private Integer numberOfPerson;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "house", cascade = CascadeType.MERGE)
     private List<Employee> employeeList = new ArrayList<>();
 

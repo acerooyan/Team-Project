@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
-@RequestMapping("/em")
+@RequestMapping("/api/em")
 public class OnboardController {
 
     /*
 
      */
-    @PostMapping("/af")
+    @PostMapping("/jiexitest")
     public ResponseEntity<Object> person(@RequestBody Person person) {
         if (person == null
                 || person.getFirstname() == null
@@ -21,6 +21,8 @@ public class OnboardController {
         } else {
             try{
                 //add new person in database
+                //person +
+                //
             }catch (Exception e){
                 return ResponseEntity.internalServerError().build();
             }

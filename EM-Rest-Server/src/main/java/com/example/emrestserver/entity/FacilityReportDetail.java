@@ -3,7 +3,8 @@ package com.example.emrestserver.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.io.Serializable;
+import java.sql.Date;
 
 @Entity
 @Table(name = "facilityreportdetail")
@@ -12,7 +13,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FacilityReportDetail {
+public class FacilityReportDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
