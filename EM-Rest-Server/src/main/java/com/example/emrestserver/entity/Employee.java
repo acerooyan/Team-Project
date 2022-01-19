@@ -69,9 +69,10 @@ public class Employee implements Serializable {
     @Column(name="DriverLicence_ExpirationDate")
     private Date driverLicence_ExpirationDate;
 
-    @ManyToOne
-    @JoinColumn(name="HouseID")
-    private House house;
+//    @ManyToOne
+//    @JoinColumn(name="HouseID")
+    @Column(name = "HouseID")
+    private Integer houseId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.MERGE)
     private List<PersonalDocument> personalDocumentList = new ArrayList<>();

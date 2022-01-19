@@ -20,7 +20,7 @@ public class HomeController {
     HrHomeService hrHomeService;
 
     @GetMapping("/hr/home")
-    public ResponseEntity<List<HrHomeDomain> > hrHome() {
+    public ResponseEntity<Employee > hrHome() {
         //hard coded data
         ApplicationWorkFlow applicationWorkFlow = new ApplicationWorkFlow(null,null,new Date(),new Date(),"pending","lol","opt");
 
@@ -33,7 +33,7 @@ public class HomeController {
 //            System.out.println("error catch");
 //            return ResponseEntity.internalServerError().build();
 //        }
-        return ResponseEntity.ok().body(hrHomeDomainList);
+        return ResponseEntity.ok().body(hrHomeDomainList.get(0).getEmployee());
     }
 
     @GetMapping("/employee/home")

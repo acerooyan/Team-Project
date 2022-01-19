@@ -31,8 +31,8 @@ public class House implements Serializable {
     @Column(name = "NumberOfPerson")
     private Integer numberOfPerson;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "house", cascade = CascadeType.MERGE)
-    private List<Employee> employeeList = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "house", cascade = CascadeType.MERGE)
+//    private List<Employee> employeeList = new ArrayList<>();
 
 
 
