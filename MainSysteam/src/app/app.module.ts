@@ -16,6 +16,16 @@ import { EmployeeProfileComponent } from './home/employee-profile/employee-profi
 import { EmpVisaStatusManagementComponent } from './home/emp-visa-status-management/emp-visa-status-management.component';
 import { HireComponent } from './home/hire/hire.component';
 import { WildCardComponent } from './wild-card/wild-card.component';
+import { Step1Component } from './register/step1/step1.component';
+import { Step2Component } from './register/step2/step2.component';
+import { Step3Component } from './register/step3/step3.component';
+import { Step4Component } from './register/step4/step4.component';
+import { Step5Component } from './register/step5/step5.component';
+import { Step6Component } from './register/step6/step6.component';
+import {RegisterService} from "./services/register.service";
+import { RegnavbarComponent } from './register/regnavbar/regnavbar.component';
+import { RegisterComponent } from './register/register.component';
+
 
 
 @NgModule({
@@ -28,7 +38,15 @@ import { WildCardComponent } from './wild-card/wild-card.component';
     EmployeeProfileComponent,
     EmpVisaStatusManagementComponent,
     HireComponent,
-    WildCardComponent
+    WildCardComponent,
+    Step1Component,
+    Step2Component,
+    Step3Component,
+    Step4Component,
+    Step5Component,
+    Step6Component,
+    RegnavbarComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,11 +55,13 @@ import { WildCardComponent } from './wild-card/wild-card.component';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    
+
 
     
   ],
-  providers: [],
+  providers: [RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

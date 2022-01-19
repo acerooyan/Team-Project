@@ -34,7 +34,7 @@ export class LoginFormComponent implements OnInit {
       {
         next: data => {
             console.log(data);
-            this.router.navigate(['nav'])
+            this.router.navigate(['nav/hr'])
         },
         error: e => {
             
