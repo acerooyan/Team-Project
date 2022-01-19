@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl} from '@angular/forms';
 import { VerifyUserService } from 'src/app/services/verify-user.service';
-
-
-;
+import { errors } from 'src/app/entity/errors';
 
 @Component({
   selector: 'app-login-form',
@@ -16,10 +14,13 @@ export class LoginFormComponent implements OnInit {
   public nameControl = new FormControl();
   public PasswordControl = new FormControl();
   public loginAsHr: boolean = false;
-
+  errorObject: errors = {code:"", message:""}
+  
+  
   constructor(private router: Router, private service: VerifyUserService ) { }
 
   ngOnInit(): void {
+   
   }
 
   changerole(){
@@ -37,8 +38,8 @@ export class LoginFormComponent implements OnInit {
         },
         error: e => {
             
-          
-            console.log('There was an error!', e );
+           this.errorObject.code = e.status;
+           this.errorObject.message = e.error;
             
         }
     })
