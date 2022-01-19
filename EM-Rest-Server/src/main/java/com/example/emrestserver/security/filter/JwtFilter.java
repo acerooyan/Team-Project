@@ -75,9 +75,11 @@ public class JwtFilter implements Filter {
         String userId = null;
         Claims claims = JwtUtil.getClaimsFromJwt(token);
 
+        if(claims!=null){
+            userId = claims.get("id").toString();
+            System.out.println("UserId is " + userId);
+        }
 
-        userId = claims.get("id").toString();
-        System.out.println("UserId is " + userId);
 
         if (userId == null ) {
             System.out.println("Failed first filter, direct back to login");
