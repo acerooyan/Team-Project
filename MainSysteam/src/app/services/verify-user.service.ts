@@ -10,8 +10,8 @@ export class VerifyUserService {
 
 
 
-  // private sso = "auth/login";
-   private sso = "api/hr/home";
+  private sso = "auth/login";
+   private mainhrhome= "api/hr/home";
 
   
   constructor(private http: HttpClient) { }
@@ -25,14 +25,22 @@ export class VerifyUserService {
 
 
 
-      return this.http.get(this.sso);
-
-  //   return this.http.post(this.sso,  body, {
-  //     responseType: 'text',
-  //     withCredentials: true,
+    return this.http.post(this.sso,  body, {
+      responseType: 'text',
+      withCredentials: true,
       
-  //   }) 
-  }
+    }) 
+  
+
+}
+
+
+HrHome( ):Observable<any>
+{
+ 
+    return this.http.get(this.mainhrhome);
+
+}
 
   
  

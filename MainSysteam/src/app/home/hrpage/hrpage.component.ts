@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { VerifyUserService } from 'src/app/services/verify-user.service';
 @Component({
   selector: 'app-hrpage',
   templateUrl: './hrpage.component.html',
@@ -20,7 +20,7 @@ export class HrpageComponent implements OnInit {
       "Application Type":"Onboarding",
       "Status":"Complete"},
   ]
-  constructor() {
+  constructor(private service: VerifyUserService) {
     this.data = [
       {
         Name:"Joey",
@@ -37,6 +37,27 @@ export class HrpageComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+  
+   
+      this.service.HrHome().subscribe(
+        {
+          next: data => {
+              console.log(data);
+              
+          },
+          error: e => {
+              
+            console.log(e);
+              
+          }
+      })
+       
+  
+      
+    
+  
+
   }
 
 }
