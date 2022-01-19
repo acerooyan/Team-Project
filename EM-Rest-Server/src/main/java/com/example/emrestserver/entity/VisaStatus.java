@@ -1,11 +1,12 @@
 package com.example.emrestserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -25,7 +26,7 @@ public class VisaStatus implements Serializable {
     private String visaType;
 
     @Column(name = "Active")
-    private String active;
+    private Integer active;
 
     @Column(name = "ModificationDate")
     private Date modificationDate;
@@ -33,6 +34,7 @@ public class VisaStatus implements Serializable {
     @Column(name = "CreateUser")
     private String createUser;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "visaStatus", cascade = CascadeType.MERGE)
     private List<Employee> employeeList = new ArrayList<>();
 

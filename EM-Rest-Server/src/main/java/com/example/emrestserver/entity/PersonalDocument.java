@@ -1,5 +1,6 @@
 package com.example.emrestserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class PersonalDocument implements Serializable {
     @Column(name ="ID")
     private Integer id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "EmployeeID")
     private Employee employee;

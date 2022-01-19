@@ -1,5 +1,6 @@
 package com.example.emrestserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,8 +32,9 @@ public class House implements Serializable {
     @Column(name = "NumberOfPerson")
     private Integer numberOfPerson;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "house", cascade = CascadeType.MERGE)
-//    private List<Employee> employeeList = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "house", cascade = CascadeType.MERGE)
+    private List<Employee> employeeList = new ArrayList<>();
 
 
 

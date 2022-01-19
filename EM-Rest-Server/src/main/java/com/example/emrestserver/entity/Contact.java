@@ -1,5 +1,6 @@
 package com.example.emrestserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,14 +38,16 @@ public class Contact implements Serializable {
     @Column(name = "isLandlord")
     private Byte isLandlord;
 
-    @Column(name = "WithEmployee")
-    private Integer withEmployee;
+//    @Column(name = "WithEmployee")
+//    private Integer withEmployee;
 
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "WitEmployee")
+    @JoinColumn(name = "WithEmployee")
     private Employee employee;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "contact")
     private House house;
 

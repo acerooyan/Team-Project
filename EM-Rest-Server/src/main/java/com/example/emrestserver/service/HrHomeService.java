@@ -4,6 +4,7 @@ import com.example.emrestserver.dao.HrHomeDao;
 import com.example.emrestserver.domain.HrHomeDomain;
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.PersonalDocument;
+import com.example.emrestserver.entity.VisaStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,4 +47,10 @@ public class HrHomeService {
         }
         return ans;
     }
+
+    @Transactional
+    public List<VisaStatus> test(){
+        return hrHomeDao.test();
+    }
+
 }
