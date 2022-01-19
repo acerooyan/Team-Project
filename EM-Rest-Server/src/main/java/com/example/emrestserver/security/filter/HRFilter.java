@@ -2,6 +2,11 @@ package com.example.emrestserver.security.filter;
 
 
 
+import com.example.emrestserver.constant.JwtConstant;
+import com.example.emrestserver.security.util.CookieUtil;
+import com.example.emrestserver.security.util.JwtUtil;
+import io.jsonwebtoken.Claims;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -22,16 +27,33 @@ public class HRFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpSession oldSession = ((HttpServletRequest)servletRequest).getSession(false);
-        System.out.println("HrFilter    " + oldSession);
-        if (oldSession == null) {// need to add condition to check jwt role
-            servletRequest.setAttribute("exception"," NO AUTHORIZATION");
-            servletRequest.setAttribute("url",((HttpServletRequest) servletRequest).getRequestURL());
-            HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
-            httpResponse.sendRedirect(((HttpServletRequest) servletRequest).getContextPath() + "/errorPage");
+        HttpServletResponse res = (HttpServletResponse) servletResponse;
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        res.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
+        System.out.println(req.getHeader("Origin"));
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.setHeader("Access-Control-Allow-Methods", "*");
+        res.setHeader("Access-Control-Max-Age", "3600");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
+
+        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+        System.out.println("+++++++++HRFilter++++++++");
+        System.out.println(token+"token");
+
+        Claims claims = JwtUtil.getClaimsFromJwt(token);
+        String role = null;
+        if(claims!=null){
+            role = claims.get("role").toString();
+            System.out.println(role);
+        }
+
+        if (role != null && !role.equalsIgnoreCase("HR")) {
+            System.out.println("Failed HR filter, direct back to login");
+            res.setStatus(401);
         } else {
-            System.out.println("HR do filter");
-            filterChain.doFilter(servletRequest, servletResponse);
+            System.out.println("pass HR filter.");
+            req.setAttribute("userId", role);
+            filterChain.doFilter(req, res);
         }
     }
 
