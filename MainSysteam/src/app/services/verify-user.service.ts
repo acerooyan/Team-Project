@@ -10,8 +10,8 @@ export class VerifyUserService {
 
 
   // private sso = "http://localhost:9999/auth/login";
-  private sso = "http://localhost:8080/em/af";
-  
+  private sso = "http://localhost:8080/";
+  headers = { 'content-type': 'application/json'};
   constructor(private http: HttpClient) { }
 
 
@@ -21,16 +21,41 @@ export class VerifyUserService {
     const body = {userName:email, 
       password: psw};
 
-    
+    // return this.http.post(this.sso, { 
+    //   headers: { 
+    //   'Allow-Cross-Origin-Origin0': '*', 
+    //   "Content-Type": "application/json"
+      
+    //   }, 
+    //   withCredentials: true,
+    //   responseType: 'application/json', 
+    //   userName:email, 
+    //   password: psw, 
+    //   }) 
 
 
     return this.http.post(this.sso,  body, {
-      responseType: 'text',
-      withCredentials: true,
-      
+      withCredentials: true
     }) 
   }
 
   
- 
+  // verify(email: string, psw: string):Observable<any>
+  // {
+    
+
+  //   return this.http.post(this.sso, { 
+  //     headers: { 
+  //     'Allow-Cross-Origin-Origin0': '*', 
+  //     "Content-Type": "application/json"
+      
+  //     }, 
+  //     withCredentials: true,
+  //     responseType: 'text', 
+  //     firstname: email,
+  //     lastname: psw
+
+  //     }) 
+  // }
+
 }
