@@ -1,4 +1,4 @@
-package com.example.emrestserver.domain;
+package com.example.emrestserver.domains;
 
 import com.example.emrestserver.entity.Person;
 import com.example.emrestserver.entity.VisaStatus;

@@ -1,7 +1,7 @@
 package com.example.emrestserver.service;
 
 import com.example.emrestserver.dao.HrHomeDao;
-import com.example.emrestserver.domain.HrHomeDomain;
+import com.example.emrestserver.domains.combined.HrHomeDomain;
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.PersonalDocument;
 import com.example.emrestserver.entity.VisaStatus;

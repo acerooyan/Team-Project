@@ -1,7 +1,7 @@
 package com.example.emrestserver.controller;
 
 
-import com.example.emrestserver.domain.TestDomain;
+import com.example.emrestserver.domains.TestDomain;
 import com.example.emrestserver.entity.Person;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
