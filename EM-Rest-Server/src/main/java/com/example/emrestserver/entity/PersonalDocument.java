@@ -4,12 +4,13 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+
 
 @Entity
 @Table(name = "personaldocument")
 @Data
-@ToString
+//@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,11 +33,15 @@ public class PersonalDocument implements Serializable {
     @Column(name = "Comment")
     private String comment;
 
-    @Column(name = "CreateDate")
-    private Date createDate;
+    @Column(name = "CreatedDate")
+    private Date createdDate;
 
     @Column(name = "CreatedBy")
     private String createdBy;
 
+    @Override
+    public String toString(){
+        return "personalDocument{ID: "+id+", EmployeeId: "+ employee.getId() + ", path:"+path+"}";
+    }
 
 }

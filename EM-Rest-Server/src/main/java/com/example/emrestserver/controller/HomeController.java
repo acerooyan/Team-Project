@@ -1,5 +1,6 @@
 package com.example.emrestserver.controller;
 
+import com.example.emrestserver.domain.HrHomeDomain;
 import com.example.emrestserver.entity.ApplicationWorkFlow;
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.Person;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
@@ -18,19 +20,20 @@ public class HomeController {
     HrHomeService hrHomeService;
 
     @GetMapping("/hr/home")
-    public ResponseEntity<ApplicationWorkFlow> hrHome() {
+    public ResponseEntity<List<HrHomeDomain> > hrHome() {
         //hard coded data
         ApplicationWorkFlow applicationWorkFlow = new ApplicationWorkFlow(null,null,new Date(),new Date(),"pending","lol","opt");
 
 //        try{
             //get application list from database
-            System.out.println("lanzhulema");
-            System.out.println(hrHomeService.getFetchedAllEmployee().get(0).getId());
+
+         List<HrHomeDomain> hrHomeDomainList = hrHomeService.mapDocumentWithEmployee();
+
 //        }catch (Exception e){
 //            System.out.println("error catch");
 //            return ResponseEntity.internalServerError().build();
 //        }
-        return ResponseEntity.ok().body(applicationWorkFlow);
+        return ResponseEntity.ok().body(hrHomeDomainList);
     }
 
     @GetMapping("/employee/home")

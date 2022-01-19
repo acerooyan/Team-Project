@@ -82,5 +82,10 @@ public class Employee implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.MERGE)
     private List<Contact> contactList;
 
+    @Override
+    public String toString(){
+        return "Employee{ID:"+ id + ", Person: "+person.getId()+ ", visaStatusID: "+visaStatus.getId()+"}";
+    }
 }
+
 
