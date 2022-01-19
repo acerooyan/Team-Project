@@ -1,5 +1,6 @@
-package com.example.emrestserver.domain;
+package com.example.emrestserver.domains.combined;
 
+import com.example.emrestserver.domains.standalone.*;
 import lombok.*;
 
 @Data

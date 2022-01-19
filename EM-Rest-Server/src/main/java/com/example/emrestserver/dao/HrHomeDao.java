@@ -1,6 +1,5 @@
 package com.example.emrestserver.dao;
 
-import com.example.emrestserver.domain.HrHomeDomain;
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.PersonalDocument;
 import com.example.emrestserver.entity.VisaStatus;
@@ -8,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 import java.util.ArrayList;

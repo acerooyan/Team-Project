@@ -1,9 +1,6 @@
-package com.example.emrestserver.domain;
+package com.example.emrestserver.domains.standalone;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
-
-
-import java.sql.Date;
 
 @Data
 @ToString

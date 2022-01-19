@@ -1,16 +1,11 @@
 package com.example.emrestserver.controller;
 
-import com.example.emrestserver.domain.HrHomeDomain;
-import com.example.emrestserver.entity.ApplicationWorkFlow;
-import com.example.emrestserver.entity.Employee;
-import com.example.emrestserver.entity.Person;
-import com.example.emrestserver.entity.VisaStatus;
+import com.example.emrestserver.domains.combined.HrHomeDomain;
 import com.example.emrestserver.service.HrHomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.List;
 
 @RestController

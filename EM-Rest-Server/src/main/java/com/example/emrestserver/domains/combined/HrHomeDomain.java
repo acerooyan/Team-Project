@@ -1,4 +1,4 @@
-package com.example.emrestserver.domain;
+package com.example.emrestserver.domains.combined;
 
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.PersonalDocument;

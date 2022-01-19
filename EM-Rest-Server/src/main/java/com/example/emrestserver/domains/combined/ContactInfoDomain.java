@@ -1,4 +1,5 @@
-package com.example.emrestserver.domain;
+package com.example.emrestserver.domains.combined;
+import com.example.emrestserver.domains.standalone.AddressDomain;
 import lombok.*;
 
 import java.util.List;
