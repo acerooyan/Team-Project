@@ -20,25 +20,14 @@ export class Step6Component implements OnInit {
     this.registerService.setContactEmergency(this.contactEmergency);
   }
   step6Register() {
-    console.log(this.registerService.getRegUser());
+    
+    
     console.log(this.registerService.getBasicInfo());
     console.log(this.registerService.getContactInfo());
     console.log(this.registerService.getCarInfo());
     console.log(this.registerService.getResidentialStatus());
     console.log(this.contactReference);
     console.log(this.contactEmergency);
-    // this.registerService.registerAll(this.basicInfo).subscribe(data=>{
-    //   alert("Successful")
-    // },error=>alert("Error"));
-
   }
-  submitAll() {
-    // this.registerService.registerAll(this.registerService.data);
-    // this.registerService.registerAll(this.basicInfo).subscribe(data=>{
-    //   alert("Successful")
-    // },error=>alert("Error"));
-
-  }
-
 
 }

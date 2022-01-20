@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,  HttpRequest, HttpEvent} from '@angular/common/http';
 import { Observable, Observer } from 'rxjs';
 import {RegUser} from "../entity/reg-user";
 import {BasicInfo} from "../entity/basic-info";
@@ -14,36 +14,84 @@ import { Routes, RouterModule} from '@angular/router';
   providedIn: 'root'
 })
 export class RegisterService {
-  baseUrl="http://localhost:8081/user";
+  
   constructor(private httpClient: HttpClient) { }
 
-  regUser: RegUser = new RegUser();
+  Avatar = new File(["foo"], "foo.txt", {
+    type: "text/plain",
+  });
+
+  workAuthorization = new File(["foo"], "foo.txt", {
+    type: "text/plain",
+  });
+  
   basicInfo: BasicInfo = new BasicInfo();
-
   contactInfo: ContactInfo = new ContactInfo();
-  // addressList: any[] = [{
-  //   address:Address
-  // }];
-
   carInfo: CarInfo = new CarInfo();
   residentialStatus: ResidentialStatus = new ResidentialStatus();
   contactReference: ContactReference = new ContactReference();
   contactEmergency: ContactEmergency = new ContactEmergency();
 
-//   setAddressList(addressList: any[] = [{
-//     address:Address
-//   }]) {
-//     this.addressList = addressList;
-// }
-// getAddressList() {
-//     return this.addressList;
-// }
-  setRegUser(regUser: RegUser) {
-    this.regUser = regUser;
+
+  private sso = "auth/registration";
+  private MainSever= "api";
+
+
+
+  setRegUser(regUser: RegUser):Observable<any> {
+ 
+    const body = {
+      userName:regUser.userName, 
+      password: regUser.password,
+      email: regUser.email,
+      
+    };
+
+    return this.httpClient.post(this.sso,  body, {
+      responseType: 'text',
+      withCredentials: true,
+      
+    }) 
+  
   }
-  getRegUser() {
-    return this.regUser;
+
+
+  sumbitAll(){
+    const formData: FormData = new FormData();
+
+    formData.append('Avator', this.Avatar);
+    formData.append('Work', this.workAuthorization);
+    formData.append("model",JSON.stringify(this.basicInfo ));
+    
+   
+
+    const req = new HttpRequest('POST', `${this.MainSever}/upload`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this.httpClient.request(req);
   }
+
+
+
+
+
+
+  setAvatar(file: any) {
+    this.Avatar = file;
+    console.log(" in service avatar" );
+    console.log(this.Avatar);
+  }
+
+
+  setWorkFile(file: any) {
+   
+    this.workAuthorization = file;
+  }
+
+
+  
 
   setContactEmergency(contactEmergency: ContactEmergency) {
     this.contactEmergency = contactEmergency;
@@ -81,16 +129,5 @@ export class RegisterService {
   getCarInfo() {
     return this.carInfo;
   }
-  // data = [this.regUser,this.basicInfo,this.carInfo,this.residentialStatus,this.contactReference,this.contactEmergency]
-  // formData: FormData = new FormData();
-  // formData.append()
 
-  registerBasicInfo(basicInfo: BasicInfo): Observable<Object> {
-    console.log(basicInfo);
-    return this.httpClient.post(`${this.baseUrl}`,basicInfo);
-  }
-  // registerContactInfo(contactInfo: ContactInfo) Observable<Object> {
-  //   console.log(contactInfo);
-  //   return this.httpClient.post(`${this.baseUrl}`,contactInfo);
-  // }
 }
