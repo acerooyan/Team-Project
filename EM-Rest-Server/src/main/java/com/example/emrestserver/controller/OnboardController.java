@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
+import java.util.Arrays;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
 @RequestMapping("/api/em")
@@ -34,23 +36,20 @@ public class OnboardController {
 
 
         Gson g = new Gson();
-        BasicInfoDomain basicInfoDomain = g.fromJson(basicInfo, BasicInfoDomain.class);
-        ContactInfoDomain contactInfoDomain = g.fromJson(contactInfo, ContactInfoDomain.class);
-        System.out.println(contactInfoDomain.getAddressDaoList());
-        ObjectMapper objectMapper = new ObjectMapper();
+
+        BasicInfoDomain basicInfoDomain = g.fromJson(basicInfo,BasicInfoDomain.class);
 
 
-        AddressDomain[] addressDomains = objectMapper.readValue(addressList, AddressDomain[].class);
-        System.out.println(Arrays.toString(addressDomains));
+        ContactInfoDomain contactInfoDomain = g.fromJson(contactInfo,ContactInfoDomain.class);
 
-
+        System.out.println(Arrays.toString(contactInfoDomain.getAddressDomains()));
         if (basicInfo == null) {
             System.out.println("basicInfo not found");
             return ResponseEntity.unprocessableEntity().build();
         } else {
             Person p = registerService.convertBasicInfoToPerson(basicInfoDomain, contactInfoDomain);
             // add addresses
-            registerService.addAddress(p, addressDomains);
+//            registerService.addAddress(p, addressDomains);
 //            try{
             //update database
 //            }catch (Exception e){
