@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContactInfoDomain {
-    private String cellphone;
+    private String cellPhone;
     private String alternatePhone;
     private String email;
 

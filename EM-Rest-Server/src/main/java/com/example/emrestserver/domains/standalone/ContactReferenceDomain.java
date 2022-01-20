@@ -17,7 +17,7 @@ public class ContactReferenceDomain {
     private String addressLine1;
     private String addressLine2;
     private String city;
-    private Integer zipcode;
+    private String zipcode;
     private String state;
     private String relationship;
 
