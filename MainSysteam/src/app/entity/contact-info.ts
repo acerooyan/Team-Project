@@ -12,7 +12,14 @@ export class ContactInfo {
   //   status!: "";
   //   Zipcode!: "";
   // ]
-  addressDaoList!: Address;
+  addressDaoList: any[] = [{
+    address:Address
+  }]
 
-
+//public addresses: any[] = [{
+//     address: '',
+//     street: '',
+//     city: '',
+//     country: ''
+//   }];
 }

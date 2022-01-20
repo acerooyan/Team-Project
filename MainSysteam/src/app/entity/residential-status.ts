@@ -12,6 +12,7 @@ export class ResidentialStatus {
   workAuthorization = "";
   startDate!: String;
   expirationDate!: String;
+  workAuthorizationFile!: File;
 
 
 }

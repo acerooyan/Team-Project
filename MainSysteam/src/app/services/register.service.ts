@@ -68,6 +68,9 @@ export class RegisterService {
   getCarInfo() {
     return this.carInfo;
   }
+  // data = [this.regUser,this.basicInfo,this.carInfo,this.residentialStatus,this.contactReference,this.contactEmergency]
+  // formData: FormData = new FormData();
+  // formData.append()
 
   registerBasicInfo(basicInfo: BasicInfo): Observable<Object> {
     console.log(basicInfo);

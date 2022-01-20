@@ -14,6 +14,37 @@
       <label  class="form-label">Email</label>
       <input type="email" class="form-control" id="Email" name="Email" [(ngModel)]="contactInfo.email" >
     </div>
+
+
+      <section *ngFor="let address of contactInfo.addressDaoList; let i = index;">
+        <h3>Address{{i+1}}</h3>
+        <button type="button"  (click)="removeAddress(i)">Remove Address</button>
+        <br>
+        <br>
+        <div>
+        <label>AddressLine1: </label>
+        <input type="text" [(ngModel)]="address.addressLine1" name="addressLine1_{{i}}"/>
+          </div>
+        <div>
+        <label>AddressLine2: </label>
+        <input type="text" [(ngModel)]="address.addressLine2" name="addressLine2_{{i}}"/>
+        </div><div>
+        <label>City: </label>
+        <input type="text" [(ngModel)]="address.city" name="city_{{i}}"/>
+      </div> <div>
+        <label>Status: </label>
+        <input type="text" [(ngModel)]="address.status" name="status_{{i}}"/>
+      </div>    <div>
+        <label>Zipcode: </label>
+        <input type="text" [(ngModel)]="address.Zipcode" name="Zipcode_{{i+1}}"/>
+      </div>
+        <button type="button" (click)="addAddress()">Add Address</button>
+
+      </section>
+
+
+<br>
+
 <!--    <div class="mb-3">-->
 <!--      <label  class="form-label">Address Line1</label>-->
 <!--      <input type="text" class="form-control" id="Address1" name="Address1" [(ngModel)]="contactInfo.addressDaoList.addressLine1">-->

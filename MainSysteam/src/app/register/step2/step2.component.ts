@@ -22,9 +22,10 @@ export class Step2Component implements OnInit {
   basicInfoRegister() {
     console.log(this.registerService.getRegUser());
     console.log(this.basicInfo);
-    // this.registerService.registerBasicInfo(this.basicInfo).subscribe(data=>{
-    //   alert("Successfully User is register?")
-    // },error=>alert("Sorry User not register"));
+    this.registerService.registerBasicInfo(this.basicInfo).subscribe(data=>{
+      alert("Successful")
+    },error=>alert("Error"));
+
 
   }
 
