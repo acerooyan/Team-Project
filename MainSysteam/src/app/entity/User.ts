@@ -1,5 +1,5 @@
-export interface User{
-    userName: string,
-    email: string,
-    role: boolean
-}
+// export interface User{
+//     userName: string,
+//     email: string,
+//     role: boolean
+// }

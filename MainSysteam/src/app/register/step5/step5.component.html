@@ -1,42 +1,47 @@
 <div class="container col-md-6">
   <h1 style="color: red;">Residential Status</h1>
-  
+
     <div class="mb-3">
       <label class="form-label">Are you a citizen or permanent resident of US?</label>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="isCitizenOrResident" id="isCitizenOrResident" value="yes" [(ngModel)]="residentialStatus.isCitizenOrResident">
+        <input class="form-check-input" type="radio" name="isCitizenOrResident" id="isCitizenOrResident" value="yes" required #cr="ngModel" [(ngModel)]="residentialStatus.isCitizenOrResident">
         <label>
           Yes
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="isCitizenOrResident" id="isCitizenOrResident" value="no" [(ngModel)]="residentialStatus.isCitizenOrResident">
+        <input class="form-check-input" type="radio" name="isCitizenOrResident" id="isCitizenOrResident1" value="no" required #cr="ngModel" [(ngModel)]="residentialStatus.isCitizenOrResident">
         <label>
           No
         </label>
       </div>
+      <div *ngIf="cr.invalid && cr.touched" class="text-danger">Selection is Required</div>
     </div>
+
+
+    <div [hidden] = "!selected()">
     <div *ngIf="isCitizenOrResident()">
       <div class="mb-3">
         <label class="form-label">Citizen or GreenCard?</label>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="citizenOrGreenCard" id="citizenOrGreenCard" value="Citizen" [(ngModel)]="residentialStatus.citizenOrGreenCard">
+          <input class="form-check-input" type="radio" name="citizenOrGreenCard" id="citizenOrGreenCard" required #is="ngModel" value="Citizen" [(ngModel)]="residentialStatus.citizenOrGreenCard">
           <label>
             Citizen
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="citizenOrGreenCard" id="citizenOrGreenCard" value="GreenCard" [(ngModel)]="residentialStatus.citizenOrGreenCard">
+          <input class="form-check-input" type="radio" name="citizenOrGreenCard" id="citizenOrGreenCard1" required #is = "ngModel" value="GreenCard" [(ngModel)]="residentialStatus.citizenOrGreenCard">
           <label>
             GreenCard
           </label>
         </div>
+        <div *ngIf="is.invalid&&is.touched" class="text-danger">Selection is Required</div>
       </div>
     </div>
     <div *ngIf="!isCitizenOrResident()">
       <div class="mb-3">
         <label class="form-label">What is your work authorization?</label>
-      <select class="form-select" aria-label="Default select example" [(ngModel)]="residentialStatus.workAuthorization">
+      <select class="form-select" aria-label="Default select example" required #auth="ngModel" [(ngModel)]="residentialStatus.workAuthorization">
 
         <option value="H1-B">H1-B</option>
         <option value="L2">L2</option>
@@ -44,31 +49,33 @@
         <option value="H4">H4</option>
         <option value="other">other</option>
       </select>
+        <div *ngIf="auth.invalid && auth.touched" class="text-danger">Selection is Required</div>
       </div>
       <div class="mb-3">
-        <label  class="form-label">Start Date</label>
-        <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="residentialStatus.startDate" >
+        <label  class="form-label">Start Date(*)</label>
+        <input type="date" class="form-control" id="startDate" name="startDate" required #start="ngModel" [(ngModel)]="residentialStatus.startDate" >
+        <div *ngIf="start.invalid &&start.touched" class="text-danger">Start Date is Required</div>
       </div>
       <div class="mb-3">
-        <label  class="form-label">Expiration Date</label>
-        <input type="date" class="form-control" id="expirationDate" name="expirationDate" [(ngModel)]="residentialStatus.expirationDate" >
-      </div>
+        <label  class="form-label">Expiration Date(*)</label>
+        <input type="date" class="form-control" id="expirationDate" name="expirationDate" required #exp = "ngModel" [(ngModel)]="residentialStatus.expirationDate" >
+        <div *ngIf="exp.invalid && exp.touched" class="text-danger">Expiration Date is Required</div> </div>
       <div class="input-group mb-3">
         <label  class="form-label">Upload a copy of your work authorization</label>
-        <input type="file" class="form-control" id="inputGroupFile02" (change)="selectFile($event)">
-        
+        <input type="file" class="form-control" id="inputGroupFile02">
+        <label class="input-group-text" for="inputGroupFile02">Upload</label>
       </div>
+    </div>
+
     </div>
 
 
 
-
-
 <!--    <a routerLink="step6"><button class="btn btn-success pull-right" > next</button></a>-->
-    <button (click)="changePage();saveResidentialStatus();residentialStatusRegister()">
+    <button [disabled]="cr.invalid" (click)="changePage();saveResidentialStatus();residentialStatusRegister()">
       <span>next</span>
     </button>
 <!--    <button type="submit" class="btn btn-primary">save</button>-->
-  
+
 </div>
 

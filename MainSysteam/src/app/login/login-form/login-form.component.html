@@ -26,27 +26,13 @@
             </div>
   
             
+  
             <div class="text-center text-lg-start mt-4 pt-2">
-              
-              <div style="display: inline-flex;">
-                
-                <label class="container">Log in as HR
-                  <input type="checkbox" (change)="changerole()">
-                  <span class="checkmark"></span>
-                </label>
-
-
-                <button type="button" class="btn btn-primary btn-lg"
+              <button type="button" class="btn btn-primary btn-lg"
                 style="padding-left: 2.5rem; padding-right: 2.5rem;" (click)="verify()">Login</button>
-           
-                
-
-              </div>
-              
-              
-      
+             
             </div>
-            <h4 *ngIf= 'errorObject.code'  style='color: red'>{{errorObject.message}} with error code: {{errorObject.code}}</h4>
+  
           </form>
         </div>
       </div>

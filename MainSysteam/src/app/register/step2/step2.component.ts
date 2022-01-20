@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {BasicInfo} from "../../entity/basic-info";
 import {RegisterService} from "../../services/register.service";
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-step2',
@@ -11,36 +12,41 @@ import { Router } from '@angular/router';
 })
 export class Step2Component implements OnInit {
   basicInfo: BasicInfo = new BasicInfo();
+  //
+  // exform! : FormGroup;
   constructor(public registerService: RegisterService, public router: Router) { }
-  
-  selectedFiles?: FileList;
-  
-  
- 
- 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
+    // this.exform = new FormGroup({
+    //   'firstname' : new FormControl(null, Validators.required),
+    //   'lastname' : new FormControl(null, Validators.required),
+    //   'SSN' : new FormControl(null, Validators.required),
+    //   'dateofbirth' : new FormControl(null, Validators.required),
+    //   'gender' : new FormControl(null, Validators.required),
+      // 'l' : new FormControl(null, [Validators.required, Validators.email]),
+      // 'phone' : new FormControl(
+      //   null,
+      //   [
+      //     Validators.required,
+      //     Validators.pattern('^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$')
+      //   ]),
+      // 'message' : new FormControl(null, [Validators.required, Validators.minLength(10)])
+    // });
   }
   saveBasicInfo() {
     this.registerService.setBasicInfo(this.basicInfo);
-    this.registerService.setAvatar(this.selectedFiles);
   }
   basicInfoRegister() {
-    
+    console.log(this.registerService.getRegUser());
     console.log(this.basicInfo);
-   
+    // this.registerService.registerBasicInfo(this.basicInfo).subscribe(data=>{
+    //   alert("Successful")
+    // },error=>alert("Error"));
+
 
   }
 
   changePage() {
     this.router.navigate(["/regnav/step3"]);
   }
-
-
-  selectFile(event: any): void {
-    
-    this.selectedFiles = event.target.files;
-  }
-
-  
 }
