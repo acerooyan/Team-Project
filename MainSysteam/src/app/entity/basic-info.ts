@@ -5,7 +5,5 @@ export class BasicInfo {
   SSN!:string;
   DOB!:string;
   gender!:string;
-  //private MultipartFile file;
-  file! : File;
 
 }

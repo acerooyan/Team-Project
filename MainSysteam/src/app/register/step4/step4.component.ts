@@ -23,7 +23,7 @@ export class Step4Component implements OnInit {
     }
   }
   carInfoRegister(){
-    console.log(this.registerService.getRegUser());
+   
     console.log(this.registerService.getBasicInfo());
     console.log(this.registerService.getContactInfo());
     console.log(this.carInfo);

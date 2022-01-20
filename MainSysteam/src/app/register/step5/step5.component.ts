@@ -9,15 +9,19 @@ import { Router } from '@angular/router';
 })
 export class Step5Component implements OnInit {
   residentialStatus: ResidentialStatus = new ResidentialStatus();
+  selectedFiles?: FileList;
+
+
   constructor(public registerService: RegisterService,  public router: Router) { }
 
   ngOnInit(): void {
   }
   saveResidentialStatus() {
     this.registerService.setResidentialStatus(this.residentialStatus);
+    this.registerService.setWorkFile(this.selectFile);
   }
   residentialStatusRegister() {
-    console.log(this.registerService.getRegUser());
+    
     console.log(this.registerService.getBasicInfo());
     console.log(this.registerService.getContactInfo());
     console.log(this.registerService.getCarInfo());
@@ -30,15 +34,13 @@ export class Step5Component implements OnInit {
       return false;
     }
   }
-  selected() {
-    if (this.residentialStatus.isCitizenOrResident == "yes" || this.residentialStatus.isCitizenOrResident == "no") {
-      return true;
-    } else {
-      return false;
-    }
-  }
   changePage() {
     this.router.navigate(["/regnav/step6"]);
   }
 
+
+  selectFile(event: any): void {
+    
+    this.selectedFiles = event.target.files;
+  }
 }

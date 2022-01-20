@@ -4,24 +4,23 @@
     <div class="mb-3">
       <label class="form-label">Do you have a driver license?</label>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="driverlicense" id="d" value="yes" required #havedl="ngModel" [(ngModel)]="carInfo.driverlicense">
+        <input class="form-check-input" type="radio" name="driverlicense" id="d" value="yes" [(ngModel)]="carInfo.driverlicense">
         <label>
           Yes
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="driverlicense" id="d" value="no" required #havedl="ngModel"[(ngModel)]="carInfo.driverlicense">
+        <input class="form-check-input" type="radio" name="driverlicense" id="d" value="no" [(ngModel)]="carInfo.driverlicense">
         <label>
           No
         </label>
       </div>
-      <div *ngIf="havedl.invalid && havedl.touched" class="text-danger">Selection is Required</div>
     </div>
 <div *ngIf="haveDriverLicense()">
     <div class="mb-3">
-      <label  class="form-label">Driver License Expiration Date(*)</label>
-      <input type="date" class="form-control" id="driverLicence_expirationDate" name="driverLicence_expirationDate" required #expire = "ngModel" [(ngModel)]="carInfo.driverLicence_expirationDate" >
-      <div *ngIf="expire.invalid && expire.touched" class="text-danger">Date is Required</div> </div>
+      <label  class="form-label">Driver License Expiration Date</label>
+      <input type="date" class="form-control" id="driverLicence_expirationDate" name="driverLicence_expirationDate" [(ngModel)]="carInfo.driverLicence_expirationDate" >
+    </div>
     <div class="mb-3">
       <label  class="form-label">Make</label>
       <input type="input" class="form-control" id="make" name="make" [(ngModel)]="carInfo.make" >
@@ -45,10 +44,10 @@
 
 
 
-
-    <button [disabled]="havedl.invalid " (click)="changePage();saveCarInfo();carInfoRegister()">
+<!--    <a routerLink="step5"><button class="btn btn-success pull-right" > next</button></a>-->
+    <button (click)="changePage();saveCarInfo();carInfoRegister()">
       <span>next</span>
     </button>
-
+<!--    <button type="submit" class="btn btn-primary">save</button>-->
   </form>
 </div>

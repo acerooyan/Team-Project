@@ -3,53 +3,17 @@
   <form>
 
     <div class="mb-3">
-      <label  class="form-label">Cell Phone(*)</label>
-      <input type="text" class="form-control" id="cellphone" name="cellphone" [(ngModel)]="contactInfo.cellphone" required #cell = "ngModel">
-      <div *ngIf="cell.invalid && cell.touched" class="text-danger">Cellphone is Required</div></div>
+      <label  class="form-label">Cell Phone</label>
+      <input type="text" class="form-control" id="cellphone" name="cellphone" [(ngModel)]="contactInfo.cellphone">
+    </div>
     <div class="mb-3">
       <label  class="form-label">Work Phone</label>
       <input type="text" class="form-control" id="workphone" name="workphone" [(ngModel)]="contactInfo.alternatePhone" >
     </div>
     <div class="mb-3">
-      <label  class="form-label">Email(*)</label>
-      <input type="email" class="form-control" id="Email" name="Email" [(ngModel)]="contactInfo.email" required #email = "ngModel">
-      <div *ngIf="email.invalid && email.touched" class="text-danger">Email is Required</div>
+      <label  class="form-label">Email</label>
+      <input type="email" class="form-control" id="Email" name="Email" [(ngModel)]="contactInfo.email" >
     </div>
-
-
-      <section *ngFor="let address of contactInfo.addressDaoList; let i = index;">
-        <h3>Address{{i+1}}</h3>
-        <button type="button"  (click)="removeAddress(i)">Remove Address</button>
-        <br>
-        <br>
-        <div>
-        <label>AddressLine1(*): </label>
-        <input type="text" [(ngModel)]="address.addressLine1" name="addressLine1_{{i}}" required #line1 = "ngModel">
-          <div *ngIf="line1.invalid && line1.touched" class="text-danger">Address line1 is Required</div>
-          </div>
-        <div>
-        <label>AddressLine2: </label>
-        <input type="text" [(ngModel)]="address.addressLine2" name="addressLine2_{{i}}" >
-        </div><div>
-        <label>City(*): </label>
-        <input type="text" [(ngModel)]="address.city" name="city_{{i}}" required #city = "ngModel">
-        <div *ngIf="city.invalid && city.touched" class="text-danger">City is Required</div>
-      </div> <div>
-        <label>Status(*): </label>
-        <input type="text" [(ngModel)]="address.status" name="status_{{i}}" #status = "ngModel">
-        <div *ngIf="status.invalid && status.touched" class="text-danger">Status is Required</div>
-      </div>    <div>
-        <label>Zipcode(*): </label>
-        <input type="text" [(ngModel)]="address.Zipcode" name="Zipcode_{{i+1}}" required #zip = "ngModel">
-        <div *ngIf="zip.invalid && zip.touched" class="text-danger">Zip Code is Required</div>
-      </div>
-        <button type="button" (click)="addAddress()">Add Address</button>
-
-      </section>
-
-
-<br>
-
 <!--    <div class="mb-3">-->
 <!--      <label  class="form-label">Address Line1</label>-->
 <!--      <input type="text" class="form-control" id="Address1" name="Address1" [(ngModel)]="contactInfo.addressDaoList.addressLine1">-->
@@ -70,8 +34,7 @@
 <!--      <label  class="form-label">Zip Code</label>-->
 <!--      <input type="text" class="form-control" id="zipcode" name="zipcode" [(ngModel)]="contactInfo.addressDaoList.Zipcode" >-->
 <!--    </div>-->
-<!--    <button [disabled]="email.invalid || cell.invalid||line1.invalid||city.invalid||status.invalid||zip.invalid" (click)="changePage();saveContactInfo();contactInfoRegister()">-->
-    <button [disabled]="email.invalid || cell.invalid" (click)="changePage();saveContactInfo();contactInfoRegister()">
+    <button (click)="changePage();saveContactInfo();contactInfoRegister()">
     <span>next</span>
     </button>
 <!--    <a routerLink="step4"><button class="btn btn-success pull-right" > next</button></a>-->
