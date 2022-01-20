@@ -54,4 +54,25 @@ public class HibernateUserDao extends AbstractHbDao<User> implements IUserDao {
         return super.findById(id);
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        Session session = super.getCurrentSession();
+        DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
+        criteria.add(Restrictions.eq("email", email));
+        List<User> existedUser = criteria.getExecutableCriteria(session).list();
+        if (existedUser != null && existedUser.size() > 0) return existedUser.get(0);
+        return null;
+    }
+
+    @Override
+    public User getUserByName(String name) {
+        Session session = super.getCurrentSession();
+        DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
+        criteria.add(Restrictions.eq("userName", name));
+        List<User> existedUser = criteria.getExecutableCriteria(session).list();
+        if (existedUser != null && existedUser.size() > 0) return existedUser.get(0);
+        return null;
+    }
+
+
 }

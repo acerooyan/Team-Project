@@ -10,4 +10,8 @@ public interface IUserDao {
     User merge(User user);
 
     User getUserById(int id);
+
+    User getUserByEmail(String email);
+
+    User getUserByName(String name);
 }

@@ -11,4 +11,8 @@ public interface UserService {
     List<UserDomain> checkLogin(UserDomain userDomain);
 
     User getUserById(int id);
+
+    User getUserByEmail(String email);
+
+    User getUserByName(String name);
 }

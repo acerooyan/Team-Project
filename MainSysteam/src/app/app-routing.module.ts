@@ -1,12 +1,12 @@
-import { Component, NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginFormComponent } from './login/login-form/login-form.component';
-import { NavbarComponent } from './home/navbar/navbar.component';
-import { HrpageComponent } from './home/hrpage/hrpage.component';
-import { EmployeeProfileComponent } from './home/employee-profile/employee-profile.component';
-import { EmpVisaStatusManagementComponent } from './home/emp-visa-status-management/emp-visa-status-management.component';
-import { HireComponent } from './home/hire/hire.component';
-import { WildCardComponent } from './wild-card/wild-card.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginFormComponent} from './login/login-form/login-form.component';
+import {NavbarComponent} from './home/navbar/navbar.component';
+import {HrpageComponent} from './home/hrpage/hrpage.component';
+import {EmployeeProfileComponent} from './home/employee-profile/employee-profile.component';
+import {EmpVisaStatusManagementComponent} from './home/emp-visa-status-management/emp-visa-status-management.component';
+import {HireComponent} from './home/hire/hire.component';
+import {WildCardComponent} from './wild-card/wild-card.component';
 import {Step1Component} from './register/step1/step1.component';
 import {Step2Component} from './register/step2/step2.component';
 import {Step3Component} from './register/step3/step3.component';
@@ -17,24 +17,23 @@ import {RegisterComponent} from "./register/register.component";
 import {RegnavbarComponent} from "./register/regnavbar/regnavbar.component";
 
 
-
 const routes: Routes = [
 
-{path: '', component:LoginFormComponent},
+  {path: '', component: LoginFormComponent},
 
 
-{
-path: 'nav', 
-component:NavbarComponent,
-children: [
-  {path: 'hr', component: HrpageComponent},
-  {path: 'profile', component:EmployeeProfileComponent},
-  {path:'visa', component:EmpVisaStatusManagementComponent},
-  {path:'hire', component:HireComponent}
-  ]
-},
+  {
+    path: 'nav',
+    component: NavbarComponent,
+    children: [
+      {path: 'hr', component: HrpageComponent},
+      {path: 'profile', component: EmployeeProfileComponent},
+      {path: 'visa', component: EmpVisaStatusManagementComponent},
+      {path: 'hire', component: HireComponent}
+    ]
+  },
 
-{path: 'regnav', component: RegisterComponent},
+  {path: 'regnav', component: RegisterComponent},
   {
     path: 'regnav', component: RegnavbarComponent,
     children: [
@@ -47,10 +46,7 @@ children: [
     ]
   },
 
-{path:'**', component:WildCardComponent}
-
-
-
+  {path: '**', component: WildCardComponent}
 
 
 ];
@@ -59,4 +55,5 @@ children: [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

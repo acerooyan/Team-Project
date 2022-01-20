@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         try {
             User user = userDao.getUser(userDomain);
             List<String> roleNames = new ArrayList<>();
-            for (UserRole userRole : user.getUserRole()) {
+            for (UserRole userRole : user.getUserRoleList()) {
                 roleNames.add(userRole.getRole().getRoleName());
             }
             userDomain = UserDomain.builder().userName(user.getUserName()).role(roleNames).id(user.getID()).email(user.getEmail()).build();
@@ -69,5 +69,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(int id) {
         return userDao.getUserById(id);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userDao.getUserByEmail(email);
+    }
+
+    @Override
+    public User getUserByName(String name) {
+        return userDao.getUserByName(name);
     }
 }
