@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
 @RequestMapping("/api/em")
@@ -31,9 +33,10 @@ public class OnboardController {
 
         Gson g = new Gson();
         BasicInfoDomain basicInfoDomain = g.fromJson(basicInfo,BasicInfoDomain.class);
+
         ContactInfoDomain contactInfoDomain = g.fromJson(contactInfo,ContactInfoDomain.class);
 
-
+        System.out.println(Arrays.toString(contactInfoDomain.getAddressDomains()));
         if (basicInfo == null) {
             System.out.println("basicInfo not found");
             return ResponseEntity.unprocessableEntity().build();

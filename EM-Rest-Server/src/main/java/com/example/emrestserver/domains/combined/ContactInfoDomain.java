@@ -13,7 +13,7 @@ public class ContactInfoDomain {
     private String cellphone;
     private String alternatePhone;
     private String email;
-    List<AddressDomain> addressDaoList;
-
+    //List<AddressDomain> addressDaoList;
+    AddressDomain[] addressDomains;
 
 }
