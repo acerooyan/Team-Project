@@ -1,0 +1,83 @@
+<div class="container col-md-6">
+  <h1 style="color: red;">Reference</h1>
+  <form (ngSubmit)="saveStep6();step6Register()">
+      <div class="mb-3">
+        <label  class="form-label">First Name</label>
+        <input type="input" class="form-control" id="driverLicence_expirationDate" name="driverLicence_expirationDate" [(ngModel)]="contactReference.firstName" >
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">Last Name</label>
+        <input type="input" class="form-control" id="lastName" name="lastName" [(ngModel)]="contactReference.lastName" >
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">Middle Name</label>
+        <input type="input" class="form-control" id="middleName" name="middleName" [(ngModel)]="contactReference.middleName" >
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">Cell Phone</label>
+        <input type="input" class="form-control" id="cellPhone" name="cellPhone" [(ngModel)]="contactReference.cellPhone" >
+      </div>
+    <div class="mb-3">
+      <label  class="form-label">Email</label>
+      <input type="input" class="form-control" id="email" name="email" [(ngModel)]="contactReference.email" >
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">Address Line1</label>
+      <input type="input" class="form-control" id="addressLine1" name="addressLine1" [(ngModel)]="contactReference.addressLine1" >
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">Address Line2</label>
+      <input type="input" class="form-control" id="addressLine2" name="addressLine2" [(ngModel)]="contactReference.addressLine2" >
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">City</label>
+      <input type="input" class="form-control" id="city" name="city" [(ngModel)]="contactReference.city" >
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">Zip Code</label>
+      <input type="input" class="form-control" id="zipcode" name="zipcode" [(ngModel)]="contactReference.zipcode" >
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">State</label>
+      <input type="input" class="form-control" id="state" name="state" [(ngModel)]="contactReference.state" >
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">Relationship</label>
+      <input type="input" class="form-control" id="relationship" name="relationship" [(ngModel)]="contactReference.relationship" >
+    </div>
+
+
+    <h1 style="color: red;">Emergency Contact</h1>
+    <div class="mb-3">
+      <label  class="form-label">First Name</label>
+      <input type="input" class="form-control" id="firstName" name="firstName" [(ngModel)]="contactEmergency.firstName" >
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">Last Name</label>
+      <input type="input" class="form-control" id="lastName" name="lastName" [(ngModel)]="contactEmergency.lastName" >
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">Middle Name</label>
+      <input type="input" class="form-control" id="middleName" name="middleName" [(ngModel)]="contactEmergency.middleName" >
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">Cell Phone</label>
+      <input type="input" class="form-control" id="cellPhone" name="cellPhone" [(ngModel)]="contactEmergency.cellPhone" >
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">Email</label>
+      <input type="input" class="form-control" id="email" name="email" [(ngModel)]="contactEmergency.email" >
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">Relationship</label>
+      <input type="input" class="form-control" id="relationship" name="relationship" [(ngModel)]="contactEmergency.relationship" >
+    </div>
+
+
+
+
+
+    <button type="submit" class="btn btn-primary">submit</button>
+  </form>
+</div>
+

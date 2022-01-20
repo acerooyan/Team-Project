@@ -10,7 +10,6 @@ import com.example.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -45,21 +44,17 @@ public class LoginController {
     @GetMapping("/new")
     public ResponseEntity<String> savePerson(@RequestParam("registrationToken") String registrationToken) {
         String email = JwtUtil.getSubjectFromJwt(registrationToken);
-        if(email!=null&&email.equals("expired")){
-            return ResponseEntity.ok("Expired Token");
-        }
+        if (email == null) return ResponseEntity.ok("Empty email");
+        if (email.equals("expired")) return ResponseEntity.ok("Expired Token");
         RegistrationToken registrationToken1 = registrationTokenService.getTokenByTokenAndEmail(email, registrationToken);
-        if(registrationToken1!=null){
-            return ResponseEntity.ok("Success");
-        }
+        if (registrationToken1 != null) return ResponseEntity.ok("Success");
         return ResponseEntity.ok("Invalid Token");
     }
 
     @PostMapping("/registration")
     public ResponseEntity<String> addUser(@RequestBody UserDomain userDomain) {
         UserDomain newUserDomain = userService.addUser(userDomain);
-        if (newUserDomain == null)
-            return ResponseEntity.ok("Failed");
+        if (newUserDomain == null) return ResponseEntity.ok("Failed");
         return ResponseEntity.ok("Success");
     }
 
