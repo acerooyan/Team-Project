@@ -3,10 +3,9 @@ package com.example.emrestserver.controller;
 
 import com.example.emrestserver.domains.combined.TestDomain;
 import com.example.emrestserver.domains.standalone.*;
-import com.example.emrestserver.entity.Address;
-import com.example.emrestserver.entity.Employee;
-import com.example.emrestserver.entity.Person;
-import com.example.emrestserver.entity.VisaStatus;
+import com.example.emrestserver.entity.*;
+import com.example.emrestserver.service.AwsService;
+import com.example.emrestserver.service.PersonalDocumentService;
 import com.example.emrestserver.service.RegisterService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,6 +13,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 
@@ -26,12 +26,20 @@ public class OnboardController {
     @Autowired
     RegisterService registerService;
 
+    @Autowired
+    private AwsService awsService;
+
+    @Autowired
+    private PersonalDocumentService personalDocumentService;
     /*
 
      */
     @PostMapping("/register/test")
-    public ResponseEntity<Object> register(@RequestPart("testDomain") String testDomainString
-//                                           @RequestPart("contactInfo") String contactInfo
+    public ResponseEntity<Object> register(@RequestPart("model") String testDomainString,
+                                           @RequestPart("Avatar")MultipartFile file1,
+                                           @RequestPart("Driver")MultipartFile file2,
+                                           @RequestPart("Work")MultipartFile file3
+//
 //                                           @RequestPart("addressList") String addressList
     ) throws JsonProcessingException {
 
@@ -53,14 +61,14 @@ public class OnboardController {
             TestDomain testDomain = g.fromJson(testDomainString, TestDomain.class);
             BasicInfoDomain basicInfoDomain = testDomain.getBasicInfoDomain();
             ContactInfoDomain contactInfoDomain = testDomain.getContactInfoDomain();
-            ContactReferenceDomain contactReferenceDomain = testDomain.getContactReferenceDomain();
             ContactEmergencyDomain contactEmergencyDomain = testDomain.getContactEmergencyDomain();
             ResidentialStatusDomain residentialStatusDomain = testDomain.getResidentialStatusDomain();
+            CarInfoDomain carInfoDomain = testDomain.getCarInfoDomain();
             System.out.println(basicInfoDomain);
             System.out.println(contactInfoDomain);
-            System.out.println(contactReferenceDomain);
             System.out.println(contactEmergencyDomain);
             System.out.println(residentialStatusDomain);
+            System.out.println(carInfoDomain);
 
             //call services
             //1. add person and return a person(with id)
@@ -70,21 +78,48 @@ public class OnboardController {
             AddressDomain[] addressDomains = contactInfoDomain.getAddressDomains();
             registerService.addAddress(p, addressDomains);
 
-            // todo: add visaStatus
+            // add visaStatus
             VisaStatus visaStatus = registerService.addVisaStatus(residentialStatusDomain);
             // todo: add employee
-//            registerService.addEmployee()
-            Employee employee;
-            // todo : add person & contact
-//            registerService.addContactReference(contactReferenceDomain);
 
-            // todo: add personalDocument
-            // add contact person
-            // reference person included address
+            //avatar:  get file name -> from aws service
+            String fileName1;
+            if (file1 != null){
+                 fileName1 = awsService.uploadFile(file1);
+            }else{
+                fileName1 = "";
+            }
+            Employee employee = registerService.addEmployee(p,visaStatus, residentialStatusDomain, carInfoDomain, fileName1);
+            System.out.println("From controller: ");
+
+            System.out.println(employee);
+
+            // add personalDocument
+            PersonalDocument personalDocument =  personalDocumentService.buildDocument(fileName1,employee);
+
+
+            // todo: add reference contact and emergency contact
+            if (testDomain.getContactReferenceDomain() != null){
+                ContactReferenceDomain contactReferenceDomain = testDomain.getContactReferenceDomain();
+                registerService.addContactReference(contactReferenceDomain, employee);
+            }
+            registerService.addContactEmergency(contactEmergencyDomain, employee);
 
 
 
-            return ResponseEntity.ok().body(basicInfoDomain);
+            // todo: add files
+            if (!file2.isEmpty()){
+                String fileName2 = awsService.uploadFile(file2);
+                personalDocument =  personalDocumentService.buildDocument(fileName2,employee);
+
+            }
+            if (!file3.isEmpty()){
+                String fileName3 = awsService.uploadFile(file3);
+                personalDocument =  personalDocumentService.buildDocument(fileName3,employee);
+
+            }
+
+            return ResponseEntity.ok().build();
 //            }catch (Exception e){
 //                //can add more exceptions
 //                return ResponseEntity.internalServerError().build();

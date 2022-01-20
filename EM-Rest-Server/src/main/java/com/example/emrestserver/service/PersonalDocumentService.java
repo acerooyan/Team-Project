@@ -28,7 +28,7 @@ public class PersonalDocumentService {
                 .title(arrOfStr[1])
                 .comment("")
                 .createdDate(new Date(System.currentTimeMillis()))
-                .createdBy("")
+                .createdBy(employee.getPerson().getFirstname())
                 .build();
 
         return addPersonalDocument(personalDocument);

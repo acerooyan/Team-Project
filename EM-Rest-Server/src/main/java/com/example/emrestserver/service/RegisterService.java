@@ -3,12 +3,11 @@ package com.example.emrestserver.service;
 import com.example.emrestserver.dao.RegisterDao;
 import com.example.emrestserver.domains.standalone.*;
 import com.example.emrestserver.domains.combined.MergeDomain;
-import com.example.emrestserver.entity.Address;
-import com.example.emrestserver.entity.Person;
-import com.example.emrestserver.entity.VisaStatus;
+import com.example.emrestserver.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 
@@ -78,7 +77,7 @@ public class RegisterService {
 
 
     @Transactional
-    public void addContactReference(ContactReferenceDomain contactReferenceDomain){
+    public void addContactReference(ContactReferenceDomain contactReferenceDomain, Employee employee){
         Person contactPerson = Person.builder()
                 .firstname(contactReferenceDomain.getFirstName())
                 .lastname(contactReferenceDomain.getLastName())
@@ -87,7 +86,26 @@ public class RegisterService {
                 .email(contactReferenceDomain.getEmail())
                 .build();
         Person newP = addPerson(contactPerson);
+        Address address = Address.builder()
+                .addressLine1(contactReferenceDomain.getAddressLine1())
+                .addressLine2(contactReferenceDomain.getAddressLine2())
+                .city(contactReferenceDomain.getCity())
+                .stateAbbr(contactReferenceDomain.getState())
+                .stateName(contactReferenceDomain.getState())
+                .zipcode(Integer.valueOf(contactReferenceDomain.getZipcode()))
+                .person(newP)
+                .build();
+        registerDao.addAddress(address);
         // todo: need employee
+        Contact contact = Contact.builder()
+                .employee(employee)
+                .person(newP)
+                .relationShip(contactReferenceDomain.getRelationship())
+                .isReference((byte)1)
+                .isEmergency((byte)0)
+                .isLandlord((byte)0)
+                .build();
+        registerDao.addContact(contact);
     }
 
     @Transactional
@@ -107,9 +125,71 @@ public class RegisterService {
             visaStatus.setActive("0");
             visaStatus.setModificationDate(new Date(System.currentTimeMillis()));
         }
-
         VisaStatus visaStatus1 = registerDao.addVisaStatus(visaStatus);
         return visaStatus1;
-
     }
+
+    @Transactional
+    public Employee addEmployee(Person p, VisaStatus visaStatus, ResidentialStatusDomain residentialStatusDomain, CarInfoDomain carInfoDomain, String avatarName){
+        Employee employee = Employee.builder()
+                .person(p)
+                .startDate(new Date(System.currentTimeMillis()))
+                .visaStatus(visaStatus)
+                .title("employee")
+                .build();
+
+        // 判断 car
+        StringBuilder sb = new StringBuilder();
+        if( carInfoDomain.getDriverLicence()!= null){
+            employee.setDriverLicence(carInfoDomain.getDriverLicence());
+            employee.setDriverLicence_ExpirationDate(Date.valueOf(carInfoDomain.getDriverLicence_expirationDate()));
+            if (carInfoDomain.getColor()!=null || !carInfoDomain.getColor().equals("")){
+                sb.append(carInfoDomain.getColor());
+                sb.append(" ");
+            }
+            if(carInfoDomain.getMake() != null){
+                sb.append(carInfoDomain.getMake());
+                sb.append(" ");
+            }
+            if (carInfoDomain.getModel()!= null){
+                sb.append(carInfoDomain.getModel());
+            }
+        }
+        String car = sb.toString();
+        if (!car.equals("")){
+            employee.setCar(car);
+        }
+        // visa status start date
+        employee.setVisaStartDate(Date.valueOf(residentialStatusDomain.getStartDate()));
+        //visa status end date
+        employee.setVisaEndDate(Date.valueOf(residentialStatusDomain.getExpirationDate()));
+        // avatar
+        if(!avatarName.equals("")){
+            employee.setAvatar(avatarName);
+        }
+        System.out.println(employee);
+        return registerDao.addEmployee(employee);
+    }
+
+    @Transactional
+    public Contact addContactEmergency(ContactEmergencyDomain contactEmergencyDomain, Employee employee){
+        Person p = Person.builder()
+                .firstname(contactEmergencyDomain.getFirstName())
+                .lastname(contactEmergencyDomain.getLastName())
+                .middleName(contactEmergencyDomain.getMiddleName())
+                .email(contactEmergencyDomain.getEmail())
+                .cellPhone(contactEmergencyDomain.getCellPhone())
+                .build();
+        Person newP = registerDao.addPerson(p);
+        Contact contact = Contact.builder()
+                .isEmergency((byte)1)
+                .isLandlord((byte)0)
+                .isReference((byte)0)
+                .relationShip(contactEmergencyDomain.getRelationship())
+                .employee(employee)
+                .person(newP)
+                .build();
+        return registerDao.addContact(contact);
+    }
+
 }

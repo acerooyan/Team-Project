@@ -1,8 +1,6 @@
 package com.example.emrestserver.dao;
 
-import com.example.emrestserver.entity.Address;
-import com.example.emrestserver.entity.Person;
-import com.example.emrestserver.entity.VisaStatus;
+import com.example.emrestserver.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,4 +56,33 @@ public class RegisterDao {
         findVisaStatus.setParameter("id", id);
         return (VisaStatus) findVisaStatus.getSingleResult();
     }
+
+    public Employee getEmployeeById(Integer id){
+        Session session = getCurrentSession();
+        Query findEmployee = session.createQuery("FROM Employee  where id=:id");
+        findEmployee.setParameter("id", id);
+        return (Employee) findEmployee.getSingleResult();
+    }
+    public Employee addEmployee(Employee employee){
+        Session session = getCurrentSession();
+        Integer employeeId = (Integer) session.save(employee);
+        return getEmployeeById(employeeId);
+    }
+
+    public Contact getContactById(Integer id){
+        Session session = getCurrentSession();
+        Query findContact = session.createQuery("FROM Contact WHERE id=:id");
+        findContact.setParameter("id", id);
+        return (Contact) findContact.getSingleResult();
+
+    }
+
+    public Contact addContact(Contact contact){
+        Session session = getCurrentSession();
+        Integer contactId = (Integer) session.save(contact);
+        return getContactById(contactId);
+    }
+
+
+
 }
