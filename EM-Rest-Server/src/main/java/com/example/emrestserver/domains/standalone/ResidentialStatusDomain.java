@@ -15,5 +15,5 @@ public class ResidentialStatusDomain {
     private String workAuthorization; // visa status
     private String startDate;
     private String expirationDate;
-    private MultipartFile workAuthorizationFile;
+//    private MultipartFile workAuthorizationFile;
 }

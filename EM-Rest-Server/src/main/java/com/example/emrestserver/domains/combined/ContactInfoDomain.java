@@ -15,5 +15,4 @@ public class ContactInfoDomain {
     private String email;
     List<AddressDomain> addressDaoList;
 
-
 }

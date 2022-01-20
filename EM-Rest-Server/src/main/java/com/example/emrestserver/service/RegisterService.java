@@ -47,8 +47,8 @@ public class RegisterService {
                 .ssn(basicInfoDomain.getSsn())
                 .dob(Date.valueOf(basicInfoDomain.getDob()))
                 .userId(12345).build();
-        Person newP = addPerson(p);
-        return newP;
+//        Person newP = addPerson(p);
+        return p;
     }
     @Transactional
     public Person addPerson(Person person){
