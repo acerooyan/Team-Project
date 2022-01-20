@@ -30,6 +30,7 @@ export class Step1Component implements OnInit {
       }
     );
   }
+
   saveRegUser() {
     this.registerService.setRegUser(this.regUser).subscribe(
       {
@@ -46,6 +47,7 @@ export class Step1Component implements OnInit {
         }
     });
   }
+
   regUserRegister() {
     console.log(this.regUser);
   }
