@@ -21,23 +21,23 @@ export class RegisterService {
   basicInfo: BasicInfo = new BasicInfo();
 
   contactInfo: ContactInfo = new ContactInfo();
-  addressList: any[] = [{
-    address:Address
-  }];
+  // addressList: any[] = [{
+  //   address:Address
+  // }];
 
   carInfo: CarInfo = new CarInfo();
   residentialStatus: ResidentialStatus = new ResidentialStatus();
   contactReference: ContactReference = new ContactReference();
   contactEmergency: ContactEmergency = new ContactEmergency();
 
-  setAddressList(addressList: any[] = [{
-    address:Address
-  }]) {
-    this.addressList = addressList;
-}
-getAddressList() {
-    return this.addressList;
-}
+//   setAddressList(addressList: any[] = [{
+//     address:Address
+//   }]) {
+//     this.addressList = addressList;
+// }
+// getAddressList() {
+//     return this.addressList;
+// }
   setRegUser(regUser: RegUser) {
     this.regUser = regUser;
   }

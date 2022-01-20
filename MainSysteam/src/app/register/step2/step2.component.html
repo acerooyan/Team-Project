@@ -21,30 +21,30 @@
     </div>
     <div class="mb-3">
       <label  class="form-label">Last Name(*)</label>
-      <input type="text" class="form-control" id="lastname" required name="lastname"  [(ngModel)]="basicInfo.lastName" #ln = 'ngModel'>
+      <input type="text" class="form-control" id="lastname" required name="lastname"  [(ngModel)]="basicInfo.lastName" #ln = "ngModel">
       <div *ngIf="ln.invalid && ln.touched" class="text-danger">Lastname is Required</div>
     </div>
     <div class="mb-3">
       <label  class="form-label">SSN(*)</label>
-      <input type="text" class="form-control" id="SSN" required name="SSN"  [(ngModel)]="basicInfo.SSN" #ssn = 'ngModel'>
+      <input type="text" class="form-control" id="SSN" required name="SSN"  [(ngModel)]="basicInfo.SSN" #ssn = "ngModel">
       <div *ngIf="ssn.invalid && ssn.touched" class="text-danger">SSN is Required</div>
     </div>
     <div class="mb-3">
       <label  class="form-label">Date Of Birth(*)</label>
-      <input type="date" class="form-control" id="dateofbirth" required name="dateofbirth"  [(ngModel)]="basicInfo.DOB" #dob = 'ngModel'>
+      <input type="date" class="form-control" id="dateofbirth" required name="dateofbirth"  [(ngModel)]="basicInfo.DOB" #dob = "ngModel">
       <div *ngIf="dob.invalid && dob.touched" class="text-danger">DOB is Required</div>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Gender(*)</label>
       <div class="form-check" >
-        <input class="form-check-input" type="radio" name="gender" id="male" value="male" required [(ngModel)]="basicInfo.gender" #gender = 'ngModel'>
+        <input class="form-check-input" type="radio" name="gender" id="male" value="male" required [(ngModel)]="basicInfo.gender" #gender = "ngModel">
         <label>
           Male
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="gender" id="female" value="female" required [(ngModel)]="basicInfo.gender" #genfer = 'ngModel'>
+        <input class="form-check-input" type="radio" name="gender" id="female" value="female" required [(ngModel)]="basicInfo.gender" #gender = "ngModel">
         <label>
           Female
         </label>

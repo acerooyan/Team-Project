@@ -3,7 +3,7 @@ import {BasicInfo} from "../../entity/basic-info";
 import {RegisterService} from "../../services/register.service";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {fn} from "@angular/compiler/src/output/output_ast";
+
 
 @Component({
   selector: 'app-step2',

@@ -21,9 +21,9 @@ export class Step3Component implements OnInit {
   addressList : any[] = [{
     address:Address
   }];
-  saveAddressList() {
-    this.registerService.setAddressList(this.addressList);
-  }
+  // saveAddressList() {
+  //   this.registerService.setAddressList(this.addressList);
+  // }
 
 
   saveContactInfo() {
@@ -33,7 +33,7 @@ export class Step3Component implements OnInit {
     console.log(this.registerService.getRegUser());
     console.log(this.registerService.getBasicInfo());
     console.log(this.contactInfo);
-    console.log(this.addressList);
+    // console.log(this.addressList);
   }
   changePage() {
     this.router.navigate(["/regnav/step4"]);
@@ -47,11 +47,11 @@ export class Step3Component implements OnInit {
   //     });
   //   }
   addAddress() {
-    this.addressList.push({
+    this.contactInfo.addressDaoList.push({
       address:Address
     });
   }
   removeAddress(i: number) {
-    this.addressList.splice(i, 1);
+    this.contactInfo.addressDaoList.splice(i, 1);
   }
 }

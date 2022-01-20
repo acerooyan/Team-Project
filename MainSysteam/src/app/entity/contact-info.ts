@@ -12,9 +12,9 @@ export class ContactInfo {
   //   status!: "";
   //   Zipcode!: "";
   // ]
-  // addressDaoList: any[] = [{
-  //   address:Address
-  // }]
+  addressDaoList: any[] = [{
+    address:Address
+  }]
 
 //public addresses: any[] = [{
 //     address: '',

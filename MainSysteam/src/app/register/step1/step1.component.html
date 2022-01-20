@@ -4,15 +4,18 @@
 <form>
     <div class="mb-3">
       <label  class="form-label">User Name</label>
-      <input type="text" class="form-control" id="userName" name="userName" [(ngModel)]="regUser.userName">
-    </div>
-    <div class="mb-3">
-      <label  class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" name="password" [(ngModel)]="regUser.password" >
+      <input type="text" class="form-control" id="userName" name="userName" required [(ngModel)]="regUser.userName" #un = "ngModel">
+      <div *ngIf="un.invalid && un.touched" class="text-danger">Username is Required</div>
     </div>
 
+    <div class="mb-3">
+      <label  class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="regUser.password" #pw = "ngModel">
+
+      <div *ngIf="pw.invalid && pw.touched" class="text-danger">Username is Required</div></div>
+
 <!--    <a class="btn" routerLink="step2">next</a>-->
-    <button (click)="changePage();saveRegUser();regUserRegister()">
+    <button [disabled]="un.invalid || pw.invalid" (click)="changePage();saveRegUser();regUserRegister()">
       <span>next</span>
     </button>
 <!--    <button type="submit" class="btn btn-primary">save</button>-->
