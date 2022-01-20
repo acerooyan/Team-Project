@@ -1,43 +1,55 @@
 <div class="container col-md-6">
+
+
+
+
   <h1 style="color: red;">Basic Information</h1>
 
-    <form>
+
 
     <div class="mb-3">
       <label class="form-label">First Name(*)</label>
-      <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="basicInfo.firstName">
+      <input type="text" class="form-control" id="firstname" required name="firstname" [(ngModel)]="basicInfo.firstName" #fn = "ngModel" >
+      <div *ngIf="fn.invalid && fn.touched" class="text-danger">Firstname is Required</div>
+
     </div>
+
+
     <div class="mb-3">
       <label  class="form-label">Middle Name</label>
-      <input type="text" class="form-control" id="middlename" name="middlename" [(ngModel)]="basicInfo.middleName" >
+      <input type="text" class="form-control" id="middlename"  name="middlename" [(ngModel)]="basicInfo.middleName" >
     </div>
     <div class="mb-3">
       <label  class="form-label">Last Name(*)</label>
-      <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="basicInfo.lastName" >
+      <input type="text" class="form-control" id="lastname" required name="lastname"  [(ngModel)]="basicInfo.lastName" #ln = 'ngModel'>
+      <div *ngIf="ln.invalid && ln.touched" class="text-danger">Lastname is Required</div>
     </div>
     <div class="mb-3">
       <label  class="form-label">SSN(*)</label>
-      <input type="text" class="form-control" id="SSN" name="SSN" [(ngModel)]="basicInfo.SSN">
+      <input type="text" class="form-control" id="SSN" required name="SSN"  [(ngModel)]="basicInfo.SSN" #ssn = 'ngModel'>
+      <div *ngIf="ssn.invalid && ssn.touched" class="text-danger">SSN is Required</div>
     </div>
     <div class="mb-3">
       <label  class="form-label">Date Of Birth(*)</label>
-      <input type="date" class="form-control" id="dateofbirth" name="dateofbirth" [(ngModel)]="basicInfo.DOB" >
+      <input type="date" class="form-control" id="dateofbirth" required name="dateofbirth"  [(ngModel)]="basicInfo.DOB" #dob = 'ngModel'>
+      <div *ngIf="dob.invalid && dob.touched" class="text-danger">DOB is Required</div>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Gender(*)</label>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="gender" id="male" value="male" [(ngModel)]="basicInfo.gender">
+      <div class="form-check" >
+        <input class="form-check-input" type="radio" name="gender" id="male" value="male" required [(ngModel)]="basicInfo.gender" #gender = 'ngModel'>
         <label>
           Male
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="gender" id="female" value="female" [(ngModel)]="basicInfo.gender">
+        <input class="form-check-input" type="radio" name="gender" id="female" value="female" required [(ngModel)]="basicInfo.gender" #genfer = 'ngModel'>
         <label>
           Female
         </label>
       </div>
+      <div *ngIf="gender.invalid && gender.touched" class="text-danger">Gender is Required</div>
     </div>
     <div class="input-group mb-3">
       <label>Upload Avatar</label>
@@ -66,9 +78,9 @@
 <!--      <span>next</span>-->
 <!--    </button>-->
 <!--    <a class="btn" routerLink="step3">next</a>-->
-      <button (click)="changePage();saveBasicInfo();basicInfoRegister()">
+      <button [disabled]="fn.invalid || ln.invalid || ssn.invalid||dob.invalid||gender.invalid" (click)="changePage();saveBasicInfo();basicInfoRegister()">
         <span>next</span>
       </button>
 <!--    <a class="btn"><button (click)="saveBasicInfo();basicInfoRegister()"  class="btn btn-primary">next</button></a>-->
-  </form>
+
 </div>

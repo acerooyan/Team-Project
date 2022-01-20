@@ -16,7 +16,7 @@
     </div>
 
 
-      <section *ngFor="let address of contactInfo.addressDaoList; let i = index;">
+      <section *ngFor="let address of addressList; let i = index;">
         <h3>Address{{i+1}}</h3>
         <button type="button"  (click)="removeAddress(i)">Remove Address</button>
         <br>

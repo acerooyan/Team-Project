@@ -19,12 +19,25 @@ export class RegisterService {
 
   regUser: RegUser = new RegUser();
   basicInfo: BasicInfo = new BasicInfo();
+
   contactInfo: ContactInfo = new ContactInfo();
+  addressList: any[] = [{
+    address:Address
+  }];
+
   carInfo: CarInfo = new CarInfo();
   residentialStatus: ResidentialStatus = new ResidentialStatus();
   contactReference: ContactReference = new ContactReference();
   contactEmergency: ContactEmergency = new ContactEmergency();
-  // data.append("a",regUser)
+
+  setAddressList(addressList: any[] = [{
+    address:Address
+  }]) {
+    this.addressList = addressList;
+}
+getAddressList() {
+    return this.addressList;
+}
   setRegUser(regUser: RegUser) {
     this.regUser = regUser;
   }
