@@ -1,8 +1,10 @@
 package com.example.emrestserver.service;
 
-import com.example.emrestserver.domain.BasicInfoDomain;
-import com.example.emrestserver.domain.ContactInfoDomain;
-import com.example.emrestserver.domain.MergeDomain;
+
+import com.example.emrestserver.dao.RegisterDao;
+import com.example.emrestserver.domains.combined.ContactInfoDomain;
+import com.example.emrestserver.domains.combined.MergeDomain;
+import com.example.emrestserver.domains.standalone.BasicInfoDomain;
 import com.example.emrestserver.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
