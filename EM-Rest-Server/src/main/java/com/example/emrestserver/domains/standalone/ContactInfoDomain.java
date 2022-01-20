@@ -1,4 +1,4 @@
-package com.example.emrestserver.domains.combined;
+package com.example.emrestserver.domains.standalone;
 import com.example.emrestserver.domains.standalone.AddressDomain;
 import lombok.*;
 
@@ -10,9 +10,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContactInfoDomain {
-    private String cellphone;
+    private String cellPhone;
     private String alternatePhone;
     private String email;
+
     //List<AddressDomain> addressDaoList;
     AddressDomain[] addressDomains;
 
