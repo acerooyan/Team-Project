@@ -1,8 +1,11 @@
 package com.example.emrestserver.controller;
 
 
+import com.example.emrestserver.entity.PersonalDocument;
 import com.example.emrestserver.service.AwsService;
-        import org.springframework.beans.factory.annotation.Autowired;
+import com.example.emrestserver.service.PersonalDocumentService;
+import com.example.emrestserver.service.UtilService;
+import org.springframework.beans.factory.annotation.Autowired;
 
         import org.springframework.core.io.ByteArrayResource;
         import org.springframework.http.HttpStatus;
@@ -11,16 +14,25 @@ import com.example.emrestserver.service.AwsService;
         import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/file")
+@RequestMapping("/api/file")
 public class AwsController {
 
     @Autowired
     private AwsService service;
 
+    @Autowired
+    private PersonalDocumentService personalDocumentService;
+
+    @Autowired
+    private UtilService utilService;
+
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam(value = "file") MultipartFile file) {
-        return new ResponseEntity<>(service.uploadFile(file), HttpStatus.OK);
+    public ResponseEntity<String> uploadFile(@RequestPart(value = "file") MultipartFile file, @RequestPart(value = "employeeId")Integer id) {
+        String fileName = service.uploadFile(file);
+        PersonalDocument personalDocument =  personalDocumentService.buildDocument(fileName,utilService.getEmployeeById(id));
+        return ResponseEntity.ok().body(fileName);
     }
+
 
     @GetMapping("/download/{fileName}")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable String fileName) {
