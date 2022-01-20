@@ -7,7 +7,7 @@ export class ResidentialStatus {
   //     private String expirationDate;
   //     private MultipartFile workAuthorizationFile;
 
-  isCitizenOrResident!: String;
+  isCitizenOrResident="";
   citizenOrGreenCard!: String;
   workAuthorization = "";
   startDate!: String;

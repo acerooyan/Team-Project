@@ -3,7 +3,7 @@
   <form>
 
     <div class="mb-3">
-      <label  class="form-label">Cell Phone</label>
+      <label  class="form-label">Cell Phone(*)</label>
       <input type="text" class="form-control" id="cellphone" name="cellphone" [(ngModel)]="contactInfo.cellphone">
     </div>
     <div class="mb-3">
@@ -11,7 +11,7 @@
       <input type="text" class="form-control" id="workphone" name="workphone" [(ngModel)]="contactInfo.alternatePhone" >
     </div>
     <div class="mb-3">
-      <label  class="form-label">Email</label>
+      <label  class="form-label">Email(*)</label>
       <input type="email" class="form-control" id="Email" name="Email" [(ngModel)]="contactInfo.email" >
     </div>
 
@@ -22,20 +22,20 @@
         <br>
         <br>
         <div>
-        <label>AddressLine1: </label>
+        <label>AddressLine1(*): </label>
         <input type="text" [(ngModel)]="address.addressLine1" name="addressLine1_{{i}}"/>
           </div>
         <div>
         <label>AddressLine2: </label>
         <input type="text" [(ngModel)]="address.addressLine2" name="addressLine2_{{i}}"/>
         </div><div>
-        <label>City: </label>
+        <label>City(*): </label>
         <input type="text" [(ngModel)]="address.city" name="city_{{i}}"/>
       </div> <div>
-        <label>Status: </label>
+        <label>Status(*): </label>
         <input type="text" [(ngModel)]="address.status" name="status_{{i}}"/>
       </div>    <div>
-        <label>Zipcode: </label>
+        <label>Zipcode(*): </label>
         <input type="text" [(ngModel)]="address.Zipcode" name="Zipcode_{{i+1}}"/>
       </div>
         <button type="button" (click)="addAddress()">Add Address</button>

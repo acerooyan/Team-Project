@@ -3,7 +3,7 @@
   <form (ngSubmit)="saveStep6();step6Register()">
       <div class="mb-3">
         <label  class="form-label">First Name</label>
-        <input type="input" class="form-control" id="driverLicence_expirationDate" name="driverLicence_expirationDate" [(ngModel)]="contactReference.firstName" >
+        <input type="input" class="form-control" id="fname" name="driverLicence_expirationDate" [(ngModel)]="contactReference.firstName" >
       </div>
       <div class="mb-3">
         <label  class="form-label">Last Name</label>
@@ -49,28 +49,28 @@
 
     <h1 style="color: red;">Emergency Contact</h1>
     <div class="mb-3">
-      <label  class="form-label">First Name</label>
+      <label  class="form-label">First Name(*)</label>
       <input type="input" class="form-control" id="firstName" name="firstName" [(ngModel)]="contactEmergency.firstName" >
     </div>
     <div class="mb-3">
-      <label  class="form-label">Last Name</label>
-      <input type="input" class="form-control" id="lastName" name="lastName" [(ngModel)]="contactEmergency.lastName" >
+      <label  class="form-label">Last Name(*)</label>
+      <input type="input" class="form-control" id="lastName2" name="lastName" [(ngModel)]="contactEmergency.lastName" >
     </div>
     <div class="mb-3">
       <label  class="form-label">Middle Name</label>
-      <input type="input" class="form-control" id="middleName" name="middleName" [(ngModel)]="contactEmergency.middleName" >
+      <input type="input" class="form-control" id="middleName2" name="middleName" [(ngModel)]="contactEmergency.middleName" >
     </div>
     <div class="mb-3">
-      <label  class="form-label">Cell Phone</label>
-      <input type="input" class="form-control" id="cellPhone" name="cellPhone" [(ngModel)]="contactEmergency.cellPhone" >
+      <label  class="form-label">Cell Phone(*)</label>
+      <input type="input" class="form-control" id="cellPhone2" name="cellPhone" [(ngModel)]="contactEmergency.cellPhone" >
     </div>
     <div class="mb-3">
-      <label  class="form-label">Email</label>
-      <input type="input" class="form-control" id="email" name="email" [(ngModel)]="contactEmergency.email" >
+      <label  class="form-label">Email(*)</label>
+      <input type="input" class="form-control" id="email2" name="email" [(ngModel)]="contactEmergency.email" >
     </div>
     <div class="mb-3">
-      <label  class="form-label">Relationship</label>
-      <input type="input" class="form-control" id="relationship" name="relationship" [(ngModel)]="contactEmergency.relationship" >
+      <label  class="form-label">Relationship(*)</label>
+      <input type="input" class="form-control" id="relationship2" name="relationship" [(ngModel)]="contactEmergency.relationship" >
     </div>
 
 

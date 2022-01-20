@@ -30,6 +30,13 @@ export class Step5Component implements OnInit {
       return false;
     }
   }
+  selected() {
+    if (this.residentialStatus.isCitizenOrResident == "yes" || this.residentialStatus.isCitizenOrResident == "no") {
+      return true;
+    } else {
+      return false;
+    }
+  }
   changePage() {
     this.router.navigate(["/regnav/step6"]);
   }
