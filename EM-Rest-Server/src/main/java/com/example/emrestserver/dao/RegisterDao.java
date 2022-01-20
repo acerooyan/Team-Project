@@ -23,7 +23,7 @@ public class RegisterDao {
         Session session = getCurrentSession();
         Query findAllPerson = session.createQuery("FROM Person");
 
-        Integer personId = findAllPerson.getResultList().size();
+        Integer personId = findAllPerson.getResultList().size()+1;
         p.setId(personId);
         session.merge(p);
         // check if add successfully.
