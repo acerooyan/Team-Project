@@ -38,6 +38,7 @@ public class TestController {
 
     @PostMapping("/upload")
     public ResponseEntity<Object> test3(@RequestParam(value = "file",required = false)MultipartFile file,@RequestParam("model")String model){
+
         if(file == null ){
             System.out.println("file not found");
             return ResponseEntity.notFound().build();
@@ -45,6 +46,8 @@ public class TestController {
             System.out.println("model not found");
             return ResponseEntity.notFound().build();
         }else{
+            System.out.println(file);
+            System.out.println(model);
             return ResponseEntity.ok().build();
         }
 

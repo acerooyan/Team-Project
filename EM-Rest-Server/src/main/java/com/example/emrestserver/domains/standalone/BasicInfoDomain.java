@@ -22,6 +22,6 @@ public class BasicInfoDomain {
 
     private String gender;
 
-    private MultipartFile file;
+    //private MultipartFile file;
 
 }
