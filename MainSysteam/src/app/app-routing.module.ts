@@ -33,7 +33,7 @@ const routes: Routes = [
     ]
   },
 
-  {path: 'regnav', component: RegisterComponent},
+ 
   {
     path: 'regnav', component: RegnavbarComponent,
     children: [
