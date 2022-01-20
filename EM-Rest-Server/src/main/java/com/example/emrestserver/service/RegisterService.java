@@ -1,9 +1,11 @@
 package com.example.emrestserver.service;
 
 import com.example.emrestserver.dao.RegisterDao;
-import com.example.emrestserver.domains.combined.ContactInfoDomain;
+import com.example.emrestserver.domains.standalone.AddressDomain;
+import com.example.emrestserver.domains.standalone.ContactInfoDomain;
 import com.example.emrestserver.domains.combined.MergeDomain;
 import com.example.emrestserver.domains.standalone.BasicInfoDomain;
+import com.example.emrestserver.entity.Address;
 import com.example.emrestserver.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,14 +57,21 @@ public class RegisterService {
         return registerDao.addPerson(person);
     }
 
-//    private Integer addAddress(Address address){
-//        return 0;
-//    }
-//    private Integer addPerson( person){
-//        return 0;
-//    }
-//    private Integer addPerson(Person person){
-//        return 0;
-//    }
+    @Transactional
+    public void addAddress(Person p, AddressDomain[] addressDomains){
+        Address address;
+        for(int i = 0; i < addressDomains.length; i++){
+            address = Address.builder()
+                    .addressLine1(addressDomains[i].getAddressLine1())
+                    .addressLine2(addressDomains[i].getAddressLine2())
+                    .city(addressDomains[i].getCity())
+                    .stateAbbr(addressDomains[i].getState())
+                    .stateName(addressDomains[i].getState())
+                    .zipcode(Integer.parseInt(addressDomains[i].getZipcode()))
+                    .build();
+            address.
+        }
+    }
+
 
 }

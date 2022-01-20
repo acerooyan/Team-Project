@@ -1,4 +1,4 @@
-package com.example.emrestserver.domains.combined;
+package com.example.emrestserver.domains.standalone;
 import com.example.emrestserver.domains.standalone.AddressDomain;
 import lombok.*;
 
@@ -13,6 +13,6 @@ public class ContactInfoDomain {
     private String cellphone;
     private String alternatePhone;
     private String email;
-    List<AddressDomain> addressDaoList;
+    private String addressDaoList;
 
 }

@@ -11,15 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class CarInfoDomain {
 
     private String driverLicence;
-
     private String driverLicence_expirationDate;
-
 //    private MultipartFile driverLicenceFile;
-
     private String make;
-
     private String model;
-
     private String color;
 
 }

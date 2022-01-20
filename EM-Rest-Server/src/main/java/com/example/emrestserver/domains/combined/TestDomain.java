@@ -1,7 +1,8 @@
 package com.example.emrestserver.domains.combined;
 
+import com.example.emrestserver.domains.standalone.AddressDomain;
 import com.example.emrestserver.domains.standalone.BasicInfoDomain;
-import com.example.emrestserver.entity.Address;
+import com.example.emrestserver.domains.standalone.ContactInfoDomain;
 import lombok.*;
 
 import java.util.List;
@@ -14,5 +15,5 @@ import java.util.List;
 public class TestDomain {
     BasicInfoDomain basicInfoDomain;
     ContactInfoDomain contactInfoDomain;
-    Address[] addressList;
+    List<AddressDomain> addressList;
 }

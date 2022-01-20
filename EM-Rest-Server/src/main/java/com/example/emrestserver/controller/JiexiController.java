@@ -1,9 +1,12 @@
 package com.example.emrestserver.controller;
 
 import com.example.emrestserver.domains.combined.TestDomain;
+import com.example.emrestserver.domains.standalone.AddressDomain;
 import com.example.emrestserver.entity.Address;
 import com.example.emrestserver.entity.Person;
 import com.example.emrestserver.service.RegisterService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +32,11 @@ public class JiexiController {
             //update database
             Person p = registerService.convertBasicInfoToPerson(testDomain.getBasicInfoDomain(), testDomain.getContactInfoDomain());
             System.out.println(testDomain.getAddressList());
-            Address[] addressList = testDomain.getAddressList();
-            for(int i = 0; i < addressList.length;i++){
-                System.out.println(addressList[i]);
+            ObjectMapper objectMapper = new ObjectMapper();
+//            List<Address> addressList = objectMapper.readValue(,)
+            List<AddressDomain> addressList = testDomain.getAddressList();
+            for(int i = 0; i < addressList.size();i++){
+                System.out.println(addressList.get(i));
 //                System.out.println(addressList.get(i).getAddressLine1());
 //                System.out.println(addressList.get(i).getAddressLine2());
 //                System.out.println(addressList.get(i).getAddressLine1());

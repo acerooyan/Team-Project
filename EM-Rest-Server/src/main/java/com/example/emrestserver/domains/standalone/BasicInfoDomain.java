@@ -11,17 +11,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class BasicInfoDomain {
 
     private String firstName;
-
     private String lastName;
-
     private String middleName;
-
     private String ssn;
-
     private String dob;
-
     private String gender;
-
     //private MultipartFile file;
 
 }
