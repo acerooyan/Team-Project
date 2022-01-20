@@ -5,6 +5,7 @@ import com.example.emrestserver.domains.TestDomain;
 import com.example.emrestserver.entity.Person;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api")
@@ -35,7 +36,19 @@ public class TestController {
         }
     }
 
+    @PostMapping("/upload")
+    public ResponseEntity<Object> test3(@RequestParam(value = "file",required = false)MultipartFile file,@RequestParam("model")String model){
+        if(file == null ){
+            System.out.println("file not found");
+            return ResponseEntity.notFound().build();
+        } else if(model == null){
+            System.out.println("model not found");
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok().build();
+        }
 
+    }
 
 
 
