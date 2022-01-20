@@ -16,9 +16,9 @@ public class BasicInfoDomain {
 
     private String middleName;
 
-    private String SSN;
+    private String ssn;
 
-    private String DOB;
+    private String dob;
 
     private String gender;
 

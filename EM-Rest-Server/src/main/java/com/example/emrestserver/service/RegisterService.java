@@ -7,6 +7,7 @@ import com.example.emrestserver.domains.standalone.BasicInfoDomain;
 import com.example.emrestserver.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 
@@ -15,7 +16,7 @@ public class RegisterService {
 
     @Autowired
     RegisterDao registerDao;
-
+    @Transactional
     public void mainService(MergeDomain mergeDomain){
         // basicInfoDomain contains:
         BasicInfoDomain basicInfoDomain = mergeDomain.getBasicInfoDomain();
@@ -32,21 +33,26 @@ public class RegisterService {
         * */
     }
 
-    private Person convertBasicInfoToPerson(BasicInfoDomain basicInfoDomain, ContactInfoDomain contactInfoDomain){
+    @Transactional
+    public Person convertBasicInfoToPerson(BasicInfoDomain basicInfoDomain, ContactInfoDomain contactInfoDomain){
+//        String dateString = basicInfoDomain.getDOB();
+//        System.out.println(dateString);
+//        Date date = Date.valueOf(basicInfoDomain.getDOB());
         Person p = Person.builder().firstname(basicInfoDomain.getFirstName())
                 .lastname(basicInfoDomain.getLastName())
                 .middleName(basicInfoDomain.getMiddleName())
                 .email(contactInfoDomain.getEmail())
                 .cellPhone(contactInfoDomain.getCellphone())
                 .alternatePhone(contactInfoDomain.getAlternatePhone())
-                .ssn(basicInfoDomain.getSSN())
-                .dob(Date.valueOf(basicInfoDomain.getDOB()))
+                .ssn(basicInfoDomain.getSsn())
+                .dob(Date.valueOf(basicInfoDomain.getDob()))
                 .userId(12345).build();
-
-        return p;
+        Person newP = addPerson(p);
+        return newP;
     }
-    private Integer addPerson(Person person){
-        return 0;
+    @Transactional
+    public Person addPerson(Person person){
+        return registerDao.addPerson(person);
     }
 
 //    private Integer addAddress(Address address){
