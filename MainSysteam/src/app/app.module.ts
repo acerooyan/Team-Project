@@ -25,6 +25,8 @@ import { Step6Component } from './register/step6/step6.component';
 import {RegisterService} from "./services/register.service";
 import { RegnavbarComponent } from './register/regnavbar/regnavbar.component';
 import { RegisterComponent } from './register/register.component';
+import { FileuploadComponent } from './test/fileupload/fileupload.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -47,6 +49,8 @@ import { RegisterComponent } from './register/register.component';
     Step6Component,
     RegnavbarComponent,
     RegisterComponent,
+    FileuploadComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -56,6 +60,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CommonModule
     
 
 

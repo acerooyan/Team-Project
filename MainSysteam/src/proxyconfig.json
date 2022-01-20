@@ -5,14 +5,8 @@
         "changeOrigin": true
     },
     "/auth":{
-<<<<<<< HEAD
         "target": "http://localhost:9999",
         "secure": false,
         "changeOrigin": true
-=======
-     "target": "http://localhost:9999",
-     "secure": false,
-      "changeOrigin": true
->>>>>>> c4c9189355ac8e854ba995208cfa34f04069ff03
     }
 }

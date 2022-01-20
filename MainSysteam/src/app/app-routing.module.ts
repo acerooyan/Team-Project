@@ -15,7 +15,7 @@ import {Step5Component} from './register/step5/step5.component';
 import {Step6Component} from './register/step6/step6.component';
 import {RegisterComponent} from "./register/register.component";
 import {RegnavbarComponent} from "./register/regnavbar/regnavbar.component";
-
+import { FileuploadComponent } from './test/fileupload/fileupload.component';
 
 
 const routes: Routes = [
@@ -47,6 +47,8 @@ children: [
     ]
   },
 
+  {path: 'upload', component:FileuploadComponent},
+  
 {path:'**', component:WildCardComponent}
 
 

@@ -1,13 +1,21 @@
 <div class="row g-3 align-items-center">
-    <div class="col-auto">
-      <label for="inputPassword6" class="col-form-label">Email</label>
-    </div>
-    <div class="col-auto">
-      <input  [formControl]="EmailControl" type="email" id="inputPassword6"   class="form-control" aria-describedby="passwordHelpInline">
-    </div>
-    
-    <button type="button" class="btn btn-primary" (click)="GenerateToken()">Generate Token</button>
-    
-</div>
+  <div class="col-auto">
+    <label for="inputPassword6" class="col-form-label">Email</label>
+  </div>
+  <div class="col-auto">
+    <input [formControl]="EmailControl" type="email" id="inputPassword6" class="form-control"
+           aria-describedby="passwordHelpInline">
+  </div>
+  <div class="col-auto">
+    <ul class="durations">
+      <li *ngFor="let duration of durations; let i = index"
+          [class.selected]="duration === selectedDuration"
+          (click)="onSelect(duration)">
+        <span class="badge">{{i}}</span> {{duration.value}}
+      </li>
+    </ul>
+  </div>
 
-  
+  <button type="button" class="btn btn-primary" (click)="GenerateToken()">Generate Token</button>
+
+</div>

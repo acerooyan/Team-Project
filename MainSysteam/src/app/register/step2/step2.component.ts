@@ -12,23 +12,35 @@ import { Router } from '@angular/router';
 export class Step2Component implements OnInit {
   basicInfo: BasicInfo = new BasicInfo();
   constructor(public registerService: RegisterService, public router: Router) { }
-
+  
+  selectedFiles?: FileList;
+  
+  
+ 
+ 
   ngOnInit(): void {
 
   }
   saveBasicInfo() {
     this.registerService.setBasicInfo(this.basicInfo);
+    this.registerService.setAvatar(this.selectedFiles);
   }
   basicInfoRegister() {
-    console.log(this.registerService.getRegUser());
+    
     console.log(this.basicInfo);
-    // this.registerService.registerBasicInfo(this.basicInfo).subscribe(data=>{
-    //   alert("Successfully User is register?")
-    // },error=>alert("Sorry User not register"));
+   
 
   }
 
   changePage() {
     this.router.navigate(["/regnav/step3"]);
   }
+
+
+  selectFile(event: any): void {
+    
+    this.selectedFiles = event.target.files;
+  }
+
+  
 }

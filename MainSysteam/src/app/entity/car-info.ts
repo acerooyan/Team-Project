@@ -4,5 +4,5 @@ export class CarInfo {
   make!:String;
   model!: String;
   color!:String;
-  driverLicenceFile!: File;
+  
 }

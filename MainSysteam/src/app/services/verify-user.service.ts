@@ -10,7 +10,7 @@ export class VerifyUserService {
 
 
 
-  private sso = "auth/login";
+   private sso = "auth/login";
    private mainhrhome= "api/hr/home";
 
   
