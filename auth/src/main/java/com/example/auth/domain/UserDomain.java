@@ -1,0 +1,24 @@
+package com.example.auth.domain;
+
+import lombok.*;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
+@Data
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserDomain {
+    @NotNull
+    private Integer id;
+    @NotNull
+    private String userName;
+    @NotNull
+    private String password;
+    @NotNull
+    private String email;
+    @NotNull
+    private List<String> role;
+}
