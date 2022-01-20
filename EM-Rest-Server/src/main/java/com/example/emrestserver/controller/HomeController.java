@@ -19,23 +19,23 @@ public class HomeController {
     @GetMapping("/hr/home")
     public ResponseEntity<List<HrHomeDomain>> hrHome() {
 
-//        try{
+        try {
 //            get application list from database
-         List<HrHomeDomain> hrHomeDomainList = hrHomeService.mapDocumentWithEmployee();
-        return ResponseEntity.ok().body(hrHomeDomainList);
-//        }catch (Exception e){
-//            System.out.println("error catch");
-//            return ResponseEntity.internalServerError().build();
-//        }
+            List<HrHomeDomain> hrHomeDomainList = hrHomeService.mapDocumentWithEmployee();
+            return ResponseEntity.ok().body(hrHomeDomainList);
+        } catch (Exception e) {
+            System.out.println("error catch");
+            return ResponseEntity.internalServerError().build();
+        }
 
     }
 
     @GetMapping("/employee/home")
-    public String  employeeHome() {
-        try{
+    public String employeeHome() {
+        try {
             //add new person in database
             return "success";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "error";
         }
 
