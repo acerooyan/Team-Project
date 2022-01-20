@@ -44,7 +44,7 @@ public class AwsService {
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
         s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObj));
         fileObj.delete();
-        return "File Uploaded: " + fileName;
+        return fileName;
     }
 
     public byte[] downloadFile(String fileName) {
