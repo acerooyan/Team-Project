@@ -55,19 +55,19 @@ public class Person implements Serializable{
     private Integer userId;
 
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "person")
-    private Employee employee;
+//    @JsonIgnore
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "person")
+//    private Employee employee;
 
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.MERGE)
-
-    private List<Contact> contactList = new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.MERGE)
-    private List<Address> addressList = new ArrayList<>();
+//    @JsonIgnore
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.MERGE)
+//
+//    private List<Contact> contactList = new ArrayList<>();
+//
+//    @JsonIgnore
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.MERGE)
+//    private List<Address> addressList = new ArrayList<>();
 
 
 

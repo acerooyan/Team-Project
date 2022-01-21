@@ -64,6 +64,7 @@ public class ProfileController {
 
                 //todo: update DB with received personalInfo domain
                 Person personUpdated =  profileUpdateService.buildPerson(personalInfoDomain,email);
+                System.out.println(personUpdated);
 
                 profileUpdateService.updatePersonWithPerson(personUpdated);
 

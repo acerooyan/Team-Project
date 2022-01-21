@@ -3,11 +3,14 @@ package com.example.emrestserver.controller;
 
 import com.example.emrestserver.constant.JwtConstant;
 import com.example.emrestserver.domains.TestDomain;
+import com.example.emrestserver.domains.profile.PersonalInfoDomain;
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.Person;
 import com.example.emrestserver.security.util.CookieUtil;
 import com.example.emrestserver.security.util.JwtUtil;
+import com.example.emrestserver.service.ProfileUpdateService;
 import com.example.emrestserver.service.UtilService;
+import com.google.gson.Gson;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,9 @@ public class TestController {
 
     @Autowired
     private UtilService utilService;
+
+    @Autowired
+    private ProfileUpdateService profileUpdateService;
 
     @GetMapping("/test")
     public String test1(){
@@ -60,20 +66,35 @@ public class TestController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<Object> test3(@RequestParam(value = "file",required = false)MultipartFile file,@RequestParam("model")String model){
+    @GetMapping("/test5")
+    public ResponseEntity<Employee> test5(@RequestPart(value = "model") String model,ServletRequest servletRequest){
 
-        if(file == null ){
-            System.out.println("file not found");
-            return ResponseEntity.notFound().build();
-        } else if(model == null){
-            System.out.println("model not found");
-            return ResponseEntity.notFound().build();
-        }else{
-            System.out.println(file);
-            System.out.println(model);
-            return ResponseEntity.ok().build();
-        }
+        String email = "jamesh970327@gmail.com";
+
+        if ( model == null || email == null) {
+            System.out.println("not found");
+            return ResponseEntity.status(666).build();
+        } else {
+            try{
+                Gson g = new Gson();
+                PersonalInfoDomain personalInfoDomain = g.fromJson(model,PersonalInfoDomain.class);
+                System.out.println(personalInfoDomain);
+                //todo: update DB with received personalInfo domain
+                Person personUpdated =  profileUpdateService.buildPerson(personalInfoDomain,email);
+                System.out.println(personUpdated);
+                profileUpdateService.updatePersonWithPerson(personUpdated);
+
+
+
+
+                return ResponseEntity.ok().build();
+            }catch (Exception e){
+                System.out.println("error catch");
+                e.printStackTrace();
+                return ResponseEntity.internalServerError().build();
+            }
+    }
+
 
     }
 

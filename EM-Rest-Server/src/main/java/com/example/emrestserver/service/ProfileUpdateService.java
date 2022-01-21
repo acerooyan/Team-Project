@@ -27,6 +27,7 @@ public class ProfileUpdateService {
         return personDao.updatePersonWithPerson(person);
     }
 
+    @Transactional
     public Person buildPerson(PersonalInfoDomain personalInfoDomain,String email) throws ParseException {
         Person person = getPersonByEmail(email);
 
@@ -42,9 +43,7 @@ public class ProfileUpdateService {
         }
 
         //change dob
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-        Date date = (Date) formatter.parse(personalInfoDomain.getDob());
-        person.setDob(date);
+        person.setDob(Date.valueOf(personalInfoDomain.getDob()));
 
         //change gender
         person.setGender(personalInfoDomain.getGender());

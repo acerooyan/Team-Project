@@ -18,9 +18,11 @@ public class PersonDao {
 
     public Person getPersonByEmail(String email){
         Session session = getCurrentSession();
-        Query query = session.createQuery("FROM Person WHERE email = :email");
+        Query query = session.createQuery("FROM Person p WHERE p.email = :email");
         query.setParameter("email",email);
-        return (Person) query.getSingleResult();
+        Person person = (Person) query.getSingleResult();
+        //System.out.println(person.getContactList().size());
+        return person;
     }
 
     public Person updatePersonWithPerson(Person person){
