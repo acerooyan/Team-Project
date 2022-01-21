@@ -58,8 +58,8 @@ export class Step6Component implements OnInit {
       }
     });
   }
-  // changePage() {
-  //   this.router.redirect()
-  // }
+  changePage() {
+    this.router.navigate(["/regnav/step7"]);
+  }
 
 }

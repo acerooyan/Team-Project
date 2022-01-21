@@ -4,20 +4,24 @@
     <div class="mb-3">
       <label class="form-label">Do you have a driver license?</label>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="driverlicense" id="d" value="yes" required #havedl="ngModel" [(ngModel)]="carInfo.driverlicense">
+        <input class="form-check-input" type="radio" name="driverlicense" id="d" value="yes" required #havedl="ngModel" [(ngModel)]="haveDriverLicense">
         <label>
           Yes
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="driverlicense" id="d" value="no" required #havedl="ngModel"[(ngModel)]="carInfo.driverlicense">
+        <input class="form-check-input" type="radio" name="driverlicense2" id="d" value="no" required #havedl="ngModel"[(ngModel)]="haveDriverLicense">
         <label>
           No
         </label>
       </div>
       <div *ngIf="havedl.invalid && havedl.touched" class="text-danger">Selection is Required</div>
     </div>
-<div *ngIf="haveDriverLicense()">
+<div *ngIf="haveLicense()">
+  <div class="mb-3">
+    <label  class="form-label">Driver License(*)</label>
+    <input type="text" class="form-control" id="driverLicence_expirationDate" name="driverLicence_expirationDate" required #number = "ngModel" [(ngModel)]="carInfo.driverlicense" >
+    <div *ngIf="number.invalid && number.touched" class="text-danger">License number is Required</div> </div>
     <div class="mb-3">
       <label  class="form-label">Driver License Expiration Date(*)</label>
       <input type="date" class="form-control" id="driverLicence_expirationDate" name="driverLicence_expirationDate" required #expire = "ngModel" [(ngModel)]="carInfo.driverLicence_expirationDate" >

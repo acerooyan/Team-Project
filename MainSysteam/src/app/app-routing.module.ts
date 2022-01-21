@@ -13,6 +13,7 @@ import {Step3Component} from './register/step3/step3.component';
 import {Step4Component} from './register/step4/step4.component';
 import {Step5Component} from './register/step5/step5.component';
 import {Step6Component} from './register/step6/step6.component';
+import { Step7Component } from './register/step7/step7.component';
 import {RegisterComponent} from "./register/register.component";
 import {RegnavbarComponent} from "./register/regnavbar/regnavbar.component";
 import { FileuploadComponent } from './test/fileupload/fileupload.component';
@@ -33,7 +34,7 @@ const routes: Routes = [
     ]
   },
 
- 
+
   {
     path: 'regnav', component: RegnavbarComponent,
     children: [
@@ -42,12 +43,13 @@ const routes: Routes = [
       {path: 'step3', component: Step3Component},
       {path: 'step4', component: Step4Component},
       {path: 'step5', component: Step5Component},
-      {path: 'step6', component: Step6Component}
+      {path: 'step6', component: Step6Component},
+      {path: 'step7', component: Step7Component}
     ]
   },
 
   {path: 'upload', component:FileuploadComponent},
-  
+
 {path:'**', component:WildCardComponent}
 
 
