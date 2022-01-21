@@ -94,8 +94,12 @@ public class OnboardController {
 
             System.out.println(employee);
 
+            PersonalDocument personalDocument;
             // add personalDocument
-            PersonalDocument personalDocument =  personalDocumentService.buildDocument(fileName1,employee);
+            if(employee.getAvatar()!= null && !employee.getAvatar().equals("")){
+                 personalDocument =  personalDocumentService.buildDocument(fileName1,employee);
+            }
+
 
 
             // todo: add reference contact and emergency contact

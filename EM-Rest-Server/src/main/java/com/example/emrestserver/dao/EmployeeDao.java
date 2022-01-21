@@ -29,6 +29,6 @@ public class EmployeeDao {
         Query query = session.createQuery("FROM Employee e WHERE e.person.email = :email");
         query.setParameter("email",email);
         return (Employee) query.getSingleResult();
-
     }
+
 }
