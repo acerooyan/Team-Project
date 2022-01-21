@@ -1,9 +1,6 @@
 package com.example.emrestserver.dao;
 
-import com.example.emrestserver.entity.Address;
-import com.example.emrestserver.entity.Contact;
-import com.example.emrestserver.entity.Employee;
-import com.example.emrestserver.entity.PersonalDocument;
+import com.example.emrestserver.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -75,4 +72,10 @@ public class EmployeeDao {
         return personalDocuments;
     }
 
+    public ApplicationWorkFlow getOnboardApplicationWorkFlowById(Integer employeeId){
+        Session session = getCurrentSession();
+        Query getVisaStatus = session.createQuery("FROM ApplicationWorkFlow awf WHERE employee.id=:id AND type='onBoarding'");
+        getVisaStatus.setParameter("id", employeeId);
+        return (ApplicationWorkFlow)getVisaStatus.getSingleResult();
+    }
 }
