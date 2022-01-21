@@ -12,6 +12,7 @@ import { Address} from "../../entity/address";
   styleUrls: ['./step3.component.css']
 })
 export class Step3Component implements OnInit {
+
   contactInfo: ContactInfo = new ContactInfo();
   constructor(public registerService: RegisterService,  public router: Router) { }
 

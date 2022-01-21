@@ -34,7 +34,7 @@ const routes: Routes = [
     ]
   },
 
- 
+
   {
     path: 'regnav', component: RegnavbarComponent,
     children: [
@@ -50,7 +50,7 @@ const routes: Routes = [
 
   {path: 'step7', component: Step7Component},
   {path: 'upload', component:FileuploadComponent},
-  
+
 {path:'**', component:WildCardComponent}
 
 
