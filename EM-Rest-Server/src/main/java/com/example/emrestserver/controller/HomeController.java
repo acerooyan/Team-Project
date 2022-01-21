@@ -1,7 +1,9 @@
 package com.example.emrestserver.controller;
 
 import com.example.emrestserver.domains.combined.HrHomeDomain;
+import com.example.emrestserver.entity.Mail;
 import com.example.emrestserver.service.HrHomeService;
+import com.example.emrestserver.service.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,9 @@ public class HomeController {
 
     @Autowired
     HrHomeService hrHomeService;
+
+    @Autowired
+    EmailService emailService;
 
     @GetMapping("/hr/home")
     public ResponseEntity<List<HrHomeDomain>> hrHome() {
@@ -30,14 +35,15 @@ public class HomeController {
 
     }
 
-    @GetMapping("/employee/home")
-    public String employeeHome() {
-        try {
-            //add new person in database
-            return "success";
-        } catch (Exception e) {
-            return "error";
-        }
-
+    @GetMapping("/sendNotification")
+    public ResponseEntity<String> sendNotification(@RequestParam("email") String email){
+        Mail mail = new Mail();
+        mail.setMailTo(email);
+        mail.setContentType("text/html");
+        mail.setMailSubject("Document Notification");
+        mail.setMailContent("Your documents are going to expire, please submit it ASAP.");
+        emailService.sendEmail(mail);
+        return ResponseEntity.ok().build();
     }
 }
+
