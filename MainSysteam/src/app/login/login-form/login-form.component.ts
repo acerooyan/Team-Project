@@ -42,21 +42,21 @@ export class LoginFormComponent implements OnInit {
             else
             { 
 
-              //this.router.navigate(['Enav/profile'])
+              this.router.navigate(['Enav/profile'])
               //if empoly call 8080 controller -> {200 : homepage , }
-              this.personalInfoService.IsApproved().subscribe(
-                {
-                  next:data1 =>{
-                    console.log(data1);
-                    this.router.navigate(['Enav/profile'])
-                  },
+            //   this.personalInfoService.IsApproved().subscribe(
+            //     {
+            //       next:data1 =>{
+            //         console.log(data1);
+            //         this.router.navigate(['Enav/profile'])
+            //       },
 
-                  error: e1 =>{
-                    this.errorObject.code = e1.status;
-                    this.errorObject.message = e1.error;
-                  }
-                }
-              )
+            //       error: e1 =>{
+            //         this.errorObject.code = e1.status;
+            //         this.errorObject.message = e1.error;
+            //       }
+            //     }
+            //   )
                 
             }
                  

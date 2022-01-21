@@ -14,9 +14,13 @@
               <div class="col-6 col-sm-5"><h5>DOB</h5></div>
           
               <div class="w-100"></div>
-          
-              <div class="col-6 col-sm-5">Name</div>
-              <div class="col-6 col-sm-5">Dob</div>
+              
+              <div  *ngIf="!change_personalInfo"  class="col-6 col-sm-5">{{personalInfo.fullName}}</div>
+              <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.fullName' ></textarea></div> 
+
+              
+              <div  *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.Dob}}</div>
+              <div *ngIf="change_personalInfo"  class="col-6 col-sm-5"><textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.Dob'></textarea></div> 
             </div>
             <br>
            
@@ -27,8 +31,11 @@
                 
                 <div class="w-100"></div>
             
-                <div class="col-6 col-sm-5">Name</div>
-                <div class="col-6 col-sm-5">Dob</div>
+                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.Age}}</div>
+                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.Age' ></textarea></div> 
+
+                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.Gender}}</div>
+                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.Gender' ></textarea></div> 
             </div>
 
             <br>
@@ -39,7 +46,8 @@
                 
                 <div class="w-100"></div>
             
-                <div class="col-6 col-sm-5">Name</div>
+                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.SSN}}</div>
+                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.SSN' ></textarea></div> 
                 
             </div>
           </div>
@@ -47,70 +55,190 @@
           
       </div>
       <div class="card-footer">
-        <small class="text-muted"><button type="button" class="btn btn-info">Edit</button></small>
+        <small class="text-muted">
+          <button *ngIf="!change_personalInfo"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="change_personalInfo1()">Edit</button>
+          
+          <button *ngIf="change_personalInfo"  style= "background-color: salmon;  margin-left: 150px" type="button" class="btn btn-info" (click)="change_personalInfo1(); edit('personalInfo', personalInfo)">Save</button>
+        </small>
+       
       </div>
     </div>
 
 
     
 
-        <!-- address -->
+        <!-- address
+        
+        {
+    "addressLine1": "fontana",
+    "addressLine2": "J140",
+    "city": "XXX",
+    "state": "CA",
+    "zipcode": "9210"
+}
+        -->
     <div class="card">
    
       <div class="card-body">
         <h5 class="card-title"><i class="fa fa-address-book-o" style="font-size:36px"></i>   Address</h5> 
-        <div class="container">
-            <div class="row">
-              <div  class="col-6 col-sm-5">
-                <h5>AddressLine1</h5>
+        <div *ngFor="let add of Address">
+          <div *ngIf="!change_Address" >
+                
+            <div class="container">
+              <div class="row">
+                <div  class="col-6 col-sm-5">
+                  <h5>AddressLine1</h5>
+                </div>
+                <div class="col-6 col-sm-5"><h5>AddressLine2</h5></div>
+            
+                <div class="w-100"></div>
+               
+  
+                
+                <div   class="col-6 col-sm-5">{{add.addressLine1}}</div>
+               
+  
+            
+                <div  class="col-6 col-sm-5">{{add.addressLine2}}</div>
+               
               </div>
-              <div class="col-6 col-sm-5"><h5>AddressLine2</h5></div>
-          
-              <div class="w-100"></div>
-          
-              <div class="col-6 col-sm-5">Name</div>
-              <div class="col-6 col-sm-5">Dob</div>
-            </div>
-            <br>
-           
-            <div class="row">
-                <div  class="col-6 col-sm-5"><h5>City</h5></div>
-                <div class="col-6 col-sm-5"><h5>State</h5></div>
-            
-                
-                <div class="w-100"></div>
-            
-                <div class="col-6 col-sm-5">Name</div>
-                <div class="col-6 col-sm-5">Dob</div>
-            </div>
+              <br>
+             
+              <div class="row">
+                  <div  class="col-6 col-sm-5"><h5>City</h5></div>
+                  <div class="col-6 col-sm-5"><h5>State</h5></div>
+              
+                  
+                  <div class="w-100"></div>
+              
+                  <div class="col-6 col-sm-5">{{add.city}}</div>
+                  <div class="col-6 col-sm-5">{{add.state}}</div>
+              </div>
+  
+              <br>
+              <div class="row">
+                  <div  class="col-6 col-sm-5"><h5>Zipcode</h5></div>
+                  
+              
+                  
+                  <div class="w-100"></div>
+              
+                  <div class="col-6 col-sm-5">{{add.zipcode}}</div>
+                  
+              </div>
+            </div> 
 
-            <br>
-            <div class="row">
-                <div  class="col-6 col-sm-5"><h5>Zipcode</h5></div>
-                
-            
-                
-                <div class="w-100"></div>
-            
-                <div class="col-6 col-sm-5">Name</div>
-                
-            </div>
           </div>
+
+
+
+
+          <div *ngIf="change_Address" >
+                
+            <div class="container">
+              <div class="row">
+                <div  class="col-6 col-sm-5">
+                  <h5>AddressLine1</h5>
+                </div>
+                <div class="col-6 col-sm-5"><h5>AddressLine2</h5></div>
+            
+                <div class="w-100"></div>
+               
+  
+                
+                
+                <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'add.addressLine1' ></textarea></div>  
+  
+            
+                <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'add.addressLine2' ></textarea></div>  
+              </div>
+              <br>
+             
+              <div class="row">
+                  <div  class="col-6 col-sm-5"><h5>City</h5></div>
+                  <div class="col-6 col-sm-5"><h5>State</h5></div>
+              
+                  
+                  <div class="w-100"></div>
+
+                  <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'add.city' ></textarea></div>  
+                  <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'add.state' ></textarea></div>
+                  
+              </div>
+  
+              <br>
+              <div class="row">
+                  <div  class="col-6 col-sm-5"><h5>Zipcode</h5></div>
+                  
+              
+                  
+                  <div class="w-100"></div>
+                  <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'add.zipcode' ></textarea></div>
+                  
+                  
+              </div>
+            </div> 
+
+          </div>
+
+
+          
+
+          </div>
+       
+        
       </div>
       <div class="card-footer">
-        <small class="text-muted"><button type="button" class="btn btn-info">Edit</button></small>
+        <button *ngIf="!change_Address"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="change_Address1()">Edit</button>
+          
+        <button *ngIf="change_Address"  style= "background-color: salmon;  margin-left: 150px" type="button" class="btn btn-info" (click)="change_Address1(); edit('address', Address)">Save</button>
       </div>
     </div>
 
 
 
-    <!-- address -->
+    <!--Contact Info -->
 
     <div class="card">
      
       <div class="card-body">
         <h5 class="card-title"><i class="fa fa-volume-control-phone" style="font-size:36px"></i>  Contact Info</h5>
-        <div class="container">
+
+        <div *ngIf="change_ConatctInfo">
+          <div class="container">
+            <div class="row">
+              <div  class="col-6 col-sm-5">
+                <h5>cellPhone</h5>
+              </div>
+              <div class="col-6 col-sm-5"><h5>Alternate Phone</h5></div>
+          
+              <div class="w-100"></div>
+              <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'ConatctInfo.cellPhone' ></textarea></div>
+              <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'ConatctInfo.Alternatephone' ></textarea></div>
+              
+            </div>
+            <br>
+           
+            <div class="row">
+                <div  class="col-6 col-sm-5"><h5>Email</h5></div>
+            
+            
+                
+                <div class="w-100"></div>
+
+                <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'ConatctInfo.email' ></textarea></div>
+               
+                
+            </div>
+
+            <br>
+            
+          </div>
+        </div>
+
+
+        <div *ngIf="!change_ConatctInfo">
+          <div class="container">
             <div class="row">
               <div  class="col-6 col-sm-5">
                 <h5>cellPhone</h5>
@@ -119,8 +247,8 @@
           
               <div class="w-100"></div>
           
-              <div class="col-6 col-sm-5">Name</div>
-              <div class="col-6 col-sm-5">Dob</div>
+              <div class="col-6 col-sm-5">{{ConatctInfo.cellPhone}}</div>
+              <div class="col-6 col-sm-5">{{ConatctInfo.Alternatephone}}</div>
             </div>
             <br>
            
@@ -131,16 +259,21 @@
                 
                 <div class="w-100"></div>
             
-                <div class="col-6 col-sm-5">Email</div>
+                <div class="col-6 col-sm-5">{{ConatctInfo.email}}</div>
                 
             </div>
 
             <br>
             
           </div>
+        </div>
+        
       </div>
       <div class="card-footer">
-        <small class="text-muted"><button type="button" class="btn btn-info">Edit</button></small>
+        
+        <button *ngIf="!change_ConatctInfo"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="change_ConatctInfo1()">Edit</button>
+          
+        <button *ngIf="change_ConatctInfo"  style= "background-color: salmon;  margin-left: 150px" type="button" class="btn btn-info" (click)="change_ConatctInfo1(); edit('contactInfo', ConatctInfo)">Save</button>
       </div>
     </div>
   </div>
@@ -163,7 +296,7 @@
               <div class="w-100"></div>
           
               
-              <div class="col-6 col-sm-5">Dob</div>
+              <div class="col-6 col-sm-5">{{employee.workAuthorization}}</div>
             </div>
             <br>
            
@@ -174,25 +307,25 @@
                 
                 <div class="w-100"></div>
             
-                <div class="col-6 col-sm-5">Name</div>
-                <div class="col-6 col-sm-5">Dob</div>
+                <div class="col-6 col-sm-5">{{employee.workAuthorizationSD}}</div>
+                <div class="col-6 col-sm-5">{{employee.workAuthorizationED}}</div>
             </div>
 
             <br>
             <div class="row">
-                <div  class="col-6 col-sm-5"><h5>SSN</h5></div>
+                <div  class="col-6 col-sm-5"><h5>Title</h5></div>
                 
             
                 
                 <div class="w-100"></div>
             
-                <div class="col-6 col-sm-5">Name</div>
+                <div class="col-6 col-sm-5">{{employee.title}}</div>
                 
             </div>
           </div>
       </div>
       <div class="card-footer">
-        <small class="text-muted"><button type="button" class="btn btn-info">Edit</button></small>
+        <small class="text-muted"><button type="button" class="btn btn-info" (click)="edit('employment', employee)">Edit</button></small>
       </div>
     </div>
     <div class="card">
@@ -210,8 +343,8 @@
           
               <div class="w-100"></div>
           
-              <div class="col-6 col-sm-5">Name</div>
-              <div class="col-6 col-sm-5">Dob</div>
+              <div class="col-6 col-sm-5">{{EmergencyContact.fullName}}</div>
+              <div class="col-6 col-sm-5">{{EmergencyContact.RelationShip}}</div>
             </div>
             <br>
            
@@ -222,25 +355,16 @@
                 
                 <div class="w-100"></div>
             
-                <div class="col-6 col-sm-5">Name</div>
-                <div class="col-6 col-sm-5">Dob</div>
+                <div class="col-6 col-sm-5">{{EmergencyContact.Cellphone}}</div>
+                <div class="col-6 col-sm-5">{{EmergencyContact.email}}</div>
             </div>
 
             <br>
-            <div class="row">
-                <div  class="col-6 col-sm-5"><h5>SSN</h5></div>
-                
             
-                
-                <div class="w-100"></div>
-            
-                <div class="col-6 col-sm-5">Name</div>
-                
-            </div>
           </div>
       </div>
       <div class="card-footer">
-        <small class="text-muted"><button type="button" class="btn btn-info">Edit</button></small>
+        <small class="text-muted"><button type="button" class="btn btn-info" (click)="edit('emergencyContact', EmergencyContact)">Edit</button></small>
       </div>
     </div>
     <div class="card">

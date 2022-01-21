@@ -6,8 +6,8 @@ import { Observable, Observer } from 'rxjs';
 })
 export class PersonalInfoService {
 
-  private mainhrhome= "api//jwt/hr/home";
-
+  private mainhrhome= "/api/jwt/profile";
+  private editBase = "/api/jwt/em/profile/"
 
   // private test= "api//test4";
   constructor(private httpClient: HttpClient) { }
@@ -28,12 +28,12 @@ export class PersonalInfoService {
   } 
 
 
-  EditInfo(info:any):Observable<any>{
-
+  EditInfo(url:string, info:any):Observable<any>{
+    
     const body = {
       data:info
     };
-    return this.httpClient.put(this.mainhrhome, body, {
+    return this.httpClient.put(this.editBase+ url, body, {
       responseType: 'text',
      
       
