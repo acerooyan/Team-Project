@@ -54,8 +54,7 @@ public class TestController {
         System.out.println(utilService.getEmployeeByEmail("jamesh970327@gmail.com"));
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-        Claims claims = JwtUtil.getClaimsFromJwt(token);
-        String email = claims.get("email").toString();
+        String email = JwtUtil.getSubjectFromJwt(token);
         System.out.println(email);
 
         return ResponseEntity.ok().build();
