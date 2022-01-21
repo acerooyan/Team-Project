@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
             for (UserRole userRole : user.getUserRoleList()) {
                 roleNames.add(userRole.getRole().getRoleName());
             }
-            userDomain = UserDomain.builder().userName(user.getUserName()).role(roleNames).id(user.getID()).email(user.getEmail()).build();
+            userDomain = UserDomain.builder().userName(user.getUserName()).role(roleNames.get(0)).id(user.getID()).email(user.getEmail()).build();
             res.add(userDomain);
         } catch (NullPointerException e) {
             e.printStackTrace();
