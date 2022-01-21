@@ -35,10 +35,10 @@ public class OnboardController {
 
      */
     @PostMapping("/register/test")
-    public ResponseEntity<Object> register(@RequestPart("model") String testDomainString,
-                                           @RequestPart("Avatar")MultipartFile file1,
-                                           @RequestPart("Driver")MultipartFile file2,
-                                           @RequestPart("Work")MultipartFile file3
+    public ResponseEntity<Object> register(@RequestPart(value = "model") String testDomainString,
+                                           @RequestPart(value = "Avatar", required = false)MultipartFile file1,
+                                           @RequestPart(value = "Driver", required = false)MultipartFile file2,
+                                           @RequestPart(value = "Work", required = false)MultipartFile file3
 //
 //                                           @RequestPart("addressList") String addressList
     ) throws JsonProcessingException {

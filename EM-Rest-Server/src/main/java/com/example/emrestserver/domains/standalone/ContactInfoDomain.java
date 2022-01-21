@@ -1,5 +1,6 @@
 package com.example.emrestserver.domains.standalone;
 import com.example.emrestserver.domains.standalone.AddressDomain;
+import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
 import java.util.List;
@@ -10,11 +11,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContactInfoDomain {
+    @SerializedName("cellphone")
     private String cellPhone;
     private String alternatePhone;
     private String email;
 
-    //List<AddressDomain> addressDaoList;
+    @SerializedName("addressDaoList")
     AddressDomain[] addressDomains;
 
 }

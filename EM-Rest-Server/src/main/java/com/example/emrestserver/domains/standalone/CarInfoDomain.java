@@ -1,5 +1,6 @@
 package com.example.emrestserver.domains.standalone;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,10 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarInfoDomain {
-
+    @SerializedName("driverlicense")
     private String driverLicence;
     private String driverLicence_expirationDate;
-//    private MultipartFile driverLicenceFile;
+
     private String make;
     private String model;
     private String color;
