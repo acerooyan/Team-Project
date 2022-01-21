@@ -1,5 +1,6 @@
 package com.example.emrestserver.domains.profile;
 
+import com.example.emrestserver.domains.standalone.AddressDomain;
 import lombok.*;
 
 @Data
@@ -8,10 +9,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProfileDomain {
-//    PersonalInfoDomain personalInfoDomain;
-//    AddressDomain[] addressDomains;
-//    EmploymentDomain employmentDomain;
-//    EmergencyContactDomain emergencyContactDomain;
-//    ContactInforDomain contactInforDomain;
-//    DocumentDomain documentDomain;
+    PersonalInfoDomain personalInfoDomain;
+    AddressDomain[] addressDomains;
+    EmploymentDomain employmentDomain;
+    EmergencyContactDomain emergencyContactDomain;
+    ContactInfoDomain contactInfoDomain;
+    DocumentDomain documentDomain;
 }
