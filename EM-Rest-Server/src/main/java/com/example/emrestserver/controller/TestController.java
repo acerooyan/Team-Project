@@ -1,14 +1,21 @@
 package com.example.emrestserver.controller;
 
 
+import com.example.emrestserver.constant.JwtConstant;
 import com.example.emrestserver.domains.TestDomain;
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.Person;
+import com.example.emrestserver.security.util.CookieUtil;
+import com.example.emrestserver.security.util.JwtUtil;
 import com.example.emrestserver.service.UtilService;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class TestController {
@@ -42,8 +49,14 @@ public class TestController {
     }
 
     @GetMapping("/test4")
-    public ResponseEntity<Employee> test4(){
-        System.out.println(utilService.getEmployeeByEmail("jamesh970327@gmail.com"));;
+    public ResponseEntity<Employee> test4(ServletRequest servletRequest){
+
+        System.out.println(utilService.getEmployeeByEmail("jamesh970327@gmail.com"));
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+        String email = JwtUtil.getSubjectFromJwt(token);
+        System.out.println(email);
+
         return ResponseEntity.ok().build();
     }
 

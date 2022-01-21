@@ -1,6 +1,8 @@
 package com.example.emrestserver.controller;
 
+import com.example.emrestserver.domains.profile.PersonalInfoDomain;
 import com.example.emrestserver.domains.profile.ProfileDomain;
+import com.google.gson.Gson;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,17 +26,29 @@ public class ProfileController {
         }
     }
 
-    @PutMapping("/em/profile/personalInfo")
-    public ResponseEntity<Object> personalInfo() {
+    @PutMapping("/em/profile/personalInfo/{email}")
+    public ResponseEntity<Object> personalInfo(@RequestPart(value = "model") String model,@PathVariable String email) {
 
-        try{
-            //get application list from database
-            //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
-            return ResponseEntity.ok().build();
-        }catch (Exception e){
-            System.out.println("error catch");
-            return ResponseEntity.internalServerError().build();
+
+
+        if ( model == null || email == null) {
+            System.out.println("not found");
+            return ResponseEntity.unprocessableEntity().build();
+        } else {
+            try{
+                Gson g = new Gson();
+                PersonalInfoDomain personalInfoDomain = g.fromJson(model,PersonalInfoDomain.class);
+                //call update service
+                //get application list from database
+                //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
+                return ResponseEntity.ok().build();
+            }catch (Exception e){
+                System.out.println("error catch");
+                return ResponseEntity.internalServerError().build();
+            }
         }
+
+
     }
 
     @PutMapping("/em/profile/address")
