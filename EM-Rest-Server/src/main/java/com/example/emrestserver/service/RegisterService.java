@@ -27,9 +27,10 @@ public class RegisterService {
         /* order:
         * 1. Person(who is employee)
         * 2. Addresses
-        * 3. person(who is/are contact)
-        * 4. visaStatus(no employeeId needed)
-        * 5. Employee (get personal ID and Visastatus Id house set to null)
+        *
+        * 3. visaStatus(no employeeId needed)
+        * 4. Employee (get personal ID and Visastatus Id house set to null)
+        * 5. person(who is/are contact)
         * 6. PersonalDocument (employeeId needed)
         * */
     }
@@ -159,10 +160,14 @@ public class RegisterService {
         if (!car.equals("")){
             employee.setCar(car);
         }
-        // visa status start date
-        employee.setVisaStartDate(Date.valueOf(residentialStatusDomain.getStartDate()));
-        //visa status end date
-        employee.setVisaEndDate(Date.valueOf(residentialStatusDomain.getExpirationDate()));
+
+        if(!residentialStatusDomain.getIsCitizenOrResident().equalsIgnoreCase("yes")){
+            // visa status start date
+            employee.setVisaStartDate(Date.valueOf(residentialStatusDomain.getStartDate()));
+            //visa status end date
+            employee.setVisaEndDate(Date.valueOf(residentialStatusDomain.getExpirationDate()));
+        }
+
         // avatar
         if(!avatarName.equals("")){
             employee.setAvatar(avatarName);
