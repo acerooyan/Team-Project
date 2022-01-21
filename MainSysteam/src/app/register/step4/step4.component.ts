@@ -17,22 +17,21 @@ export class Step4Component implements OnInit {
   }
   ngOnInit(): void {
   }
-  haveDriverLicense() {
-    if (this.carInfo.driverlicense == "yes") {
+  haveDriverLicense! : String;
+  haveLicense() {
+    if (this.haveDriverLicense == "yes") {
       return true;
     } else {
       return false;
     }
   }
   carInfoRegister(){
-   
     console.log(this.registerService.getBasicInfo());
     console.log(this.registerService.getContactInfo());
     console.log(this.carInfo);
   }
 
   selectFile(event: any): void {
-    
     this.selectedFiles = event.target.files;
   }
 

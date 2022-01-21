@@ -11,7 +11,7 @@ export class VerifyUserService {
 
 
    private sso = "auth/login";
-   private mainhrhome= "api/hr/home";
+   private mainhrhome= "api//jwt/hr/home";
 
   
   constructor(private http: HttpClient) { }

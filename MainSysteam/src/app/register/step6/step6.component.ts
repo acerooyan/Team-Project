@@ -35,6 +35,7 @@ export class Step6Component implements OnInit {
   {
     this.registerService.sumbitAll().subscribe({
       next: (event: any) => {
+        console.log("here1");
         this.router.navigate(['step7']);
         console.log(event);
         // if (event.type === HttpEventType.UploadProgress) {
@@ -46,6 +47,7 @@ export class Step6Component implements OnInit {
         // }
       },
       error: (err: any) => {
+        console.log("here");
         console.log(err);
         // this.progress = 0;
 
@@ -59,5 +61,6 @@ export class Step6Component implements OnInit {
       }
     });
   }
+
 
 }

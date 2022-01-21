@@ -118,7 +118,7 @@ export class RegisterService {
     
    
 
-    const req = new HttpRequest('POST', `${this.MainSever}/em/register/test`, formData, {
+    const req = new HttpRequest('POST', `${this.MainSever}/register/test`, formData, {
       reportProgress: true,
       responseType: 'json'
     });
