@@ -33,6 +33,9 @@ public class LoginController {
         if (userDomain != null && userDomain.getUserName() != null && userDomain.getPassword() != null) {
             List<UserDomain> userDomainList = userService.checkLogin(userDomain);
             if (userDomainList != null && userDomainList.size() > 0) {
+                if(userDomain.getRole().equals("HR")){
+                    if(!userDomainList.get(0).getRole().equals(userDomain.getRole()))return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You don't have this role!");
+                }
                 String jwt = JwtUtil.generateToken(userDomain.getEmail(), JwtConstant.JWT_VALID_DURATION, userDomainList.get(0).getRole(), userDomainList.get(0).getId());
                 CookieUtil.create(res, JwtConstant.JWT_COOKIE_NAME, jwt, false, -1, "localhost");
                 return ResponseEntity.ok().build();
