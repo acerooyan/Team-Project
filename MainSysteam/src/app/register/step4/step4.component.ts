@@ -26,14 +26,12 @@ export class Step4Component implements OnInit {
     }
   }
   carInfoRegister(){
-
     console.log(this.registerService.getBasicInfo());
     console.log(this.registerService.getContactInfo());
     console.log(this.carInfo);
   }
 
   selectFile(event: any): void {
-
     this.selectedFiles = event.target.files;
   }
 
