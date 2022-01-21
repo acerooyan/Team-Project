@@ -12,7 +12,6 @@ public class StatusController {
         try{
             String status = null;
             //todo: get status from applicationworkflow
-            
             if(status != null && status.equals("complete")){
                 return ResponseEntity.ok().build();
             }else{

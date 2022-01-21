@@ -1,8 +1,8 @@
 package com.example.emrestserver.controller;
 
 import com.example.emrestserver.constant.JwtConstant;
-import com.example.emrestserver.domains.profile.PersonalInfoDomain;
-import com.example.emrestserver.domains.profile.ProfileDomain;
+import com.example.emrestserver.domains.profile.*;
+import com.example.emrestserver.domains.standalone.AddressDomain;
 import com.example.emrestserver.security.util.CookieUtil;
 import com.example.emrestserver.security.util.JwtUtil;
 import com.example.emrestserver.service.EmployeeService1;
@@ -39,21 +39,23 @@ public class ProfileController {
         }
     }
 
-    @PutMapping("/em/profile/personalInfo/{email}")
-    public ResponseEntity<Object> personalInfo(@RequestPart(value = "model") String model,@PathVariable String email) {
-
-
+    @PutMapping("/em/profile/personalInfo")
+    public ResponseEntity<Object> personalInfo(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
+//        HttpServletRequest req = (HttpServletRequest) servletRequest;
+//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+//        String email = JwtUtil.getSubjectFromJwt(token);
+        String email = "jamesh970327@gmail.com";
 
         if ( model == null || email == null) {
             System.out.println("not found");
-            return ResponseEntity.unprocessableEntity().build();
+            return ResponseEntity.status(666).build();
         } else {
             try{
                 Gson g = new Gson();
                 PersonalInfoDomain personalInfoDomain = g.fromJson(model,PersonalInfoDomain.class);
-                //call update service
-                //get application list from database
-                //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
+
+                //todo: update DB with received personalInfo domain
+
                 return ResponseEntity.ok().build();
             }catch (Exception e){
                 System.out.println("error catch");
@@ -65,54 +67,102 @@ public class ProfileController {
     }
 
     @PutMapping("/em/profile/address")
-    public ResponseEntity<Object> address() {
+    public ResponseEntity<Object> address(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
+//        HttpServletRequest req = (HttpServletRequest) servletRequest;
+//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+//        String email = JwtUtil.getSubjectFromJwt(token);
+        String email = "jamesh970327@gmail.com";
 
-        try{
-            //get application list from database
-            //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
-            return ResponseEntity.ok().build();
-        }catch (Exception e){
-            System.out.println("error catch");
-            return ResponseEntity.internalServerError().build();
+        if ( model == null || email == null) {
+            System.out.println("not found");
+            return ResponseEntity.status(666).build();
+        } else {
+            try{
+                Gson g = new Gson();
+
+                //warning check correctness of following line
+                AddressDomain[] addressDomains = g.fromJson(model,AddressDomain[].class);
+                //todo: update DB with received personalInfo domain
+
+                return ResponseEntity.ok().build();
+            }catch (Exception e){
+                System.out.println("error catch");
+                return ResponseEntity.internalServerError().build();
+            }
         }
     }
 
     @PutMapping("/em/profile/contactInfo")
-    public ResponseEntity<Object> contactInfo() {
+    public ResponseEntity<Object> contactInfo(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
+//        HttpServletRequest req = (HttpServletRequest) servletRequest;
+//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+//        String email = JwtUtil.getSubjectFromJwt(token);
+        String email = "jamesh970327@gmail.com";
 
-        try{
-            //get application list from database
-            //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
-            return ResponseEntity.ok().build();
-        }catch (Exception e){
-            System.out.println("error catch");
-            return ResponseEntity.internalServerError().build();
+        if ( model == null || email == null) {
+            System.out.println("not found");
+            return ResponseEntity.status(666).build();
+        } else {
+            try{
+                Gson g = new Gson();
+                ContactInfoDomain contactInfoDomain = g.fromJson(model,ContactInfoDomain.class);
+                //todo: update DB with received contactInfo domain
+
+                return ResponseEntity.ok().build();
+            }catch (Exception e){
+                System.out.println("error catch");
+                return ResponseEntity.internalServerError().build();
+            }
         }
     }
 
     @PutMapping("/em/profile/employment")
-    public ResponseEntity<Object> employment() {
+    public ResponseEntity<Object> employment(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
+//        HttpServletRequest req = (HttpServletRequest) servletRequest;
+//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+//        String email = JwtUtil.getSubjectFromJwt(token);
+        String email = "jamesh970327@gmail.com";
 
-        try{
-            //get application list from database
-            //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
-            return ResponseEntity.ok().build();
-        }catch (Exception e){
-            System.out.println("error catch");
-            return ResponseEntity.internalServerError().build();
+        if ( model == null || email == null) {
+            System.out.println("not found");
+            return ResponseEntity.status(666).build();
+        } else {
+            try{
+                Gson g = new Gson();
+                EmploymentDomain employmentDomain = g.fromJson(model,EmploymentDomain.class);
+
+                //todo: update DB with received EmploymentDomain
+
+                return ResponseEntity.ok().build();
+            }catch (Exception e){
+                System.out.println("error catch");
+                return ResponseEntity.internalServerError().build();
+            }
         }
     }
 
     @PutMapping("/em/profile/emergencyContact")
-    public ResponseEntity<Object> emergencyContact() {
+    public ResponseEntity<Object> emergencyContact(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
+//        HttpServletRequest req = (HttpServletRequest) servletRequest;
+//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+//        String email = JwtUtil.getSubjectFromJwt(token);
+        String email = "jamesh970327@gmail.com";
 
-        try{
-            //get application list from database
-            //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
-            return ResponseEntity.ok().build();
-        }catch (Exception e){
-            System.out.println("error catch");
-            return ResponseEntity.internalServerError().build();
+        if ( model == null || email == null) {
+            System.out.println("not found");
+            return ResponseEntity.status(666).build();
+        } else {
+            try{
+                Gson g = new Gson();
+                EmergencyContactDomain emergencyContactDomain = g.fromJson(model,EmergencyContactDomain.class);
+
+                //todo: update DB with received EmergencyContactDomain
+
+                return ResponseEntity.ok().build();
+            }catch (Exception e){
+                System.out.println("error catch");
+                return ResponseEntity.internalServerError().build();
+            }
         }
     }
 
