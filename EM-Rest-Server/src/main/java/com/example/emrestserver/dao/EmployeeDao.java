@@ -18,7 +18,16 @@ public class EmployeeDao {
     public Employee getEmployeeById(Integer id){
         Session session = getCurrentSession();
 
-        Query query = session.createQuery("FROM Employee WHERE id ="+ id);
+        Query query = session.createQuery("FROM Employee E WHERE id ="+ id);
+        return (Employee) query.getSingleResult();
+
+    }
+
+    public Employee getEmployeeByEmail(String email){
+        Session session = getCurrentSession();
+
+        Query query = session.createQuery("FROM Employee e WHERE e.person.email = :email");
+        query.setParameter("email",email);
         return (Employee) query.getSingleResult();
 
     }

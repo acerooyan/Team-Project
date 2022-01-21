@@ -15,4 +15,9 @@ public class UtilService {
     public Employee getEmployeeById(Integer id){
         return employeeDao.getEmployeeById(id);
     }
+
+    @Transactional
+    public Employee getEmployeeByEmail(String email){
+        return employeeDao.getEmployeeByEmail(email);
+    }
 }

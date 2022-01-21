@@ -2,14 +2,19 @@ package com.example.emrestserver.controller;
 
 
 import com.example.emrestserver.domains.TestDomain;
+import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.Person;
+import com.example.emrestserver.service.UtilService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/jwt")
 public class TestController {
+
+    @Autowired
+    private UtilService utilService;
 
     @GetMapping("/test")
     public String test1(){
@@ -34,6 +39,12 @@ public class TestController {
             System.out.println(testDomain.getPerson());
             return ResponseEntity.ok().body(testDomain);
         }
+    }
+
+    @GetMapping("/test4")
+    public ResponseEntity<Employee> test4(){
+        System.out.println(utilService.getEmployeeByEmail("jamesh970327@gmail.com"));;
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/upload")
