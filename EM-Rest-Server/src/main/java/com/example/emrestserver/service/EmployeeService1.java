@@ -2,10 +2,7 @@ package com.example.emrestserver.service;
 
 import com.example.emrestserver.dao.EmployeeDao;
 import com.example.emrestserver.dao.EmployeeDao2;
-import com.example.emrestserver.domains.profile.EmergencyContactDomain;
-import com.example.emrestserver.domains.profile.EmploymentDomain;
-import com.example.emrestserver.domains.profile.PersonalInfoDomain;
-import com.example.emrestserver.domains.profile.ProfileDomain;
+import com.example.emrestserver.domains.profile.*;
 import com.example.emrestserver.domains.standalone.AddressDomain;
 import com.example.emrestserver.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +61,7 @@ public class EmployeeService1 {
                 .builder().dob(person.getDob().toString()).ssn(person.getSsn())
                 .age(age).gender(person.getGender()).build();
         StringBuilder sb = new StringBuilder();
-        // full name
+
         sb.append(person.getFirstname());
         sb.append(" ");
         if(person.getMiddleName()!= null){
@@ -77,10 +74,19 @@ public class EmployeeService1 {
         //EmployeeDomain ready
         EmploymentDomain employmentDomain = EmploymentDomain.builder()
                 .workAuthorization(employee.getVisaStatus().getVisaType())
-                .workAuthorizationStartDate(employee.getStartDate().toString())
-                .workAuthorizationEndDate(employee.getEndDate().toString())
+//                .workAuthorizationStartDate(employee.getStartDate().toString())
+//                .workAuthorizationEndDate(employee.getEndDate().toString())
                 .title(employee.getTitle())
                 .build();
+
+        if(employee.getVisaStatus().getVisaType().equalsIgnoreCase("greenCard")||
+                employee.getVisaStatus().getVisaType().equalsIgnoreCase("citizen")){
+            employmentDomain.setWorkAuthorizationStartDate("");
+            employmentDomain.setWorkAuthorizationEndDate("");
+        }else{
+            employmentDomain.setWorkAuthorizationStartDate(employee.getStartDate().toString());
+            employmentDomain.setWorkAuthorizationEndDate(employee.getEndDate().toString());
+        }
 
         Address[] addresses = getAddressByPersonId(person.getId());
 
@@ -92,10 +98,50 @@ public class EmployeeService1 {
 
         //EmergencyContactDomain ready
         Contact contact = employeeDao.getEmergencyByEmployeeId(employee.getId());
-//        EmergencyContactDomain emergencyContactDomain =
+        Person contactPerson = contact.getPerson();
+        StringBuilder sb1 = new StringBuilder();
+        sb1.append(contactPerson.getFirstname());
+        sb1.append(" ");
+        if(contactPerson.getMiddleName()!= null){
+            sb1.append(contactPerson.getMiddleName());
+            sb1.append(" ");
+        }
+        sb1.append(contactPerson.getLastname());
+        String contactFullName = sb1.toString();
+        EmergencyContactDomain emergencyContactDomain = EmergencyContactDomain.builder()
+                .fullName(contactFullName)
+                .relationship(contact.getRelationShip())
+                .cellPhone(contactPerson.getCellPhone())
+                .email(contactPerson.getEmail())
+                .build();
 
 
+        // contactInfo ready
+        ContactInfoDomain contactInfoDomain = ContactInfoDomain.builder()
+                .cellPhone(person.getCellPhone())
+                .alternatePhone(person.getAlternatePhone())
+                .email(person.getEmail())
+                .build();
 
 
+        PersonalDocument[] personalDocuments = getDocumentByEmployeeId(employee.getId());
+        String[] documentArr = new String[personalDocuments.length];
+        for(int i  = 0; i < documentArr.length; i++){
+            documentArr[i] = personalDocuments[i].getPath();
+        }
+        DocumentDomain documentDomain = DocumentDomain.builder()
+                .fileName(documentArr).build();
+
+        // finally, create profile Domain
+        ProfileDomain profileDomain = ProfileDomain.builder()
+                .personalInfoDomain(personalInfoDomain)
+                .addressDomains(addressDomains)
+                .employmentDomain(employmentDomain)
+                .emergencyContactDomain(emergencyContactDomain)
+                .contactInfoDomain(contactInfoDomain)
+                .documentDomain(documentDomain)
+                .build();
+        System.out.println(profileDomain);
+        return profileDomain;
     }
 }
