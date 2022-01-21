@@ -13,7 +13,7 @@ export class Step4Component implements OnInit {
   constructor(public registerService: RegisterService,  public router: Router) { }
   saveCarInfo() {
     this.registerService.setCarInfo(this.carInfo);
-    this.registerService.setDriver(this.selectFile);
+    this.registerService.setDriver(this.selectedFiles);
   }
   ngOnInit(): void {
   }
@@ -26,14 +26,12 @@ export class Step4Component implements OnInit {
     }
   }
   carInfoRegister(){
-
     console.log(this.registerService.getBasicInfo());
     console.log(this.registerService.getContactInfo());
     console.log(this.carInfo);
   }
 
   selectFile(event: any): void {
-
     this.selectedFiles = event.target.files;
   }
 

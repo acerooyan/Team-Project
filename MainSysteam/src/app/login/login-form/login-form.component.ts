@@ -30,11 +30,23 @@ export class LoginFormComponent implements OnInit {
 
   verify(){
    
-    this.service.verify(this.nameControl.value, this.PasswordControl.value).subscribe(
+    this.service.verify(this.nameControl.value, this.PasswordControl.value, this.loginAsHr).subscribe(
       {
         next: data => {
             console.log(data);
-            this.router.navigate(['nav/hr'])
+            if(this.loginAsHr)
+            {
+              // go hr home 
+              this.router.navigate(['nav/hr']);
+            }
+            else
+            {
+                 //if empoly call 8080 controller -> {200 : homepage , }
+              // go employee home
+            }
+         
+
+            
         },
         error: e => {
             
@@ -49,29 +61,5 @@ export class LoginFormComponent implements OnInit {
   }
 
 
-  
-  // verify(){
-    
-  //   this.service.verify(this.nameControl.value, this.PasswordControl.value).subscribe(
-  //     (data:any) =>{
-  //       this.cookie.set("1","12323232");
-  //       console.log('no error')
-  //       console.log(data);
-        
-        
-  //     },
-  //     (error) =>{
-  //       console.log('error')
-  //       console.log(error);
-  //     }
-
-  //   );
-     
-
-    
-  // }
-
-  // RedirectTohome(){
-  //   this.router.navigate(['nav']);
-  // }
+ 
 }

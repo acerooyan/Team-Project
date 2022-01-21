@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
 @Component({
   selector: 'app-step7',
   templateUrl: './step7.component.html',
@@ -7,7 +6,7 @@ import {Router} from "@angular/router";
 })
 export class Step7Component implements OnInit {
 
-  constructor(public router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

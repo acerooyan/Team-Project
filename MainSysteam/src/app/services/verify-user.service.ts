@@ -11,17 +11,20 @@ export class VerifyUserService {
 
 
    private sso = "auth/login";
-   private mainhrhome= "api/hr/home";
+   private mainhrhome= "api//jwt/hr/home";
 
   
   constructor(private http: HttpClient) { }
 
 
-  verify(email: string, psw: string):Observable<any>
+  verify(email: string, psw: string, loginAsHr: boolean):Observable<any>
   {
+    var r = loginAsHr ? "HR": "employee"
     
     const body = {userName:email, 
-      password: psw};
+      password: psw, 
+      role: [r]
+    };
 
 
 
