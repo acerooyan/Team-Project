@@ -83,6 +83,17 @@ public class RegisterDao {
         return getContactById(contactId);
     }
 
+    public ApplicationWorkFlow getApplicationById(Integer id){
+        Session session = getCurrentSession();
+        Query findApplication = session.createQuery("FROM ApplicationWorkFlow WHERE id=:id");
+        findApplication.setParameter("id", id);
+        return (ApplicationWorkFlow) findApplication.getSingleResult();
+    }
 
+    public ApplicationWorkFlow addApplicationWorkFlow(ApplicationWorkFlow applicationWorkFlow){
+        Session session = getCurrentSession();
+        Integer applicationId = (Integer) session.save(applicationWorkFlow);
+        return getApplicationById(applicationId);
+    }
 
 }

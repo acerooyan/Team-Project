@@ -108,16 +108,17 @@ public class OnboardController {
 
 
             // todo: add files
-            if (!file2.isEmpty()){
+            if (file2 != null){
                 String fileName2 = awsService.uploadFile(file2);
                 personalDocument =  personalDocumentService.buildDocument(fileName2,employee);
 
             }
-            if (!file3.isEmpty()){
+            if (file3 != null){
                 String fileName3 = awsService.uploadFile(file3);
                 personalDocument =  personalDocumentService.buildDocument(fileName3,employee);
 
             }
+            registerService.addApplicationWorkFlow(employee);
 
             return ResponseEntity.ok().build();
 //            }catch (Exception e){

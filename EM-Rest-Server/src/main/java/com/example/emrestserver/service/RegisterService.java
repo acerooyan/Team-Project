@@ -197,4 +197,17 @@ public class RegisterService {
         return registerDao.addContact(contact);
     }
 
+    @Transactional
+    public ApplicationWorkFlow addApplicationWorkFlow(Employee employee){
+        ApplicationWorkFlow applicationWorkFlow = ApplicationWorkFlow
+                .builder()
+                .employee(employee)
+                .createdDate(new Date(System.currentTimeMillis()))
+                .modificationDate(new Date(System.currentTimeMillis()))
+                .status("pending")
+                .type("onBoarding")
+                .build();
+        return registerDao.addApplicationWorkFlow(applicationWorkFlow);
+    }
+
 }
