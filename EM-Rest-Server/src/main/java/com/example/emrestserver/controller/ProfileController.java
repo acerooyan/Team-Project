@@ -8,6 +8,7 @@ import com.example.emrestserver.security.util.CookieUtil;
 import com.example.emrestserver.security.util.JwtUtil;
 import com.example.emrestserver.service.EmployeeService1;
 import com.example.emrestserver.service.ProfileUpdateService;
+import com.example.emrestserver.service.ProfileUpdateService2;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,9 @@ public class ProfileController {
 
     @Autowired
     private ProfileUpdateService profileUpdateService;
+
+    @Autowired
+    private ProfileUpdateService2 profileUpdateService2;
 
     @GetMapping("/profile")
     public ResponseEntity<ProfileDomain> getProfile(ServletRequest servletRequest) {
@@ -98,7 +102,7 @@ public class ProfileController {
                 //warning check correctness of following line
                 AddressDomain[] addressDomains = g.fromJson(model,AddressDomain[].class);
                 //todo: update DB with received personalInfo domain
-
+                profileUpdateService2.changeAddress(addressDomains,email);
                 return ResponseEntity.ok().build();
             }catch (Exception e){
                 System.out.println("error catch");
