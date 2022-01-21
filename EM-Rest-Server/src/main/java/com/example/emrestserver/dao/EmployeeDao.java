@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class EmployeeDao {
         return sessionFactory.getCurrentSession();
     }
 
+    @Transactional
     public Employee getEmployeeById(Integer id){
         Session session = getCurrentSession();
 
@@ -25,7 +27,7 @@ public class EmployeeDao {
         return (Employee) query.getSingleResult();
 
     }
-
+    @Transactional
     public Employee getEmployeeByEmail(String email){
         Session session = getCurrentSession();
 
@@ -34,6 +36,7 @@ public class EmployeeDao {
         return (Employee) query.getSingleResult();
     }
 
+    @Transactional
     public Address[] getAddressByPersonId(Integer personId){
         Session session = getCurrentSession();
         Query getAddress = session.createQuery("From Address WHERE Person.id =:id");
