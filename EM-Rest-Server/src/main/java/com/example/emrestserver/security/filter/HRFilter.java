@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = "/jwt/hr/*")
+@WebFilter(urlPatterns = "/api/jwt/hr/*")
 public class HRFilter implements Filter {
 
 
