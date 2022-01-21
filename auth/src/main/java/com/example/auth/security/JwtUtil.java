@@ -12,14 +12,14 @@ import java.util.List;
 public class JwtUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtil.class);
 
-    public static String generateToken(String subject, int validDuration, List<String> role, int id) {
+    public static String generateToken(String subject, int validDuration, String role, int id) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
 
         JwtBuilder builder = Jwts.builder()
                 .setSubject(subject)
                 .claim("id", id)
-                .claim("role", role != null && role.size() > 0 ? role.get(0) : "")
+                .claim("role", role)
 //                .claim("firstName", firstName)
 //                .claim("lastName", lastName)
                 .setIssuedAt(now)

@@ -43,7 +43,7 @@ public class RegistrationTokenController {
                 Mail mail = new Mail();
                 mail.setMailTo(registrationTokenDomain.getEmail());
                 mail.setContentType("text/html");
-                mail.setMailSubject("");
+                mail.setMailSubject("Registration Token");
                 //TODO: url should be front end url not backend url
                 mail.setMailContent("This is your registration link: \nhttp://localhost:4200/regnav/step1?registrationToken=" + jwt);
                 emailService.sendEmail(mail);

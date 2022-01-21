@@ -20,5 +20,5 @@ public class UserDomain {
     @NotNull
     private String email;
     @NotNull
-    private List<String> role;
+    private String role;
 }
