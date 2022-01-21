@@ -27,6 +27,7 @@ import { RegnavbarComponent } from './register/regnavbar/regnavbar.component';
 import { RegisterComponent } from './register/register.component';
 import { FileuploadComponent } from './test/fileupload/fileupload.component';
 import { CommonModule } from '@angular/common';
+import { Step7Component } from './register/step7/step7.component';
 
 
 
@@ -50,6 +51,7 @@ import { CommonModule } from '@angular/common';
     RegnavbarComponent,
     RegisterComponent,
     FileuploadComponent,
+    Step7Component,
    
   ],
   imports: [
