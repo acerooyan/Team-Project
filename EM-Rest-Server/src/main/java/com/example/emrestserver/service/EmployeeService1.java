@@ -6,12 +6,14 @@ import com.example.emrestserver.domains.profile.*;
 import com.example.emrestserver.domains.standalone.AddressDomain;
 import com.example.emrestserver.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 
+@Service
 public class EmployeeService1 {
     @Autowired
     EmployeeDao employeeDao;

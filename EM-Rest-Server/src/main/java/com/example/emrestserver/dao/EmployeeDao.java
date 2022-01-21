@@ -42,8 +42,9 @@ public class EmployeeDao {
 
 
     public Address[] getAddressByPersonId(Integer personId){
+        System.out.println(personId);
         Session session = getCurrentSession();
-        Query getAddress = session.createQuery("From Address WHERE Person.id =:id");
+        Query getAddress = session.createQuery("From Address WHERE person.id =:id");
         getAddress.setParameter("id", personId);
         List<Address> addressList = (List<Address>)getAddress.getResultList();
         Address[] addressArray = new Address[addressList.size()];
@@ -54,7 +55,7 @@ public class EmployeeDao {
     public Contact getEmergencyByEmployeeId(Integer id){
         Session session = getCurrentSession();
 
-        Query query = session.createQuery("FROM Contact c WHERE c.employee = :id and c.isEmergency = 1");
+        Query query = session.createQuery("FROM Contact c WHERE c.employee.id = :id and c.isEmergency = 1");
         query.setParameter("id",id);
         Contact contact = (Contact) query.getSingleResult();
         System.out.println(contact.getPerson().getId());
