@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
-@RequestMapping("/api/em")
+@RequestMapping("/")
 public class OnboardController {
     @Autowired
     RegisterService registerService;

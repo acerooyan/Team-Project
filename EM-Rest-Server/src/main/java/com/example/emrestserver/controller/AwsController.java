@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/api/file")
+@RequestMapping("/jwt/file")
 public class AwsController {
 
     @Autowired

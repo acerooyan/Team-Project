@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = "/api/employee/*")
+@WebFilter(urlPatterns = "/jwt/employee/*")
 public class EmployeeFilter implements Filter {
 
 

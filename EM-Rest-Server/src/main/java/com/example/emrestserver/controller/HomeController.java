@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
-@RequestMapping("/api")
+@RequestMapping("/jwt")
 public class HomeController {
 
     @Autowired
