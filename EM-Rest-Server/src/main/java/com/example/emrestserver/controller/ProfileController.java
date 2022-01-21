@@ -63,24 +63,10 @@ public class ProfileController {
                 PersonalInfoDomain personalInfoDomain = g.fromJson(model,PersonalInfoDomain.class);
 
                 //todo: update DB with received personalInfo domain
+                Person personUpdated =  profileUpdateService.buildPerson(personalInfoDomain,email);
 
-                Person person = profileUpdateService.getPersonByEmail(email);
-                String fullName = personalInfoDomain.getFullName();
-                String[] split = fullName.split("\\s+");
+                profileUpdateService.updatePersonWithPerson(personUpdated);
 
-                //change name
-                person.setFirstname(split[0]);
-                if(split.length == 2){
-                    person.setLastname(split[1]);
-                }else{
-                    person.setMiddleName(split[1]);
-                    person.setFirstname(split[2]);
-                }
-
-                //change dob
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-                Date date = (Date) formatter.parse(personalInfoDomain.getDob());
-                person.setDob(date);
 
 
 
