@@ -16,10 +16,5 @@ export class ContactInfo {
     address:Address
   }]
 
-//public addresses: any[] = [{
-//     address: '',
-//     street: '',
-//     city: '',
-//     country: ''
-//   }];
+
 }

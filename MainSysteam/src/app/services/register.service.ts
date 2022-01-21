@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,  HttpRequest, HttpEvent} from '@angular/common/http';
 import { Observable, Observer } from 'rxjs';
 import {RegUser} from "../entity/reg-user";
 import {BasicInfo} from "../entity/basic-info";
@@ -10,40 +10,147 @@ import {ResidentialStatus} from "../entity/residential-status";
 import {ContactReference} from "../entity/contact-reference";
 import {ContactEmergency} from "../entity/contact-emergency";
 import { Routes, RouterModule} from '@angular/router';
+
+export class mergeDomain  {
+  basicInfo?: BasicInfo;
+  contactInfo?: ContactInfo;
+  carInfo?: CarInfo;
+  residentialStatus?: ResidentialStatus;
+  contactReference?: ContactReference;
+  contactEmergency?: ContactEmergency;
+
+}
+
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class RegisterService {
-  baseUrl="http://localhost:8081/user";
+  
   constructor(private httpClient: HttpClient) { }
 
-  regUser: RegUser = new RegUser();
+  Avatar ?: FileList;
+
+  workAuthorization  ?: FileList;
+
+  driverLi  ?: FileList;
+  
   basicInfo: BasicInfo = new BasicInfo();
-
   contactInfo: ContactInfo = new ContactInfo();
-  // addressList: any[] = [{
-  //   address:Address
-  // }];
-
   carInfo: CarInfo = new CarInfo();
   residentialStatus: ResidentialStatus = new ResidentialStatus();
   contactReference: ContactReference = new ContactReference();
   contactEmergency: ContactEmergency = new ContactEmergency();
 
-//   setAddressList(addressList: any[] = [{
-//     address:Address
-//   }]) {
-//     this.addressList = addressList;
-// }
-// getAddressList() {
-//     return this.addressList;
-// }
-  setRegUser(regUser: RegUser) {
-    this.regUser = regUser;
+
+  private sso = "auth/registration";
+  private MainSever= "api";
+
+
+
+  setRegUser(regUser: RegUser):Observable<any> {
+ 
+    const body = {
+      userName:regUser.userName, 
+      password: regUser.password,
+      email: regUser.email,
+      
+    };
+
+    return this.httpClient.post(this.sso,  body, {
+      responseType: 'text',
+      withCredentials: true,
+      
+    }) 
+  
   }
-  getRegUser() {
-    return this.regUser;
+
+  
+  
+  sumbitAll():Observable<HttpEvent<any>>{
+    const formData: FormData = new FormData();
+    
+    let obj = new mergeDomain ();
+
+    obj.basicInfo = this.basicInfo;
+    obj.carInfo = this.carInfo;
+    obj.contactEmergency = this.contactEmergency;
+    obj.contactInfo = this.contactInfo;
+    obj.contactReference = this.contactReference;
+    obj.residentialStatus = this.residentialStatus;
+
+    if (this.Avatar) {
+      
+      var file: File | null = this.Avatar.item(0);
+      if(file)
+      {
+        console.log(1111111111);
+        console.log(file);
+        formData.append('Avatar', file);
+      }
+    }
+
+    if (this.workAuthorization) {
+      
+      var file: File | null = this.workAuthorization.item(0);
+      if(file)
+      {
+        formData.append('Work', file);
+      }
+    }
+
+    if (this.driverLi) {
+      
+      var file: File | null = this.driverLi.item(0);
+      if(file)
+      {
+        formData.append('Driver', file);
+      }
+    }
+
+
+   
+  
+   
+    formData.append("model",JSON.stringify(obj));
+    
+   
+
+    const req = new HttpRequest('POST', `${this.MainSever}/em/register/test`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this.httpClient.request(req);
   }
+
+
+
+
+
+
+  setAvatar(file: any) {
+    this.Avatar = file;
+    console.log(" in service avatar" );
+    console.log(this.Avatar);
+  }
+
+
+  setDriver(file: any) {
+    this.driverLi = file;
+    
+  }
+
+
+  setWorkFile(file: any) {
+   
+    this.workAuthorization = file;
+  }
+
+
+  
 
   setContactEmergency(contactEmergency: ContactEmergency) {
     this.contactEmergency = contactEmergency;
@@ -81,16 +188,5 @@ export class RegisterService {
   getCarInfo() {
     return this.carInfo;
   }
-  // data = [this.regUser,this.basicInfo,this.carInfo,this.residentialStatus,this.contactReference,this.contactEmergency]
-  // formData: FormData = new FormData();
-  // formData.append()
 
-  registerBasicInfo(basicInfo: BasicInfo): Observable<Object> {
-    console.log(basicInfo);
-    return this.httpClient.post(`${this.baseUrl}`,basicInfo);
-  }
-  // registerContactInfo(contactInfo: ContactInfo) Observable<Object> {
-  //   console.log(contactInfo);
-  //   return this.httpClient.post(`${this.baseUrl}`,contactInfo);
-  // }
 }

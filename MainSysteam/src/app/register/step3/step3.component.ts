@@ -4,7 +4,7 @@ import { BasicInfo} from "../../entity/basic-info";
 import { RegisterService} from "../../services/register.service";
 import { Router } from '@angular/router';
 import { Address} from "../../entity/address";
-import { AddressList} from "../../entity/address-list";
+
 
 @Component({
   selector: 'app-step3',
@@ -30,7 +30,7 @@ export class Step3Component implements OnInit {
     this.registerService.setContactInfo(this.contactInfo);
   }
   contactInfoRegister(){
-    console.log(this.registerService.getRegUser());
+    console.log(this.registerService);
     console.log(this.registerService.getBasicInfo());
     console.log(this.contactInfo);
     // console.log(this.addressList);

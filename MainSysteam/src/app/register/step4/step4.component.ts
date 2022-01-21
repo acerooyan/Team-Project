@@ -9,9 +9,11 @@ import { Router } from '@angular/router';
 })
 export class Step4Component implements OnInit {
   carInfo: CarInfo = new CarInfo();
+  selectedFiles?: FileList;
   constructor(public registerService: RegisterService,  public router: Router) { }
   saveCarInfo() {
     this.registerService.setCarInfo(this.carInfo);
+    this.registerService.setDriver(this.selectedFiles);
   }
   ngOnInit(): void {
   }
@@ -23,11 +25,18 @@ export class Step4Component implements OnInit {
     }
   }
   carInfoRegister(){
-    console.log(this.registerService.getRegUser());
+   
     console.log(this.registerService.getBasicInfo());
     console.log(this.registerService.getContactInfo());
     console.log(this.carInfo);
   }
+
+  selectFile(event: any): void {
+    
+    this.selectedFiles = event.target.files;
+  }
+
+
   changePage() {
     this.router.navigate(["/regnav/step5"]);
   }

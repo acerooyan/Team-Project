@@ -60,11 +60,11 @@
         <label  class="form-label">Expiration Date(*)</label>
         <input type="date" class="form-control" id="expirationDate" name="expirationDate" required #exp = "ngModel" [(ngModel)]="residentialStatus.expirationDate" >
         <div *ngIf="exp.invalid && exp.touched" class="text-danger">Expiration Date is Required</div> </div>
-      <div class="input-group mb-3">
-        <label  class="form-label">Upload a copy of your work authorization</label>
-        <input type="file" class="form-control" id="inputGroupFile02">
-        <label class="input-group-text" for="inputGroupFile02">Upload</label>
-      </div>
+        <div class="input-group mb-3">
+          <label  class="form-label">Upload a copy of your work authorization</label>
+          <input type="file" class="form-control" id="inputGroupFile02" (change)="selectFile($event)">
+          
+        </div>
     </div>
 
     </div>
@@ -78,4 +78,13 @@
 <!--    <button type="submit" class="btn btn-primary">save</button>-->
 
 </div>
+
+
+
+
+
+
+
+
+
 

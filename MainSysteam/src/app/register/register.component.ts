@@ -6,6 +6,10 @@ import {Router} from "@angular/router";
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
+
+
+
 export class RegisterComponent implements OnInit {
 
   constructor( public router: Router) { }
