@@ -3,9 +3,11 @@ package com.example.emrestserver.controller;
 import com.example.emrestserver.constant.JwtConstant;
 import com.example.emrestserver.domains.profile.*;
 import com.example.emrestserver.domains.standalone.AddressDomain;
+import com.example.emrestserver.entity.Person;
 import com.example.emrestserver.security.util.CookieUtil;
 import com.example.emrestserver.security.util.JwtUtil;
 import com.example.emrestserver.service.EmployeeService1;
+import com.example.emrestserver.service.ProfileUpdateService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.sql.Date;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
@@ -21,6 +25,10 @@ import java.util.List;
 public class ProfileController {
     @Autowired
     private EmployeeService1 employeeService1;
+
+    @Autowired
+    private ProfileUpdateService profileUpdateService;
+
     @GetMapping("/profile")
     public ResponseEntity<ProfileDomain> getProfile(ServletRequest servletRequest) {
 
@@ -55,6 +63,26 @@ public class ProfileController {
                 PersonalInfoDomain personalInfoDomain = g.fromJson(model,PersonalInfoDomain.class);
 
                 //todo: update DB with received personalInfo domain
+
+                Person person = profileUpdateService.getPersonByEmail(email);
+                String fullName = personalInfoDomain.getFullName();
+                String[] split = fullName.split("\\s+");
+
+                //change name
+                person.setFirstname(split[0]);
+                if(split.length == 2){
+                    person.setLastname(split[1]);
+                }else{
+                    person.setMiddleName(split[1]);
+                    person.setFirstname(split[2]);
+                }
+
+                //change dob
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+                Date date = (Date) formatter.parse(personalInfoDomain.getDob());
+                person.setDob(date);
+
+
 
                 return ResponseEntity.ok().build();
             }catch (Exception e){
