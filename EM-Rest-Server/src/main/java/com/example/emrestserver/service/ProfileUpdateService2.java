@@ -4,14 +4,15 @@ import com.example.emrestserver.dao.EmployeeDao;
 import com.example.emrestserver.dao.PersonDao;
 import com.example.emrestserver.dao.PersonDao2;
 import com.example.emrestserver.domains.profile.EmergencyContactDomain;
+import com.example.emrestserver.domains.profile.EmploymentDomain;
 import com.example.emrestserver.domains.standalone.AddressDomain;
-import com.example.emrestserver.entity.Address;
-import com.example.emrestserver.entity.Contact;
-import com.example.emrestserver.entity.Employee;
-import com.example.emrestserver.entity.Person;
+import com.example.emrestserver.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.Date;
+
 @Service
 public class ProfileUpdateService2 {
     @Autowired
@@ -67,5 +68,23 @@ public class ProfileUpdateService2 {
         person.setCellPhone(emergencyContactDomain.getCellPhone());
 
         personDao2.updatePerson(person);
+    }
+
+    @Transactional
+    public void changeEmployee(EmploymentDomain employmentDomain,String email){
+
+        Employee employee = employeeDao.getEmployeeByEmail(email);
+        VisaStatus visaStatus = employee.getVisaStatus();
+
+        //update visaStatus
+        visaStatus.setVisaType(employmentDomain.getWorkAuthorization());
+        visaStatus.setModificationDate(new Date(System.currentTimeMillis()));
+        personDao2.updateVisaStatus(visaStatus);
+
+        //update employee
+        employee.setVisaStartDate(Date.valueOf(employmentDomain.getWorkAuthorizationStartDate()));
+        employee.setVisaEndDate(Date.valueOf(employmentDomain.getWorkAuthorizationEndDate()));
+        personDao2.updateEmployee(employee);
+
     }
 }

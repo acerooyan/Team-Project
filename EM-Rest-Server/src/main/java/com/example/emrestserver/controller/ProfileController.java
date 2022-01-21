@@ -151,7 +151,7 @@ public class ProfileController {
                 EmploymentDomain employmentDomain = g.fromJson(model,EmploymentDomain.class);
 
                 //todo: update DB with received EmploymentDomain
-
+                profileUpdateService2.changeEmployee(employmentDomain, email);
                 return ResponseEntity.ok().build();
             }catch (Exception e){
                 System.out.println("error catch");
