@@ -174,7 +174,7 @@ public class ProfileController {
             try{
                 Gson g = new Gson();
                 EmergencyContactDomain emergencyContactDomain = g.fromJson(model,EmergencyContactDomain.class);
-
+                profileUpdateService2.changeEmergencyContact(emergencyContactDomain,email);
                 //todo: update DB with received EmergencyContactDomain
 
                 return ResponseEntity.ok().build();
