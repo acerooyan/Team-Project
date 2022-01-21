@@ -1,9 +1,12 @@
 package com.example.emrestserver.service;
 
 import com.example.emrestserver.dao.EmployeeDao;
+import com.example.emrestserver.dao.PersonDao;
 import com.example.emrestserver.dao.PersonDao2;
+import com.example.emrestserver.domains.profile.EmergencyContactDomain;
 import com.example.emrestserver.domains.standalone.AddressDomain;
 import com.example.emrestserver.entity.Address;
+import com.example.emrestserver.entity.Contact;
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProfileUpdateService2 {
     @Autowired
     PersonDao2 personDao2;
+
+    @Autowired
+    PersonDao personDao;
 
     @Autowired
     UtilService utilService;
@@ -39,5 +45,27 @@ public class ProfileUpdateService2 {
         }
     }
 
+    @Transactional
+    public void changeEmergencyContact(EmergencyContactDomain emergencyContactDomain, String email){
+        Employee employee = utilService.getEmployeeByEmail(email);
+        Person person = employee.getPerson();
+        Contact contact = employeeDao.getEmergencyByEmployeeId(employee.getId());
+        Person contactPerson = contact.getPerson();
+        // update contact
+        contact.setRelationShip(emergencyContactDomain.getRelationship());
+        personDao2.updateContact(contact);
+        //update person
+        String fullName = emergencyContactDomain.getFullName();
+        String[] split = fullName.split("\\s+");
+        person.setFirstname(split[0]);
+        if(split.length == 2){
+            person.setLastname(split[1]);
+        }else{
+            person.setMiddleName(split[1]);
+            person.setFirstname(split[2]);
+        }
+        person.setCellPhone(emergencyContactDomain.getCellPhone());
 
+        personDao2.updatePerson(person);
+    }
 }
