@@ -16,5 +16,4 @@ public class EmployeeService1 {
     public Address[] getAddressByPersonId(Integer personId){
         return employeeDao.getAddressByPersonId(personId);
     }
-    public
 }
