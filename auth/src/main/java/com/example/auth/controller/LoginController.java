@@ -30,6 +30,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(HttpServletResponse res, @RequestBody UserDomain userDomain) {
+        System.out.println("in log in");
         if (userDomain != null && userDomain.getUserName() != null && userDomain.getPassword() != null) {
             List<UserDomain> userDomainList = userService.checkLogin(userDomain);
             if (userDomainList != null && userDomainList.size() > 0) {

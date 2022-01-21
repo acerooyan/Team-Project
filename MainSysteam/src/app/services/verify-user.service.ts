@@ -19,11 +19,11 @@ export class VerifyUserService {
 
   verify(email: string, psw: string, loginAsHr: boolean):Observable<any>
   {
-    var r = loginAsHr ? "HR": "employee"
+    
     
     const body = {userName:email, 
       password: psw, 
-      role: [r]
+      role: loginAsHr ? "HR": "employee"
     };
 
 
