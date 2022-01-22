@@ -49,6 +49,8 @@ public class OnboardController {
 //        BasicInfoDomain basicInfoDomain = g.fromJson(basicInfo,BasicInfoDomain.class);
 //        ContactInfoDomain contactInfoDomain = g.fromJson(contactInfo,ContactInfoDomain.class);
 
+        System.out.println("\n\n here pleasw!!!");
+        System.out.println(testDomainString);
 
         if (testDomainString == null) {
             System.out.println("basicInfo not found");
@@ -64,11 +66,6 @@ public class OnboardController {
             ContactEmergencyDomain contactEmergencyDomain = testDomain.getContactEmergencyDomain();
             ResidentialStatusDomain residentialStatusDomain = testDomain.getResidentialStatusDomain();
             CarInfoDomain carInfoDomain = testDomain.getCarInfoDomain();
-            System.out.println(basicInfoDomain);
-            System.out.println(contactInfoDomain);
-            System.out.println(contactEmergencyDomain);
-            System.out.println(residentialStatusDomain);
-            System.out.println(carInfoDomain);
 
             //call services
             //1. add person and return a person(with id)

@@ -13,8 +13,8 @@ public class AddressDomain {
     private String addressLine2;
     private String city;
 
-    @SerializedName("status")
+    @SerializedName(value = "state", alternate = {"status"})
     private String state;
-    @SerializedName("Zipcode")
+    @SerializedName(value="zipcode", alternate={"Zipcode"})
     private String zipcode;
 }

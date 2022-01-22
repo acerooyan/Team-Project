@@ -98,7 +98,7 @@ public class ProfileController {
                 profileUpdateService2.changeAddress(addressDomains,email);
                 return ResponseEntity.ok().build();
             }catch (Exception e){
-                System.out.println("error catch");
+                e.printStackTrace();
                 return ResponseEntity.internalServerError().build();
             }
         }

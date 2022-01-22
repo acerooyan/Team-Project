@@ -58,16 +58,16 @@ public class ProfileUpdateService2 {
         //update person
         String fullName = emergencyContactDomain.getFullName();
         String[] split = fullName.split("\\s+");
-        person.setFirstname(split[0]);
+        contactPerson.setFirstname(split[0]);
         if(split.length == 2){
-            person.setLastname(split[1]);
+            contactPerson.setLastname(split[1]);
         }else{
-            person.setMiddleName(split[1]);
-            person.setFirstname(split[2]);
+            contactPerson.setMiddleName(split[1]);
+            contactPerson.setFirstname(split[2]);
         }
-        person.setCellPhone(emergencyContactDomain.getCellPhone());
+        contactPerson.setCellPhone(emergencyContactDomain.getCellPhone());
 
-        personDao2.updatePerson(person);
+        personDao2.updatePerson(contactPerson);
     }
 
     @Transactional
