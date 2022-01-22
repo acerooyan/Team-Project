@@ -209,5 +209,4 @@ public class RegisterService {
                 .build();
         return registerDao.addApplicationWorkFlow(applicationWorkFlow);
     }
-
 }
