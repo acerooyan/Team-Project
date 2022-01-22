@@ -2,7 +2,9 @@ package com.example.emrestserver.controller;
 
 import com.example.emrestserver.domains.profile.*;
 import com.example.emrestserver.domains.standalone.AddressDomain;
+import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.Person;
+import com.example.emrestserver.service.AwsService;
 import com.example.emrestserver.service.EmployeeService1;
 import com.example.emrestserver.service.ProfileUpdateService;
 import com.example.emrestserver.service.ProfileUpdateService2;
@@ -10,6 +12,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletRequest;
 
@@ -25,6 +28,9 @@ public class ProfileController {
 
     @Autowired
     private ProfileUpdateService2 profileUpdateService2;
+
+    @Autowired
+    private AwsService awsService;
 
     @GetMapping("/profile")
     public ResponseEntity<ProfileDomain> getProfile(ServletRequest servletRequest) {
@@ -64,9 +70,6 @@ public class ProfileController {
                 System.out.println(personUpdated);
 
                 profileUpdateService.updatePersonWithPerson(personUpdated);
-
-
-
 
                 return ResponseEntity.ok().build();
             }catch (Exception e){
@@ -174,6 +177,37 @@ public class ProfileController {
                 EmergencyContactDomain emergencyContactDomain = g.fromJson(model,EmergencyContactDomain.class);
                 profileUpdateService2.changeEmergencyContact(emergencyContactDomain,email);
                 //todo: update DB with received EmergencyContactDomain
+
+                return ResponseEntity.ok().build();
+            }catch (Exception e){
+                System.out.println("error catch");
+                return ResponseEntity.internalServerError().build();
+            }
+        }
+    }
+
+    @PutMapping("/em/profile/avatar")
+    public ResponseEntity<Object> avatar(@RequestPart("file") MultipartFile file, ServletRequest servletRequest) {
+//        HttpServletRequest req = (HttpServletRequest) servletRequest;
+//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+//        String email = JwtUtil.getSubjectFromJwt(token);
+        String email = "jamesh970327@gmail.com";
+
+        String fileName;
+        if ( file == null || email == null) {
+            System.out.println("not found");
+            return ResponseEntity.status(666).build();
+        } else {
+            try{
+
+
+                fileName = awsService.uploadFile(file);
+                Employee employee = employeeService1.getEmpolyeeByEmail(email);
+                employee.setAvatar(fileName);
+                employeeService1.updateEmployee(employee);
+//                Gson g = new Gson();
+//                EmergencyContactDomain emergencyContactDomain = g.fromJson(model,EmergencyContactDomain.class);
+//                profileUpdateService2.changeEmergencyContact(emergencyContactDomain,email);
 
                 return ResponseEntity.ok().build();
             }catch (Exception e){

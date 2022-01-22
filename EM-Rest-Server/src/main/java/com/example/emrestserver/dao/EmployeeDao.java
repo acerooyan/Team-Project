@@ -78,4 +78,9 @@ public class EmployeeDao {
         getVisaStatus.setParameter("id", employeeId);
         return (ApplicationWorkFlow)getVisaStatus.getSingleResult();
     }
+
+    public Employee updateEmployee(Employee employee){
+        Session session = getCurrentSession();
+        return (Employee) session.merge(employee);
+    }
 }
