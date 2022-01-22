@@ -10,7 +10,7 @@ export class VerifyUserService {
 
 
 
-   private sso = "auth/login";
+   private sso = "auth/";
    private mainhrhome= "api//jwt/hr/home";
 
   
@@ -28,13 +28,21 @@ export class VerifyUserService {
 
 
 
-    return this.http.post(this.sso,  body, {
+    return this.http.post(this.sso+'login',  body, {
       responseType: 'text',
       withCredentials: true,
       
     }) 
   
 
+}
+
+
+logout():Observable<any>{
+  return this.http.get(this.sso + 'logout', 
+  {
+    withCredentials: true
+  })
 }
 
 

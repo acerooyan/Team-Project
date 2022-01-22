@@ -1,7 +1,9 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import{PersonalInfoService} from 'src/app/services/personal-info.service';
 import{personalInfo, employee, Address,EmergencyContact,ConatctInfo} from 'src/app/PersonalnfoEntity/Info'
-import { error } from '@angular/compiler/src/util';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
@@ -15,15 +17,16 @@ export class PersonalInfoComponent implements OnInit {
   public Address:any[] = [];
   public EmergencyContact: EmergencyContact = {};
   public ConatctInfo: ConatctInfo = {};
+  public fileNameArray:string[] = ['1642745451766_database.png'];
 
-
+  fileInfos?: Observable<any>;
   change_personalInfo = false;
   change_employee = false;
   change_Address = false;
   change_EmergencyContact= false;
   change_ConatctInfo= false;
   
-  constructor(private service: PersonalInfoService) { }
+  constructor(private service: PersonalInfoService, private router: Router) { }
 
   // PersonalInfoDomain personalInfoDomain;
   // AddressDomain[] addressDomains;
@@ -43,10 +46,11 @@ export class PersonalInfoComponent implements OnInit {
     this.service.GetAllInfo().subscribe(
       (data: any) =>{
         console.log(data);
+        
         console.log(data.addressDomains);
 
         //get personalInfo
-        this.personalInfo = {fullName:"Jimmy",Dob: "Yan",Age: "23",Gender: "male",SSN: "1234" }; 
+        this.personalInfo = {fullName:data.personalInfoDomain.fullName, dob: data.personalInfoDomain.dob, age: data.personalInfoDomain.age, gender: data.personalInfoDomain.gender, ssn: data.personalInfoDomain.ssn }; 
 
         //get address[]
         for (let i = 0; i < data.addressDomains.length; i++) {
@@ -66,14 +70,38 @@ export class PersonalInfoComponent implements OnInit {
 
       },
       (error: any)=>{
-        console.log(error);
+        if (error.status === 401) {
+          this.router.navigate(['']);
+        }
+        else{
+          console.log(error);
+        }
 
       }
 
     )
+
+    //<a href="{{ aws.com/ }}">{{ 1642745451766_database.png }}</a>
+
+    
+      
+
+
+
   }
 
+  download(fileNmae: string)
+  {
+      this.service.getFiles(fileNmae).subscribe(
+        (data:any) =>{
+          console.log(data);
+        },
+        (error:any) =>{
+          console.log(error)
+        }
 
+      )
+  }
 
   edit(url:string, info:any)
   {

@@ -67,7 +67,7 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<String> logout(HttpServletResponse res, @RequestParam("redirect") String redirect) {
+    public ResponseEntity<String> logout(HttpServletResponse res) {
         CookieUtil.clear(res, JwtConstant.JWT_COOKIE_NAME, "localhost");
         return ResponseEntity.ok().build();
     }

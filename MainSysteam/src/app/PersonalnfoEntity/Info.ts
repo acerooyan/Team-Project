@@ -1,9 +1,9 @@
 export interface personalInfo{
     fullName?: string,
-    Dob?: string,
-    Age?: string,
-    Gender?: string,
-    SSN?: string
+    dob?: string,
+    age?: string,
+    gender?: string,
+    ssn?: string
 
    
 }

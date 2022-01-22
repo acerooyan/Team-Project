@@ -19,8 +19,8 @@
               <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.fullName' ></textarea></div> 
 
               
-              <div  *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.Dob}}</div>
-              <div *ngIf="change_personalInfo"  class="col-6 col-sm-5"><textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.Dob'></textarea></div> 
+              <div  *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.dob}}</div>
+              <div *ngIf="change_personalInfo"  class="col-6 col-sm-5"><textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.dob'></textarea></div> 
             </div>
             <br>
            
@@ -31,11 +31,11 @@
                 
                 <div class="w-100"></div>
             
-                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.Age}}</div>
-                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.Age' ></textarea></div> 
+                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.age}}</div>
+                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.age' ></textarea></div> 
 
-                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.Gender}}</div>
-                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.Gender' ></textarea></div> 
+                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.gender}}</div>
+                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.gender' ></textarea></div> 
             </div>
 
             <br>
@@ -46,8 +46,8 @@
                 
                 <div class="w-100"></div>
             
-                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.SSN}}</div>
-                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.SSN' ></textarea></div> 
+                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.ssn}}</div>
+                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.ssn' ></textarea></div> 
                 
             </div>
           </div>
@@ -375,10 +375,15 @@
         <!-- address -->
       <div class="card-body">
         <h5 class="card-title"><i class="fa fa-file-code-o" style="font-size:36px"></i> Document </h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <ul
+      class="list-group list-group-flush"
+     
+    >
+      <li class="list-group-item">
+        <a (click)="download('1642745451766_database.png')"> 1642745451766_database.png </a>
+      </li>
+    </ul>
       </div>
-      <div class="card-footer">
-        <small class="text-muted"><button type="button" class="btn btn-info">Edit</button></small>
-      </div>
+      
     </div>
   </div>
