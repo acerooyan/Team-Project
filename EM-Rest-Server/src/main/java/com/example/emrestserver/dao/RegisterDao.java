@@ -21,8 +21,11 @@ public class RegisterDao {
     public Person addPerson(Person p){
 
         Session session = getCurrentSession();
-        Query findAllPerson = session.createQuery("FROM Person");
-
+        Query findPerson = session.createQuery("FROM Person WHERE email=:email");
+        findPerson.setParameter("email", p.getEmail());
+        if(findPerson.getSingleResult() != null){
+            return (Person)findPerson.getSingleResult();
+        }
         System.out.println(p);
         Integer personId = (Integer)session.save(p);
 
@@ -95,5 +98,6 @@ public class RegisterDao {
         Integer applicationId = (Integer) session.save(applicationWorkFlow);
         return getApplicationById(applicationId);
     }
+
 
 }

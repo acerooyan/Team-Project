@@ -77,7 +77,6 @@ public class OnboardController {
 
             // add visaStatus
             VisaStatus visaStatus = registerService.addVisaStatus(residentialStatusDomain);
-            // todo: add employee
 
             //avatar:  get file name -> from aws service
             String fileName1;
@@ -99,7 +98,9 @@ public class OnboardController {
 
             // todo: add reference contact and emergency contact
             if (testDomain.getContactReferenceDomain() != null){
+
                 ContactReferenceDomain contactReferenceDomain = testDomain.getContactReferenceDomain();
+                //todo check if email exists
                 registerService.addContactReference(contactReferenceDomain, employee);
             }
             registerService.addContactEmergency(contactEmergencyDomain, employee);
