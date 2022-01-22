@@ -11,11 +11,9 @@ import com.example.emrestserver.security.util.JwtUtil;
 import com.example.emrestserver.service.ProfileUpdateService;
 import com.example.emrestserver.service.UtilService;
 import com.google.gson.Gson;
-import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -80,7 +78,7 @@ public class TestController {
                 PersonalInfoDomain personalInfoDomain = g.fromJson(model,PersonalInfoDomain.class);
                 System.out.println(personalInfoDomain);
                 //todo: update DB with received personalInfo domain
-                Person personUpdated =  profileUpdateService.buildPerson(personalInfoDomain,email);
+                Person personUpdated =  profileUpdateService.buildPerson1(personalInfoDomain,email);
                 System.out.println(personUpdated);
                 profileUpdateService.updatePersonWithPerson(personUpdated);
 

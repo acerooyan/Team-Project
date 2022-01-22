@@ -1,6 +1,7 @@
 package com.example.emrestserver.service;
 
 import com.example.emrestserver.dao.PersonDao;
+import com.example.emrestserver.domains.profile.ContactInfoDomain;
 import com.example.emrestserver.domains.profile.PersonalInfoDomain;
 import com.example.emrestserver.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ProfileUpdateService {
     }
 
     @Transactional
-    public Person buildPerson(PersonalInfoDomain personalInfoDomain,String email) throws ParseException {
+    public Person buildPerson1(PersonalInfoDomain personalInfoDomain, String email) throws ParseException {
         Person person = getPersonByEmail(email);
 
         //change name
@@ -50,6 +51,20 @@ public class ProfileUpdateService {
 
         //change ssn
         person.setSsn(personalInfoDomain.getSsn());
+
+        return person;
+    }
+
+    @Transactional
+    public Person buildPerson2(ContactInfoDomain contactInfoDomain, String email) throws ParseException {
+        Person person = getPersonByEmail(email);
+
+        //change cellPhone
+        person.setCellPhone(contactInfoDomain.getCellPhone());
+
+        //change alternatePhone
+        person.setAlternatePhone(contactInfoDomain.getAlternatePhone());
+
 
         return person;
     }

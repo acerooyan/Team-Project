@@ -1,11 +1,8 @@
 package com.example.emrestserver.controller;
 
-import com.example.emrestserver.constant.JwtConstant;
 import com.example.emrestserver.domains.profile.*;
 import com.example.emrestserver.domains.standalone.AddressDomain;
 import com.example.emrestserver.entity.Person;
-import com.example.emrestserver.security.util.CookieUtil;
-import com.example.emrestserver.security.util.JwtUtil;
 import com.example.emrestserver.service.EmployeeService1;
 import com.example.emrestserver.service.ProfileUpdateService;
 import com.example.emrestserver.service.ProfileUpdateService2;
@@ -15,10 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.sql.Date;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
@@ -67,7 +60,7 @@ public class ProfileController {
                 PersonalInfoDomain personalInfoDomain = g.fromJson(model,PersonalInfoDomain.class);
 
                 //todo: update DB with received personalInfo domain
-                Person personUpdated =  profileUpdateService.buildPerson(personalInfoDomain,email);
+                Person personUpdated =  profileUpdateService.buildPerson1(personalInfoDomain,email);
                 System.out.println(personUpdated);
 
                 profileUpdateService.updatePersonWithPerson(personUpdated);
@@ -126,6 +119,11 @@ public class ProfileController {
                 Gson g = new Gson();
                 ContactInfoDomain contactInfoDomain = g.fromJson(model,ContactInfoDomain.class);
                 //todo: update DB with received contactInfo domain
+                Person personUpdated =  profileUpdateService.buildPerson2(contactInfoDomain,email);
+                System.out.println(personUpdated);
+
+                profileUpdateService.updatePersonWithPerson(personUpdated);
+
 
                 return ResponseEntity.ok().build();
             }catch (Exception e){
