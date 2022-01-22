@@ -149,4 +149,9 @@ public class EmployeeService1 {
         System.out.println(profileDomain);
         return profileDomain;
     }
+
+    @Transactional
+    public Employee updateEmployee(Employee employee){
+        return employeeDao.updateEmployee(employee);
+    }
 }

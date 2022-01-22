@@ -2,6 +2,7 @@ package com.example.emrestserver.controller;
 
 import com.example.emrestserver.domains.profile.*;
 import com.example.emrestserver.domains.standalone.AddressDomain;
+import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.Person;
 import com.example.emrestserver.service.AwsService;
 import com.example.emrestserver.service.EmployeeService1;
@@ -199,8 +200,11 @@ public class ProfileController {
         } else {
             try{
 
-                fileName = awsService.uploadFile(file);
 
+                fileName = awsService.uploadFile(file);
+                Employee employee = employeeService1.getEmpolyeeByEmail(email);
+                employee.setAvatar(fileName);
+                employeeService1.updateEmployee(employee);
 //                Gson g = new Gson();
 //                EmergencyContactDomain emergencyContactDomain = g.fromJson(model,EmergencyContactDomain.class);
 //                profileUpdateService2.changeEmergencyContact(emergencyContactDomain,email);
