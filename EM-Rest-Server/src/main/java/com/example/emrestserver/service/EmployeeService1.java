@@ -58,6 +58,8 @@ public class EmployeeService1 {
         LocalDate birthdayDate =dob.toLocalDate();
         Integer age = Period.between(birthdayDate, LocalDate.now()).getYears();
 
+        //AvatarDomain ready
+        AvatarDomain avatarDomain = AvatarDomain.builder().avatar(employee.getAvatar()).build();
         // PersonInfoDomain ready
         PersonalInfoDomain personalInfoDomain = PersonalInfoDomain
                 .builder().dob(person.getDob().toString()).ssn(person.getSsn())
@@ -142,6 +144,7 @@ public class EmployeeService1 {
                 .emergencyContactDomain(emergencyContactDomain)
                 .contactInfoDomain(contactInfoDomain)
                 .documentDomain(documentDomain)
+                .avatarDomain(avatarDomain)
                 .build();
         System.out.println(profileDomain);
         return profileDomain;
