@@ -115,7 +115,7 @@ export class RegisterService {
   
    
     formData.append("model",JSON.stringify(obj));
-    
+   
    
 
     const req = new HttpRequest('POST', `${this.MainSever}/register/test`, formData, {

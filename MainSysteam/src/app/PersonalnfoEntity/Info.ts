@@ -16,23 +16,33 @@ export interface employee{
     
 }
 
-export interface Address{
-    AddressLine1?: string,
-    workAuthorizationSD?: string,
-    workAuthorizationED?: string,
-    title?:string;
-}
+// export interface Address{
+//     AddressLine1?: string,
+//     workAuthorizationSD?: string,
+//     workAuthorizationED?: string,
+//     title?:string;
+// }
 
 export interface EmergencyContact{
     fullName?: string,
-    RelationShip?: string,
-    Cellphone?: string,
+    relationship?: string,
+    cellPhone?: string,
     email?:string;
 }
 
 export interface ConatctInfo{
     cellPhone?: string,
-    Alternatephone?: string,
+    alternatePhone?: string,
     email?: string,
+   
+}
+
+
+export interface address{
+    addressLine1?: string,
+    addressLine2?: string,
+    city?: string,
+    state?: string,
+    zipcode?: string,
    
 }

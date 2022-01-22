@@ -1,6 +1,6 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import{PersonalInfoService} from 'src/app/services/personal-info.service';
-import{personalInfo, employee, Address,EmergencyContact,ConatctInfo} from 'src/app/PersonalnfoEntity/Info'
+import{personalInfo, employee, address,EmergencyContact,ConatctInfo} from 'src/app/PersonalnfoEntity/Info'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -14,10 +14,10 @@ export class PersonalInfoComponent implements OnInit {
 
   public personalInfo: personalInfo = {} ;
   public employee: employee = {};
-  public Address:any[] = [];
+  public Address:address[] = [];
   public EmergencyContact: EmergencyContact = {};
   public ConatctInfo: ConatctInfo = {};
-  public fileNameArray:string[] = ['1642745451766_database.png'];
+  public fileNameArray:string[] = [];
 
   fileInfos?: Observable<any>;
   change_personalInfo = false;
@@ -63,11 +63,14 @@ export class PersonalInfoComponent implements OnInit {
           
           
          //get ContactInfoDomain
-         this.ConatctInfo = {cellPhone: "6264923795", Alternatephone: "6267578821", email:"acer0830@hotmail.com"};
+         this.ConatctInfo = {cellPhone: data.contactInfoDomain.cellPhone, alternatePhone: data.contactInfoDomain.alternatePhone, email:data.contactInfoDomain.email};
 
          //get EmergencyContactDomain
-          this.EmergencyContact = {fullName: "James", RelationShip:"Freind", Cellphone: "911", email:"james123@gmail.com"}
+          this.EmergencyContact = {fullName: data.emergencyContactDomain.fullName, relationship:data.emergencyContactDomain.relationship, cellPhone: data.emergencyContactDomain.cellPhone, email:data.emergencyContactDomain.email}
 
+          //get documentDomain
+          this.fileNameArray = data.documentDomain.fileName;
+          
       },
       (error: any)=>{
         if (error.status === 401) {
