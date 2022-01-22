@@ -43,6 +43,11 @@ export class PersonalInfoComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.change_personalInfo = false;
+    this.change_employee = false;
+    this.change_Address = false;
+    this.change_EmergencyContact= false;
+    this.change_ConatctInfo= false;
     this.service.GetAllInfo().subscribe(
       (data: any) =>{
         console.log(data);
@@ -84,13 +89,27 @@ export class PersonalInfoComponent implements OnInit {
 
     )
 
-    //<a href="{{ aws.com/ }}">{{ 1642745451766_database.png }}</a>
-
-    
       
 
 
 
+  }
+
+
+  
+  displayStyle = "none";
+  
+  openPopup() {
+    this.displayStyle = "block";
+  }
+  closePopupWithYes() {
+    this.ngOnInit();
+    this.displayStyle = "none";
+
+  }
+
+  closePopupWithNo() {
+    this.displayStyle = "none";
   }
 
   download(fileNmae: string)

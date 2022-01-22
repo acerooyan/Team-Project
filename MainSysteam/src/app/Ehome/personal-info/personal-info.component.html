@@ -1,11 +1,67 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <p>Are sure you want discard you changes?</p>
+  
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-danger" 
+                (click)="closePopupWithYes()">
+          Yes
+        </button>
+
+        <button type="button" class="btn btn-danger" 
+                (click)="closePopupWithNo()">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<header>
+  
+
+  <!-- Background image -->
+  <div
+    class="p-5 text-center bg-image"
+    style="
+      background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+      height: 400px;
+      margin-top: 58px;
+    "
+  >
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">Welcome, {{personalInfo.fullName}}</h1>
+       
+          
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Background image -->
+</header>
+
+
 <div class="card-group">
     <div class="card">
         
-     
+      
       <div class="card-body">
         <h5 class="card-title"><i class="fa fa-meh-o" style="font-size:36px"></i>  Personal Info</h5>
+        <p   style="padding-left: 120px;"><img src="https://placekitten.com/300/300" alt="Avatar" class="avatar"> </p>
         <div class="container">
             <div class="row">
               <div  class="col-6 col-sm-5">
@@ -58,6 +114,9 @@
         <small class="text-muted">
           <button *ngIf="!change_personalInfo"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="change_personalInfo1()">Edit</button>
           
+
+          <button *ngIf="change_personalInfo"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="openPopup()">Discard</button>
+
           <button *ngIf="change_personalInfo"  style= "background-color: salmon;  margin-left: 150px" type="button" class="btn btn-info" (click)="change_personalInfo1(); edit('personalInfo', personalInfo)">Save</button>
         </small>
        
@@ -190,7 +249,7 @@
       </div>
       <div class="card-footer">
         <button *ngIf="!change_Address"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="change_Address1()">Edit</button>
-          
+        <button *ngIf="change_Address"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="openPopup()">Discard</button>
         <button *ngIf="change_Address"  style= "background-color: salmon;  margin-left: 150px" type="button" class="btn btn-info" (click)="change_Address1(); edit('address', Address)">Save</button>
       </div>
     </div>
@@ -226,7 +285,7 @@
                 
                 <div class="w-100"></div>
 
-                <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'ConatctInfo.email' ></textarea></div>
+                <div class="col-6 col-sm-5">{{ConatctInfo.email}}</div>
                
                 
             </div>
@@ -272,7 +331,7 @@
       <div class="card-footer">
         
         <button *ngIf="!change_ConatctInfo"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="change_ConatctInfo1()">Edit</button>
-          
+        <button *ngIf="change_ConatctInfo"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="openPopup()">Discard</button>
         <button *ngIf="change_ConatctInfo"  style= "background-color: salmon;  margin-left: 150px" type="button" class="btn btn-info" (click)="change_ConatctInfo1(); edit('contactInfo', ConatctInfo)">Save</button>
       </div>
     </div>
@@ -408,7 +467,8 @@
       <div class="card-footer">
 
         <button *ngIf="!change_EmergencyContact"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="change_EmergencyContact1()">Edit</button>
-          
+        <button *ngIf="change_EmergencyContact"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="openPopup()">Discard</button>
+
         <button *ngIf="change_EmergencyContact"  style= "background-color: salmon;  margin-left: 150px" type="button" class="btn btn-info" (click)="change_EmergencyContact1(); edit('emergencyContact', EmergencyContact)">Save</button>
         
       </div>
