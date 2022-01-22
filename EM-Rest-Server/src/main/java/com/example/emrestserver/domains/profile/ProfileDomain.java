@@ -15,4 +15,5 @@ public class ProfileDomain {
     EmergencyContactDomain emergencyContactDomain;
     ContactInfoDomain contactInfoDomain;
     DocumentDomain documentDomain;
+    AvatarDomain avatarDomain;
 }

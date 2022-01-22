@@ -87,7 +87,7 @@ public class OnboardController {
             if (file1 != null){
                  fileName1 = awsService.uploadFile(file1);
             }else{
-                fileName1 = "";
+                fileName1 = "defaultAvatar.jpg";
             }
             Employee employee = registerService.addEmployee(p,visaStatus, residentialStatusDomain, carInfoDomain, fileName1);
             System.out.println("From controller: ");
@@ -100,16 +100,12 @@ public class OnboardController {
                  personalDocument =  personalDocumentService.buildDocument(fileName1,employee);
             }
 
-
-
             // todo: add reference contact and emergency contact
             if (testDomain.getContactReferenceDomain() != null){
                 ContactReferenceDomain contactReferenceDomain = testDomain.getContactReferenceDomain();
                 registerService.addContactReference(contactReferenceDomain, employee);
             }
             registerService.addContactEmergency(contactEmergencyDomain, employee);
-
-
 
             // todo: add files
             if (file2 != null){
@@ -123,7 +119,6 @@ public class OnboardController {
 
             }
             registerService.addApplicationWorkFlow(employee);
-
             return ResponseEntity.ok().build();
 //            }catch (Exception e){
 //                //can add more exceptions
