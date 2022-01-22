@@ -61,7 +61,9 @@
       
       <div class="card-body">
         <h5 class="card-title"><i class="fa fa-meh-o" style="font-size:36px"></i>  Personal Info</h5>
-        <p   style="padding-left: 120px;"><img src="https://placekitten.com/300/300" alt="Avatar" class="avatar"> </p>
+        
+        <p  *ngIf="!avator" style="padding-left: 120px;"><img src="https://placekitten.com/300/300" alt="Avatar" class="avatar"> </p>
+        <p  *ngIf="avator" style="padding-left: 120px;"><img src="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{avator}}" alt="Avatar" class="avatar"> </p>
         <div class="container">
             <div class="row">
               <div  class="col-6 col-sm-5">

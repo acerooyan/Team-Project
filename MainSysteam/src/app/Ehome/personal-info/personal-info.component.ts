@@ -18,6 +18,7 @@ export class PersonalInfoComponent implements OnInit {
   public EmergencyContact: EmergencyContact = {};
   public ConatctInfo: ConatctInfo = {};
   public fileNameArray:string[] = [];
+  public avator?: string;
 
   fileInfos?: Observable<any>;
   change_personalInfo = false;
@@ -75,6 +76,9 @@ export class PersonalInfoComponent implements OnInit {
 
           //get documentDomain
           this.fileNameArray = data.documentDomain.fileName;
+
+          //get avator 
+          this.avator = data.avatarDomain.avatar;
           
       },
       (error: any)=>{
@@ -112,18 +116,7 @@ export class PersonalInfoComponent implements OnInit {
     this.displayStyle = "none";
   }
 
-  download(fileNmae: string)
-  {
-      this.service.getFiles(fileNmae).subscribe(
-        (data:any) =>{
-          console.log(data);
-        },
-        (error:any) =>{
-          console.log(error)
-        }
-
-      )
-  }
+ 
 
   edit(url:string, info:any)
   {

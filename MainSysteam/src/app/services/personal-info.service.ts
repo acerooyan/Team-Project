@@ -30,9 +30,6 @@ export class PersonalInfoService {
   } 
 
 
-  getFiles(filename: string): Observable<any> {
-    return this.httpClient.get(`${this.fileUrl + filename}`);
-  }
 
   EditInfo(url:string, info:any):Observable<any>{
     const formData: FormData = new FormData();
