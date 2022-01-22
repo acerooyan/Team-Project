@@ -30,6 +30,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(HttpServletResponse res, @RequestBody UserDomain userDomain) {
+        System.out.println("in log in");
         if (userDomain != null && userDomain.getUserName() != null && userDomain.getPassword() != null) {
             List<UserDomain> userDomainList = userService.checkLogin(userDomain);
             if (userDomainList != null && userDomainList.size() > 0) {
@@ -66,7 +67,7 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<String> logout(HttpServletResponse res, @RequestParam("redirect") String redirect) {
+    public ResponseEntity<String> logout(HttpServletResponse res) {
         CookieUtil.clear(res, JwtConstant.JWT_COOKIE_NAME, "localhost");
         return ResponseEntity.ok().build();
     }

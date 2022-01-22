@@ -17,6 +17,10 @@ import { Step7Component } from './register/step7/step7.component';
 import {RegisterComponent} from "./register/register.component";
 import {RegnavbarComponent} from "./register/regnavbar/regnavbar.component";
 import { FileuploadComponent } from './test/fileupload/fileupload.component';
+import { EnavbarComponent } from './Ehome/enavbar/enavbar.component';
+import { PersonalInfoComponent } from './Ehome/personal-info/personal-info.component';
+import { EhomeComponent } from './Ehome/ehome/ehome.component';
+
 
 const routes: Routes = [
 
@@ -31,6 +35,18 @@ const routes: Routes = [
       {path: 'profile', component: EmployeeProfileComponent},
       {path: 'visa', component: EmpVisaStatusManagementComponent},
       {path: 'hire', component: HireComponent}
+    ]
+  },
+
+
+  {
+    path: 'Enav',
+    component: EnavbarComponent,
+    children: [
+      {path: 'Home', component: PersonalInfoComponent},
+      {path: 'profile', component: PersonalInfoComponent},
+      // {path: 'visa', component: EmpVisaStatusManagementComponent},
+     
     ]
   },
 

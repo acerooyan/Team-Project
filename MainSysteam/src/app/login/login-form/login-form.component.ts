@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl} from '@angular/forms';
 import { VerifyUserService } from 'src/app/services/verify-user.service';
 import { errors } from 'src/app/entity/errors';
-
+import { PersonalInfoService } from 'src/app/services/personal-info.service';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -17,7 +17,7 @@ export class LoginFormComponent implements OnInit {
   errorObject: errors = {code:"", message:""}
   
   
-  constructor(private router: Router, private service: VerifyUserService ) { }
+  constructor(private router: Router, private service: VerifyUserService,private personalInfoService:PersonalInfoService  ) { }
 
   ngOnInit(): void {
    
@@ -40,13 +40,26 @@ export class LoginFormComponent implements OnInit {
               this.router.navigate(['nav/hr']);
             }
             else
-            {
-                 //if empoly call 8080 controller -> {200 : homepage , }
-              // go employee home
-            }
-         
+            { 
 
-            
+              this.router.navigate(['Enav/profile'])
+              //if empoly call 8080 controller -> {200 : homepage , }
+            //   this.personalInfoService.IsApproved().subscribe(
+            //     {
+            //       next:data1 =>{
+            //         console.log(data1);
+            //         this.router.navigate(['Enav/profile'])
+            //       },
+
+            //       error: e1 =>{
+            //         this.errorObject.code = e1.status;
+            //         this.errorObject.message = e1.error;
+            //       }
+            //     }
+            //   )
+                
+            }
+                 
         },
         error: e => {
             

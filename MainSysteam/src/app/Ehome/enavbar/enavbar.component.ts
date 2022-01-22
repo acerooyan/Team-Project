@@ -3,11 +3,11 @@ import {VerifyUserService} from 'src/app/services/verify-user.service'
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-regnavbar',
-  templateUrl: './regnavbar.component.html',
-  styleUrls: ['./regnavbar.component.css']
+  selector: 'app-enavbar',
+  templateUrl: './enavbar.component.html',
+  styleUrls: ['./enavbar.component.css']
 })
-export class RegnavbarComponent implements OnInit {
+export class EnavbarComponent implements OnInit {
 
   constructor(private VerifyUserService: VerifyUserService, private router: Router) { }
 

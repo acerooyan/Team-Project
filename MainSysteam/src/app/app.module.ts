@@ -28,6 +28,9 @@ import { RegisterComponent } from './register/register.component';
 import { FileuploadComponent } from './test/fileupload/fileupload.component';
 import { CommonModule } from '@angular/common';
 import { Step7Component } from './register/step7/step7.component';
+import { EnavbarComponent } from './Ehome/enavbar/enavbar.component';
+import { PersonalInfoComponent } from './Ehome/personal-info/personal-info.component';
+import { EhomeComponent } from './Ehome/ehome/ehome.component';
 
 
 
@@ -52,6 +55,9 @@ import { Step7Component } from './register/step7/step7.component';
     RegisterComponent,
     FileuploadComponent,
     Step7Component,
+    EnavbarComponent,
+    PersonalInfoComponent,
+    EhomeComponent,
    
   ],
   imports: [
