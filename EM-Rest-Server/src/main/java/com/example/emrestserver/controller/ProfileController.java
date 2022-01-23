@@ -8,7 +8,7 @@ import com.example.emrestserver.entity.Person;
 import com.example.emrestserver.security.util.CookieUtil;
 import com.example.emrestserver.security.util.JwtUtil;
 import com.example.emrestserver.service.AwsService;
-import com.example.emrestserver.service.EmployeeService1;
+import com.example.emrestserver.service.EmployeeService;
 import com.example.emrestserver.service.ProfileUpdateService;
 import com.example.emrestserver.service.ProfileUpdateService2;
 import com.google.gson.Gson;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/jwt")
 public class ProfileController {
     @Autowired
-    private EmployeeService1 employeeService1;
+    private EmployeeService employeeService;
 
     @Autowired
     private ProfileUpdateService profileUpdateService;
@@ -46,7 +46,7 @@ public class ProfileController {
         try{
             //get application list from database
         //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
-            ProfileDomain profileDomain = employeeService1.getDataReady(email);
+            ProfileDomain profileDomain = employeeService.getDataReady(email);
             return  ResponseEntity.ok().body(profileDomain);
         }catch (Exception e){
             System.out.println("error catch");
@@ -222,9 +222,9 @@ public class ProfileController {
 
 
                 fileName = awsService.uploadFile(file);
-                Employee employee = employeeService1.getEmpolyeeByEmail(email);
+                Employee employee = employeeService.getEmpolyeeByEmail(email);
                 employee.setAvatar(fileName);
-                employeeService1.updateEmployee(employee);
+                employeeService.updateEmployee(employee);
 //                Gson g = new Gson();
 //                EmergencyContactDomain emergencyContactDomain = g.fromJson(model,EmergencyContactDomain.class);
 //                profileUpdateService2.changeEmergencyContact(emergencyContactDomain,email);

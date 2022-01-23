@@ -18,7 +18,7 @@ import java.sql.Date;
 public class VisaStatusController {
 
     @Autowired
-    EmployeeService1 employeeService1;
+    EmployeeService employeeService;
 
     @Autowired
     EmployeeVisaService employeeVisaService;
@@ -61,15 +61,15 @@ public class VisaStatusController {
 
             if(workFlowStatus.equals("reject")){
                 //update comment
-                employeeService1.updateWorkFlowByType(hrVisaStatusDomain.getCurrentStep(),email,hrVisaStatusDomain.getComment(),hrVisaStatusDomain.getWorkflowStatus());
+                employeeService.updateWorkFlowByType(hrVisaStatusDomain.getCurrentStep(),email,hrVisaStatusDomain.getComment(),hrVisaStatusDomain.getWorkflowStatus());
             }else{
                 hrVisaService2.buildPerson(hrVisaStatusDomain,email);
 
                 //update visastatus
-                employeeService1.updateVisaStatus(email,hrVisaStatusDomain.visa);
+                employeeService.updateVisaStatus(email,hrVisaStatusDomain.visa);
 
                 //update employee
-                Employee employee = employeeService1.getEmpolyeeByEmail(email);
+                Employee employee = employeeService.getEmpolyeeByEmail(email);
                 employee.setStartDate(Date.valueOf(hrVisaStatusDomain.getStartDate()));
                 employee.setEndDate(Date.valueOf(hrVisaStatusDomain.getEndDate()));
 
@@ -79,7 +79,7 @@ public class VisaStatusController {
             }
 
             //update Workflow
-            employeeService1.updateWorkFlowByType(hrVisaStatusDomain.getCurrentStep(),email,"",hrVisaStatusDomain.getWorkflowStatus());
+            employeeService.updateWorkFlowByType(hrVisaStatusDomain.getCurrentStep(),email,"",hrVisaStatusDomain.getWorkflowStatus());
 
 
 
@@ -123,13 +123,13 @@ public class VisaStatusController {
             String fileName = awsService.uploadFile(file);
 
             if(employeeStatusDomain.getStatus().equalsIgnoreCase("reject")){
-                personalDocumentService.updatePersonalDocument(fileName,employeeService1.getEmpolyeeByEmail(email));
+                personalDocumentService.updatePersonalDocument(fileName, employeeService.getEmpolyeeByEmail(email));
             }else{
 
-                personalDocumentService.buildDocument(fileName,employeeService1.getEmpolyeeByEmail(email));
+                personalDocumentService.buildDocument(fileName, employeeService.getEmpolyeeByEmail(email));
 
             }
-            employeeService1.updateWorkFlowByType(employeeStatusDomain.getNextStep(),email,"","pending");
+            employeeService.updateWorkFlowByType(employeeStatusDomain.getNextStep(),email,"","pending");
 
 
             return  ResponseEntity.ok().body(employeeStatusDomain);
