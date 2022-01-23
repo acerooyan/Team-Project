@@ -1,7 +1,6 @@
 package com.example.emrestserver.service;
 
 import com.example.emrestserver.dao.EmployeeDao;
-import com.example.emrestserver.dao.EmployeeDao2;
 import com.example.emrestserver.domains.profile.*;
 import com.example.emrestserver.domains.standalone.AddressDomain;
 import com.example.emrestserver.entity.*;
@@ -153,5 +152,15 @@ public class EmployeeService1 {
     @Transactional
     public Employee updateEmployee(Employee employee){
         return employeeDao.updateEmployee(employee);
+    }
+
+    @Transactional
+    public VisaStatus updateVisaStatus(String email,String visaType){
+        return employeeDao.updateVisaStatus(email,visaType);
+    }
+
+    @Transactional
+    public ApplicationWorkFlow updateWorkFlowByType(String type, String email, String comments, String status){
+        return employeeDao.updateWorkFlowByType(type, email,comments,status);
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class StatusController {
+public class LoginStatusController {
 
     @Autowired
     EmployeeService1 employeeService1;

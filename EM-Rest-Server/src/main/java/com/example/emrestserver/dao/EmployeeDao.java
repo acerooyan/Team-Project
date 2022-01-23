@@ -93,4 +93,25 @@ public class EmployeeDao {
 
         return applicationWorkFlowList.get(applicationWorkFlowList.size()-1);
     }
+
+   public VisaStatus updateVisaStatus(String email,String visaType){
+       VisaStatus visaStatus = getEmployeeByEmail(email).getVisaStatus();
+       visaStatus.setVisaType(visaType);
+       Session session = getCurrentSession();
+       return (VisaStatus) session.merge(visaStatus);
+
+   }
+
+   public ApplicationWorkFlow updateWorkFlowByType(String type,String email,String comments,String status){
+       Employee employee = getEmployeeByEmail(email);
+       Session session = getCurrentSession();
+       Query query = session.createQuery("FROM ApplicationWorkFlow a WHERE employee =:employee and type = :type");
+       query.setParameter("employee", employee);
+       query.setParameter("type", type);
+       ApplicationWorkFlow applicationWorkFlow = (ApplicationWorkFlow) query.getSingleResult();
+       applicationWorkFlow.setComments(comments);;
+       applicationWorkFlow.setStatus(status);
+
+       return (ApplicationWorkFlow) session.merge(applicationWorkFlow);
+   }
 }

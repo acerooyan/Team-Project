@@ -18,4 +18,5 @@ public class HrVisaStatusDomain {
     public String currentStep;
     public String nextStep;
     public String comment;
+    public String workflowStatus;
 }
