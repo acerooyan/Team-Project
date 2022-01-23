@@ -33,7 +33,7 @@ public class PersonDao {
             totalNum = l.intValue();
         }
         if(maxResult==null)maxResult = 2;
-        criteria.setFirstResult(curPage * maxResult);
+        criteria.setFirstResult((curPage-1) * maxResult);
         criteria.setMaxResults(maxResult);
         List<Person> personList = criteria.list();
         if (personList != null && personList.size() > 0) {

@@ -51,7 +51,7 @@ public class HomeController {
         }
     }
 
-    @PostMapping("/employee/profiles")
+    @PostMapping("/hr/employee/profiles")
     public ResponseEntity<EmployeeProfileDomain> getAllProfiles(@RequestBody EmployeeProfileDomain employeeProfileDomain) {
         EmployeeProfileDomain employeeProfileDomain1 = personService.getEmployees(employeeProfileDomain.getCurPage(), employeeProfileDomain.getTotalNum(), employeeProfileDomain.getMaxResult(), employeeProfileDomain.getEmail());
         return ResponseEntity.ok(employeeProfileDomain1);
