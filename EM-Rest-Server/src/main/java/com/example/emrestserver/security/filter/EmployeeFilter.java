@@ -1,21 +1,19 @@
 package com.example.emrestserver.security.filter;
 
 import com.example.emrestserver.constant.JwtConstant;
-import com.example.emrestserver.security.util.CookieUtil;
-import com.example.emrestserver.security.util.JwtUtil;
+import com.example.emrestserver.security.CookieUtil;
+import com.example.emrestserver.security.JwtUtil;
 import io.jsonwebtoken.Claims;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
 @WebFilter(urlPatterns = "/api/employee/*")
 public class EmployeeFilter implements Filter {
-
 
 
     @Override
@@ -36,15 +34,15 @@ public class EmployeeFilter implements Filter {
 
         String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
         System.out.println("+++++++++EmployeeFilter++++++++");
-        System.out.println(token+"token");
+        System.out.println(token + "token");
 
         Claims claims = JwtUtil.getClaimsFromJwt(token);
         String role = null;
-        if(claims!=null){
+        if (claims != null) {
             role = claims.get("role").toString();
             System.out.println(role);
         }
-
+        filterChain.doFilter(req, res);
         if (role != null && !role.equalsIgnoreCase("employee")) {
             System.out.println("Failed employee filter, direct back to login");
             res.setStatus(401);

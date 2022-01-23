@@ -6,8 +6,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -73,7 +73,7 @@ public class Employee implements Serializable {
     private Date driverLicence_ExpirationDate;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "HouseID")
     private House house;
     //    @Column(name = "HouseID")
