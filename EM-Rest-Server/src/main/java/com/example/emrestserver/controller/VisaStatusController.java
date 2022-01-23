@@ -95,9 +95,8 @@ public class VisaStatusController {
         EmployeeStatusDomain employeeStatusDomain = null;
         try{
             //todo: return work flow
-            ApplicationWorkFlow largestWorkFlow =  employeeVisaService.getLargestWorkFlowByEmail(email);
 
-
+            employeeStatusDomain = employeeVisaService.mainService(email);
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
             System.out.println("error catch");

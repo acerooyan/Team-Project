@@ -12,6 +12,8 @@ public class EmployeeStatusDomain {
     private String nextStep;
     private String comment;
     private String status;
+    private String i983;
+    private String i983Sample;
     String[] documents;
 
 }

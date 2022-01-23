@@ -67,6 +67,8 @@ public class HrVisaStatusService {
                     .documents(documentArr)
                     .currentStep(currentStep)
                     .nextStep(nextStep)
+                    .comment("")
+                    .workflowStatus("")
                     .build();
             hrVisaStatusDomains[i] = hrVisaStatusDomain;
         }
