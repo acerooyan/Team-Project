@@ -4,10 +4,7 @@ import com.example.emrestserver.domains.visaStatus.EmployeeStatusDomain;
 import com.example.emrestserver.domains.visaStatus.HrVisaStatusDomain;
 import com.example.emrestserver.entity.ApplicationWorkFlow;
 import com.example.emrestserver.entity.Employee;
-import com.example.emrestserver.service.EmployeeService1;
-import com.example.emrestserver.service.EmployeeVisaService;
-import com.example.emrestserver.service.HrVisaService2;
-import com.example.emrestserver.service.RegisterService;
+import com.example.emrestserver.service.*;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +28,12 @@ public class VisaStatusController {
 
     @Autowired
     RegisterService registerService;
+
+    @Autowired
+    private AwsService awsService;
+
+    @Autowired
+    private PersonalDocumentService personalDocumentService;
 
     @GetMapping("/hr/visaStatus")
     public ResponseEntity<HrVisaStatusDomain> getAllVisaStatus() {
@@ -108,9 +111,26 @@ public class VisaStatusController {
 
     @PostMapping("/em/visaStatus")
     public ResponseEntity<EmployeeStatusDomain> updateWorkFlowAndFile(@RequestPart(value = "model") String model,@RequestPart(value = "file") MultipartFile file) {
+//        HttpServletRequest req = (HttpServletRequest) servletRequest;
+//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+//        String email = JwtUtil.getSubjectFromJwt(token);
+        String email = "jamesh970327@gmail.com";
         EmployeeStatusDomain employeeStatusDomain = null;
         try{
             //todo: update database workflow and document
+            Gson g = new Gson();
+            employeeStatusDomain = g.fromJson(model,EmployeeStatusDomain.class);
+            String fileName = awsService.uploadFile(file);
+
+            if(employeeStatusDomain.getStatus().equalsIgnoreCase("reject")){
+                personalDocumentService.updatePersonalDocument(fileName,employeeService1.getEmpolyeeByEmail(email));
+            }else{
+
+                personalDocumentService.buildDocument(fileName,employeeService1.getEmpolyeeByEmail(email));
+
+            }
+            employeeService1.updateWorkFlowByType(employeeStatusDomain.getNextStep(),email,"","pending");
+
 
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){

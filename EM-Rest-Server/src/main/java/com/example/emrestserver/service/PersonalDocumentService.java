@@ -45,4 +45,19 @@ public class PersonalDocumentService {
         return personalDocumentDao.getEmployee();
     }
 
+    @Transactional
+    public PersonalDocument updatePersonalDocument(String path, Employee employee){
+        String[] arrOfStr = path.split("_", 2);
+        PersonalDocument personalDocument = PersonalDocument.builder()
+                .employee(employee)
+                .path(path)
+                .title(arrOfStr[1])
+                .comment("")
+                .createdDate(new Date(System.currentTimeMillis()))
+                .createdBy(employee.getPerson().getFirstname())
+                .build();
+
+        return personalDocumentDao.addPersonalDocument(personalDocument);
+    }
+
 }

@@ -38,5 +38,14 @@ public class PersonalDocumentDao {
     }
 
 
+    public PersonalDocument updatePersonalDocument( PersonalDocument personalDocument){
+        Session session = getCurrentSession();
+
+
+        session.merge(personalDocument);
+        return personalDocument;
+    }
+
+
 
 }
