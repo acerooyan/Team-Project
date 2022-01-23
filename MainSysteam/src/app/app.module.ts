@@ -27,6 +27,7 @@ import {Step7Component} from './register/step7/step7.component';
 import {EnavbarComponent} from './Ehome/enavbar/enavbar.component';
 import {PersonalInfoComponent} from './Ehome/personal-info/personal-info.component';
 import {EhomeComponent} from './Ehome/ehome/ehome.component';
+import {VisaStatusComponent} from "./Ehome/visa-status/visa-status.component";
 import {FilledInfoComponent} from './filled-info/filled-info.component';
 import {NavComponent} from './filled-info/nav/nav.component';
 import {step2Component} from './filled-info/step2/step2.component'
@@ -62,6 +63,7 @@ import {NgxPaginationModule} from "ngx-pagination";
     Step7Component,
     EnavbarComponent,
     PersonalInfoComponent,
+    VisaStatusComponent,
     EhomeComponent,
     FilledInfoComponent,
     NavComponent,

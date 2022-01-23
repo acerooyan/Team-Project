@@ -19,6 +19,7 @@ import {RegnavbarComponent} from "./register/regnavbar/regnavbar.component";
 import { FileuploadComponent } from './test/fileupload/fileupload.component';
 import { EnavbarComponent } from './Ehome/enavbar/enavbar.component';
 import { PersonalInfoComponent } from './Ehome/personal-info/personal-info.component';
+import {VisaStatusComponent} from "./Ehome/visa-status/visa-status.component";
 import { EhomeComponent } from './Ehome/ehome/ehome.component';
 import { NavComponent } from './filled-info/nav/nav.component';
 import { step2Component } from './filled-info/step2/step2.component'
@@ -39,25 +40,25 @@ const routes: Routes = [
       {path: 'hr', component: HrpageComponent},
       {path: 'profile', component: EmployeeProfileComponent},
       {path: 'visa', component: EmpVisaStatusManagementComponent},
-      {path: 'hire', component: HireComponent, 
-    
+      {path: 'hire', component: HireComponent,
+
       children: [
-        
+
         {
           path: 'hireNav', component: NavComponent,
           children: [
-           
+
             {path: 'step2', component: step2Component},
             {path: 'step3', component: step3Component},
             {path: 'step4', component: step4Component},
             {path: 'step5', component: step5Component},
             {path: 'step6', component: step6Component},
-            
+
           ]
         },
-        
+
       ]
-      
+
     }
     ]
   },
@@ -69,12 +70,12 @@ const routes: Routes = [
     children: [
       {path: 'Home', component: PersonalInfoComponent},
       {path: 'profile', component: PersonalInfoComponent},
-      // {path: 'visa', component: EmpVisaStatusManagementComponent},
-     
+      {path: 'visa', component: VisaStatusComponent}
+
     ]
   },
 
- 
+
   {
     path: 'regnav', component: RegnavbarComponent,
     children: [
@@ -84,13 +85,13 @@ const routes: Routes = [
       {path: 'step4', component: Step4Component},
       {path: 'step5', component: Step5Component},
       {path: 'step6', component: Step6Component},
-      
+
     ]
   },
 
   {path: 'step7', component: Step7Component},
   {path: 'upload', component:FileuploadComponent},
-  
+
 {path:'**', component:WildCardComponent}
 
 
