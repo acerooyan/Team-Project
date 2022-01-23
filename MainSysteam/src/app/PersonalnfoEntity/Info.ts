@@ -16,12 +16,6 @@ export interface employee{
     
 }
 
-// export interface Address{
-//     AddressLine1?: string,
-//     workAuthorizationSD?: string,
-//     workAuthorizationED?: string,
-//     title?:string;
-// }
 
 export interface EmergencyContact{
     fullName?: string,
@@ -45,4 +39,13 @@ export interface address{
     state?: string,
     zipcode?: string,
    
+}
+
+export interface applicationWorkflow
+{
+    status?:string,
+    type? : string,
+    comments? : string
+    email?:string,
+    name? :string
 }

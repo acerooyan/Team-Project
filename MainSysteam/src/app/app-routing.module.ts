@@ -34,7 +34,26 @@ const routes: Routes = [
       {path: 'hr', component: HrpageComponent},
       {path: 'profile', component: EmployeeProfileComponent},
       {path: 'visa', component: EmpVisaStatusManagementComponent},
-      {path: 'hire', component: HireComponent}
+      {path: 'hire', component: HireComponent, 
+    
+      children: [
+        
+        {
+          path: 'hireNav', component: RegnavbarComponent,
+          children: [
+           
+            {path: 'step2', component: Step2Component},
+            {path: 'step3', component: Step3Component},
+            {path: 'step4', component: Step4Component},
+            {path: 'step5', component: Step5Component},
+            {path: 'step6', component: Step6Component},
+            
+          ]
+        },
+        
+      ]
+      
+    }
     ]
   },
 
