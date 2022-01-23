@@ -63,7 +63,7 @@ public class HrVisaStatusService {
                     .visa(employees[i].getVisaStatus().getVisaType())
                     .startDate(employees[i].getVisaStartDate().toString())
                     .endDate(employees[i].getVisaEndDate().toString())
-                    .dayLeft(daysLeft(employees[i].getVisaStartDate(),employees[i].getVisaEndDate()))
+                    .dayLeft(daysLeft(employees[i].getVisaEndDate()))
                     .documents(documentArr)
                     .currentStep(currentStep)
                     .nextStep(nextStep)
@@ -95,9 +95,9 @@ public class HrVisaStatusService {
         return "";
     }
 
-    public Integer daysLeft(Date startDate, Date endDate){
+    public Integer daysLeft(Date endDate){
 
-        LocalDate start = startDate.toLocalDate();
+        LocalDate start = LocalDate.now();
         LocalDate end = endDate.toLocalDate();
         Integer days = (int) ChronoUnit.DAYS.between(start, end);
         return days;

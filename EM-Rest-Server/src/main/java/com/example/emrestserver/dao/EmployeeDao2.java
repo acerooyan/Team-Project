@@ -30,7 +30,7 @@ public class EmployeeDao2 {
     public PersonalDocument[] getDocumentByEmployeeId(Integer id){
         Session session = getCurrentSession();
 
-        Query query = session.createQuery("FROM  PersonalDocument p WHERE p.employee.id = :id");
+        Query query = session.createQuery("FROM  PersonalDocument p WHERE p.employee.id = :id ORDER BY id DESC");
         query.setParameter("id",id);
         List<PersonalDocument> personalDocumentList= (List<PersonalDocument>) query.getResultList();
 

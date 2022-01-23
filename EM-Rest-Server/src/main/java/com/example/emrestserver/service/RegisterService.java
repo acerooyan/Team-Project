@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service("registerService")
 public class RegisterService {
@@ -132,9 +134,11 @@ public class RegisterService {
 
     @Transactional
     public Employee addEmployee(Person p, VisaStatus visaStatus, ResidentialStatusDomain residentialStatusDomain, CarInfoDomain carInfoDomain, String avatarName){
+        LocalDateTime yearAfter = LocalDateTime.now().plusYears(1);
         Employee employee = Employee.builder()
                 .person(p)
                 .startDate(new Date(System.currentTimeMillis()))
+                .endDate(Date.valueOf(String.valueOf(yearAfter)))
                 .visaStatus(visaStatus)
                 .title("employee")
                 .build();

@@ -4,10 +4,7 @@ import com.example.emrestserver.domains.visaStatus.EmployeeStatusDomain;
 import com.example.emrestserver.domains.visaStatus.HrVisaStatusDomain;
 import com.example.emrestserver.entity.ApplicationWorkFlow;
 import com.example.emrestserver.entity.Employee;
-import com.example.emrestserver.service.EmployeeService1;
-import com.example.emrestserver.service.EmployeeVisaService;
-import com.example.emrestserver.service.HrVisaService2;
-import com.example.emrestserver.service.RegisterService;
+import com.example.emrestserver.service.*;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +27,8 @@ public class VisaStatusController {
     HrVisaService2 hrVisaService2;
 
     @Autowired
+    HrVisaStatusService hrVisaStatusService;
+    @Autowired
     RegisterService registerService;
 
     @GetMapping("/hr/visaStatus")
@@ -37,7 +36,7 @@ public class VisaStatusController {
         HrVisaStatusDomain hrVisaStatusDomain = null;
         try{
             //todo: return domain object and put int in body.
-
+            hrVisaStatusService.mainService();
             return  ResponseEntity.ok().body(hrVisaStatusDomain);
         }catch (Exception e){
             System.out.println("error catch");
