@@ -7,6 +7,8 @@ export class StatusInfo{
   nextStep?: String;
   comment?: String;
   documents?: string[];
+  i983?: String;
+  i983Sample?: String;
 }
 @Component({
   selector: 'app-visa-status',
@@ -18,17 +20,17 @@ export class VisaStatusComponent implements OnInit {
   public statusInfo: StatusInfo = {};
 
   selectedFiles?: FileList;
-  private statusInfoUrl = "";
+  private statusInfoUrl = "api/jwt/em/visaStatus";
   constructor(private httpClient: HttpClient) { }
   ngOnInit(): void {
     this.getStatusInfo().subscribe(
       (data:any) =>{
         console.log(data);
         this.statusInfo = {
-          currentStep:data.statusInfoDomain.currentStep,
-          nextStep:data.statusInfoDomain.nextStep,
-          comment: data.statusInfoDomain.comment,
-          documents:data.statusInfoDomain.documents
+          currentStep:data.employeeStatusDomain.currentStep,
+          nextStep:data.employeeStatusDomain.nextStep,
+          comment: data.employeeStatusDomain.comment,
+          documents:data.employeeStatusDomain.documents
         };
       }
     )

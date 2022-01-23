@@ -33,23 +33,31 @@ export class EmpVisaStatusManagementComponent implements OnInit {
     endDate:"2021",
     dayLeft:"10"
   },
-    {fullName: "yy",
+    {fullName: "cc",
       visa:"OPT",
       startDate:"1999",
       endDate:"2030",
       dayLeft:"20"
     },
   ]
-  private statusInfoUrl = "";
+  private statusInfoUrl = "api/jwt/hr/visaStatus";
+  private showDetail!: any[];
+
   constructor(private httpClient: HttpClient,private router: Router) { }
   changedName?:String;
+
   ngOnInit(): void {
+
     this.getStatusInfo().subscribe(
       (data:any) =>{
         console.log(data);
-        for(let i=0; i < data.statusDomains.length; i++) {
-          this.statusList.push(data.statusDomains[i]);
+
+        for(let i=0; i < data.hrVisaStatusDomain.length; i++) {
+          this.statusList.push(data.hrVisaStatusDomain[i]);
+          // this.showDetail.push(false);
+           this.showDetail = new Array(data.hrVisaStatusDomain.length).fill(false);
         }
+
       },
       (error: any)=>{
         if (error.status === 401) {
@@ -65,8 +73,9 @@ export class EmpVisaStatusManagementComponent implements OnInit {
   getStatusInfo():Observable<any> {
     return this.httpClient.get(this.statusInfoUrl);
   }
-  public index=0
-  showDetail = [false,false];
+  public index!:number;
+
+
 getDetail(i:number) {
   this.index = i;
 this.showDetail[i] = !this.showDetail[i];
@@ -74,6 +83,25 @@ this.showDetail[i] = !this.showDetail[i];
 }
 getArrayIndex(){
   return this.showDetail[this.index];
+}
+approve(index:number) {
+  this.statusList[index].workflowStatus = "approve";
+
+}
+reject(index:number) {
+  this.statusList[index].workflowStatus = "reject";
+}
+//return a userInfo modified from statusList
+submit(index:number) {
+  const formData: FormData = new FormData();
+  formData.append("model",JSON.stringify(this.statusList[index]))
+
+  const req = new HttpRequest('POST', this.statusInfoUrl, formData, {
+    reportProgress: true,
+    responseType: 'json'
+  });
+
+  return this.httpClient.request(req);
 }
 
 }

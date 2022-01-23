@@ -1,3 +1,4 @@
+
 <table class="table">
   <thead>
   <tr>
@@ -9,7 +10,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr (click)="getDetail(i)" *ngFor="let status of test; let i=index">
+  <tr (click)="getDetail(i)" *ngFor="let status of statusList; let i=index">
     <td scope="row">{{i}}</td>
     <td>{{status.fullName}}</td>
     <td>{{status.visa}}</td>
@@ -19,20 +20,63 @@
   </tr>
 
   </tbody>
+
 </table>
+
+
 <div [hidden]="!getArrayIndex()">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
   <div>
     <label>Name:</label>
-    <input type="text" [(ngModel)]="test[index].fullName" name="fullname" ng-init="test[index].fullName">
+    <input type="text" [disabled]="statusList[index].nextStep=='complete'" [(ngModel)]="statusList[index].fullName" name="fullname" ng-init="statusList[index].fullName">
   </div>
   <div>
     <Label>Visa:</Label>
+    <input type="text" [disabled]="statusList[index].nextStep=='complete'" [(ngModel)]="statusList[index].visa" name="visa" ng-init="statusList[index].visa">
   </div>
   <div>
     <label>Start Date:</label>
+    <input type="text" [disabled]="statusList[index].nextStep=='complete'" [(ngModel)]="statusList[index].startDate" name="startDate" ng-init="statusList[index].startDate">
   </div>
   <div>
     <label>End Date:</label>
+    <input type="text" [disabled]="statusList[index].nextStep=='complete'" [(ngModel)]="statusList[index].endDate" name="endDate" ng-init="statusList[index].endDate">
   </div>
+</div>
+      </div>
+    </div>
 
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Document Received</h5>
+
+        <li class="list-group-item" *ngFor="let file of statusList[index].documents">
+          <a target="_blank" href="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{file}}">
+            <i class="fa fa-file" style="font-size:36px;"></i>
+            {{file}} </a>
+        </li>
+        <h5 class="card-title">Next Step</h5>
+
+        {{statusList[index].nextStep}}
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Comment</h5>
+        <input type="text" [disabled]="statusList[index].nextStep=='complete'" [(ngModel)]="statusList[index].comment" name="comment" >
+        <h5 class="card-title">Next Step</h5>
+        {{statusList[index].nextStep}}
+        <button  [disabled]="statusList[index].nextStep=='complete'" (click)="approve(index);submit(index)">Approve</button>
+        <button  [disabled]="statusList[index].nextStep=='complete'" (click)="reject(index); submit(index)">Reject</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>

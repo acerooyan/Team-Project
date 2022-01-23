@@ -3,10 +3,21 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Visa Status</h5>
+        <div>
         <p class="card-text">Current Status:</p>
         {{statusInfo.currentStep}}
+        </div><div>
         <p class="card-text">Next Step:</p>
         {{statusInfo.nextStep}}
+      </div>
+        <div [hidden]="statusInfo.i983==null">
+          <a target="_blank" href="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{statusInfo.i983}}">
+            <i class="fa fa-file" style="font-size:36px;"></i>
+            {{statusInfo.i983}} </a>
+          <a target="_blank" href="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{statusInfo.i983Sample}}">
+            <i class="fa fa-file" style="font-size:36px;"></i>
+            {{statusInfo.i983Sample}} </a>
+        </div>
         <div class="input-group mb-3">
           <label>Upload file</label>
           <br>
