@@ -1,18 +1,15 @@
 package com.example.emrestserver.dao;
 
 import com.example.emrestserver.entity.Contact;
-import com.example.emrestserver.entity.Employee;
-import com.example.emrestserver.entity.PersonalDocument;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public class EmployeeDao2 {
+public class EmergencyDao {
+
     @Autowired
     protected SessionFactory sessionFactory;
     protected  final Session getCurrentSession(){
@@ -26,6 +23,7 @@ public class EmployeeDao2 {
         query.setParameter("id",id);
         return (Contact) query.getSingleResult();
     }
+<<<<<<< HEAD:EM-Rest-Server/src/main/java/com/example/emrestserver/dao/EmployeeDao2.java
 
     public PersonalDocument[] getDocumentByEmployeeId(Integer id){
         Session session = getCurrentSession();
@@ -39,4 +37,6 @@ public class EmployeeDao2 {
 
         return personalDocuments;
     }
+=======
+>>>>>>> f7544bbf5e2a9f94d7f0752011e219e092134a3d:EM-Rest-Server/src/main/java/com/example/emrestserver/dao/EmergencyDao.java
 }

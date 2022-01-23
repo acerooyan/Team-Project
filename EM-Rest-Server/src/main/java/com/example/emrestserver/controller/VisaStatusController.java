@@ -18,7 +18,7 @@ import java.sql.Date;
 public class VisaStatusController {
 
     @Autowired
-    EmployeeService1 employeeService1;
+    EmployeeService employeeService;
 
     @Autowired
     EmployeeVisaService employeeVisaService;
@@ -30,6 +30,12 @@ public class VisaStatusController {
     HrVisaStatusService hrVisaStatusService;
     @Autowired
     RegisterService registerService;
+
+    @Autowired
+    private AwsService awsService;
+
+    @Autowired
+    private PersonalDocumentService personalDocumentService;
 
     @GetMapping("/hr/visaStatus")
     public ResponseEntity<HrVisaStatusDomain> getAllVisaStatus() {
@@ -57,15 +63,15 @@ public class VisaStatusController {
 
             if(workFlowStatus.equals("reject")){
                 //update comment
-                employeeService1.updateWorkFlowByType(hrVisaStatusDomain.getCurrentStep(),email,hrVisaStatusDomain.getComment(),hrVisaStatusDomain.getWorkflowStatus());
+                employeeService.updateWorkFlowByType(hrVisaStatusDomain.getCurrentStep(),email,hrVisaStatusDomain.getComment(),hrVisaStatusDomain.getWorkflowStatus());
             }else{
                 hrVisaService2.buildPerson(hrVisaStatusDomain,email);
 
                 //update visastatus
-                employeeService1.updateVisaStatus(email,hrVisaStatusDomain.visa);
+                employeeService.updateVisaStatus(email,hrVisaStatusDomain.visa);
 
                 //update employee
-                Employee employee = employeeService1.getEmpolyeeByEmail(email);
+                Employee employee = employeeService.getEmpolyeeByEmail(email);
                 employee.setStartDate(Date.valueOf(hrVisaStatusDomain.getStartDate()));
                 employee.setEndDate(Date.valueOf(hrVisaStatusDomain.getEndDate()));
 
@@ -75,7 +81,7 @@ public class VisaStatusController {
             }
 
             //update Workflow
-            employeeService1.updateWorkFlowByType(hrVisaStatusDomain.getCurrentStep(),email,"",hrVisaStatusDomain.getWorkflowStatus());
+            employeeService.updateWorkFlowByType(hrVisaStatusDomain.getCurrentStep(),email,"",hrVisaStatusDomain.getWorkflowStatus());
 
 
 
@@ -106,9 +112,26 @@ public class VisaStatusController {
 
     @PostMapping("/em/visaStatus")
     public ResponseEntity<EmployeeStatusDomain> updateWorkFlowAndFile(@RequestPart(value = "model") String model,@RequestPart(value = "file") MultipartFile file) {
+//        HttpServletRequest req = (HttpServletRequest) servletRequest;
+//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+//        String email = JwtUtil.getSubjectFromJwt(token);
+        String email = "jamesh970327@gmail.com";
         EmployeeStatusDomain employeeStatusDomain = null;
         try{
             //todo: update database workflow and document
+            Gson g = new Gson();
+            employeeStatusDomain = g.fromJson(model,EmployeeStatusDomain.class);
+            String fileName = awsService.uploadFile(file);
+
+            if(employeeStatusDomain.getStatus().equalsIgnoreCase("reject")){
+                personalDocumentService.updatePersonalDocument(fileName, employeeService.getEmpolyeeByEmail(email));
+            }else{
+
+                personalDocumentService.buildDocument(fileName, employeeService.getEmpolyeeByEmail(email));
+
+            }
+            employeeService.updateWorkFlowByType(employeeStatusDomain.getNextStep(),email,"","pending");
+
 
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
