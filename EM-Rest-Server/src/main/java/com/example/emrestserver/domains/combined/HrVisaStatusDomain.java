@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HrVisaStatusDomain {
+    public String email;
     public String fullName;
     public String visa;
     public String startDate;
