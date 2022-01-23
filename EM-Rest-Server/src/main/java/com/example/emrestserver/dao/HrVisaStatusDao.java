@@ -1,6 +1,8 @@
 package com.example.emrestserver.dao;
 
+import com.example.emrestserver.entity.ApplicationWorkFlow;
 import com.example.emrestserver.entity.Employee;
+import com.example.emrestserver.entity.VisaStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -29,6 +31,15 @@ public class HrVisaStatusDao {
         return employeeArr;
     }
 
+    public ApplicationWorkFlow getCurrentStep(Integer employeeId){
+
+        Session session = getCurrentSession();
+        Query getVisaCurrentByEmployeeId = session.createQuery("From ApplicationWorkFlow awf WHERE awf.employee.id= :id order by awf.id desc");
+        getVisaCurrentByEmployeeId.setParameter("id", employeeId);
+        getVisaCurrentByEmployeeId.setMaxResults(1);
+
+
+    }
     // generate next step(only String not creating the application work flow;
 
 
