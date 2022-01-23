@@ -6,14 +6,14 @@ import lombok.*;
 @ToString
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class MergeDomain {
 
-    BasicInfoDomain basicInfoDomain;
-    ContactInfoDomain contactInfoDomain;
-    CarInfoDomain carInfoDomain;
-    ContactEmergencyDomain contactEmergencyDomain;
-    ContactReferenceDomain contactReferenceDomain;
-    ResidentialStatusDomain residentialStatusDomain;
+//    BasicInfoDomain basicInfoDomain;
+//    ContactInfoDomain contactInfoDomain;
+//    CarInfoDomain carInfoDomain;
+//    ContactEmergencyDomain contactEmergencyDomain;
+//    ContactReferenceDomain contactReferenceDomain;
+//    ResidentialStatusDomain residentialStatusDomain;
 
 }

@@ -2,10 +2,9 @@ package com.example.emrestserver.security.filter;
 
 
 import com.example.emrestserver.constant.JwtConstant;
-import com.example.emrestserver.security.util.CookieUtil;
-import com.example.emrestserver.security.util.JwtUtil;
+import com.example.emrestserver.security.CookieUtil;
+import com.example.emrestserver.security.JwtUtil;
 import io.jsonwebtoken.Claims;
-import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -55,6 +54,7 @@ public class JwtFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse res = (HttpServletResponse) servletResponse;
         HttpServletRequest req = (HttpServletRequest) servletRequest;
+        filterChain.doFilter(req, res);
         res.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         System.out.println(req.getHeader("Origin"));
         res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -68,8 +68,7 @@ public class JwtFilter implements Filter {
 
         String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
         System.out.println("+++++++++JwtFilter++++++++");
-        System.out.println(token+"token");
-
+        System.out.println(token + "token");
 
 
         String userId = null;
@@ -78,8 +77,7 @@ public class JwtFilter implements Filter {
 
         userId = claims.get("id").toString();
         System.out.println("UserId is " + userId);
-
-        if (userId == null ) {
+        if (userId == null) {
             System.out.println("Failed first filter, direct back to login");
             res.setStatus(401);
         } else {

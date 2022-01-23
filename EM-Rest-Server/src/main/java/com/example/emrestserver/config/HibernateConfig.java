@@ -15,7 +15,7 @@ import java.util.Properties;
 public class HibernateConfig {
 
     @Autowired
-    com.example.emrestserver.config.HibernateDbProperty hibernateDbProperty;
+    HibernateDbProperty hibernateDbProperty;
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {

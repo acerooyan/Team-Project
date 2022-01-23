@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person implements Serializable{
+public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -54,6 +54,13 @@ public class Person implements Serializable{
     @Column(name = "UserId")
     private Integer userId;
 
+    @Transient
+    private Integer curPage;
+    @Transient
+    private Integer totalNum;
+    @Transient
+    private Integer maxResult;
+
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "person")
@@ -68,7 +75,6 @@ public class Person implements Serializable{
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.MERGE)
     private List<Address> addressList = new ArrayList<>();
-
 
 
 }
