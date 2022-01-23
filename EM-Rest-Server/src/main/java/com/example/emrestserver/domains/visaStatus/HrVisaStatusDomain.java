@@ -1,4 +1,4 @@
-package com.example.emrestserver.domains.combined;
+package com.example.emrestserver.domains.visaStatus;
 
 import lombok.*;
 

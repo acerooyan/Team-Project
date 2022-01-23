@@ -83,4 +83,14 @@ public class EmployeeDao {
         Session session = getCurrentSession();
         return (Employee) session.merge(employee);
     }
+
+    public ApplicationWorkFlow getLargestWorkFlowByEmail(String email){
+        Employee employee = getEmployeeByEmail(email);
+        Session session = getCurrentSession();
+        Query query = session.createQuery("FROM ApplicationWorkFlow a WHERE employee =:employee");
+        query.setParameter("employee", employee);
+        List<ApplicationWorkFlow> applicationWorkFlowList = query.getResultList();
+
+        return applicationWorkFlowList.get(applicationWorkFlowList.size()-1);
+    }
 }
