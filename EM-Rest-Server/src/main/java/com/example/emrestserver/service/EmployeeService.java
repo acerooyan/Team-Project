@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @Service
-public class EmployeeService1 {
+public class EmployeeService {
     @Autowired
     EmployeeDao employeeDao;
 
@@ -29,7 +29,7 @@ public class EmployeeService1 {
 
     @Transactional
     public Contact getEmergencyByEmployeeId(Integer id){
-        return getEmergencyByEmployeeId(id);
+        return employeeDao.getEmergencyByEmployeeId(id);
     }
 
     @Transactional
@@ -163,4 +163,6 @@ public class EmployeeService1 {
     public ApplicationWorkFlow updateWorkFlowByType(String type, String email, String comments, String status){
         return employeeDao.updateWorkFlowByType(type, email,comments,status);
     }
+
+
 }

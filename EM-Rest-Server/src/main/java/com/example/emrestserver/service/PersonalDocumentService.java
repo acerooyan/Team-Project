@@ -57,7 +57,11 @@ public class PersonalDocumentService {
                 .createdBy(employee.getPerson().getFirstname())
                 .build();
 
-        return personalDocumentDao.addPersonalDocument(personalDocument);
+        return personalDocumentDao.updatePersonalDocument(personalDocument);
+    }
+
+    public PersonalDocument getPersonalDocumentByTitle( String title,Integer id){
+        return personalDocumentDao.getPersonalDocumentByTitle(title,id);
     }
 
 }

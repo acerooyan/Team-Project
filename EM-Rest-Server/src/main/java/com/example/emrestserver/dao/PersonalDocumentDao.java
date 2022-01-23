@@ -38,12 +38,23 @@ public class PersonalDocumentDao {
     }
 
 
+
     public PersonalDocument updatePersonalDocument( PersonalDocument personalDocument){
         Session session = getCurrentSession();
 
 
         session.merge(personalDocument);
         return personalDocument;
+    }
+
+    public PersonalDocument getPersonalDocumentByTitle( String title,Integer id){
+        Session session = getCurrentSession();
+
+        Query query = session.createQuery("FROM PersonalDocument WHERE title = :title and id = :id");
+        query.setParameter("title",title);
+        query.setParameter("title",id);
+
+        return (PersonalDocument) query.getSingleResult();
     }
 
 
