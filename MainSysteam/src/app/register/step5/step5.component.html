@@ -43,9 +43,9 @@
         <label class="form-label">What is your work authorization?</label>
       <select class="form-select" aria-label="Default select example" required #auth="ngModel" [(ngModel)]="residentialStatus.workAuthorization">
 
-        <option value="H1-B">H1-B</option>
+        <option value="H1B">H1-B</option>
         <option value="L2">L2</option>
-        <option value="F1(CPT/OPT)">F1(CPT/OPT)</option>
+        <option value="OPT">F1(CPT/OPT)</option>
         <option value="H4">H4</option>
         <option value="other">other</option>
       </select>
@@ -63,7 +63,7 @@
         <div class="input-group mb-3">
           <label  class="form-label">Upload a copy of your work authorization</label>
           <input type="file" class="form-control" id="inputGroupFile02" (change)="selectFile($event)">
-          
+
         </div>
     </div>
 

@@ -1,1 +1,38 @@
-<p>emp-visa-status-management works!</p>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Work Authorization</th>
+    <th scope="col">Expiration Date</th>
+    <th scope="col">Day Left</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr (click)="getDetail(i)" *ngFor="let status of test; let i=index">
+    <td scope="row">{{i}}</td>
+    <td>{{status.fullName}}</td>
+    <td>{{status.visa}}</td>
+    <td>{{status.endDate}}</td>
+    <td>{{status.dayLeft}}</td>
+
+  </tr>
+
+  </tbody>
+</table>
+<div [hidden]="!getArrayIndex()">
+  <div>
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="test[index].fullName" name="fullname" ng-init="test[index].fullName">
+  </div>
+  <div>
+    <Label>Visa:</Label>
+  </div>
+  <div>
+    <label>Start Date:</label>
+  </div>
+  <div>
+    <label>End Date:</label>
+  </div>
+
+</div>

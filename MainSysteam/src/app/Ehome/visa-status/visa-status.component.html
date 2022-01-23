@@ -4,15 +4,16 @@
       <div class="card-body">
         <h5 class="card-title">Visa Status</h5>
         <p class="card-text">Current Status:</p>
-        {{currentStatus}}
+        {{statusInfo.currentStep}}
         <p class="card-text">Next Step:</p>
-        {{nextStep}}
+        {{statusInfo.nextStep}}
         <div class="input-group mb-3">
           <label>Upload file</label>
           <br>
           <input type="file" class="form-control"  id="inputGroupFile02" multiple (change)="selectFile($event)" >
 
         </div>
+        <button (click)="reset();submitFile()">submit</button>
       </div>
     </div>
   </div>
@@ -21,11 +22,11 @@
       <div class="card-body">
         <h5 class="card-title">Uploaded Document</h5>
 
-        <!--        <li class="list-group-item" *ngFor="let file of selectedFiles">-->
-        <a target="_blank" href=" ">
-          <i class="fa fa-file" style="font-size:36px;"></i>
-          {{selectedFiles}} </a>
-        <!--        </li>-->
+        <li class="list-group-item" *ngFor="let file of statusInfo.documents">
+          <a target="_blank" href="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{file}}">
+            <i class="fa fa-file" style="font-size:36px;"></i>
+            {{file}} </a>
+        </li>
 
       </div>
     </div>
