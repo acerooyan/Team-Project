@@ -1,9 +1,12 @@
 package com.example.emrestserver.controller;
 
+import com.example.emrestserver.constant.JwtConstant;
 import com.example.emrestserver.domains.profile.*;
 import com.example.emrestserver.domains.standalone.AddressDomain;
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.Person;
+import com.example.emrestserver.security.util.CookieUtil;
+import com.example.emrestserver.security.util.JwtUtil;
 import com.example.emrestserver.service.AwsService;
 import com.example.emrestserver.service.EmployeeService1;
 import com.example.emrestserver.service.ProfileUpdateService;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
@@ -35,10 +39,10 @@ public class ProfileController {
     @GetMapping("/profile")
     public ResponseEntity<ProfileDomain> getProfile(ServletRequest servletRequest) {
 
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-//        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+        String email = JwtUtil.getSubjectFromJwt(token);
+
         try{
             //get application list from database
         //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
@@ -50,12 +54,28 @@ public class ProfileController {
         }
     }
 
+
+    @GetMapping("/hr/profile/byemail")
+    public ResponseEntity<ProfileDomain> getProfilebyemail(ServletRequest servletRequest,@RequestPart(value = "model") String model ) {
+
+        String email = model;
+        try{
+            //get application list from database
+            //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
+            ProfileDomain profileDomain = employeeService1.getDataReady(email);
+            return  ResponseEntity.ok().body(profileDomain);
+        }catch (Exception e){
+            System.out.println("error catch");
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
     @PutMapping("/em/profile/personalInfo")
     public ResponseEntity<Object> personalInfo(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-//        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+        String email = JwtUtil.getSubjectFromJwt(token);
+
 
         if ( model == null || email == null) {
             System.out.println("not found");
@@ -83,10 +103,10 @@ public class ProfileController {
 
     @PutMapping("/em/profile/address")
     public ResponseEntity<Object> address(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-//        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+        String email = JwtUtil.getSubjectFromJwt(token);
+
 
         if ( model == null || email == null) {
             System.out.println("not found");
@@ -109,10 +129,10 @@ public class ProfileController {
 
     @PutMapping("/em/profile/contactInfo")
     public ResponseEntity<Object> contactInfo(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-//        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+        String email = JwtUtil.getSubjectFromJwt(token);
+
 
         if ( model == null || email == null) {
             System.out.println("not found");
@@ -138,10 +158,10 @@ public class ProfileController {
 
     @PutMapping("/em/profile/employment")
     public ResponseEntity<Object> employment(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-//        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+        String email = JwtUtil.getSubjectFromJwt(token);
+
 
         if ( model == null || email == null) {
             System.out.println("not found");
@@ -163,10 +183,10 @@ public class ProfileController {
 
     @PutMapping("/em/profile/emergencyContact")
     public ResponseEntity<Object> emergencyContact(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-//        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+        String email = JwtUtil.getSubjectFromJwt(token);
+
 
         if ( model == null || email == null) {
             System.out.println("not found");
@@ -188,10 +208,10 @@ public class ProfileController {
 
     @PutMapping("/em/profile/avatar")
     public ResponseEntity<Object> avatar(@RequestPart("file") MultipartFile file, ServletRequest servletRequest) {
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-//        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+        String email = JwtUtil.getSubjectFromJwt(token);
+
 
         String fileName;
         if ( file == null || email == null) {
