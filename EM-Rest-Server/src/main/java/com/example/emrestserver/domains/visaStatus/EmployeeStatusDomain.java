@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeStatusDomain {
-    private String currentStep;
+    public String currentStep;
     private String nextStep;
     private String comment;
     private String status;
