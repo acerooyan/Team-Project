@@ -25,6 +25,7 @@ public class HrVisaStatusDao {
         Session session = getCurrentSession();
         Query getAllEmployeeWithVisaStatus = session.createQuery("FROM Employee e WHERE e.visaStatus.visaType = 'OPT'");
         List<Employee> employees = (List<Employee>) getAllEmployeeWithVisaStatus.getResultList();
+
         Employee[] employeeArr = new Employee[employees.size()];
         employees.toArray(employeeArr);
 
@@ -32,15 +33,21 @@ public class HrVisaStatusDao {
     }
 
     public ApplicationWorkFlow getCurrentStep(Integer employeeId){
-
         Session session = getCurrentSession();
         Query getVisaCurrentByEmployeeId = session.createQuery("From ApplicationWorkFlow awf WHERE awf.employee.id= :id order by awf.id desc");
         getVisaCurrentByEmployeeId.setParameter("id", employeeId);
-        getVisaCurrentByEmployeeId.setMaxResults(1);
+        List<ApplicationWorkFlow> applicationWorkFlows = (List<ApplicationWorkFlow>)getVisaCurrentByEmployeeId.getResultList();
+        return applicationWorkFlows.get(0);
+    }
 
+    public ApplicationWorkFlow getPrevStep(Integer employeeId){
+        Session session = getCurrentSession();
+        Query getVisaCurrentByEmployeeId = session.createQuery("From ApplicationWorkFlow awf WHERE awf.employee.id= :id order by awf.id desc");
+        getVisaCurrentByEmployeeId.setParameter("id", employeeId);
+        List<ApplicationWorkFlow> applicationWorkFlows = (List<ApplicationWorkFlow>)getVisaCurrentByEmployeeId.getResultList();
+        return applicationWorkFlows.get(1);
 
     }
-    // generate next step(only String not creating the application work flow;
 
 
 
