@@ -31,6 +31,7 @@ import { Step7Component } from './register/step7/step7.component';
 import { EnavbarComponent } from './Ehome/enavbar/enavbar.component';
 import { PersonalInfoComponent } from './Ehome/personal-info/personal-info.component';
 import { EhomeComponent } from './Ehome/ehome/ehome.component';
+import { VisaStatusComponent } from './Ehome/visa-status/visa-status.component';
 
 
 
@@ -58,6 +59,7 @@ import { EhomeComponent } from './Ehome/ehome/ehome.component';
     EnavbarComponent,
     PersonalInfoComponent,
     EhomeComponent,
+    VisaStatusComponent,
    
   ],
   imports: [
