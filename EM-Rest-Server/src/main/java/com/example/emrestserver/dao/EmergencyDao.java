@@ -23,20 +23,4 @@ public class EmergencyDao {
         query.setParameter("id",id);
         return (Contact) query.getSingleResult();
     }
-<<<<<<< HEAD:EM-Rest-Server/src/main/java/com/example/emrestserver/dao/EmployeeDao2.java
-
-    public PersonalDocument[] getDocumentByEmployeeId(Integer id){
-        Session session = getCurrentSession();
-
-        Query query = session.createQuery("FROM  PersonalDocument p WHERE p.employee.id = :id ORDER BY id DESC");
-        query.setParameter("id",id);
-        List<PersonalDocument> personalDocumentList= (List<PersonalDocument>) query.getResultList();
-
-        PersonalDocument[] personalDocuments = new PersonalDocument[personalDocumentList.size()];
-        personalDocuments = personalDocumentList.toArray(personalDocuments);
-
-        return personalDocuments;
-    }
-=======
->>>>>>> f7544bbf5e2a9f94d7f0752011e219e092134a3d:EM-Rest-Server/src/main/java/com/example/emrestserver/dao/EmergencyDao.java
 }
