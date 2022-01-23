@@ -35,9 +35,9 @@
         <input type="text" [(ngModel)]="address.city" name="city_{{i}}" required #city = "ngModel">
         <div *ngIf="city.invalid && city.touched" class="text-danger">City is Required</div>
       </div> <div>
-        <label>Status(*): </label>
+        <label>State(*): </label>
         <input type="text" [(ngModel)]="address.status" name="status_{{i}}" #status = "ngModel">
-        <div *ngIf="status.invalid && status.touched" class="text-danger">Status is Required</div>
+        <div *ngIf="status.invalid && status.touched" class="text-danger">State is Required</div>
       </div>    <div>
         <label>Zipcode(*): </label>
         <input type="text" [(ngModel)]="address.Zipcode" name="Zipcode_{{i+1}}" required #zip = "ngModel">

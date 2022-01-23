@@ -8,7 +8,7 @@ export class PersonalInfoService {
 
   private mainhrhome= "/api/jwt/profile";
   private editBase = "/api/jwt/em/profile/"
-  private fileUrl  = '/api/jwt/file/download/';
+  
   // private test= "api//test4";
   constructor(private httpClient: HttpClient) { }
 
@@ -30,9 +30,6 @@ export class PersonalInfoService {
   } 
 
 
-  getFiles(filename: string): Observable<any> {
-    return this.httpClient.get(`${this.fileUrl + filename}`);
-  }
 
   EditInfo(url:string, info:any):Observable<any>{
     const formData: FormData = new FormData();

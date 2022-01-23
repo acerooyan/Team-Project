@@ -7,7 +7,8 @@ import {Observable} from "rxjs";
 })
 export class HireService {
   endPoint = 'auth/';
-
+  private mainhrhome= "/api/jwt/hr/profile/byemail";
+  private workfolow = "api/jwt/workflow"
   constructor(private http: HttpClient) {
   }
 
@@ -21,4 +22,21 @@ export class HireService {
       duration: duration
     });
   }
+
+
+  GetAllInfobyemail(email:string):Observable<any>{
+    const formData: FormData = new FormData();
+    formData.append('model',email );
+    return this.http.post(this.mainhrhome, formData
+      
+      );
+  } 
+
+
+  getWorkflow():Observable<any>{
+
+    return this.http.get(this.workfolow,
+      
+      );
+  } 
 }

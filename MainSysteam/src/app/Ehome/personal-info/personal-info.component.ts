@@ -1,6 +1,6 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import{PersonalInfoService} from 'src/app/services/personal-info.service';
-import{personalInfo, employee, Address,EmergencyContact,ConatctInfo} from 'src/app/PersonalnfoEntity/Info'
+import{personalInfo, employee, address,EmergencyContact,ConatctInfo} from 'src/app/PersonalnfoEntity/Info'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -14,10 +14,11 @@ export class PersonalInfoComponent implements OnInit {
 
   public personalInfo: personalInfo = {} ;
   public employee: employee = {};
-  public Address:any[] = [];
+  public Address:address[] = [];
   public EmergencyContact: EmergencyContact = {};
   public ConatctInfo: ConatctInfo = {};
-  public fileNameArray:string[] = ['1642745451766_database.png'];
+  public fileNameArray:string[] = [];
+  public avator?: string;
 
   fileInfos?: Observable<any>;
   change_personalInfo = false;
@@ -43,6 +44,11 @@ export class PersonalInfoComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.change_personalInfo = false;
+    this.change_employee = false;
+    this.change_Address = false;
+    this.change_EmergencyContact= false;
+    this.change_ConatctInfo= false;
     this.service.GetAllInfo().subscribe(
       (data: any) =>{
         console.log(data);
@@ -63,11 +69,17 @@ export class PersonalInfoComponent implements OnInit {
           
           
          //get ContactInfoDomain
-         this.ConatctInfo = {cellPhone: "6264923795", Alternatephone: "6267578821", email:"acer0830@hotmail.com"};
+         this.ConatctInfo = {cellPhone: data.contactInfoDomain.cellPhone, alternatePhone: data.contactInfoDomain.alternatePhone, email:data.contactInfoDomain.email};
 
          //get EmergencyContactDomain
-          this.EmergencyContact = {fullName: "James", RelationShip:"Freind", Cellphone: "911", email:"james123@gmail.com"}
+          this.EmergencyContact = {fullName: data.emergencyContactDomain.fullName, relationship:data.emergencyContactDomain.relationship, cellPhone: data.emergencyContactDomain.cellPhone, email:data.emergencyContactDomain.email}
 
+          //get documentDomain
+          this.fileNameArray = data.documentDomain.fileName;
+
+          //get avator 
+          this.avator = data.avatarDomain.avatar;
+          
       },
       (error: any)=>{
         if (error.status === 401) {
@@ -81,27 +93,30 @@ export class PersonalInfoComponent implements OnInit {
 
     )
 
-    //<a href="{{ aws.com/ }}">{{ 1642745451766_database.png }}</a>
-
-    
       
 
 
 
   }
 
-  download(fileNmae: string)
-  {
-      this.service.getFiles(fileNmae).subscribe(
-        (data:any) =>{
-          console.log(data);
-        },
-        (error:any) =>{
-          console.log(error)
-        }
 
-      )
+  
+  displayStyle = "none";
+  
+  openPopup() {
+    this.displayStyle = "block";
   }
+  closePopupWithYes() {
+    this.ngOnInit();
+    this.displayStyle = "none";
+
+  }
+
+  closePopupWithNo() {
+    this.displayStyle = "none";
+  }
+
+ 
 
   edit(url:string, info:any)
   {
