@@ -62,7 +62,7 @@ public class ProfileController {
         try{
             //get application list from database
             //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
-            ProfileDomain profileDomain = employeeService1.getDataReady(email);
+            ProfileDomain profileDomain = employeeService.getDataReady(email);
             return  ResponseEntity.ok().body(profileDomain);
         }catch (Exception e){
             System.out.println("error catch");

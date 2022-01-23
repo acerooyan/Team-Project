@@ -60,7 +60,7 @@ public class HomeController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/hr/download")
+    @GetMapping("/hr/home/download")
     public ResponseEntity<String> hrHome(@RequestParam("email") String email) {
 
         try {
@@ -73,12 +73,8 @@ public class HomeController {
         }
     }
 
-    @GetMapping("/hr/upload")
-    public ResponseEntity<Object> updateWorkFlowAndFile(@RequestPart(value = "file") MultipartFile file) {
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-//        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
+    @GetMapping("/hr/home/upload")
+    public ResponseEntity<Object> updateWorkFlowAndFile(@RequestPart(value = "file") MultipartFile file,@RequestParam String email) {
         try{
             //todo: update database workflow and document
             Gson g = new Gson();
