@@ -1,4 +1,4 @@
-package com.example.emrestserver.domains.combined;
+package com.example.emrestserver.domains.visaStatus;
 
 import lombok.*;
 
@@ -11,6 +11,7 @@ public class EmployeeStatusDomain {
     private String currentStep;
     private String nextStep;
     private String comment;
+    private String status;
     String[] documents;
 
 }
