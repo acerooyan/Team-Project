@@ -17,19 +17,15 @@ public class HrHireController {
     @Autowired
     private EmployeeService employeeService;
 
-    @PutMapping("/hr/hire")
-    public ResponseEntity<EmployeeStatusDomain> getWorkFlow() {
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-//        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
-        EmployeeStatusDomain employeeStatusDomain = null;
+    @GetMapping("hr/hire")
+    public ResponseEntity<Object> getAll() {
+
         try{
-            //todo: return work flow
-            //ApplicationWorkFlow largestWorkFlow =  employeeVisaService.getLargestWorkFlowByEmail(email);
+            //todo: return list of employees in hr hire page
 
 
-            return  ResponseEntity.ok().body(employeeStatusDomain);
+            //todo: change null to required domain
+            return  ResponseEntity.ok().body(null);
         }catch (Exception e){
             System.out.println("error catch");
             return ResponseEntity.internalServerError().build();
@@ -50,5 +46,29 @@ public class HrHireController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+
+    @PutMapping("/hr/hire")
+    public ResponseEntity<EmployeeStatusDomain> getWorkFlow() {
+//        HttpServletRequest req = (HttpServletRequest) servletRequest;
+//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+//        String email = JwtUtil.getSubjectFromJwt(token);
+        String email = "jamesh970327@gmail.com";
+        EmployeeStatusDomain employeeStatusDomain = null;
+        try{
+            //todo: return work flow
+            //ApplicationWorkFlow largestWorkFlow =  employeeVisaService.getLargestWorkFlowByEmail(email);
+
+
+            return  ResponseEntity.ok().body(employeeStatusDomain);
+        }catch (Exception e){
+            System.out.println("error catch");
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+
+
+
 
 }
