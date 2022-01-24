@@ -67,7 +67,7 @@ public class HomeController {
             String file = personalDocumentService.getPersonalDocumentByTitle("I-983", employeeService.getEmpolyeeByEmail(email).getId()).getPath();
             return ResponseEntity.ok().body(file);
         } catch (Exception e) {
-            System.out.println("error catch");
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
