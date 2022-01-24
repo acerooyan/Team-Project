@@ -55,22 +55,6 @@ public class ProfileController {
     }
 
 
-    @GetMapping("/hr/profile/byemail")
-    public ResponseEntity<ProfileDomain> getProfilebyemail(ServletRequest servletRequest,@RequestPart(value = "model") String model ) {
-
-        String email = model;
-        try{
-            //get application list from database
-            //List<HrProfilerDomain> hrProfilerDomainList = hrProfilerService.mapDocumentWithEmployee();
-            ProfileDomain profileDomain = employeeService.getDataReady(email);
-            return  ResponseEntity.ok().body(profileDomain);
-        }catch (Exception e){
-            System.out.println("error catch");
-            return ResponseEntity.internalServerError().build();
-        }
-    }
-
-
     @PutMapping("/em/profile/personalInfo")
     public ResponseEntity<Object> personalInfo(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
         HttpServletRequest req = (HttpServletRequest) servletRequest;

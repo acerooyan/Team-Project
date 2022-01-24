@@ -49,18 +49,16 @@ public class HrHireController {
 
 
     @PutMapping("/hr/hire")
-    public ResponseEntity<EmployeeStatusDomain> getWorkFlow() {
+    public ResponseEntity<EmployeeStatusDomain> changeWorkFlow( @RequestPart(value = "email") String email) {
 //        HttpServletRequest req = (HttpServletRequest) servletRequest;
 //        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
 //        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
-        EmployeeStatusDomain employeeStatusDomain = null;
+
         try{
             //todo: return work flow
-            //ApplicationWorkFlow largestWorkFlow =  employeeVisaService.getLargestWorkFlowByEmail(email);
 
 
-            return  ResponseEntity.ok().body(employeeStatusDomain);
+            return  ResponseEntity.ok().build();
         }catch (Exception e){
             System.out.println("error catch");
             return ResponseEntity.internalServerError().build();
