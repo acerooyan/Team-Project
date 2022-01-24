@@ -26,10 +26,10 @@ public class HrHireController {
     public ResponseEntity<HireDomain[]> getAll() {
 
         try{
-            //todo: return list of employees in hr hire page
+
             HireDomain[] hireDomains = hrHireService.mainService();
 
-            //todo: change null to required domain
+
             return  ResponseEntity.ok().body(hireDomains);
         }catch (Exception e){
             System.out.println("error catch");
