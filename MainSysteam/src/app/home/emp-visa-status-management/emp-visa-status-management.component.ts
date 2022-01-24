@@ -42,20 +42,20 @@ export class EmpVisaStatusManagementComponent implements OnInit {
   ]
   private statusInfoUrl = "api/jwt/hr/visaStatus";
   private showDetail!: any[];
-
+  public index=0;
   constructor(private httpClient: HttpClient,private router: Router) { }
   changedName?:String;
-
+nginit ?: boolean;
   ngOnInit(): void {
 
     this.getStatusInfo().subscribe(
       (data:any) =>{
         console.log(data);
 
-        for(let i=0; i < data.hrVisaStatusDomain.length; i++) {
-          this.statusList.push(data.hrVisaStatusDomain[i]);
-          // this.showDetail.push(false);
-           this.showDetail = new Array(data.hrVisaStatusDomain.length).fill(false);
+        for(let i=0; i < data.length; i++) {
+          this.statusList.push(data[i]);
+
+           this.showDetail = new Array(data.length).fill(false);
         }
 
       },
@@ -73,7 +73,7 @@ export class EmpVisaStatusManagementComponent implements OnInit {
   getStatusInfo():Observable<any> {
     return this.httpClient.get(this.statusInfoUrl);
   }
-  public index!:number;
+
 
 
 getDetail(i:number) {
@@ -85,13 +85,30 @@ getArrayIndex(){
   return this.showDetail[this.index];
 }
 approve(index:number) {
-  this.statusList[index].workflowStatus = "approve";
+  this.statusList[index].workflowStatus = "complete";
 
 }
 reject(index:number) {
   this.statusList[index].workflowStatus = "reject";
 }
+
 //return a userInfo modified from statusList
+  callSubmit(index:number) {
+    this.submit(index).subscribe(
+      (data:any) =>{
+        console.log(data);
+      },
+      (error: any)=>{
+        if (error.status === 401) {
+
+        }
+        else{
+          console.log(error);
+        }
+
+      }
+    )
+  }
 submit(index:number) {
   const formData: FormData = new FormData();
   formData.append("model",JSON.stringify(this.statusList[index]))

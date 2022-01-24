@@ -4,27 +4,49 @@
       <div class="card-body">
         <h5 class="card-title">Visa Status</h5>
         <div>
-        <p class="card-text">Current Status:</p>
-        {{statusInfo.currentStep}}
-        </div><div>
-        <p class="card-text">Next Step:</p>
-        {{statusInfo.nextStep}}
+          <h6 class="card-text">HR comment:</h6>
+          {{statusInfo.comment}}
+        </div>
+<!--        <div>-->
+<!--          <h6 class="card-text">Current Step:</h6>-->
+<!--          {{statusInfo.currentStep}}-->
+<!--        </div>-->
+
+        <h6 class="card-text">Current Status:</h6>
+        <div>
+          {{statusInfo.currentStep}}  {{statusInfo.status}}
+        </div>
+        <div>
+        <h6 class="card-text">Next Step:</h6>
+          <div *ngIf="statusInfo.nextStep!='complete' && statusInfo.nextStep!='I-983'">
+        Please upload a copy of {{statusInfo.nextStep}} form.
+          </div>
+          <div *ngIf="statusInfo.nextStep=='complete'">
+            Nothing to be completed.
+          </div>
       </div>
-        <div [hidden]="statusInfo.i983==null">
+
+        <div [hidden]="statusInfo.nextStep != 'I-983'">
+          Please download and fill your I-983 form
+          <li >
           <a target="_blank" href="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{statusInfo.i983}}">
             <i class="fa fa-file" style="font-size:36px;"></i>
             {{statusInfo.i983}} </a>
+          </li>
+            <li>
           <a target="_blank" href="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{statusInfo.i983Sample}}">
             <i class="fa fa-file" style="font-size:36px;"></i>
             {{statusInfo.i983Sample}} </a>
+        </li>
         </div>
+       <br>
         <div class="input-group mb-3">
           <label>Upload file</label>
           <br>
           <input type="file" class="form-control"  id="inputGroupFile02" multiple (change)="selectFile($event)" >
 
         </div>
-        <button (click)="reset();submitFile()">submit</button>
+        <button (click)="reset();callSubmitFile()">submit</button>
       </div>
     </div>
   </div>

@@ -20,7 +20,7 @@ import { FileuploadComponent } from './test/fileupload/fileupload.component';
 import { EnavbarComponent } from './Ehome/enavbar/enavbar.component';
 import { PersonalInfoComponent } from './Ehome/personal-info/personal-info.component';
 import { EhomeComponent } from './Ehome/ehome/ehome.component';
-
+import { VisaStatusComponent } from './Ehome/visa-status/visa-status.component';
 
 const routes: Routes = [
 
@@ -45,12 +45,12 @@ const routes: Routes = [
     children: [
       {path: 'Home', component: PersonalInfoComponent},
       {path: 'profile', component: PersonalInfoComponent},
-      // {path: 'visa', component: EmpVisaStatusManagementComponent},
-     
+      {path: 'visa', component: VisaStatusComponent},
+
     ]
   },
 
- 
+
   {
     path: 'regnav', component: RegnavbarComponent,
     children: [
@@ -60,13 +60,13 @@ const routes: Routes = [
       {path: 'step4', component: Step4Component},
       {path: 'step5', component: Step5Component},
       {path: 'step6', component: Step6Component},
-      
+
     ]
   },
 
   {path: 'step7', component: Step7Component},
   {path: 'upload', component:FileuploadComponent},
-  
+
 {path:'**', component:WildCardComponent}
 
 
