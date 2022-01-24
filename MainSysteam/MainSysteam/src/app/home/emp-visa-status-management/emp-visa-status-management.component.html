@@ -26,8 +26,8 @@
 
 <div [hidden]="!getArrayIndex()">
 
-  <div >
-    <div class="col-sm-6">
+  <div class = "row">
+    <div class="col-sm-4">
       <div class="card">
         <div class="card-body">
   <div>
@@ -50,12 +50,17 @@
       </div>
     </div>
 
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Current Step</h5>
 
         {{statusList[index].currentStep}}
+
+        <h5 class="card-title">Next Step</h5>
+
+        {{statusList[index].nextStep}}
+        
         <h5 class="card-title">Document Received</h5>
 
         <li class="list-group-item" *ngFor="let file of statusList[index].documents">
@@ -63,14 +68,12 @@
             <i class="fa fa-file" style="font-size:36px;"></i>
             {{file}} </a>
         </li>
-        <h5 class="card-title">Next Step</h5>
 
-        {{statusList[index].nextStep}}
 
       </div>
     </div>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Comment</h5>
