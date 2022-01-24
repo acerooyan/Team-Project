@@ -26,26 +26,26 @@ export class Status{
 })
 export class EmpVisaStatusManagementComponent implements OnInit {
   statusList :Status[] = [] ;
-  test=[
-    {fullName: "sy",
-    visa:"OPT",
-    startDate:"1997",
-    endDate:"2021",
-    dayLeft:"10"
-  },
-    {fullName: "cc",
-      visa:"OPT",
-      startDate:"1999",
-      endDate:"2030",
-      dayLeft:"20"
-    },
-  ]
+  // test=[
+  //   {fullName: "sy",
+  //   visa:"OPT",
+  //   startDate:"1997",
+  //   endDate:"2021",
+  //   dayLeft:"10"
+  // },
+  //   {fullName: "cc",
+  //     visa:"OPT",
+  //     startDate:"1999",
+  //     endDate:"2030",
+  //     dayLeft:"20"
+  //   },
+  // ]
   private statusInfoUrl = "api/jwt/hr/visaStatus";
   private showDetail!: any[];
   public index=0;
   constructor(private httpClient: HttpClient,private router: Router) { }
   changedName?:String;
-nginit ?: boolean;
+  nginit ?: boolean;
   ngOnInit(): void {
 
     this.getStatusInfo().subscribe(
