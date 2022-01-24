@@ -41,8 +41,8 @@ public class EmployeeVisaService {
                 next = currentAWF.getType();
             }else if(currentAWF.getType().equals("I-983")){
                 if(daysLeft(employee.getVisaEndDate()) < 100){
-                    currentAWF = hrVisaStatusDao.getPrevStep(employee.getId());
                     nextAWF = currentAWF;
+                    currentAWF = hrVisaStatusDao.getPrevStep(employee.getId());
                     current = currentAWF.getType();
                     next = nextAWF.getType();
                 }else{
