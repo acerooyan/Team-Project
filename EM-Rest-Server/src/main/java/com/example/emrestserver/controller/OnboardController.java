@@ -87,7 +87,7 @@ public class OnboardController {
             }
             Employee employee = registerService.addEmployee(p,visaStatus, residentialStatusDomain, carInfoDomain, fileName1);
             System.out.println("From controller: ");
-            employee.setAvatar(fileName1);
+
 
             PersonalDocument personalDocument;
 

@@ -173,6 +173,8 @@ public class RegisterService {
 
         // avatar
 
+        employee.setAvatar(avatarName);
+
         System.out.println(employee);
         return registerDao.addEmployee(employee);
     }
