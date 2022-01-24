@@ -53,7 +53,9 @@ public class HrHireService {
             }
 
         }
-        return hireDomains.toArray(hireDomains.toArray(new HireDomain[0]));
+        HireDomain[] hireDomainArr = new HireDomain[hireDomains.size()];
+        hireDomains.toArray(hireDomainArr);
+        return hireDomainArr;
 
     }
 
