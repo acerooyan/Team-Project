@@ -48,7 +48,7 @@ public class HomeController {
 
     }
 
-    @GetMapping("/hr/sendNotification")
+    @PostMapping("/hr/sendNotification")
     public ResponseEntity<String> sendNotification(@RequestPart("email") String email){
         Mail mail = new Mail();
         mail.setMailTo(email);
