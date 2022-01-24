@@ -125,5 +125,20 @@ public class EmployeeDao {
         return employeeArr;
    }
 
+    public Employee[] getAllEmployees(){
+        Session session = getCurrentSession();
+        Query getAllEmployees = session.createQuery("FROM Employee e WHERE e.visaStatus.active='1'");
+        List<Employee> employeeList = (List<Employee>) getAllEmployees.getResultList();
+        Employee[] employeeArr = new Employee[employeeList.size()];
+        employeeList.toArray(employeeArr);
+        return employeeArr;
+    }
+
+    public ApplicationWorkFlow getOnBoardingByEmployeeId(Integer employeeId){
+        Session session = getCurrentSession();
+        Query getOnBoardingAWF = session.createQuery("FROM ApplicationWorkFlow awf WHERE awf.employee.id=:id AND awf.type='onBoarding'");
+        return (ApplicationWorkFlow) getOnBoardingAWF.getSingleResult();
+    }
+
 
 }
