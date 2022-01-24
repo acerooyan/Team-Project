@@ -1,16 +1,14 @@
 package com.example.emrestserver.controller;
 
 import com.example.emrestserver.constant.JwtConstant;
+import com.example.emrestserver.domains.EmployeeProfileDomain;
 import com.example.emrestserver.domains.profile.*;
 import com.example.emrestserver.domains.standalone.AddressDomain;
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.Person;
 import com.example.emrestserver.security.util.CookieUtil;
 import com.example.emrestserver.security.util.JwtUtil;
-import com.example.emrestserver.service.AwsService;
-import com.example.emrestserver.service.EmployeeService;
-import com.example.emrestserver.service.ProfileUpdateService;
-import com.example.emrestserver.service.ProfileUpdateService2;
+import com.example.emrestserver.service.*;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +33,16 @@ public class ProfileController {
 
     @Autowired
     private AwsService awsService;
+
+    @Autowired
+    private PersonService personService;
+    
+
+    @PostMapping("/hr/employee/profiles")
+    public ResponseEntity<EmployeeProfileDomain> getAllProfiles(@RequestBody EmployeeProfileDomain employeeProfileDomain) {
+        EmployeeProfileDomain employeeProfileDomain1 = personService.getEmployees(employeeProfileDomain.getCurPage(), employeeProfileDomain.getTotalNum(), employeeProfileDomain.getMaxResult(), employeeProfileDomain.getEmail());
+        return ResponseEntity.ok(employeeProfileDomain1);
+    }
 
     @GetMapping("/profile")
     public ResponseEntity<ProfileDomain> getProfile(ServletRequest servletRequest) {

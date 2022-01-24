@@ -35,6 +35,8 @@ public class HomeController {
     @Autowired
     private AwsService awsService;
 
+
+
     @GetMapping("/hr/home")
     public ResponseEntity<HrHomeDomain[]> hrHome() {
 
