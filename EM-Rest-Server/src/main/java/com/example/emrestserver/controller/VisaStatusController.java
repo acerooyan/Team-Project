@@ -1,10 +1,13 @@
 package com.example.emrestserver.controller;
 
+import com.example.emrestserver.constant.JwtConstant;
 import com.example.emrestserver.domains.visaStatus.EmployeeStatusDomain;
 import com.example.emrestserver.domains.visaStatus.HrVisaStatusDomain;
 import com.example.emrestserver.entity.ApplicationWorkFlow;
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.VisaStatus;
+import com.example.emrestserver.security.util.CookieUtil;
+import com.example.emrestserver.security.util.JwtUtil;
 import com.example.emrestserver.service.*;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 
 @RestController
@@ -107,11 +112,11 @@ public class VisaStatusController {
     }
 
     @GetMapping("/em/visaStatus")
-    public ResponseEntity<EmployeeStatusDomain> getWorkFlow() {
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-//        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
+    public ResponseEntity<EmployeeStatusDomain> getWorkFlow(ServletRequest servletRequest) {
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+        String email = JwtUtil.getSubjectFromJwt(token);
+
         EmployeeStatusDomain employeeStatusDomain = null;
         try{
             //todo: return work flow
@@ -126,11 +131,11 @@ public class VisaStatusController {
     }
 
     @PostMapping("/em/visaStatus")
-    public ResponseEntity<EmployeeStatusDomain> updateWorkFlowAndFile(@RequestPart(value = "model") String model,@RequestPart(value = "file") MultipartFile file) {
-//        HttpServletRequest req = (HttpServletRequest) servletRequest;
-//        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-//        String email = JwtUtil.getSubjectFromJwt(token);
-        String email = "jamesh970327@gmail.com";
+    public ResponseEntity<EmployeeStatusDomain> updateWorkFlowAndFile(ServletRequest servletRequest,@RequestPart(value = "model") String model,@RequestPart(value = "file") MultipartFile file) {
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
+        String email = JwtUtil.getSubjectFromJwt(token);
+
         EmployeeStatusDomain employeeStatusDomain = null;
         try{
             //todo: update database workflow and document
