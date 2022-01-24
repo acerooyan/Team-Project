@@ -1,9 +1,11 @@
 package com.example.emrestserver.controller;
 
+import com.example.emrestserver.domains.hire.HireDomain;
 import com.example.emrestserver.domains.profile.ProfileDomain;
 import com.example.emrestserver.domains.visaStatus.EmployeeStatusDomain;
 import com.example.emrestserver.entity.ApplicationWorkFlow;
 import com.example.emrestserver.service.EmployeeService;
+import com.example.emrestserver.service.HrHireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +19,18 @@ public class HrHireController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private HrHireService hrHireService;
+
     @GetMapping("hr/hire")
-    public ResponseEntity<Object> getAll() {
+    public ResponseEntity<HireDomain[]> getAll() {
 
         try{
             //todo: return list of employees in hr hire page
-
+            HireDomain[] hireDomains = hrHireService.mainService();
 
             //todo: change null to required domain
-            return  ResponseEntity.ok().body(null);
+            return  ResponseEntity.ok().body(hireDomains);
         }catch (Exception e){
             System.out.println("error catch");
             return ResponseEntity.internalServerError().build();
