@@ -52,7 +52,7 @@ public class PersonalDocumentDao {
 
         Query query = session.createQuery("FROM PersonalDocument WHERE title = :title and id = :id");
         query.setParameter("title",title);
-        query.setParameter("title",id);
+        query.setParameter("id",id);
 
         return (PersonalDocument) query.getSingleResult();
     }
