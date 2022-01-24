@@ -60,6 +60,7 @@ public class PersonalDocumentService {
         return personalDocumentDao.updatePersonalDocument(personalDocument);
     }
 
+    @Transactional
     public PersonalDocument getPersonalDocumentByTitle( String title,Integer id){
         return personalDocumentDao.getPersonalDocumentByTitle(title,id);
     }
