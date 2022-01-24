@@ -87,14 +87,9 @@ public class OnboardController {
             }
             Employee employee = registerService.addEmployee(p,visaStatus, residentialStatusDomain, carInfoDomain, fileName1);
             System.out.println("From controller: ");
-
-            System.out.println(employee);
+            employee.setAvatar(fileName1);
 
             PersonalDocument personalDocument;
-            // add personalDocument
-            if(employee.getAvatar()!= null && !employee.getAvatar().equals("")){
-                 personalDocument =  personalDocumentService.buildDocument(fileName1,employee);
-            }
 
             // todo: add reference contact and emergency contact
             if (testDomain.getContactReferenceDomain() != null){
