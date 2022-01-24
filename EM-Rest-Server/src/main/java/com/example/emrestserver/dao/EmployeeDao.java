@@ -116,6 +116,14 @@ public class EmployeeDao {
        return (ApplicationWorkFlow) session.merge(applicationWorkFlow);
    }
 
+   public Employee[] getEmployeeByActive(){
+        Session session = getCurrentSession();
+        Query getEmployeeWhoseActiveIs1 = session.createQuery("FROM Employee e Where e.visaStatus.visaType='OPT' and e.visaStatus.active=1");
+        List<Employee> employeeList = getEmployeeWhoseActiveIs1.getResultList();
+        Employee[] employeeArr = new Employee[employeeList.size()];
+        employeeList.toArray(employeeArr);
+        return employeeArr;
+   }
 
 
 }

@@ -1,14 +1,19 @@
 package com.example.emrestserver.service;
 
+import com.example.emrestserver.dao.EmployeeDao;
 import com.example.emrestserver.dao.HrHomeDao;
 import com.example.emrestserver.domains.combined.HrHomeDomain;
 import com.example.emrestserver.entity.Employee;
+import com.example.emrestserver.entity.Person;
 import com.example.emrestserver.entity.PersonalDocument;
 import com.example.emrestserver.entity.VisaStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +22,9 @@ import java.util.stream.Collectors;
 public class HrHomeService {
     @Autowired
     private HrHomeDao hrHomeDao;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
 //    @Transactional
 //    public List<Employee> getAllEmployees(){
@@ -48,6 +56,44 @@ public class HrHomeService {
 //        return ans;
 //    }
 
+    @Transactional
+    public HrHomeDomain[] mainService(){
+        // get employees whose active is 1
+        Employee[] employees = employeeDao.getEmployeeByActive();
 
+        HrHomeDomain[] hrHomeDomains = new HrHomeDomain[employees.length];
+
+        for(int i = 0; i < hrHomeDomains.length; i++){
+            Person person = employees[i].getPerson();
+            StringBuilder sb = new StringBuilder();
+            sb.append(person.getFirstname());
+            sb.append(" ");
+            if(person.getMiddleName()!= null){
+                sb.append(person.getMiddleName());
+                sb.append(" ");
+            }
+            sb.append(person.getLastname());
+            HrHomeDomain hrHomeDomain = HrHomeDomain.builder()
+                    .fullName(sb.toString())
+                    .visa(employees[i].getVisaStatus().getVisaType())
+                    .startDate(employees[i].getVisaStartDate().toString())
+                    .endDate(employees[i].getVisaEndDate().toString())
+                    .dayLeft(daysLeft(employees[i].getVisaEndDate()))
+                    .email(person.getEmail())
+                    .build();
+            hrHomeDomains[i] = hrHomeDomain;
+        }
+        return hrHomeDomains;
+
+    }
+
+    @Transactional
+    public Integer daysLeft(Date endDate){
+
+        LocalDate start = LocalDate.now();
+        LocalDate end = endDate.toLocalDate();
+        Integer days = (int) ChronoUnit.DAYS.between(start, end);
+        return days;
+    }
 
 }
