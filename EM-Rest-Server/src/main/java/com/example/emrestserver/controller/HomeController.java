@@ -36,12 +36,11 @@ public class HomeController {
     private AwsService awsService;
 
     @GetMapping("/hr/home")
-    public ResponseEntity<List<HrHomeDomain>> hrHome() {
+    public ResponseEntity<HrHomeDomain[]> hrHome() {
 
         try {
-//            get application list from database
-            List<HrHomeDomain> hrHomeDomainList = hrHomeService.mapDocumentWithEmployee();
-            return ResponseEntity.ok().body(hrHomeDomainList);
+
+            return ResponseEntity.ok().body(null);
         } catch (Exception e) {
             System.out.println("error catch");
             return ResponseEntity.internalServerError().build();

@@ -8,6 +8,7 @@ import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.PersonalDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ public class EmployeeVisaService {
     @Autowired
     HrVisaStatusDao hrVisaStatusDao;
 
+    @Transactional
     public EmployeeStatusDomain mainService(String email){
         String current = "";
         String next = "";
@@ -81,10 +83,12 @@ public class EmployeeVisaService {
         return employeeStatusDomain;
     }
 
+    @Transactional
     public ApplicationWorkFlow getLargestWorkFlowByEmail(String email){
         return employeeDao.getLargestWorkFlowByEmail(email);
     }
 
+    @Transactional
     public Integer daysLeft(Date endDate){
 
         LocalDate start = LocalDate.now();
