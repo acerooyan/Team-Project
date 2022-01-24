@@ -38,7 +38,7 @@ import { step4Component } from './filled-info/step4/step4.component';
 import { step5Component } from './filled-info/step5/step5.component';
 import { step6Component } from './filled-info/step6/step6.component';
 import { ShowDeatilComponent } from './home/employee-profile/show-deatil/show-deatil.component';
-
+import { VisaStatusComponent} from "./Ehome/visa-status/visa-status.component";
 
 
 @NgModule({
@@ -67,6 +67,7 @@ import { ShowDeatilComponent } from './home/employee-profile/show-deatil/show-de
     EhomeComponent,
     FilledInfoComponent,
     NavComponent,
+    VisaStatusComponent,
 
     // filled info
     step2Component,
@@ -75,22 +76,22 @@ import { ShowDeatilComponent } from './home/employee-profile/show-deatil/show-de
     step5Component,
     step6Component,
     ShowDeatilComponent,
-   
-   
+
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-   
+
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule
-    
 
 
-    
+
+
   ],
   providers: [RegisterService],
   bootstrap: [AppComponent]

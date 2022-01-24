@@ -28,7 +28,7 @@ export class mergeDomain  {
 
 
 export class RegisterService {
-  
+
   constructor(private httpClient: HttpClient) { }
 
   Avatar ?: FileList;
@@ -36,7 +36,7 @@ export class RegisterService {
   workAuthorization  ?: FileList;
 
   driverLi  ?: FileList;
-  
+  regUser: RegUser = new RegUser();
   basicInfo: BasicInfo = new BasicInfo();
   contactInfo: ContactInfo = new ContactInfo();
   carInfo: CarInfo = new CarInfo();
@@ -51,27 +51,33 @@ export class RegisterService {
 
 
   setRegUser(regUser: RegUser):Observable<any> {
- 
+
     const body = {
-      userName:regUser.userName, 
+      userName:regUser.userName,
       password: regUser.password,
       email: regUser.email,
-      
+
     };
 
     return this.httpClient.post(this.sso,  body, {
       responseType: 'text',
       withCredentials: true,
-      
-    }) 
-  
+
+    })
+
+  }
+  setRegUserForEmail(regUser:RegUser) {
+    this.regUser = regUser;
+  }
+  getRegUser() {
+    return this.regUser;
   }
 
-  
-  
+
+
   sumbitAll():Observable<HttpEvent<any>>{
     const formData: FormData = new FormData();
-    
+
     let obj = new mergeDomain ();
 
     obj.basicInfo = this.basicInfo;
@@ -82,7 +88,7 @@ export class RegisterService {
     obj.residentialStatus = this.residentialStatus;
 
     if (this.Avatar) {
-      
+
       var file: File | null = this.Avatar.item(0);
       if(file)
       {
@@ -93,7 +99,7 @@ export class RegisterService {
     }
 
     if (this.workAuthorization) {
-      
+
       var file: File | null = this.workAuthorization.item(0);
       if(file)
       {
@@ -102,7 +108,7 @@ export class RegisterService {
     }
 
     if (this.driverLi) {
-      
+
       var file: File | null = this.driverLi.item(0);
       if(file)
       {
@@ -111,12 +117,12 @@ export class RegisterService {
     }
 
 
-   
-  
-   
+
+
+
     formData.append("model",JSON.stringify(obj));
-   
-   
+
+
 
     const req = new HttpRequest('POST', `${this.MainSever}/register/test`, formData, {
       reportProgress: true,
@@ -140,17 +146,17 @@ export class RegisterService {
 
   setDriver(file: any) {
     this.driverLi = file;
-    
+
   }
 
 
   setWorkFile(file: any) {
-   
+
     this.workAuthorization = file;
   }
 
 
-  
+
 
   setContactEmergency(contactEmergency: ContactEmergency) {
     this.contactEmergency = contactEmergency;

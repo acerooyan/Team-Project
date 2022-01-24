@@ -37,20 +37,23 @@ export class Step1Component implements OnInit {
         next: data => {
             console.log(data);
             this.router.navigate(["/regnav/step2"]);
-            
+
         },
         error: e => {
            console.log(e);
            this.errorObject.code = e.status;
            this.errorObject.message = e.error;
-            
+
         }
     });
   }
 
+  saveRegUserForEmail() {
+    this.registerService.setRegUserForEmail(this.regUser);
+  }
   regUserRegister() {
     console.log(this.regUser);
   }
- 
+
 
 }
