@@ -36,7 +36,7 @@ public class ProfileController {
 
     @Autowired
     private PersonService personService;
-    
+
 
     @PostMapping("/hr/employee/profiles")
     public ResponseEntity<EmployeeProfileDomain> getAllProfiles(@RequestBody EmployeeProfileDomain employeeProfileDomain) {

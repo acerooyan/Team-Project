@@ -31,7 +31,7 @@ public class PersonService {
             if (person.getCurPage() != null) employeeProfileDomain.setCurPage(person.getCurPage());
             if (person.getTotalNum() != null) employeeProfileDomain.setTotalNum(person.getTotalNum());
             if (person.getMaxResult() != null) employeeProfileDomain.setMaxResult(person.getMaxResult());
-            EmployeesDomain employeesDomain = EmployeesDomain.builder().name(person.getFirstname() + " " + person.getLastname()).SSN(person.getSsn()).startDate(DateUtil.DateToString(person.getEmployee().getStartDate())).visaStatus(person.getEmployee().getVisaStatus().getVisaType()).build();
+            EmployeesDomain employeesDomain = EmployeesDomain.builder().name(person.getFirstname() + " " + person.getLastname()).SSN(person.getSsn()).startDate("").visaStatus(person.getEmployee().getVisaStatus().getVisaType()).build();
             employeesDomains.add(employeesDomain);
         }
         employeeProfileDomain.setEmployeesDomains(employeesDomains);
