@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Address} from "../../entity/address";
 
 
+
 @Component({
   selector: 'app-step3',
   templateUrl: './step3.component.html',
@@ -13,9 +14,16 @@ import { Address} from "../../entity/address";
 })
 export class Step3Component implements OnInit {
   contactInfo: ContactInfo = new ContactInfo();
+
   constructor(public registerService: RegisterService,  public router: Router) { }
 
+  localEmail ?: String;
   ngOnInit(): void {
+
+    this.localEmail = this.registerService.getRegUser().email;
+    console.log(this.localEmail);
+    console.log(this.registerService.getRegUser().email)
+    this.contactInfo.email = this.localEmail;
   }
 
   addressList : any[] = [{

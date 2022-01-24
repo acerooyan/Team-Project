@@ -21,7 +21,7 @@
       <div *ngIf="pw.invalid && pw.touched" class="text-danger">Password is Required</div></div>
 
 <!--    <a class="btn" routerLink="step2">next</a>-->
-    <button [disabled]="un.invalid || pw.invalid" (click)="saveRegUser()">
+    <button [disabled]="un.invalid || pw.invalid" (click)="saveRegUser(); saveRegUserForEmail()">
       <span>next</span>
     </button>
 

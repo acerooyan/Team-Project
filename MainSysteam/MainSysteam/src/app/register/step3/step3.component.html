@@ -10,10 +10,16 @@
       <label  class="form-label">Work Phone</label>
       <input type="text" class="form-control" id="workphone" name="workphone" [(ngModel)]="contactInfo.alternatePhone" >
     </div>
-    
+<!--    <div class="mb-3">-->
+<!--      <label  class="form-label">Email</label>-->
+
+<!--      <input type="text" class="form-control" id="email" [disabled]="true" [(ngModel)]="contactInfo.email" name="email" ng-init="localEmail">-->
+<!--    </div>-->
 
 
-      <section *ngFor="let address of contactInfo.addressDaoList; let i = index;">
+
+
+    <section *ngFor="let address of contactInfo.addressDaoList; let i = index;">
         <h3>Address{{i+1}}</h3>
         <button type="button"  (click)="removeAddress(i)">Remove Address</button>
         <br>
