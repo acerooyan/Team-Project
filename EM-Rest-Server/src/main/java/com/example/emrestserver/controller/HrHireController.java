@@ -49,14 +49,16 @@ public class HrHireController {
 
 
     @PutMapping("/hr/hire")
-    public ResponseEntity<EmployeeStatusDomain> changeWorkFlow( @RequestPart(value = "email") String email) {
+    public ResponseEntity<EmployeeStatusDomain> changeWorkFlow( @RequestPart(value = "email") String email,@RequestPart(value = "comment") String comment,
+                                                                @RequestPart(value = "status") String status) {
 //        HttpServletRequest req = (HttpServletRequest) servletRequest;
 //        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
 //        String email = JwtUtil.getSubjectFromJwt(token);
 
         try{
-            //todo: return work flow
+            //todo: update work flow
 
+            employeeService.updateWorkFlowByType("onBoarding",email,comment,status);
 
             return  ResponseEntity.ok().build();
         }catch (Exception e){
