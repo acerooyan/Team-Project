@@ -104,7 +104,8 @@ public class VisaStatusController {
 
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
-            System.out.println("error catch");
+//            System.out.println("error catch");
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
@@ -135,6 +136,7 @@ public class VisaStatusController {
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
             System.out.println("error catch");
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
