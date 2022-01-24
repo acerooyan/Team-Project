@@ -42,11 +42,11 @@ public class VisaStatusController {
     private PersonalDocumentService personalDocumentService;
 
     @GetMapping("/hr/visaStatus")
-    public ResponseEntity<HrVisaStatusDomain> getAllVisaStatus() {
-        HrVisaStatusDomain hrVisaStatusDomain = null;
+    public ResponseEntity<HrVisaStatusDomain[]> getAllVisaStatus() {
+
         try{
             //todo: return domain object and put int in body.
-            hrVisaStatusService.mainService();
+            HrVisaStatusDomain[] hrVisaStatusDomain = hrVisaStatusService.mainService();
             return  ResponseEntity.ok().body(hrVisaStatusDomain);
         }catch (Exception e){
             System.out.println("/hr/visaStatus error catch");
