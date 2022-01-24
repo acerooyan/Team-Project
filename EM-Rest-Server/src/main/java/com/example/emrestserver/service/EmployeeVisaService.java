@@ -36,13 +36,14 @@ public class EmployeeVisaService {
         ApplicationWorkFlow currentAWF = hrVisaStatusDao.getCurrentStep(employee.getId());
         ApplicationWorkFlow nextAWF;
         if(currentAWF.getStatus().equals("")){
-            if (currentAWF.getType().equals("onBoarding")) {
+            if (currentAWF.getType().equals("OPT Receipt")) {
                 current = "Get Started";
                 next = currentAWF.getType();
-            }else if(currentAWF.getType().equals("I-983")){
+            }if(currentAWF.getType().equals("I-983")){
                 if(daysLeft(employee.getVisaEndDate()) < 100){
                     nextAWF = currentAWF;
                     currentAWF = hrVisaStatusDao.getPrevStep(employee.getId());
+
                     current = currentAWF.getType();
                     next = nextAWF.getType();
                 }else{
@@ -59,6 +60,7 @@ public class EmployeeVisaService {
             }
 
         }else if (currentAWF.getStatus().equals("pending")){
+
             current = currentAWF.getType();
             next = "complete";
         }else if(currentAWF.getStatus().equals("reject")){
