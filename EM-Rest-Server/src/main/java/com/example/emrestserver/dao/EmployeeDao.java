@@ -120,6 +120,7 @@ public class EmployeeDao {
         Session session = getCurrentSession();
         Query getEmployeeWhoseActiveIs1 = session.createQuery("FROM Employee e Where e.visaStatus.visaType='OPT' and e.visaStatus.active='1'");
         List<Employee> employeeList = getEmployeeWhoseActiveIs1.getResultList();
+
         Employee[] employeeArr = new Employee[employeeList.size()];
         employeeList.toArray(employeeArr);
         return employeeArr;
@@ -128,16 +129,29 @@ public class EmployeeDao {
     public Employee[] getAllEmployees(){
         Session session = getCurrentSession();
         Query getAllEmployees = session.createQuery("FROM Employee e WHERE e.visaStatus.active='1'");
+
         List<Employee> employeeList = (List<Employee>) getAllEmployees.getResultList();
+        System.out.println(employeeList);
         Employee[] employeeArr = new Employee[employeeList.size()];
         employeeList.toArray(employeeArr);
         return employeeArr;
     }
 
     public ApplicationWorkFlow getOnBoardingByEmployeeId(Integer employeeId){
-        Session session = getCurrentSession();
-        Query getOnBoardingAWF = session.createQuery("FROM ApplicationWorkFlow awf WHERE awf.employee.id=:id AND awf.type='onBoarding'");
-        return (ApplicationWorkFlow) getOnBoardingAWF.getSingleResult();
+
+        try{
+
+            Session session = getCurrentSession();
+            Query getOnBoardingAWF = session.createQuery("FROM ApplicationWorkFlow awf WHERE awf.employee.id=:id");
+            getOnBoardingAWF.setParameter("id", employeeId);
+            return (ApplicationWorkFlow) getOnBoardingAWF.getSingleResult();
+        }
+        catch (Exception e)
+        {
+            System.out.println(employeeId + "doesnt have workflow");
+            return  null;
+        }
+
     }
 
 

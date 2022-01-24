@@ -36,27 +36,13 @@ public class PersonDao {
         return (Person) session.merge(person);
     }
 
-    public List<Person> getAllPerson(Integer curPage, Integer totalNum, Integer maxResult, String email) {
-        Session session = sessionFactory.getCurrentSession();
-        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Person.class);
-        if (email != null) detachedCriteria.add(Restrictions.eq("email", email));
-        Criteria criteria = detachedCriteria.getExecutableCriteria(session);
-        if (curPage == null) curPage = 1;
-        if (totalNum == null) {
-            Criteria getTotalCriteria = session.createCriteria(Person.class).setProjection(Projections.rowCount());
-            Long l = (Long) getTotalCriteria.list().get(0);
-            totalNum = l.intValue();
-        }
-        if(maxResult==null)maxResult = 2;
-        criteria.setFirstResult((curPage-1) * maxResult);
-        criteria.setMaxResults(maxResult);
-        List<Person> personList = criteria.list();
-        if (personList != null && personList.size() > 0) {
-            personList.get(0).setTotalNum(totalNum);
-            personList.get(0).setCurPage(curPage);
-            personList.get(0).setMaxResult(maxResult);
-        }
-        return personList;
+    public Person getPersonByEmail1(String email){
+        Session session = getCurrentSession();
+        DetachedCriteria criteria = DetachedCriteria.forClass(Person.class);
+        criteria.add(Restrictions.eq("email",email));
+        List<Person> personList = criteria.getExecutableCriteria(session).list();
+        if(personList.size()>0)return personList.get(0);
+        return null;
     }
 
 }

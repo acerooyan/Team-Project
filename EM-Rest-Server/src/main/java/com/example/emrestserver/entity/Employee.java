@@ -24,14 +24,13 @@ public class Employee implements Serializable {
     @Column(name = "ID")
     private Integer id;
 
-    /*
-    @ManyToOne
-    @JoinColumn(name="PersonID")
-    private Person personId;
-     */
+    @Transient
+    private Integer curPage;
+    @Transient
+    private Integer totalNum;
+    @Transient
+    private Integer maxResult;
 
-    //either one above or below
-//    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "PersonID")
     private Person person;

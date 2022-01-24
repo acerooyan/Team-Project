@@ -1,8 +1,11 @@
 package com.example.emrestserver.service;
 
+import com.example.emrestserver.dao.EmployeeDao;
 import com.example.emrestserver.dao.PersonDao;
+import com.example.emrestserver.dao.employeeDao1;
 import com.example.emrestserver.domains.EmployeeProfileDomain;
 import com.example.emrestserver.domains.EmployeesDomain;
+import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.Person;
 import com.example.emrestserver.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +18,25 @@ import java.util.List;
 @Service
 @Transactional
 public class PersonService {
-    @Autowired
-    private PersonDao personDao;
+
+    private employeeDao1 employeeDao;
 
     @Autowired
-    public PersonService(PersonDao personDao) {
-        this.personDao = personDao;
+    public PersonService(employeeDao1 employeeDao) {
+        this.employeeDao = employeeDao;
     }
 
     public EmployeeProfileDomain getEmployees(Integer curPage, Integer totalNum, Integer maxResult, String email) {
-        List<Person> personList = personDao.getAllPerson(curPage, totalNum, maxResult, email);
+        List<Employee> employeeList = employeeDao.getAllEmployees(curPage, totalNum, maxResult, email);
         EmployeeProfileDomain employeeProfileDomain = new EmployeeProfileDomain();
         List<EmployeesDomain> employeesDomains = new ArrayList<>();
-        for (Person person : personList) {
-            if (person.getCurPage() != null) employeeProfileDomain.setCurPage(person.getCurPage());
-            if (person.getTotalNum() != null) employeeProfileDomain.setTotalNum(person.getTotalNum());
-            if (person.getMaxResult() != null) employeeProfileDomain.setMaxResult(person.getMaxResult());
-            EmployeesDomain employeesDomain = EmployeesDomain.builder().name(person.getFirstname() + " " + person.getLastname()).SSN(person.getSsn()).startDate("").visaStatus(person.getEmployee().getVisaStatus().getVisaType()).build();
+        for (Employee employee : employeeList) {
+            if (employee.getCurPage() != null) employeeProfileDomain.setCurPage(employee.getCurPage());
+            if (employee.getTotalNum() != null) employeeProfileDomain.setTotalNum(employee.getTotalNum());
+            if (employee.getMaxResult() != null) employeeProfileDomain.setMaxResult(employee.getMaxResult());
+            EmployeesDomain employeesDomain = EmployeesDomain.builder().name(employee.getPerson().getFirstname() + " " + employee.getPerson().getLastname())
+                    .SSN(employee.getPerson().getSsn()).startDate(DateUtil.DateToString(employee.getStartDate()))
+                    .visaStatus(employee.getVisaStatus().getVisaType()).email(employee.getPerson().getEmail()).build();
             employeesDomains.add(employeesDomain);
         }
         employeeProfileDomain.setEmployeesDomains(employeesDomains);

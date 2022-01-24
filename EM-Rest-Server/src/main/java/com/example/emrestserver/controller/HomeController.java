@@ -44,7 +44,7 @@ public class HomeController {
             HrHomeDomain[] hrHomeDomains = hrHomeService.mainService();
             return ResponseEntity.ok().body(hrHomeDomains);
         } catch (Exception e) {
-            System.out.println("error catch");
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
 

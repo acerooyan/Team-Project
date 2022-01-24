@@ -54,12 +54,7 @@ public class Person implements Serializable{
     @Column(name = "UserId")
     private Integer userId;
 
-    @Transient
-    private Integer curPage;
-    @Transient
-    private Integer totalNum;
-    @Transient
-    private Integer maxResult;
+
 
 
     @JsonIgnore

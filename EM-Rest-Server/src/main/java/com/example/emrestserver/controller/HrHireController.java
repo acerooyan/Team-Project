@@ -3,9 +3,10 @@ package com.example.emrestserver.controller;
 import com.example.emrestserver.domains.hire.HireDomain;
 import com.example.emrestserver.domains.profile.ProfileDomain;
 import com.example.emrestserver.domains.visaStatus.EmployeeStatusDomain;
-import com.example.emrestserver.entity.ApplicationWorkFlow;
+import com.example.emrestserver.entity.Mail;
 import com.example.emrestserver.service.EmployeeService;
 import com.example.emrestserver.service.HrHireService;
+import com.example.emrestserver.service.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,10 @@ public class HrHireController {
     @Autowired
     private HrHireService hrHireService;
 
+
+    @Autowired
+    EmailService emailService;
+
     @GetMapping("hr/hire")
     public ResponseEntity<HireDomain[]> getAll() {
 
@@ -32,12 +37,12 @@ public class HrHireController {
 
             return  ResponseEntity.ok().body(hireDomains);
         }catch (Exception e){
-            System.out.println("error catch");
+           e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
 
-    @GetMapping("/hr/profile/byemail")
+    @PostMapping("/hr/profile/byemail")
     public ResponseEntity<ProfileDomain> getProfilebyemail(ServletRequest servletRequest, @RequestPart(value = "model") String model ) {
 
         String email = model;
@@ -53,8 +58,8 @@ public class HrHireController {
     }
 
 
-    @PutMapping("/hr/hire")
-    public ResponseEntity<EmployeeStatusDomain> changeWorkFlow( @RequestPart(value = "email") String email,@RequestPart(value = "comment") String comment,
+    @PutMapping("/hr/hire/decision")
+    public ResponseEntity<EmployeeStatusDomain> changeWorkFlow( @RequestPart(value = "email") String email,
                                                                 @RequestPart(value = "status") String status) {
 //        HttpServletRequest req = (HttpServletRequest) servletRequest;
 //        String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
@@ -62,8 +67,9 @@ public class HrHireController {
 
         try{
             //todo: update work flow
-
-            employeeService.updateWorkFlowByType("onBoarding",email,comment,status);
+            //"reject";
+            //complete
+            employeeService.updateWorkFlowByType("onBoarding",email,"nah",status);
 
             return  ResponseEntity.ok().build();
         }catch (Exception e){
@@ -71,6 +77,29 @@ public class HrHireController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+
+
+    @PostMapping("/hr/decision/sendNotification")
+    public ResponseEntity<String> sendNotification(@RequestPart("email") String email, @RequestPart("comment") String comment, @RequestPart("approved") String approved){
+        Mail mail = new Mail();
+        mail.setMailTo(email);
+        mail.setContentType("text/html");
+        mail.setMailSubject("Application Notification");
+
+        if(approved.equals("complete"))
+        {
+            mail.setMailContent("Congratulation! You application is approved, please log in.\n" + "Hr Comment:" + comment);
+        }
+        else
+        {
+            mail.setMailContent("Thank you so much for your interest our Company,  we’ve decided to move forward with another candidate.\n"+ "Hr Comment:" + comment);
+        }
+
+        emailService.sendEmail(mail);
+        return ResponseEntity.ok().build();
+    }
+
 
 
 
