@@ -7,6 +7,7 @@ import com.example.emrestserver.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class HrVisaStatusService {
     EmployeeDao employeeDao;
     // focus on opt only
 
+    @Transactional
     public HrVisaStatusDomain[] mainService(){
         String currentStep;
         String nextStep;
@@ -74,7 +76,7 @@ public class HrVisaStatusService {
         }
         return hrVisaStatusDomains;
     }
-
+    @Transactional
     public String getNextStep(ApplicationWorkFlow current){
         // 不需要检查 EAD 过期问题
         String currentStep = current.getType();
@@ -96,7 +98,7 @@ public class HrVisaStatusService {
         }
         return "";
     }
-
+    @Transactional
     public Integer daysLeft(Date endDate){
 
         LocalDate start = LocalDate.now();
