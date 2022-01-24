@@ -49,7 +49,8 @@ public class VisaStatusController {
             hrVisaStatusService.mainService();
             return  ResponseEntity.ok().body(hrVisaStatusDomain);
         }catch (Exception e){
-            System.out.println("error catch");
+            System.out.println("/hr/visaStatus error catch");
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
@@ -91,7 +92,8 @@ public class VisaStatusController {
 
             return  ResponseEntity.ok().body(hrVisaStatusDomain);
         }catch (Exception e){
-            System.out.println("error catch");
+            System.out.println("/hr/visaStatus error catch");
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
@@ -109,7 +111,7 @@ public class VisaStatusController {
             employeeStatusDomain = employeeVisaService.mainService(email);
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
-//            System.out.println("error catch");
+            System.out.println("/em/visaStatus error catch");
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
@@ -147,7 +149,7 @@ public class VisaStatusController {
 
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
-            System.out.println("error catch");
+            System.out.println("/em/visaStatus error catch");
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
