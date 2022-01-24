@@ -13,7 +13,7 @@ export class step2Component implements OnInit {
   ngOnInit(): void {
 
     this.data = this.service.getAlldata();
-    console.log(this.data);
+   
 
   }
 

@@ -48,7 +48,7 @@ export interface applicationWorkflow
     comments? : string
     email?:string,
     name? :string
-    workAuth?:string
+    workAuth:string
 }
 
 export class alldata{

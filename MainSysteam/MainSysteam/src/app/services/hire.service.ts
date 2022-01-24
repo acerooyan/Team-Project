@@ -12,7 +12,7 @@ export class HireService {
   public alldata: alldata = new alldata();
   endPoint = 'auth/';
   private mainhrhome= "/api/jwt/hr/profile/byemail";
-  private workfolow = "api/jwt/workflow";
+  private workfolow = "api/jwt/hr/hire";
 
 
   public email:string = "";

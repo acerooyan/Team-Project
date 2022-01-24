@@ -47,6 +47,7 @@ export class EmployeeProfileComponent implements OnInit {
           employeeProfile.SSN = data.employeesDomains[i].ssn;
           employeeProfile.startDate = data.employeesDomains[i].startDate;
           employeeProfile.visaStatus = data.employeesDomains[i].visaStatus;
+          employeeProfile.email = data.employeesDomains[i].email;
           this.employeeProfiles.push(employeeProfile);
         }
         this.curPage = data.curPage;
@@ -56,6 +57,15 @@ export class EmployeeProfileComponent implements OnInit {
         this.totalPage = Math.ceil(this.totalNum / this.maxResult);
         for (let i = 0; i < this.totalPage; i++) {
           this.pages.push(i + 1);
+        }
+      },
+      (error : any) =>
+      {
+        if (error.status === 401) {
+          this.router.navigate([""]);
+        }
+        else{
+          console.log(error);
         }
       }
     );
@@ -72,7 +82,7 @@ export class EmployeeProfileComponent implements OnInit {
 
     this.hire.setEmail(email);
   
-    this.router.navigate(['deatil']);
+    this.router.navigate(['deatils']);
   
 
   }

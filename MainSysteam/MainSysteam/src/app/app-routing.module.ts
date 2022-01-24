@@ -35,12 +35,9 @@ const routes: Routes = [
     component: NavbarComponent,
     children: [
       {path: 'hr', component: HrpageComponent},
-      {path: 'profile', component: EmployeeProfileComponent,
-    
-      children: [
-        {path:"deatil", component: ShowDeatilComponent}
-              ]
-      },
+      {path: 'profile', component: EmployeeProfileComponent},
+      
+     
       {path: 'visa', component: EmpVisaStatusManagementComponent},
       
       
@@ -66,7 +63,7 @@ const routes: Routes = [
     }
     ]
   },
-
+  {path: 'deatils', component: ShowDeatilComponent},
 
   {
     path: 'Enav',

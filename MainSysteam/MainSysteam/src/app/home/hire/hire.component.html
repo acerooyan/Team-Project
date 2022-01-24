@@ -28,7 +28,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
-      <!-- <th scope="col">Work authorization</th> -->
+      <th scope="col">Visa </th>
       <th scope="col">Application Type</th>
       <th scope="col">Status</th>
     </tr>
@@ -37,7 +37,7 @@
     <tr *ngFor="let item of workflows; let i = index">
       <th scope="row">{{i+1}}</th>
       <td>{{item.name}}</td>
-      <!-- <td>Otto</td> -->
+      <td>{{item.workAuth}}</td>
       <td>{{item.type}}</td>
       <td>{{item.status}}</td>
       <td> <a  class="link-info" (click)="showProfile(item.email)">Info link</a></td>

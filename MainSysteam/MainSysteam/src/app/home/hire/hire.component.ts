@@ -38,25 +38,35 @@ export class HireComponent implements OnInit {
     this.durations = DURATIONS;
     this.selectedDuration = this.durations[0];
     // = {type:"onBoarding", status: "pending", email: "jamesh970327@gmail.com", comments:undefined}
-    let workflow : applicationWorkflow = {type:"onBoarding", status: "pending", email: "aceyanr0830@gmail.com", comments:undefined, name:"james"};
     
-    this.workflows.push(workflow);
-    // this.hireService.getWorkflow().subscribe(
-    //   (data: any) =>{
+//     email: "aceyanr0830@gmail.com"
+// fullName: "acer yan"
+// status: "complete"
+// type: "onBoarding"
+// workAuthorization: "OPT"
+    
+    this.hireService.getWorkflow().subscribe(
+      (data: any) =>{
 
-    //     console.log(data);
         
-    //   },
-    //   (error: any) =>
-    //   {
-    //     if (error.status === 401) {
-    //       this.router.navigate(['']);
-    //     }
-    //     else{
-    //       console.log(error);
-    //     }
-    //   }
-    // )
+        for(let d of data)
+        {
+
+          let workflow : applicationWorkflow = {type:d.type, status: d.status, email: d.email,  name:d.fullName, workAuth:d.workAuthorization};
+          this.workflows.push(workflow);
+        }
+       
+      },
+      (error: any) =>
+      {
+        if (error.status === 401) {
+          this.router.navigate(['']);
+        }
+        else{
+          console.log(error);
+        }
+      }
+    )
   }
 
   showProfile(email:string|undefined){

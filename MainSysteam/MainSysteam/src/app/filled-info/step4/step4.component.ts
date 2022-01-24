@@ -14,7 +14,7 @@ export class step4Component implements OnInit {
   ngOnInit(): void {
 
     this.data = this.service.getAlldata();
-    console.log(this.data);
+  
 
   }
 

@@ -3,4 +3,5 @@ export class EmployeeProfiles {
   SSN!:string;
   startDate!:string;
   visaStatus!:string;
+  email!:string;
 }

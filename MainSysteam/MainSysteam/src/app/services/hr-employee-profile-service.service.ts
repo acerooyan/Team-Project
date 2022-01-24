@@ -12,26 +12,16 @@ export class HrEmployeeProfileService {
   }
 
   getEmployeeProfiles(curPage: number, totalNum: number, maxResult: number, email: string): Observable<any> {
-
-
-
-    const body = {
-
+    
+    return this.httpClient.post(this.endPoint + '/hr/employee/profiles', {
+      headers: {
+        'Allow-Cross-Origin-Origin0': '*'
+      },
+      responseType: 'text',
       curPage: curPage,
       totalNum: totalNum,
       email: email,
       maxResult: maxResult
-    };
-
-
-      console.log(curPage);
-      console.log(email);
-  
-    
-    return this.httpClient.post(this.endPoint + '/hr/employee/profiles', body, 
-    {
-      responseType: 'text',
-   
     });
   }
 }
