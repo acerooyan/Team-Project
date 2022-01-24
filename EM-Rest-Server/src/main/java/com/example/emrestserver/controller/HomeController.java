@@ -59,7 +59,7 @@ public class HomeController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/hr/home/download")
+    @PostMapping("/hr/home/download")
     public ResponseEntity<String> hrHome(@RequestPart("email") String email) {
 
         try {
@@ -72,7 +72,7 @@ public class HomeController {
         }
     }
 
-    @GetMapping("/hr/home/upload")
+    @PostMapping("/hr/home/upload")
     public ResponseEntity<Object> updateWorkFlowAndFile(@RequestPart(value = "file") MultipartFile file,@RequestPart String email) {
         try{
             //todo: update database workflow and document
