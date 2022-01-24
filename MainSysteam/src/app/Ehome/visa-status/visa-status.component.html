@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Visa Status</h5>
+        <div>
+        <p class="card-text">Current Status:</p>
+        {{statusInfo.currentStep}}
+        </div><div>
+        <p class="card-text">Next Step:</p>
+        {{statusInfo.nextStep}}
+      </div>
+        <div [hidden]="statusInfo.i983==null">
+          <a target="_blank" href="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{statusInfo.i983}}">
+            <i class="fa fa-file" style="font-size:36px;"></i>
+            {{statusInfo.i983}} </a>
+          <a target="_blank" href="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{statusInfo.i983Sample}}">
+            <i class="fa fa-file" style="font-size:36px;"></i>
+            {{statusInfo.i983Sample}} </a>
+        </div>
+        <div class="input-group mb-3">
+          <label>Upload file</label>
+          <br>
+          <input type="file" class="form-control"  id="inputGroupFile02" multiple (change)="selectFile($event)" >
+
+        </div>
+        <button (click)="reset();submitFile()">submit</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Uploaded Document</h5>
+
+        <li class="list-group-item" *ngFor="let file of statusInfo.documents">
+          <a target="_blank" href="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{file}}">
+            <i class="fa fa-file" style="font-size:36px;"></i>
+            {{file}} </a>
+        </li>
+
+      </div>
+    </div>
+  </div>
+</div>
