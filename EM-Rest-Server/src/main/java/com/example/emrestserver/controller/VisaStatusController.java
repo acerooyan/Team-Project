@@ -130,7 +130,8 @@ public class VisaStatusController {
             Gson g = new Gson();
             employeeStatusDomain = g.fromJson(model,EmployeeStatusDomain.class);
             String fileName = awsService.uploadFile(file);
-
+            System.out.println(fileName);
+            System.out.println(employeeStatusDomain);
             if(employeeStatusDomain.getStatus().equalsIgnoreCase("reject")){
                 personalDocumentService.updatePersonalDocument(fileName, employeeService.getEmpolyeeByEmail(email));
 
