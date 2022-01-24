@@ -36,7 +36,7 @@ public class EmployeeVisaService {
         ApplicationWorkFlow currentAWF = hrVisaStatusDao.getCurrentStep(employee.getId());
         ApplicationWorkFlow nextAWF;
         if(currentAWF.getStatus().equals("")){
-            if (currentAWF.getType().equals("OPT Receipt")) {
+            if (currentAWF.getType().equalsIgnoreCase("OPT Receipt")) {
                 current = "Get Started";
                 next = currentAWF.getType();
             }else if(currentAWF.getType().equals("I-983")){
