@@ -89,6 +89,7 @@ public class VisaStatusController {
                 String type = hrVisaStatusDomain.getCurrentStep();
                 if(type.equalsIgnoreCase("opt ead")){
                     hrVisaService2.addApplicationWorkFlow(employee,"I-983");
+                    visaStatusService.updateVisaStatusActiveById(employeeService.getEmpolyeeByEmail(email).getId(),"1");
                 }else{
                     hrVisaService2.addApplicationWorkFlow(employee,hrVisaStatusDomain.getNextStep());
                 }
@@ -150,11 +151,11 @@ public class VisaStatusController {
             }else{
 
                 //update visastatus active if it is opt ead and opt stem ead
-                if(employeeStatusDomain.currentStep.equalsIgnoreCase("OPT EAD")
-                        && employeeStatusDomain.currentStep.equalsIgnoreCase("OPT STEM EAD") ){
-
-                    visaStatusService.updateVisaStatusActiveById(employeeService.getEmpolyeeByEmail(email).getId(),"1");
-                }
+//                if(employeeStatusDomain.currentStep.equalsIgnoreCase("OPT EAD")
+//                        && employeeStatusDomain.currentStep.equalsIgnoreCase("OPT STEM EAD") ){
+//
+//                    visaStatusService.updateVisaStatusActiveById(employeeService.getEmpolyeeByEmail(email).getId(),"1");
+//                }
 
                 personalDocumentService.buildDocument(fileName, employeeService.getEmpolyeeByEmail(email));
 
