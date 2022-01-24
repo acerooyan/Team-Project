@@ -82,11 +82,12 @@ public class VisaStatusController {
 
                 //add workflow
                 hrVisaService2.addApplicationWorkFlow(employee,hrVisaStatusDomain.getNextStep());
+                employeeService.updateWorkFlowByType(hrVisaStatusDomain.getCurrentStep(),email,"",hrVisaStatusDomain.getWorkflowStatus());
 
             }
 
             //update Workflow
-            employeeService.updateWorkFlowByType(hrVisaStatusDomain.getCurrentStep(),email,"",hrVisaStatusDomain.getWorkflowStatus());
+
 
 
 
@@ -132,6 +133,7 @@ public class VisaStatusController {
 
             if(employeeStatusDomain.getStatus().equalsIgnoreCase("reject")){
                 personalDocumentService.updatePersonalDocument(fileName, employeeService.getEmpolyeeByEmail(email));
+
             }else{
 
                 //update visastatus active if it is opt ead and opt stem ead
@@ -144,8 +146,8 @@ public class VisaStatusController {
                 personalDocumentService.buildDocument(fileName, employeeService.getEmpolyeeByEmail(email));
 
             }
-            employeeService.updateWorkFlowByType(employeeStatusDomain.getNextStep(),email,"","pending");
 
+            employeeService.updateWorkFlowByType(employeeStatusDomain.getNextStep(),email,"","pending");
 
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
