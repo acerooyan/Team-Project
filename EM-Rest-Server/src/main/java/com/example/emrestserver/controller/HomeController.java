@@ -48,8 +48,8 @@ public class HomeController {
 
     }
 
-    @GetMapping("/sendNotification")
-    public ResponseEntity<String> sendNotification(@RequestParam("email") String email){
+    @PostMapping("/hr/sendNotification")
+    public ResponseEntity<String> sendNotification(@RequestPart("email") String email){
         Mail mail = new Mail();
         mail.setMailTo(email);
         mail.setContentType("text/html");
@@ -59,8 +59,8 @@ public class HomeController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/hr/home/download")
-    public ResponseEntity<String> hrHome(@RequestParam("email") String email) {
+    @PostMapping("/hr/home/download")
+    public ResponseEntity<String> hrHome(@RequestPart("email") String email) {
 
         try {
 //            get application list from database
@@ -72,14 +72,14 @@ public class HomeController {
         }
     }
 
-    @GetMapping("/hr/home/upload")
-    public ResponseEntity<Object> updateWorkFlowAndFile(@RequestPart(value = "file") MultipartFile file,@RequestParam String email) {
+    @PostMapping("/hr/home/upload")
+    public ResponseEntity<Object> updateWorkFlowAndFile(@RequestPart(value = "file") MultipartFile file,@RequestPart String email) {
         try{
             //todo: update database workflow and document
-            Gson g = new Gson();
             String fileName = awsService.uploadFile(file);
 
             personalDocumentService.updatePersonalDocument(fileName, employeeService.getEmpolyeeByEmail(email));
+
 
             return  ResponseEntity.ok().build();
         }catch (Exception e){

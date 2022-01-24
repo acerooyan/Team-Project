@@ -4,6 +4,7 @@ import com.example.emrestserver.domains.visaStatus.EmployeeStatusDomain;
 import com.example.emrestserver.domains.visaStatus.HrVisaStatusDomain;
 import com.example.emrestserver.entity.ApplicationWorkFlow;
 import com.example.emrestserver.entity.Employee;
+import com.example.emrestserver.entity.VisaStatus;
 import com.example.emrestserver.service.*;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class VisaStatusController {
 
     @Autowired
     private AwsService awsService;
+
+    @Autowired
+    private VisaStatusService visaStatusService;
 
     @Autowired
     private PersonalDocumentService personalDocumentService;
@@ -105,7 +109,8 @@ public class VisaStatusController {
             employeeStatusDomain = employeeVisaService.mainService(email);
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
-            System.out.println("error catch");
+//            System.out.println("error catch");
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
@@ -127,6 +132,13 @@ public class VisaStatusController {
                 personalDocumentService.updatePersonalDocument(fileName, employeeService.getEmpolyeeByEmail(email));
             }else{
 
+                //update visastatus active if it is opt ead and opt stem ead
+                if(employeeStatusDomain.currentStep.equalsIgnoreCase("OPT EAD")
+                        && employeeStatusDomain.currentStep.equalsIgnoreCase("OPT STEM EAD") ){
+
+                    visaStatusService.updateVisaStatusActiveById(employeeService.getEmpolyeeByEmail(email).getId(),"1");
+                }
+
                 personalDocumentService.buildDocument(fileName, employeeService.getEmpolyeeByEmail(email));
 
             }
@@ -136,6 +148,7 @@ public class VisaStatusController {
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
             System.out.println("error catch");
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
