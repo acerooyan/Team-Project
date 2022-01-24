@@ -81,12 +81,19 @@ public class VisaStatusController {
                 employee.setEndDate(Date.valueOf(hrVisaStatusDomain.getEndDate()));
 
                 //add workflow
-                hrVisaService2.addApplicationWorkFlow(employee,hrVisaStatusDomain.getNextStep());
+                String type = hrVisaStatusDomain.getCurrentStep();
+                if(type.equalsIgnoreCase("opt ead")){
+                    hrVisaService2.addApplicationWorkFlow(employee,"I-983");
+                }else{
+                    hrVisaService2.addApplicationWorkFlow(employee,hrVisaStatusDomain.getNextStep());
+                }
+
+
+
                 employeeService.updateWorkFlowByType(hrVisaStatusDomain.getCurrentStep(),email,"",hrVisaStatusDomain.getWorkflowStatus());
 
             }
 
-            //update Workflow
 
 
 
