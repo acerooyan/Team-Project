@@ -19,13 +19,14 @@ export class HireComponent implements OnInit {
   public workflows: applicationWorkflow[] = [];
   public durations!: any[];
   public selectedDuration!: Duration;
+  public Comments:string = "";
 
-
-  
+  public DecisonEmail = "";
   public Address:address[] = [];
   
   public alldata: alldata = new alldata();
   public EmailControl = new FormControl();
+  public hidden = false;
   loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
     duration: new FormControl('', Validators.required)
@@ -35,6 +36,8 @@ export class HireComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.hidden = false;
+    this.workflows = [];
     this.durations = DURATIONS;
     this.selectedDuration = this.durations[0];
     // = {type:"onBoarding", status: "pending", email: "jamesh970327@gmail.com", comments:undefined}
@@ -69,13 +72,67 @@ export class HireComponent implements OnInit {
     )
   }
 
-  showProfile(email:string|undefined){
 
+  makeDecison(status: string)
+  {
+      console.log(this.DecisonEmail);
+      console.log(this.Comments)
+      this.hireService.ChangeWorkflow(this.DecisonEmail, status).subscribe(
+        (data: any) =>{
+
+          console.log("change workflow works");
+
+          this.hireService.sendEmail(this.DecisonEmail, status, this.Comments).subscribe(
+            (data: any) =>{
+
+                window.alert("Decsion email sent!");
+                this.hide();
+                this.ngOnInit();
+             
+             
+            },
+            (error: any) =>
+            {
+              if (error.status === 401) {
+                this.router.navigate(['']);
+              }
+              else{
+                console.log(error);
+              }
+            }
+
+          )
+         
+        },
+        (error: any) =>
+        {
+          
+        }
+      )
+  }
+
+
+  onchange()
+  {
+    this.hidden = !this.hidden;
+  }
+
+  hide(){
+     this.onchange();
+    this.router.navigate(['nav/hire']);
+  }
+ 
+  showProfile(email:string|undefined){
+     
+      this.onchange();
       if(!email)
       {
+        
         console.log("cannot get email")
       }
       else{
+
+        this.DecisonEmail = email;
         this.hireService.GetAllInfobyemail(email).subscribe(
           (data : any) =>{
             console.log(data)

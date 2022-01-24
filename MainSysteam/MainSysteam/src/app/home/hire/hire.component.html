@@ -41,9 +41,25 @@
       <td>{{item.type}}</td>
       <td>{{item.status}}</td>
       <td> <a  class="link-info" (click)="showProfile(item.email)">Info link</a></td>
+      
     </tr>
  
   </tbody>
+  <div *ngIf="hidden">
+
+    <a class="nav-link" (click)="hide()">Hide</a>
+
+    <button  style="margin: 25px ;" (click)="makeDecison('complete')" type="button" class="btn btn-success">Approve</button>
+      
+    <button type="button" (click)="makeDecison('reject')"  class="btn btn-danger">Reject</button>
+      <br>
+    <label for="exampleFormControlTextarea1">Comments</label>
+    <textarea  [(ngModel)]='Comments'  class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+    
+
+  </div>
+  
 </table>
 
 <router-outlet></router-outlet>
