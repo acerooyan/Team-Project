@@ -18,39 +18,36 @@ public class HrHomeService {
     @Autowired
     private HrHomeDao hrHomeDao;
 
-    @Transactional
-    public List<Employee> getAllEmployees(){
-        List<Employee> employeeList = hrHomeDao.getAllEmployees();
-                System.out.println(employeeList);
+//    @Transactional
+//    public List<Employee> getAllEmployees(){
+//        List<Employee> employeeList = hrHomeDao.getAllEmployees();
+//                System.out.println(employeeList);
+//
+//        return hrHomeDao.getAllEmployees();
+//    }
+//    @Transactional
+//    public List<List<PersonalDocument>> getPersonalDocumentList(){
+//        List<Employee> employeeList = getAllEmployees();
+//        List<Integer> employeeIdList = employeeList.stream().map(Employee::getId).collect(Collectors.toList());
+//        List<List<PersonalDocument>> personalDocumentList = hrHomeDao.getAllPersonalList(employeeIdList);
+//        System.out.println(personalDocumentList);
+//        return personalDocumentList;
+//    }
 
-        return hrHomeDao.getAllEmployees();
-    }
-    @Transactional
-    public List<List<PersonalDocument>> getPersonalDocumentList(){
-        List<Employee> employeeList = getAllEmployees();
-        List<Integer> employeeIdList = employeeList.stream().map(Employee::getId).collect(Collectors.toList());
-        List<List<PersonalDocument>> personalDocumentList = hrHomeDao.getAllPersonalList(employeeIdList);
-        System.out.println(personalDocumentList);
-        return personalDocumentList;
-    }
+//    @Transactional
+//    public List<HrHomeDomain> mapDocumentWithEmployee(){
+//        List<HrHomeDomain> ans = new ArrayList<>();
+//        List<List<PersonalDocument>> personalDocumentList =  getPersonalDocumentList();
+//        List<Employee> employeeList = getAllEmployees();
+//        for(int i = 0; i < employeeList.size(); i++){
+//            ans.add(HrHomeDomain.builder()
+//                    .employee(employeeList.get(i))
+//                            .personalDocumentList(personalDocumentList.get(i))
+//                    .build());
+//        }
+//        return ans;
+//    }
 
-    @Transactional
-    public List<HrHomeDomain> mapDocumentWithEmployee(){
-        List<HrHomeDomain> ans = new ArrayList<>();
-        List<List<PersonalDocument>> personalDocumentList =  getPersonalDocumentList();
-        List<Employee> employeeList = getAllEmployees();
-        for(int i = 0; i < employeeList.size(); i++){
-            ans.add(HrHomeDomain.builder()
-                    .employee(employeeList.get(i))
-                            .personalDocumentList(personalDocumentList.get(i))
-                    .build());
-        }
-        return ans;
-    }
 
-    @Transactional
-    public List<VisaStatus> test(){
-        return hrHomeDao.test();
-    }
 
 }

@@ -62,7 +62,7 @@ public class EmployeeDao {
     public PersonalDocument[] getDocumentByEmployeeId(Integer id){
         Session session = getCurrentSession();
 
-        Query query = session.createQuery("FROM  PersonalDocument p WHERE p.employee.id = :id");
+        Query query = session.createQuery("FROM  PersonalDocument p WHERE p.employee.id = :id order by id DESC");
         query.setParameter("id",id);
         List<PersonalDocument> personalDocumentList= (List<PersonalDocument>) query.getResultList();
 
@@ -93,7 +93,8 @@ public class EmployeeDao {
 
         return applicationWorkFlowList.get(applicationWorkFlowList.size()-1);
     }
-    
+
+
    public VisaStatus updateVisaStatus(String email,String visaType){
        VisaStatus visaStatus = getEmployeeByEmail(email).getVisaStatus();
        visaStatus.setVisaType(visaType);

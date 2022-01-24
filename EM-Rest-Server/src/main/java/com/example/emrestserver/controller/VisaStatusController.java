@@ -27,6 +27,8 @@ public class VisaStatusController {
     HrVisaService2 hrVisaService2;
 
     @Autowired
+    HrVisaStatusService hrVisaStatusService;
+    @Autowired
     RegisterService registerService;
 
     @Autowired
@@ -40,7 +42,7 @@ public class VisaStatusController {
         HrVisaStatusDomain hrVisaStatusDomain = null;
         try{
             //todo: return domain object and put int in body.
-
+            hrVisaStatusService.mainService();
             return  ResponseEntity.ok().body(hrVisaStatusDomain);
         }catch (Exception e){
             System.out.println("error catch");
@@ -99,9 +101,8 @@ public class VisaStatusController {
         EmployeeStatusDomain employeeStatusDomain = null;
         try{
             //todo: return work flow
-            ApplicationWorkFlow largestWorkFlow =  employeeVisaService.getLargestWorkFlowByEmail(email);
 
-
+            employeeStatusDomain = employeeVisaService.mainService(email);
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
 //            System.out.println("error catch");

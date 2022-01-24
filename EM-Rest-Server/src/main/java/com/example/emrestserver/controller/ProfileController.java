@@ -70,6 +70,7 @@ public class ProfileController {
         }
     }
 
+
     @PutMapping("/em/profile/personalInfo")
     public ResponseEntity<Object> personalInfo(@RequestPart(value = "model") String model,ServletRequest servletRequest) {
         HttpServletRequest req = (HttpServletRequest) servletRequest;

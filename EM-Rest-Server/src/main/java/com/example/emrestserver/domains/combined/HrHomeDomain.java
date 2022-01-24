@@ -12,8 +12,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HrHomeDomain {
-    Employee employee;
-    List<PersonalDocument> personalDocumentList;
-
-
+    public String fullName;
+    public String visa;
+    public String startDate;
+    public String endDate;
+    public Integer dayLeft;
+    public String email;
 }

@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 @Repository
@@ -21,21 +22,21 @@ public class RegisterDao {
     public Person addPerson(Person p){
 
         Session session = getCurrentSession();
-        Query findPerson = session.createQuery("FROM Person WHERE email=:email");
-        findPerson.setParameter("email", p.getEmail());
-        if(findPerson.getSingleResult() != null){
-            return (Person)findPerson.getSingleResult();
-        }
-        System.out.println(p);
-        Integer personId = (Integer)session.save(p);
+        try{
+            Query findPerson = session.createQuery("FROM Person WHERE email=:email");
+            findPerson.setParameter("email", p.getEmail());
 
-        // check if add successfully.
-        Query findPersonById = session.createQuery("FROM Person p WHERE p.id = :id");
-        findPersonById.setParameter("id", personId);
-        System.out.println(personId);
-        Person p1 = (Person)findPersonById.getSingleResult();
-        System.out.println(personId+" == "+ p1.getId() );
-        return p;
+            return (Person)findPerson.getSingleResult();
+
+        }catch(NoResultException e){
+            Integer personId = (Integer)session.save(p);
+            Query findPersonById = session.createQuery("FROM Person p WHERE p.id = :id");
+            findPersonById.setParameter("id", personId);
+            System.out.println(personId);
+            Person p1 = (Person)findPersonById.getSingleResult();
+            System.out.println(personId+" == "+ p1.getId() );
+            return p;
+        }
 
     }
     public void addAddress(Address address){
