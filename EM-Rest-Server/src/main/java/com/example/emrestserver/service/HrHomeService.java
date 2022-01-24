@@ -92,6 +92,10 @@ public class HrHomeService {
 
         LocalDate end = endDate.toLocalDate();
         Integer days = (int) ChronoUnit.DAYS.between(LocalDate.now(),end);
+
+        if(days < 0){
+            days =0;
+        }
         return days;
     }
 
