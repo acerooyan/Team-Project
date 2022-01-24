@@ -172,9 +172,7 @@ public class RegisterService {
         }
 
         // avatar
-        if(!avatarName.equals("")){
-            employee.setAvatar(avatarName);
-        }
+
         System.out.println(employee);
         return registerDao.addEmployee(employee);
     }
