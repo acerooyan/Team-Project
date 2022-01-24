@@ -62,7 +62,7 @@ public class EmployeeDao {
     public PersonalDocument[] getDocumentByEmployeeId(Integer id){
         Session session = getCurrentSession();
 
-        Query query = session.createQuery("FROM  PersonalDocument p WHERE p.employee.id = :id order by id DESC");
+        Query query = session.createQuery("FROM  PersonalDocument p WHERE p.employee.id = :id order by path DESC");
         query.setParameter("id",id);
         List<PersonalDocument> personalDocumentList= (List<PersonalDocument>) query.getResultList();
 
@@ -118,7 +118,7 @@ public class EmployeeDao {
 
    public Employee[] getEmployeeByActive(){
         Session session = getCurrentSession();
-        Query getEmployeeWhoseActiveIs1 = session.createQuery("FROM Employee e Where e.visaStatus.visaType='OPT' and e.visaStatus.active=1");
+        Query getEmployeeWhoseActiveIs1 = session.createQuery("FROM Employee e Where e.visaStatus.visaType='OPT' and e.visaStatus.active='1'");
         List<Employee> employeeList = getEmployeeWhoseActiveIs1.getResultList();
         Employee[] employeeArr = new Employee[employeeList.size()];
         employeeList.toArray(employeeArr);
