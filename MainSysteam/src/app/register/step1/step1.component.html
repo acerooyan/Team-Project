@@ -1,0 +1,35 @@
+<div class="container col-md-6">
+  <h1 style="color: red;">Register</h1>
+<!--  <form (ngSubmit)="saveRegUser();regUserRegister()">-->
+<form>
+    <div class="mb-3">
+      <label  class="form-label">User Name</label>
+      <input  type="text" class="form-control" id="userName" name="userName" required [(ngModel)]="regUser.userName" #un = "ngModel">
+      <div *ngIf="un.invalid && un.touched" class="text-danger">Username is Required</div>
+    </div>
+
+    <div class="mb-3">
+      <label  class="form-label">Email</label>
+      <input e type="email" class="form-control" id="userName" name="userName" required [(ngModel)]="regUser.email"  readonly="readonly" #un = "ngModel">
+      <div *ngIf="un.invalid && un.touched" class="text-danger">Email is Required</div>
+    </div>
+
+    <div class="mb-3">
+      <label  class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="regUser.password" #pw = "ngModel">
+
+      <div *ngIf="pw.invalid && pw.touched" class="text-danger">Password is Required</div></div>
+
+<!--    <a class="btn" routerLink="step2">next</a>-->
+    <button [disabled]="un.invalid || pw.invalid" (click)="saveRegUser(); saveRegUserForEmail()">
+      <span>next</span>
+    </button>
+
+    <h4 *ngIf= 'errorObject.code'  style='color: red'>{{errorObject.message}} with error code: {{errorObject.code}}</h4>
+<!--    <button type="submit" class="btn btn-primary">save</button>-->
+  </form>
+</div>
+
+
+
+

@@ -1,0 +1,41 @@
+package com.example.auth.entity;
+
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+
+@Entity
+@Table(name = "userrole")
+@Data
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserRole implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private Integer ID;
+
+
+    @ManyToOne
+    @JoinColumn(name = "UserID")
+    private User user;
+    @ManyToOne
+    @JoinColumn(name = "RoleID")
+    private Role role;
+    @Column(name = "activeflag")
+    private int activeFlag;
+    @Column(name = "createdate")
+    private Date createDate;
+    @Column(name = "modificationdate")
+    private Date modificationDate;
+    @Column(name = "lastmodificationuser")
+    private int lastModificationUser;
+
+
+
+
+}
