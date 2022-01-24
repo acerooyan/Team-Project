@@ -90,13 +90,9 @@ public class HrHomeService {
     @Transactional
     public Integer daysLeft(Date endDate){
 
-        LocalDate end = endDate.toLocalDate();
-        Integer days = (int) ChronoUnit.DAYS.between(LocalDate.now(),end);
+        Integer days = (int) ChronoUnit.DAYS.between(LocalDate.now(),endDate.toLocalDate());
 
-        if(days < 0){
-            days =0;
-        }
-        return days;
+        return days < 0 ? 0: days;
     }
 
 }
