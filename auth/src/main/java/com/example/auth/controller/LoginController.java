@@ -1,5 +1,6 @@
 package com.example.auth.controller;
 
+import com.example.auth.Exception.UserNotFoundException;
 import com.example.auth.constant.JwtConstant;
 import com.example.auth.domain.UserDomain;
 import com.example.auth.entity.RegistrationToken;
@@ -29,7 +30,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(HttpServletResponse res, @RequestBody UserDomain userDomain) {
+    public ResponseEntity<String> login(HttpServletResponse res, @RequestBody UserDomain userDomain) throws UserNotFoundException {
         System.out.println("in log in");
         if (userDomain != null && userDomain.getUserName() != null && userDomain.getPassword() != null) {
             List<UserDomain> userDomainList = userService.checkLogin(userDomain);

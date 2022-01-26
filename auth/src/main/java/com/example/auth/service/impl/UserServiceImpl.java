@@ -1,5 +1,6 @@
 package com.example.auth.service.impl;
 
+import com.example.auth.Exception.UserNotFoundException;
 import com.example.auth.dao.IUserDao;
 import com.example.auth.domain.UserDomain;
 import com.example.auth.entity.Role;
@@ -45,10 +46,26 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    public List<UserDomain> checkLogin(UserDomain userDomain) {
+    public List<UserDomain> checkLogin(UserDomain userDomain) throws UserNotFoundException {
+//        if (userDomain.getUserName().indexOf("@") >= 0) {
+//            userDomain.setEmail(userDomain.getUserName());
+//            userDomain.setUserName(null);
+//        }
+//        List<UserDomain> res = new ArrayList<>();
+//        try {
+//            User user = userDao.getUser(userDomain);
+//            List<String> roleNames = new ArrayList<>();
+//            for (UserRole userRole : user.getUserRoleList()) {
+//                roleNames.add(userRole.getRole().getRoleName());
+//            }
+//            userDomain = UserDomain.builder().userName(user.getUserName()).role(roleNames.get(0)).id(user.getID()).email(user.getEmail()).build();
+//            res.add(userDomain);
+//        } catch (NullPointerException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
         if (userDomain.getUserName().indexOf("@") >= 0) {
-            userDomain.setEmail(userDomain.getUserName());
-            userDomain.setUserName(null);
+            throw new UserNotFoundException(userDomain.getUserName());
         }
         List<UserDomain> res = new ArrayList<>();
         try {
