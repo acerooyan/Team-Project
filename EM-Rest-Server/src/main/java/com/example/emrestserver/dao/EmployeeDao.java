@@ -128,7 +128,7 @@ public class EmployeeDao {
 
     public Employee[] getAllEmployees(){
         Session session = getCurrentSession();
-        Query getAllEmployees = session.createQuery("FROM Employee e WHERE e.visaStatus.active='1'");
+        Query getAllEmployees = session.createQuery("FROM Employee e ");
 
         List<Employee> employeeList = (List<Employee>) getAllEmployees.getResultList();
         System.out.println(employeeList);
