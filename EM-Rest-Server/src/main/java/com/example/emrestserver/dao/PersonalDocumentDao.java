@@ -49,6 +49,10 @@ public class PersonalDocumentDao {
 
     public PersonalDocument getPersonalDocumentByTitle( String title,Integer id){
         Session session = getCurrentSession();
+        if(title.equals("I-983"))
+        {
+            title +=".pdf";
+        }
 
         Query query = session.createQuery("FROM PersonalDocument WHERE title = :title and id = :id");
         query.setParameter("title",title);

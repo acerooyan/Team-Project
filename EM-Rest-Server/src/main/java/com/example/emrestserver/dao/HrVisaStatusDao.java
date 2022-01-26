@@ -23,7 +23,7 @@ public class HrVisaStatusDao {
 
     public Employee[] getAllEmployeeWithOpt(){
         Session session = getCurrentSession();
-        Query getAllEmployeeWithVisaStatus = session.createQuery("FROM Employee e WHERE e.visaStatus.visaType = 'OPT'");
+        Query getAllEmployeeWithVisaStatus = session.createQuery("FROM Employee e WHERE e.visaStatus.visaType = 'OPT' OR e.visaStatus.visaType = 'F1(CPT/OPT)'");
         List<Employee> employees = (List<Employee>) getAllEmployeeWithVisaStatus.getResultList();
 
         Employee[] employeeArr = new Employee[employees.size()];

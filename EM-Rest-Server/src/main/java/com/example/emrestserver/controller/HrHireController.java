@@ -3,9 +3,11 @@ package com.example.emrestserver.controller;
 import com.example.emrestserver.domains.hire.HireDomain;
 import com.example.emrestserver.domains.profile.ProfileDomain;
 import com.example.emrestserver.domains.visaStatus.EmployeeStatusDomain;
+import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.Mail;
 import com.example.emrestserver.service.EmployeeService;
 import com.example.emrestserver.service.HrHireService;
+import com.example.emrestserver.service.HrVisaService2;
 import com.example.emrestserver.service.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,9 @@ public class HrHireController {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    HrVisaService2 hrVisaService2;
 
     @GetMapping("hr/hire")
     public ResponseEntity<HireDomain[]> getAll() {
@@ -69,8 +74,9 @@ public class HrHireController {
             //todo: update work flow
             //"reject";
             //complete
+            Employee employee = employeeService.getEmpolyeeByEmail(email);
             employeeService.updateWorkFlowByType("onBoarding",email,"nah",status);
-
+            hrVisaService2.addApplicationWorkFlow(employee,"OPT Receipt");
             return  ResponseEntity.ok().build();
         }catch (Exception e){
             System.out.println("error catch");
