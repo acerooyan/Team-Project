@@ -8,17 +8,24 @@ import com.example.auth.entity.UserRole;
 import com.example.auth.service.RoleService;
 import com.example.auth.service.UserRoleService;
 import com.example.auth.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.tomcat.util.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 @Transactional
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static final Logger log4j = LogManager.getLogger();
+
     @Autowired
     private IUserDao userDao;
     private RoleService roleService;
@@ -60,7 +67,7 @@ public class UserServiceImpl implements UserService {
             userDomain = UserDomain.builder().userName(user.getUserName()).role(roleNames.get(0)).id(user.getID()).email(user.getEmail()).build();
             res.add(userDomain);
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            log4j.error(e);
             return null;
         }
         return res;
