@@ -26,9 +26,11 @@ public class UserServiceImpl implements UserService {
     private UserRoleService userRoleService;
 
     @Autowired
-    public UserServiceImpl(RoleService roleService, UserRoleService userRoleService) {
+    public UserServiceImpl(RoleService roleService, UserRoleService userRoleService, IUserDao userDao) {
         this.roleService = roleService;
         this.userRoleService = userRoleService;
+        this.userDao = userDao;
+
     }
 
     @Override
