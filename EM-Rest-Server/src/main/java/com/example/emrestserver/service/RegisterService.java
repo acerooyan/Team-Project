@@ -51,7 +51,7 @@ public class RegisterService {
                 .gender(basicInfoDomain.getGender())
                 .build();
         Person newP = addPerson(p);
-        System.out.println("print from service"+newP.getId());
+//        System.out.println("print from service"+newP.getId());
         return newP;
     }
     @Transactional
@@ -175,7 +175,7 @@ public class RegisterService {
 
         employee.setAvatar(avatarName);
 
-        System.out.println(employee);
+//        System.out.println(employee);
         return registerDao.addEmployee(employee);
     }
 

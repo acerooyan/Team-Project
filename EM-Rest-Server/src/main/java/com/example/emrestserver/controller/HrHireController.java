@@ -9,6 +9,8 @@ import com.example.emrestserver.service.EmployeeService;
 import com.example.emrestserver.service.HrHireService;
 import com.example.emrestserver.service.HrVisaService2;
 import com.example.emrestserver.service.email.EmailService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +33,8 @@ public class HrHireController {
 
     @Autowired
     HrVisaService2 hrVisaService2;
+
+    private static final Logger log4j = LogManager.getLogger();
 
     @GetMapping("hr/hire")
     public ResponseEntity<HireDomain[]> getAll() {
@@ -57,7 +61,8 @@ public class HrHireController {
             ProfileDomain profileDomain = employeeService.getDataReady(email);
             return  ResponseEntity.ok().body(profileDomain);
         }catch (Exception e){
-            System.out.println("error catch");
+//            System.out.println("error catch");
+            log4j.error("Error Catch");
             return ResponseEntity.internalServerError().build();
         }
     }
@@ -71,7 +76,6 @@ public class HrHireController {
 //        String email = JwtUtil.getSubjectFromJwt(token);
 
         try{
-            //todo: update work flow
             //"reject";
             //complete
             Employee employee = employeeService.getEmpolyeeByEmail(email);
@@ -79,7 +83,7 @@ public class HrHireController {
             hrVisaService2.addApplicationWorkFlow(employee,"OPT Receipt");
             return  ResponseEntity.ok().build();
         }catch (Exception e){
-            System.out.println("error catch");
+//            System.out.println("error catch");
             return ResponseEntity.internalServerError().build();
         }
     }

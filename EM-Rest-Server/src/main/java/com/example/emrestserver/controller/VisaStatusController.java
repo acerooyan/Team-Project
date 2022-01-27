@@ -10,6 +10,8 @@ import com.example.emrestserver.security.util.CookieUtil;
 import com.example.emrestserver.security.util.JwtUtil;
 import com.example.emrestserver.service.*;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +48,8 @@ public class VisaStatusController {
     @Autowired
     private PersonalDocumentService personalDocumentService;
 
+    private static final Logger logger = LoggerFactory.getLogger(VisaStatusController.class);
+
     @GetMapping("/hr/visaStatus")
     public ResponseEntity<HrVisaStatusDomain[]> getAllVisaStatus() {
 
@@ -54,7 +58,8 @@ public class VisaStatusController {
             HrVisaStatusDomain[] hrVisaStatusDomain = hrVisaStatusService.mainService();
             return  ResponseEntity.ok().body(hrVisaStatusDomain);
         }catch (Exception e){
-            System.out.println("/hr/visaStatus error catch");
+//            System.out.println("/hr/visaStatus error catch");
+            logger.error("error catch");
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
@@ -105,7 +110,8 @@ public class VisaStatusController {
 
             return  ResponseEntity.ok().body(hrVisaStatusDomain);
         }catch (Exception e){
-            System.out.println("/hr/visaStatus error catch");
+//            System.out.println("/hr/visaStatus error catch");
+            logger.error("Error Catch");
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
@@ -124,7 +130,7 @@ public class VisaStatusController {
             employeeStatusDomain = employeeVisaService.mainService(email);
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
-            System.out.println("/em/visaStatus error catch");
+//            System.out.println("/em/visaStatus error catch");
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
@@ -142,8 +148,8 @@ public class VisaStatusController {
             Gson g = new Gson();
             employeeStatusDomain = g.fromJson(model,EmployeeStatusDomain.class);
             String fileName = awsService.uploadFile(file);
-            System.out.println(fileName);
-            System.out.println(employeeStatusDomain);
+//            System.out.println(fileName);
+//            System.out.println(employeeStatusDomain);
             if(employeeStatusDomain.getStatus().equalsIgnoreCase("reject")){
                 personalDocumentService.updatePersonalDocument(fileName, employeeService.getEmpolyeeByEmail(email));
 
@@ -164,7 +170,7 @@ public class VisaStatusController {
 
             return  ResponseEntity.ok().body(employeeStatusDomain);
         }catch (Exception e){
-            System.out.println("/em/visaStatus error catch");
+//            System.out.println("/em/visaStatus error catch");
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }

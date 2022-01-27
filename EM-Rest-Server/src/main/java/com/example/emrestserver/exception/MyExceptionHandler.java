@@ -11,8 +11,8 @@ public class MyExceptionHandler {
 
     // the order matters
 
-    @ExceptionHandler(value={UserNotFoundException.class})
-    public ResponseEntity<String> handlerUserNotFound(UserNotFoundException e){
+    @ExceptionHandler(value={EmployeeNotFoundException.class})
+    public ResponseEntity<String> handlerUserNotFound(EmployeeNotFoundException e){
         System.out.println("If UserNotFoundException throws, it will be intercepted by this handler");
         return new ResponseEntity(e.getMessage() + " Not Found", HttpStatus.OK);
     }

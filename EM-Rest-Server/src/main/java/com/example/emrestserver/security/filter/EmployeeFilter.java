@@ -35,7 +35,8 @@ public class EmployeeFilter implements Filter {
         res.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
 
         String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
-        System.out.println("+++++++++EmployeeFilter++++++++");
+
+//        System.out.println("+++++++++EmployeeFilter++++++++");
         System.out.println(token+"token");
 
         Claims claims = JwtUtil.getClaimsFromJwt(token);

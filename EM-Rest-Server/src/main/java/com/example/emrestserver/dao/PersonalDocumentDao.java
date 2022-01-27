@@ -1,10 +1,13 @@
 package com.example.emrestserver.dao;
 
+import com.example.emrestserver.controller.OnboardController;
 import com.example.emrestserver.entity.Employee;
 import com.example.emrestserver.entity.PersonalDocument;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +17,8 @@ public class PersonalDocumentDao {
     @Autowired
     protected SessionFactory sessionFactory;
 
+    private static final Logger logger = LoggerFactory.getLogger(PersonalDocumentDao.class);
+
     protected  final Session getCurrentSession(){
         return sessionFactory.getCurrentSession();
     }
@@ -21,10 +26,12 @@ public class PersonalDocumentDao {
     public PersonalDocument addPersonalDocument( PersonalDocument personalDocument){
         Session session = getCurrentSession();
 
-        System.out.println("DAO received document" + personalDocument);
+        logger.info("DAO received document" + personalDocument);
+
+//        System.out.println("DAO received document" + personalDocument);
 
         Integer personalDocumentId = (Integer) session.save(personalDocument);
-        System.out.println("DAO saved document");
+//        System.out.println("DAO saved document");
         System.out.println(personalDocument);
         return personalDocument;
     }

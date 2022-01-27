@@ -32,9 +32,9 @@ public class RegisterDao {
             Integer personId = (Integer)session.save(p);
             Query findPersonById = session.createQuery("FROM Person p WHERE p.id = :id");
             findPersonById.setParameter("id", personId);
-            System.out.println(personId);
+//            System.out.println(personId);
             Person p1 = (Person)findPersonById.getSingleResult();
-            System.out.println(personId+" == "+ p1.getId() );
+//            System.out.println(personId+" == "+ p1.getId() );
             return p;
         }
 

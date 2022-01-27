@@ -1,9 +1,12 @@
 package com.example.emrestserver.dao;
 
+import com.example.emrestserver.controller.OnboardController;
 import com.example.emrestserver.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +20,7 @@ public class EmployeeDao {
     protected  final Session getCurrentSession(){
         return sessionFactory.getCurrentSession();
     }
-
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeDao.class);
 
     public Employee getEmployeeById(Integer id){
         Session session = getCurrentSession();
@@ -33,13 +36,13 @@ public class EmployeeDao {
         Query query = session.createQuery("FROM Employee e WHERE e.person.email = :email");
         query.setParameter("email",email);
         Employee employee = (Employee) query.getSingleResult();
-        System.out.println(employee.getVisaStatus().getVisaType());
+        logger.info(employee.getVisaStatus().getVisaType());
+//        System.out.println(employee.getVisaStatus().getVisaType());
         return employee;
     }
 
 
     public Address[] getAddressByPersonId(Integer personId){
-        System.out.println(personId);
         Session session = getCurrentSession();
         Query getAddress = session.createQuery("From Address WHERE person.id =:id");
         getAddress.setParameter("id", personId);
@@ -55,7 +58,6 @@ public class EmployeeDao {
         Query query = session.createQuery("FROM Contact c WHERE c.employee.id = :id and c.isEmergency = 1");
         query.setParameter("id",id);
         Contact contact = (Contact) query.getSingleResult();
-        System.out.println(contact.getPerson().getId());
         return contact;
     }
 
@@ -148,7 +150,8 @@ public class EmployeeDao {
         }
         catch (Exception e)
         {
-            System.out.println(employeeId + "doesnt have workflow");
+            logger.error(employeeId + "doesn't have workflow");
+//            System.out.println(employeeId + "doesn't have workflow");
             return  null;
         }
 

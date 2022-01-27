@@ -145,7 +145,8 @@ public class EmployeeService {
                 .documentDomain(documentDomain)
                 .avatarDomain(avatarDomain)
                 .build();
-        System.out.println(profileDomain);
+//        System.out.println(profileDomain);
+
         return profileDomain;
     }
 
@@ -163,6 +164,8 @@ public class EmployeeService {
     public ApplicationWorkFlow updateWorkFlowByType(String type, String email, String comments, String status){
         return employeeDao.updateWorkFlowByType(type, email,comments,status);
     }
+
+
 
 
 }

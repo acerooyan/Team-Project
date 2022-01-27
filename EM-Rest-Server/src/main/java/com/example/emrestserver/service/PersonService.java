@@ -22,6 +22,8 @@ public class PersonService {
     private employeeDao1 employeeDao;
 
     @Autowired
+    private PersonDao personDao;
+    @Autowired
     public PersonService(employeeDao1 employeeDao) {
         this.employeeDao = employeeDao;
     }
@@ -42,4 +44,14 @@ public class PersonService {
         employeeProfileDomain.setEmployeesDomains(employeesDomains);
         return employeeProfileDomain;
     }
+
+    @Transactional
+    public Person getPersonByEmail(String email){
+        return personDao.getPersonByEmail(email);
+    }
+    @Transactional
+    public Person updatePersonWithPerson(Person person){
+        return personDao.updatePersonWithPerson(person);
+    }
+
 }

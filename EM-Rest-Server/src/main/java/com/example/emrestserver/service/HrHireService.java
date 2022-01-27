@@ -25,7 +25,7 @@ public class HrHireService {
 
         List<HireDomain> hireDomains = new ArrayList<>();
         for(int i = 0; i < employees.length; i++){
-            System.out.println(employees[i]);
+//            System.out.println(employees[i]);
             Person person = employees[i].getPerson();
             StringBuilder sb = new StringBuilder();
             sb.append(person.getFirstname());

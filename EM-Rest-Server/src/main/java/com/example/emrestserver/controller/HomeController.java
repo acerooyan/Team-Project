@@ -8,6 +8,8 @@ import com.example.emrestserver.service.HrHomeService;
 import com.example.emrestserver.service.PersonalDocumentService;
 import com.example.emrestserver.service.email.EmailService;
 import com.google.gson.Gson;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +37,7 @@ public class HomeController {
     @Autowired
     private AwsService awsService;
 
-
+    private static final Logger log4j = LogManager.getLogger();
 
     @GetMapping("/hr/home")
     public ResponseEntity<HrHomeDomain[]> hrHome() {
@@ -85,7 +87,8 @@ public class HomeController {
 
             return  ResponseEntity.ok().build();
         }catch (Exception e){
-            System.out.println("error catch");
+
+            log4j.error("Error Catch");
             return ResponseEntity.internalServerError().build();
         }
     }

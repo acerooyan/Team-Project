@@ -10,6 +10,8 @@ import com.example.emrestserver.security.util.CookieUtil;
 import com.example.emrestserver.security.util.JwtUtil;
 import com.example.emrestserver.service.*;
 import com.google.gson.Gson;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +39,7 @@ public class ProfileController {
     @Autowired
     private PersonService personService;
 
+    private static final Logger log4j = LogManager.getLogger();
 
     @PostMapping("/hr/employee/profiles")
     public ResponseEntity<EmployeeProfileDomain> getAllProfiles(@RequestBody EmployeeProfileDomain employeeProfileDomain) {
@@ -57,7 +60,8 @@ public class ProfileController {
             ProfileDomain profileDomain = employeeService.getDataReady(email);
             return  ResponseEntity.ok().body(profileDomain);
         }catch (Exception e){
-            System.out.println("error catch");
+//            System.out.println("error catch");
+            log4j.error("Error Catch");
             return ResponseEntity.internalServerError().build();
         }
     }
@@ -71,7 +75,8 @@ public class ProfileController {
 
 
         if ( model == null || email == null) {
-            System.out.println("not found");
+//            System.out.println("not found");
+            log4j.warn("Not Found");
             return ResponseEntity.status(666).build();
         } else {
             try{
@@ -86,7 +91,8 @@ public class ProfileController {
 
                 return ResponseEntity.ok().build();
             }catch (Exception e){
-                System.out.println("error catch");
+//                System.out.println("error catch");
+                log4j.error("Error Catch");
                 return ResponseEntity.internalServerError().build();
             }
         }
@@ -102,7 +108,8 @@ public class ProfileController {
 
 
         if ( model == null || email == null) {
-            System.out.println("not found");
+//            System.out.println("not found");
+            log4j.warn("Not Found");
             return ResponseEntity.status(666).build();
         } else {
             try{
@@ -128,7 +135,8 @@ public class ProfileController {
 
 
         if ( model == null || email == null) {
-            System.out.println("not found");
+//            System.out.println("not found");
+            log4j.warn("Not Found");
             return ResponseEntity.status(666).build();
         } else {
             try{
@@ -143,7 +151,7 @@ public class ProfileController {
 
                 return ResponseEntity.ok().build();
             }catch (Exception e){
-                System.out.println("error catch");
+//                System.out.println("error catch");
                 return ResponseEntity.internalServerError().build();
             }
         }
@@ -157,7 +165,8 @@ public class ProfileController {
 
 
         if ( model == null || email == null) {
-            System.out.println("not found");
+//            System.out.println("not found");
+            log4j.warn("Not Found");
             return ResponseEntity.status(666).build();
         } else {
             try{
@@ -168,7 +177,8 @@ public class ProfileController {
                 profileUpdateService2.changeEmployee(employmentDomain, email);
                 return ResponseEntity.ok().build();
             }catch (Exception e){
-                System.out.println("error catch");
+//                System.out.println("error catch");
+                log4j.error("Error Catch");
                 return ResponseEntity.internalServerError().build();
             }
         }
@@ -182,7 +192,8 @@ public class ProfileController {
 
 
         if ( model == null || email == null) {
-            System.out.println("not found");
+//            System.out.println("not found");
+            log4j.warn("Not Found");
             return ResponseEntity.status(666).build();
         } else {
             try{
@@ -193,7 +204,8 @@ public class ProfileController {
 
                 return ResponseEntity.ok().build();
             }catch (Exception e){
-                System.out.println("error catch");
+//                System.out.println("error catch");
+                log4j.error("Error Catch");
                 return ResponseEntity.internalServerError().build();
             }
         }
@@ -208,7 +220,8 @@ public class ProfileController {
 
         String fileName;
         if ( file == null || email == null) {
-            System.out.println("not found");
+//            System.out.println("not found");
+            log4j.warn("Not Found");
             return ResponseEntity.status(666).build();
         } else {
             try{
@@ -224,7 +237,8 @@ public class ProfileController {
 
                 return ResponseEntity.ok().build();
             }catch (Exception e){
-                System.out.println("error catch");
+//                System.out.println("error catch");
+                log4j.error("Error Catch");
                 return ResponseEntity.internalServerError().build();
             }
         }

@@ -6,6 +6,8 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -27,13 +29,15 @@ public class AwsService {
     @Autowired
     private AmazonS3 s3Client;
 
+    private static final Logger log4j = LogManager.getLogger();
 
     private File convertMultiPartFileToFile(MultipartFile file) {
         File convertedFile = new File(file.getOriginalFilename());
         try (FileOutputStream fos = new FileOutputStream(convertedFile)) {
             fos.write(file.getBytes());
         } catch (IOException e) {
-            System.out.println("Error converting multipartFile to file\n" + e);
+            log4j.error("Error converting multipartFile to file\n" + e);
+//            System.out.println("Error converting multipartFile to file\n" + e);
         }
         return convertedFile;
     }

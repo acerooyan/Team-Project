@@ -44,5 +44,12 @@ public class PersonDao {
         if(personList.size()>0)return personList.get(0);
         return null;
     }
+    public List<Person> findAll(){
+        Session session = getCurrentSession();
+        Query query = session.createQuery("FROM Person");
+        return (List<Person>)query.getResultList();
+
+    }
+
 
 }

@@ -10,6 +10,8 @@ import com.example.emrestserver.service.RegisterService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +33,9 @@ public class OnboardController {
 
     @Autowired
     private PersonalDocumentService personalDocumentService;
-    /*
 
-     */
+    private static final Logger logger = LoggerFactory.getLogger(OnboardController.class);
+
     @PostMapping("/register/test")
     public ResponseEntity<Object> register(@RequestPart(value = "model") String testDomainString,
                                            @RequestPart(value = "Avatar", required = false)MultipartFile file1,
@@ -49,11 +51,12 @@ public class OnboardController {
 //        BasicInfoDomain basicInfoDomain = g.fromJson(basicInfo,BasicInfoDomain.class);
 //        ContactInfoDomain contactInfoDomain = g.fromJson(contactInfo,ContactInfoDomain.class);
 
-        System.out.println("\n\n here pleasw!!!");
-        System.out.println(testDomainString);
+//        System.out.println("\n\n here pleasw!!!");
+        logger.info(testDomainString);
+//        System.out.println(testDomainString);
 
         if (testDomainString == null) {
-            System.out.println("basicInfo not found");
+//            System.out.println("basicInfo not found");
             return ResponseEntity.unprocessableEntity().build();
         } else {
 //            try{
@@ -86,7 +89,7 @@ public class OnboardController {
                 fileName1 = "defaultAvatar.jpg";
             }
             Employee employee = registerService.addEmployee(p,visaStatus, residentialStatusDomain, carInfoDomain, fileName1);
-            System.out.println("From controller: ");
+//            System.out.println("From controller: ");
 
 
             PersonalDocument personalDocument;
