@@ -8,11 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@Component
 @Aspect
 public class PointerCuts {
 
     @Pointcut("within(com.example.emrestserver.dao..*)")
     public void inDataAccessLayer() {}
+
+    @Pointcut("bean(*Controller)")
+    public void inBeanWithSuffixController() {}
 
 }

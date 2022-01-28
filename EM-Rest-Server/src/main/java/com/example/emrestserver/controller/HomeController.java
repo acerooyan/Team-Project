@@ -8,6 +8,8 @@ import com.example.emrestserver.service.HrHomeService;
 import com.example.emrestserver.service.PersonalDocumentService;
 import com.example.emrestserver.service.email.EmailService;
 import com.google.gson.Gson;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,11 +37,11 @@ public class HomeController {
     @Autowired
     private AwsService awsService;
 
-
+    private static final Logger log4j = LogManager.getLogger();
 
     @GetMapping("/hr/home")
     public ResponseEntity<HrHomeDomain[]> hrHome() {
-
+        log4j.info("in home");
         try {
             HrHomeDomain[] hrHomeDomains = hrHomeService.mainService();
             return ResponseEntity.ok().body(hrHomeDomains);
@@ -52,6 +54,7 @@ public class HomeController {
 
     @PostMapping("/hr/sendNotification")
     public ResponseEntity<String> sendNotification(@RequestPart("email") String email){
+        log4j.info("in home");
         Mail mail = new Mail();
         mail.setMailTo(email);
         mail.setContentType("text/html");
@@ -63,6 +66,7 @@ public class HomeController {
 
     @PostMapping("/hr/home/download")
     public ResponseEntity<String> hrHome(@RequestPart("email") String email) {
+        log4j.info("in home");
 
         try {
 //            get application list from database
@@ -76,6 +80,7 @@ public class HomeController {
 
     @PostMapping("/hr/home/upload")
     public ResponseEntity<Object> updateWorkFlowAndFile(@RequestPart(value = "file") MultipartFile file,@RequestPart String email) {
+        log4j.info("in home");
         try{
             //todo: update database workflow and document
             String fileName = awsService.uploadFile(file);

@@ -1,5 +1,6 @@
 package com.example.emrestserver.controller;
 
+import com.example.emrestserver.Exception.UserNotFoundException;
 import com.example.emrestserver.constant.JwtConstant;
 import com.example.emrestserver.domains.visaStatus.EmployeeStatusDomain;
 import com.example.emrestserver.domains.visaStatus.HrVisaStatusDomain;
@@ -113,22 +114,23 @@ public class VisaStatusController {
     }
 
     @GetMapping("/em/visaStatus")
-    public ResponseEntity<EmployeeStatusDomain> getWorkFlow(ServletRequest servletRequest) {
+    public ResponseEntity<EmployeeStatusDomain> getWorkFlow(ServletRequest servletRequest) throws UserNotFoundException {
+
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         String token = CookieUtil.getValue(req, JwtConstant.JWT_COOKIE_NAME);
         String email = JwtUtil.getSubjectFromJwt(token);
 
         EmployeeStatusDomain employeeStatusDomain = null;
-        try{
-            //todo: return work flow
 
-            employeeStatusDomain = employeeVisaService.mainService(email);
-            return  ResponseEntity.ok().body(employeeStatusDomain);
-        }catch (Exception e){
-            System.out.println("/em/visaStatus error catch");
-            e.printStackTrace();
-            return ResponseEntity.internalServerError().build();
-        }
+
+    
+            //todo: return work flow
+            throw new UserNotFoundException("");
+//            employeeStatusDomain = employeeVisaService.mainService(email);
+//            return  ResponseEntity.ok().body(employeeStatusDomain);
+
+
+
     }
 
     @PostMapping("/em/visaStatus")

@@ -1,4 +1,4 @@
-package com.example.springaop.Exception;
+package com.example.emrestserver.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -8,12 +8,17 @@ import com.example.emrestserver.entity.Mail;
 import com.example.emrestserver.service.EmployeeService;
 import com.example.emrestserver.service.HrHireService;
 import com.example.emrestserver.service.HrVisaService2;
+import com.example.emrestserver.service.email.AsyncSevice;
 import com.example.emrestserver.service.email.EmailService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletRequest;
+import java.io.UnsupportedEncodingException;
 
 @RestController
 @RequestMapping("/jwt")
@@ -31,6 +36,8 @@ public class HrHireController {
 
     @Autowired
     HrVisaService2 hrVisaService2;
+
+    private static final Logger log4j = LogManager.getLogger();
 
     @GetMapping("hr/hire")
     public ResponseEntity<HireDomain[]> getAll() {
@@ -57,7 +64,7 @@ public class HrHireController {
             ProfileDomain profileDomain = employeeService.getDataReady(email);
             return  ResponseEntity.ok().body(profileDomain);
         }catch (Exception e){
-            System.out.println("error catch");
+            log4j.error("This is an error log");
             return ResponseEntity.internalServerError().build();
         }
     }
@@ -79,15 +86,15 @@ public class HrHireController {
             hrVisaService2.addApplicationWorkFlow(employee,"OPT Receipt");
             return  ResponseEntity.ok().build();
         }catch (Exception e){
-            System.out.println("error catch");
+            log4j.error("This is an error log");
             return ResponseEntity.internalServerError().build();
         }
     }
 
 
-
+    AsyncSevice asyncSevice;
     @PostMapping("/hr/decision/sendNotification")
-    public ResponseEntity<String> sendNotification(@RequestPart("email") String email, @RequestPart("comment") String comment, @RequestPart("approved") String approved){
+    public ResponseEntity<String> sendNotification(@RequestPart("email") String email, @RequestPart("comment") String comment, @RequestPart("approved") String approved) throws MessagingException, UnsupportedEncodingException {
         Mail mail = new Mail();
         mail.setMailTo(email);
         mail.setContentType("text/html");
@@ -102,7 +109,7 @@ public class HrHireController {
             mail.setMailContent("Thank you so much for your interest our Company,  we’ve decided to move forward with another candidate.\n"+ "Hr Comment:" + comment);
         }
 
-        emailService.sendEmail(mail);
+        asyncSevice.sendEmail(mail);
         return ResponseEntity.ok().build();
     }
 
