@@ -1,6 +1,6 @@
 package com.example.auth.controller;
 
-import com.example.auth.Exception.UserNotFoundException;
+//import com.example.auth.Exception.UserNotFoundException;
 import com.example.auth.constant.JwtConstant;
 import com.example.auth.domain.UserDomain;
 import com.example.auth.entity.RegistrationToken;
@@ -29,22 +29,39 @@ public class LoginController {
         this.registrationTokenService = registrationTokenService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(HttpServletResponse res, @RequestBody UserDomain userDomain) throws UserNotFoundException {
-        System.out.println("in log in");
-        if (userDomain != null && userDomain.getUserName() != null && userDomain.getPassword() != null) {
-            List<UserDomain> userDomainList = userService.checkLogin(userDomain);
-            if (userDomainList != null && userDomainList.size() > 0) {
-                if(userDomain.getRole().equals("HR")){
-                    if(!userDomainList.get(0).getRole().equals(userDomain.getRole()))return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You don't have this role!");
-                }
-                String jwt = JwtUtil.generateToken(userDomainList.get(0).getEmail(), JwtConstant.JWT_VALID_DURATION, userDomainList.get(0).getRole(), userDomainList.get(0).getId());
-                CookieUtil.create(res, JwtConstant.JWT_COOKIE_NAME, jwt, false, -1, "localhost");
-                return ResponseEntity.ok().build();
+//    @PostMapping("/login")
+//    public ResponseEntity<String> login(HttpServletResponse res, @RequestBody UserDomain userDomain){
+//        System.out.println("in log in");
+//        if (userDomain != null && userDomain.getUserName() != null && userDomain.getPassword() != null) {
+//            List<UserDomain> userDomainList = userService.checkLogin(userDomain);
+//            if (userDomainList != null && userDomainList.size() > 0) {
+//                if(userDomain.getRole().equals("HR")){
+//                    if(!userDomainList.get(0).getRole().equals(userDomain.getRole()))return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You don't have this role!");
+//                }
+//                String jwt = JwtUtil.generateToken(userDomainList.get(0).getEmail(), JwtConstant.JWT_VALID_DURATION, userDomainList.get(0).getRole(), userDomainList.get(0).getId());
+//                CookieUtil.create(res, JwtConstant.JWT_COOKIE_NAME, jwt, false, -1, "localhost");
+//                return ResponseEntity.ok().build();
+//            }
+//        }
+//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid username or password");
+//    }
+
+@PostMapping("/login")
+public ResponseEntity<String> login(HttpServletResponse res, @RequestBody UserDomain userDomain) {
+    System.out.println("in log in");
+    if (userDomain != null && userDomain.getUserName() != null && userDomain.getPassword() != null) {
+        List<UserDomain> userDomainList = userService.checkLogin(userDomain);
+        if (userDomainList != null && userDomainList.size() > 0) {
+            if(userDomain.getRole().equals("HR")){
+                if(!userDomainList.get(0).getRole().equals(userDomain.getRole()))return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You don't have this role!");
             }
+            String jwt = JwtUtil.generateToken(userDomainList.get(0).getEmail(), JwtConstant.JWT_VALID_DURATION, userDomainList.get(0).getRole(), userDomainList.get(0).getId());
+            CookieUtil.create(res, JwtConstant.JWT_COOKIE_NAME, jwt, false, -1, "localhost");
+            return ResponseEntity.ok().build();
         }
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid username or password");
     }
+    return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid username or password");
+}
 
     @GetMapping("/new")
     public ResponseEntity<String> savePerson(@RequestParam("registrationToken") String registrationToken) {

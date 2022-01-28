@@ -1,6 +1,6 @@
 package com.example.logging_junit.Service;
 
-import com.example.auth.Exception.UserNotFoundException;
+//import com.example.auth.Exception.UserNotFoundException;
 import com.example.auth.dao.IUserDao;
 import com.example.auth.dao.hibernate.HibernateUserDao;
 import com.example.auth.entity.User;

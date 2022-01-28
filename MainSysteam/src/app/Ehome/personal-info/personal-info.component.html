@@ -1,0 +1,501 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <p>Are sure you want discard you changes?</p>
+  
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-danger" 
+                (click)="closePopupWithYes()">
+          Yes
+        </button>
+
+        <button type="button" class="btn btn-danger" 
+                (click)="closePopupWithNo()">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<header>
+  
+
+  <!-- Background image -->
+  <div
+    class="p-5 text-center bg-image"
+    style="
+      background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+      height: 400px;
+      margin-top: 58px;
+    "
+  >
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">Welcome, {{personalInfo.fullName}}</h1>
+       
+          
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Background image -->
+</header>
+
+
+<div class="card-group">
+    <div class="card">
+        
+      
+      <div class="card-body">
+        <h5 class="card-title"><i class="fa fa-meh-o" style="font-size:36px"></i>  Personal Info</h5>
+        
+        <p  *ngIf="!avator" style="padding-left: 120px;"><img src="https://placekitten.com/300/300" alt="Avatar" class="avatar"> </p>
+        <p  *ngIf="avator" style="padding-left: 120px;"><img src="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{avator}}" alt="Avatar" class="avatar"> </p>
+        <div class="container">
+            <div class="row">
+              <div  class="col-6 col-sm-5">
+                <h5>Full Name</h5>
+              </div>
+              <div class="col-6 col-sm-5"><h5>DOB</h5></div>
+          
+              <div class="w-100"></div>
+              
+              <div  *ngIf="!change_personalInfo"  class="col-6 col-sm-5">{{personalInfo.fullName}}</div>
+              <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.fullName' ></textarea></div> 
+
+              
+              <div  *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.dob}}</div>
+              <div *ngIf="change_personalInfo"  class="col-6 col-sm-5"><textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.dob'></textarea></div> 
+            </div>
+            <br>
+           
+            <div class="row">
+                <div  class="col-6 col-sm-5"><h5>Age</h5></div>
+                <div class="col-6 col-sm-5"><h5>Gender</h5></div>
+            
+                
+                <div class="w-100"></div>
+            
+                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.age}}</div>
+                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.age' ></textarea></div> 
+
+                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.gender}}</div>
+                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.gender' ></textarea></div> 
+            </div>
+
+            <br>
+            <div class="row">
+                <div  class="col-6 col-sm-5"><h5>SSN</h5></div>
+                
+            
+                
+                <div class="w-100"></div>
+            
+                <div *ngIf="!change_personalInfo" class="col-6 col-sm-5">{{personalInfo.ssn}}</div>
+                <div *ngIf="change_personalInfo"   class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'personalInfo.ssn' ></textarea></div> 
+                
+            </div>
+          </div>
+
+          
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">
+          <button *ngIf="!change_personalInfo"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="change_personalInfo1()">Edit</button>
+          
+
+          <button *ngIf="change_personalInfo"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="openPopup()">Discard</button>
+
+          <button *ngIf="change_personalInfo"  style= "background-color: salmon;  margin-left: 150px" type="button" class="btn btn-info" (click)="change_personalInfo1(); edit('personalInfo', personalInfo)">Save</button>
+        </small>
+       
+      </div>
+    </div>
+
+
+    
+
+        <!-- address
+        
+        {
+    "addressLine1": "fontana",
+    "addressLine2": "J140",
+    "city": "XXX",
+    "state": "CA",
+    "zipcode": "9210"
+}
+        -->
+    <div class="card">
+   
+      <div class="card-body">
+        <h5 class="card-title"><i class="fa fa-address-book-o" style="font-size:36px"></i>   Address</h5> 
+        <div *ngFor="let add of Address">
+          <div *ngIf="!change_Address" >
+                
+            <div class="container">
+              <div class="row">
+                <div  class="col-6 col-sm-5">
+                  <h5>AddressLine1</h5>
+                </div>
+                <div class="col-6 col-sm-5"><h5>AddressLine2</h5></div>
+            
+                <div class="w-100"></div>
+               
+  
+                
+                <div   class="col-6 col-sm-5">{{add.addressLine1}}</div>
+               
+  
+            
+                <div  class="col-6 col-sm-5">{{add.addressLine2}}</div>
+               
+              </div>
+              <br>
+             
+              <div class="row">
+                  <div  class="col-6 col-sm-5"><h5>City</h5></div>
+                  <div class="col-6 col-sm-5"><h5>State</h5></div>
+              
+                  
+                  <div class="w-100"></div>
+              
+                  <div class="col-6 col-sm-5">{{add.city}}</div>
+                  <div class="col-6 col-sm-5">{{add.state}}</div>
+              </div>
+  
+              <br>
+              <div class="row">
+                  <div  class="col-6 col-sm-5"><h5>Zipcode</h5></div>
+                  
+              
+                  
+                  <div class="w-100"></div>
+              
+                  <div class="col-6 col-sm-5">{{add.zipcode}}</div>
+                  
+              </div>
+            </div> 
+
+          </div>
+
+
+
+
+          <div *ngIf="change_Address" >
+                
+            <div class="container">
+              <div class="row">
+                <div  class="col-6 col-sm-5">
+                  <h5>AddressLine1</h5>
+                </div>
+                <div class="col-6 col-sm-5"><h5>AddressLine2</h5></div>
+            
+                <div class="w-100"></div>
+               
+  
+                
+                
+                <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'add.addressLine1' ></textarea></div>  
+  
+            
+                <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'add.addressLine2' ></textarea></div>  
+              </div>
+              <br>
+             
+              <div class="row">
+                  <div  class="col-6 col-sm-5"><h5>City</h5></div>
+                  <div class="col-6 col-sm-5"><h5>State</h5></div>
+              
+                  
+                  <div class="w-100"></div>
+
+                  <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'add.city' ></textarea></div>  
+                  <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'add.state' ></textarea></div>
+                  
+              </div>
+  
+              <br>
+              <div class="row">
+                  <div  class="col-6 col-sm-5"><h5>Zipcode</h5></div>
+                  
+              
+                  
+                  <div class="w-100"></div>
+                  <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'add.zipcode' ></textarea></div>
+                  
+                  
+              </div>
+            </div> 
+
+          </div>
+
+
+          
+
+          </div>
+       
+        
+      </div>
+      <div class="card-footer">
+        <button *ngIf="!change_Address"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="change_Address1()">Edit</button>
+        <button *ngIf="change_Address"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="openPopup()">Discard</button>
+        <button *ngIf="change_Address"  style= "background-color: salmon;  margin-left: 150px" type="button" class="btn btn-info" (click)="change_Address1(); edit('address', Address)">Save</button>
+      </div>
+    </div>
+
+
+
+    <!--Contact Info -->
+
+    <div class="card">
+     
+      <div class="card-body">
+        <h5 class="card-title"><i class="fa fa-volume-control-phone" style="font-size:36px"></i>  Contact Info</h5>
+
+        <div *ngIf="change_ConatctInfo">
+          <div class="container">
+            <div class="row">
+              <div  class="col-6 col-sm-5">
+                <h5>cellPhone</h5>
+              </div>
+              <div class="col-6 col-sm-5"><h5>Alternate Phone</h5></div>
+          
+              <div class="w-100"></div>
+              <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'ConatctInfo.cellPhone' ></textarea></div>
+              <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'ConatctInfo.alternatePhone' ></textarea></div>
+              
+            </div>
+            <br>
+           
+            <div class="row">
+                <div  class="col-6 col-sm-5"><h5>Email</h5></div>
+            
+            
+                
+                <div class="w-100"></div>
+
+                <div class="col-6 col-sm-5">{{ConatctInfo.email}}</div>
+               
+                
+            </div>
+
+            <br>
+            
+          </div>
+        </div>
+
+
+        <div *ngIf="!change_ConatctInfo">
+          <div class="container">
+            <div class="row">
+              <div  class="col-6 col-sm-5">
+                <h5>cellPhone</h5>
+              </div>
+              <div class="col-6 col-sm-5"><h5>Alternate Phone</h5></div>
+          
+              <div class="w-100"></div>
+          
+              <div class="col-6 col-sm-5">{{ConatctInfo.cellPhone}}</div>
+              <div class="col-6 col-sm-5">{{ConatctInfo.alternatePhone}}</div>
+            </div>
+            <br>
+           
+            <div class="row">
+                <div  class="col-6 col-sm-5"><h5>Email</h5></div>
+            
+            
+                
+                <div class="w-100"></div>
+            
+                <div class="col-6 col-sm-5">{{ConatctInfo.email}}</div>
+                
+            </div>
+
+            <br>
+            
+          </div>
+        </div>
+        
+      </div>
+      <div class="card-footer">
+        
+        <button *ngIf="!change_ConatctInfo"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="change_ConatctInfo1()">Edit</button>
+        <button *ngIf="change_ConatctInfo"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="openPopup()">Discard</button>
+        <button *ngIf="change_ConatctInfo"  style= "background-color: salmon;  margin-left: 150px" type="button" class="btn btn-info" (click)="change_ConatctInfo1(); edit('contactInfo', ConatctInfo)">Save</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-group">
+     
+    
+
+    <!-- address -->
+    <div class="card">
+
+      <div class="card-body">
+        <h5 class="card-title"><i class="fa fa-shopping-bag" style="font-size:36px;"></i>  Employment</h5>
+    
+          <div class="container">
+            <div class="row">
+              <div  class="col-6 col-sm-5">
+                <h5>Work authorization</h5>
+              </div>
+              
+          
+              <div class="w-100"></div>
+          
+              
+              <div class="col-6 col-sm-5">{{employee.workAuthorization}}</div>
+            </div>
+            <br>
+           
+            <div class="row">
+                <div class="col-6 col-sm-5"><h5>authorization start date</h5></div>
+                <div class="col-6 col-sm-5"><h5>authorization end date</h5></div>
+            
+                
+                <div class="w-100"></div>
+            
+                <div class="col-6 col-sm-5">{{employee.workAuthorizationSD}}</div>
+                <div class="col-6 col-sm-5">{{employee.workAuthorizationED}}</div>
+            </div>
+
+            <br>
+            <div class="row">
+                <div  class="col-6 col-sm-5"><h5>Title</h5></div>
+                
+            
+                
+                <div class="w-100"></div>
+            
+                <div class="col-6 col-sm-5">{{employee.title}}</div>
+                
+            </div>
+          </div>
+        
+
+
+        
+        
+      </div>
+      <div class="card-footer">
+        <small class="text-muted"><button type="button" class="btn btn-info"  disabled = true;  (click)="edit('employment', employee)">Edit</button></small>
+      </div>
+    </div>
+    <div class="card">
+      
+
+        <!-- address -->
+      <div class="card-body">
+        <h5 class="card-title"> <i class="fa fa-child" style="font-size:36px"></i>  Emergency Contact</h5>
+        <div *ngIf="!change_EmergencyContact">
+          <div class="container">
+            <div class="row">
+              <div  class="col-6 col-sm-5">
+                <h5>Full Name</h5>
+              </div>
+              <div class="col-6 col-sm-5"><h5>Relationship</h5></div>
+          
+              <div class="w-100"></div>
+          
+              <div class="col-6 col-sm-5">{{EmergencyContact.fullName}}</div>
+              <div class="col-6 col-sm-5">{{EmergencyContact.relationship}}</div>
+            </div>
+            <br>
+           
+            <div class="row">
+                <div  class="col-6 col-sm-5"><h5>Cell Phone</h5></div>
+                <div class="col-6 col-sm-5"><h5>Email</h5></div>
+            
+                
+                <div class="w-100"></div>
+            
+                <div class="col-6 col-sm-5">{{EmergencyContact.cellPhone}}</div>
+                <div class="col-6 col-sm-5">{{EmergencyContact.email}}</div>
+            </div>
+
+            <br>
+            
+          </div>
+        </div>
+
+        <div *ngIf="change_EmergencyContact">
+          <div class="container">
+            <div class="row">
+              <div  class="col-6 col-sm-5">
+                <h5>Full Name</h5>
+              </div>
+              <div class="col-6 col-sm-5"><h5>Relationship</h5></div>
+          
+              <div class="w-100"></div>
+              
+              <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'EmergencyContact.fullName' ></textarea></div>
+              <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'EmergencyContact.relationship' ></textarea></div>
+
+            </div>
+            <br>
+           
+            <div class="row">
+                <div  class="col-6 col-sm-5"><h5>Cell Phone</h5></div>
+                <div class="col-6 col-sm-5"><h5>Email</h5></div>
+            
+                
+                <div class="w-100"></div>
+                
+
+                <div  class="col-6 col-sm-5"> <textarea rows="0" cols="10" [(ngModel)] = 'EmergencyContact.cellPhone' ></textarea></div>
+                <div class="col-6 col-sm-5">{{EmergencyContact.email}}</div>
+            </div>
+
+            <br>
+            
+          </div>
+        </div>
+        
+      </div>
+      <div class="card-footer">
+
+        <button *ngIf="!change_EmergencyContact"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="change_EmergencyContact1()">Edit</button>
+        <button *ngIf="change_EmergencyContact"  style=" margin-left: 150px" type="button" class="btn btn-info" (click)="openPopup()">Discard</button>
+
+        <button *ngIf="change_EmergencyContact"  style= "background-color: salmon;  margin-left: 150px" type="button" class="btn btn-info" (click)="change_EmergencyContact1(); edit('emergencyContact', EmergencyContact)">Save</button>
+        
+      </div>
+    </div>
+    <div class="card">
+    
+
+
+
+        <!-- address -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="fa fa-file-code-o" style="font-size:36px"></i> Document </h5>
+        <ul
+      class="list-group list-group-flush"
+     
+    >
+      <li class="list-group-item" *ngFor="let file of fileNameArray">
+        <a target="_blank" href="https://beaconfire-project-document.s3.us-west-1.amazonaws.com/{{file}}">
+          <i class="fa fa-file" style="font-size:36px;"></i>
+          {{file}} </a>
+      </li>
+    </ul>
+      </div>
+      <div class="card-footer">
+       
+      </div>
+    </div>
+  </div>

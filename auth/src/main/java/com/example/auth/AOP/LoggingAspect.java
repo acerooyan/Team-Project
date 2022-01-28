@@ -16,19 +16,45 @@ import javax.servlet.http.HttpServletRequest;
 public class LoggingAspect {
     Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Around("com.example.auth.AOP.PointCuts.inDaoLayer()")
-    public Object executionTimeAdvice(ProceedingJoinPoint pjp) throws Throwable {
-        long startTime = System.currentTimeMillis();
-        log.warn("before processed");
+//    @Around("com.example.auth.AOP.PointCuts.inDaoLayer()")
+//    public Object executionTimeAdvice(ProceedingJoinPoint pjp) throws Throwable {
+//        long startTime = System.currentTimeMillis();
+//        log.warn("before processed");
+//
+//        Object result = pjp.proceed();
+//
+//        long elapsedTime = System.currentTimeMillis() - startTime;
+//        String className = pjp.getSignature().getDeclaringTypeName();
+//        String methodName = pjp.getSignature().getName();
+//        log.warn(className + "." + methodName + " execution time: " + elapsedTime + " ms " + "result: " + result);
+//        return result;
+//    }
+        @Around("com.example.auth.AOP.PointCuts.inControllerLayer()")
+        public Object log(final ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
-        Object result = pjp.proceed();
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+                    .currentRequestAttributes())
+                    .getRequest();
 
-        long elapsedTime = System.currentTimeMillis() - startTime;
-        String className = pjp.getSignature().getDeclaringTypeName();
-        String methodName = pjp.getSignature().getName();
-        log.warn(className + "." + methodName + " execution time: " + elapsedTime + " ms " + "result: " + result);
-        return result;
-    }
+            long start = System.currentTimeMillis();
+
+            Object value;
+
+            try {
+                value = proceedingJoinPoint.proceed();
+            } catch (Throwable throwable) {
+                throw throwable;
+            } finally {
+                long duration = System.currentTimeMillis() - start;
+
+                log.info("{} {} from {} took {} ms",
+                        request.getMethod(), request.getRequestURI(),
+                        request.getRemoteAddr(), duration);
+                // use repo and the information above to persist data
+            }
+
+            return value;
+        }
 
     @Before("com.example.auth.AOP.PointCuts.inControllerLayer()")
     public void beforeMethod(JoinPoint joinPoint) {
@@ -58,7 +84,9 @@ public class LoggingAspect {
     @AfterReturning(pointcut = "com.example.auth.AOP.PointCuts.inControllerLayer()", returning = "result")
     public void logAfter(JoinPoint joinPoint, Object result) {
         String returnValue = this.getValue(result);
-        log.debug("Method Return value : " + returnValue);
+        log.info("--- response information -------- ---");
+        log.info("Method Return value : " + returnValue);
+        log.info("--- response information -------- ---");
     }
 
     private String getValue(Object result) {
